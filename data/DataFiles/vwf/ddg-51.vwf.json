@@ -1,0 +1,348 @@
+{
+    "children": {
+        "N15586c73": {
+            "children": {
+                "N94f3b0c9": {
+                    "extends": "SandboxCamera.vwf",
+                    "properties": {
+                        "DisplayName": "Camera1",
+                        "owner": "Rob",
+                        "transform": [-1.0000001192092896, 3.482407606725246e-8, -2.399459830826345e-8, 0, 1.960015261204262e-8, 0.08715559542179108, 0.9961947202682495, 0, -3.6356369026435686e-9, 0.9961946606636047, -0.08715563267469406, 0, 24.5, 15.553004264831543, 5.666027545928955, 1]
+                    },
+                    "random": {
+                        "c": 1,
+                        "s0": 0.0410357259679586,
+                        "s1": 0.718352320836857,
+                        "s2": 0.528338009724393
+                    },
+                    "sequence": 0,
+                    "source": "vwf/model/threejs/camera.js",
+                    "type": "subDriver/threejs"
+                }
+            },
+            "extends": "asset.vwf",
+            "properties": {
+                "DisplayName": "Barry1",
+                "___physics_activation_state": 1,
+                "___physics_deactivation_time": 0,
+                "___physics_velocity_angular": [0, 0, 0],
+                "___physics_velocity_linear": [0, 0, 0],
+                "materialDef": [{
+                        "alpha": 1,
+                        "ambient": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "color": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "emit": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "layers": [{
+                                "alpha": 1,
+                                "mapInput": 0,
+                                "mapTo": 1,
+                                "offsetx": 0,
+                                "offsety": 0,
+                                "scalex": 1,
+                                "scaley": 1,
+                                "src": "./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"
+                            }
+                        ],
+                        "reflect": 0,
+                        "shininess": 0.004002,
+                        "side": 0,
+                        "specularColor": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "specularLevel": 1,
+                        "type": "phong"
+                    }, {
+                        "alpha": 1,
+                        "ambient": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "color": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "emit": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "layers": [{
+                                "alpha": 1,
+                                "mapInput": 0,
+                                "mapTo": 1,
+                                "offsetx": 0,
+                                "offsety": 0,
+                                "scalex": 1,
+                                "scaley": 1,
+                                "src": "./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"
+                            }
+                        ],
+                        "reflect": 0,
+                        "shininess": 0.004002,
+                        "side": 0,
+                        "specularColor": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "specularLevel": 1
+                    }, {
+                        "alpha": 1,
+                        "ambient": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "color": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "emit": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "layers": [{
+                                "alpha": 1,
+                                "mapInput": 0,
+                                "mapTo": 1,
+                                "offsetx": 0,
+                                "offsety": 0,
+                                "scalex": 1,
+                                "scaley": 1,
+                                "src": "./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"
+                            }
+                        ],
+                        "reflect": 0,
+                        "shininess": 0.004002,
+                        "side": 0,
+                        "specularColor": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "specularLevel": 1
+                    }, {
+                        "alpha": 1,
+                        "ambient": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "color": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "emit": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "layers": [{
+                                "alpha": 1,
+                                "mapInput": 0,
+                                "mapTo": 1,
+                                "offsetx": 0,
+                                "offsety": 0,
+                                "scalex": 1,
+                                "scaley": 1,
+                                "src": "./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"
+                            }
+                        ],
+                        "reflect": 0,
+                        "shininess": 0.004002,
+                        "side": 0,
+                        "specularColor": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "specularLevel": 1
+                    }, {
+                        "alpha": 1,
+                        "ambient": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "color": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "emit": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "layers": [{
+                                "alpha": 1,
+                                "mapInput": 0,
+                                "mapTo": 1,
+                                "offsetx": 0,
+                                "offsety": 0,
+                                "scalex": 1,
+                                "scaley": 1,
+                                "src": "./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"
+                            }
+                        ],
+                        "reflect": 0,
+                        "shininess": 0.004002,
+                        "side": 0,
+                        "specularColor": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "specularLevel": 1
+                    }, {
+                        "alpha": 1,
+                        "ambient": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "color": {
+                            "b": 1,
+                            "g": 1,
+                            "r": 1
+                        },
+                        "emit": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "layers": [{
+                                "alpha": 1,
+                                "mapInput": 0,
+                                "mapTo": 1,
+                                "offsetx": 0,
+                                "offsety": 0,
+                                "scalex": 1,
+                                "scaley": 1,
+                                "src": "./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"
+                            }
+                        ],
+                        "reflect": 0,
+                        "shininess": 0.004002,
+                        "side": 0,
+                        "specularColor": {
+                            "b": 0,
+                            "g": 0,
+                            "r": 0
+                        },
+                        "specularLevel": 1
+                    }
+                ],
+                "owner": "Rob",
+                "transform": [1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0.25, -1.5, -0.75, 1],
+                "type": "3DR Object"
+            },
+            "random": {
+                "c": 1,
+                "s0": 0.529011126374826,
+                "s1": 0.196021612733603,
+                "s2": 0.923128565540537
+            },
+            "sequence": 0,
+            "source": "./vwfdatamanager.svc/3drdownload?pid=adl:1588",
+            "type": "subDriver/threejs/asset/vnd.osgjs+json+compressed"
+        }
+    },
+    "extends": "box2.vwf",
+    "methods": {
+        "tick": {
+            "body": "  var waterDepth = 20;\n    var hullThick = 2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass/2;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n            console.log(depth);\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n        //this.physicsAPI.addForceAtCenter(this.transformAPI.localToGlobal(0, 100, 0));\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 10;\n        vel[1] *= 1.0 - depth / 3;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }  ",
+            "parameters": []
+        }
+    },
+    "properties": {
+        "DisplayName": "box2",
+        "___physics_activation_state": 4,
+        "___physics_angular_velocity": [0, 0, 0],
+        "___physics_damping": 0.4,
+        "___physics_deactivation_time": 0,
+        "___physics_enabled": true,
+        "___physics_linear_velocity": [0, 0, 0],
+        "___physics_mass": 80051.2,
+        "___physics_velocity_angular": [0, 0, 0],
+        "___physics_velocity_linear": [0, 0, 0],
+        "_length": 135,
+        "counter": 0,
+        "height": 10,
+        "materialDef": {
+            "alpha": 1,
+            "ambient": {
+                "b": 1,
+                "g": 1,
+                "r": 1
+            },
+            "color": {
+                "a": 1,
+                "b": 1,
+                "g": 1,
+                "r": 1
+            },
+            "emit": {
+                "b": 0,
+                "g": 0,
+                "r": 0
+            },
+            "layers": [{
+                    "alpha": 1,
+                    "blendMode": 0,
+                    "mapInput": 0,
+                    "mapTo": 1,
+                    "offsetx": 0,
+                    "offsety": 0,
+                    "rot": 0,
+                    "scalex": 1,
+                    "scaley": 1,
+                    "src": "checker.jpg"
+                }
+            ],
+            "reflect": 0.8,
+            "shadeless": false,
+            "shadow": true,
+            "shininess": 15,
+            "specularColor": {
+                "b": 0.577350269189626,
+                "g": 0.577350269189626,
+                "r": 0.577350269189626
+            },
+            "specularLevel": 1
+        },
+        "owner": "Rob",
+        "transform": [0.866025447845459, 0, 0.5, 0, 0, 1, 0, 0, -0.5, 0, 0.866025447845459, 0, 35.9754753112793, 18.5, 23.074844360351562, 1],
+        "type": "Primitive",
+        "visible": false,
+        "width": 20
+    },
+    "random": {
+        "c": 1,
+        "s0": 0.134394315304235,
+        "s1": 0.921757695497945,
+        "s2": 0.0452698364388198
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/box.js",
+    "type": "subDriver/threejs"
+}
