@@ -1,0 +1,60 @@
+{
+    "children": {
+        "N2bef4927": {
+            "extends": "seek.vwf",
+            "properties": {
+                "DisplayName": "seek1",
+                "Offset": [8, 0, 4],
+                "Target": "box2-vwf-Nc5cb6be",
+                "owner": "Rob",
+                "strength": 0.3,
+                "type": "behavior"
+            },
+            "random": {
+                "c": 1,
+                "s0": 0.127052526222542,
+                "s1": 0.514706505695358,
+                "s2": 0.823928599478677
+            },
+            "sequence": 0
+        }
+    },
+    "extends": "SandboxCamera.vwf",
+    "methods": {
+        "tick": {
+            "body": "\n\n\n\n\n\n            var node = this.Scene.findNodeByID(this.objectToLookAt);\n                var pos = [0, 0, 0];\n                if (node)\n                    pos = node.transformAPI.localToGlobal([0, 0, 0]);\n                var offset = this.offset.internal_val;\n                offset = MATH.scaleVec3(offset, this.zoom);\n               \n                this.transformAPI.lookat(pos, '', '-Y', 'Z');\n",
+            "parameters": []
+        }
+    },
+    "properties": {
+        "DisplayName": "LookatCamera",
+        "EditorData": {
+            "Target": {
+                "displayname": "Target",
+                "property": "objectToLookAt",
+                "type": "nodeid"
+            }
+        },
+        "last_x": 0,
+        "last_y": 0,
+        "mousedown": 0,
+        "objectToLookAt": "box2-vwf-Nc5cb6be",
+        "offset": [1, 0, 0],
+        "owner": "Rob",
+        "quaternion": [-0.168120741844177, 0.0131280934438109, -0.0767349526286125, 0.982687532901764],
+        "rotation": [-0.90743362903595, 0.0708590298891068, -0.414177775382996, 21.3538246154785],
+        "scale": [1.00000011920929, 0.998998463153839, 0.999000251293182],
+        "transform": [0.06477046012878418, 0.9979006052017212, 8.258164818641944e-9, 0, -0.8920736312866211, 0.05790167301893234, -0.4459262192249298, 0, -0.4449904263019562, 0.028882890939712524, 0.8939518928527832, 0, 42.75, -71.5, 27.5, 1],
+        "translation": [-4.97808504104614, -9.80616760253906, 1.45953845977783],
+        "zoom": 1
+    },
+    "random": {
+        "c": 1,
+        "s0": 0.762165069347247,
+        "s1": 0.779216341907158,
+        "s2": 0.235236180946231
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/camera.js",
+    "type": "subDriver/threejs"
+}

@@ -1,0 +1,51 @@
+{
+    "extends": "SandboxParticleSystem.vwf",
+    "methods": {
+        "tick": {
+            "body": "   // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.emitterPosition = this.Scene.children_by_name.box4.children_by_name.enginePos.transformAPI.getWorldPosition();\n   findviewnode(this.id).children[0].children[0].frustumCulled =false   ",
+            "parameters": []
+        }
+    },
+    "properties": {
+        "DisplayName": "Wake",
+        "alphaTest": 0,
+        "colorRange": [0, 0, 0.231372549019608, 0],
+        "damping": -0.01,
+        "depthTest": false,
+        "emitterPosition": [0, null, null],
+        "emitterSize": [1, 1, 0.4],
+        "emitterType": "box",
+        "endAlpha": 0.24,
+        "endColor": [0.741176470588235, 0.854901960784314, 0.988235294117647, 0.24],
+        "endColor_noAplha": [0.741176470588235, 0.854901960784314, 0.988235294117647],
+        "endSize": 3,
+        "gravity": -0.02,
+        "image": "../vwfDataManager.svc/texture?UID=smoke.png",
+        "mamSpin": 2.6,
+        "maxOrientation": 19.6,
+        "maxVelocity": [0.01, 0.01, 0.01],
+        "minOrientation": -14.8,
+        "minSpin": -3.8,
+        "minVelocity": [-0.011, -0.01, -0.01],
+        "owner": "Rob",
+        "rotation": {
+            "_x": 0,
+            "_y": 0,
+            "_z": 0,
+            "_order": "XYZ"
+        },
+        "sizeRange": 0.62,
+        "solver": "Analytic",
+        "startAlpha": 0.98,
+        "startColor": [1, 1, 1, 0.98],
+        "transform": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+        "type": "ParticleSystem"
+    },
+    "random": {
+        "c": 1,
+        "s0": 0.337756546912715,
+        "s1": 0.105646711308509,
+        "s2": 0.0182790500111878
+    },
+    "sequence": 0
+}
