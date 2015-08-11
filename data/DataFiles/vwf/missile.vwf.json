@@ -1,0 +1,118 @@
+{
+    "children": {
+        "N513b334a": {
+            "extends": "SandboxParticleSystem.vwf",
+            "properties": {
+                "DisplayName": "ParticleSystem1",
+                "additive": true,
+                "counter": 0,
+                "depthTest": false,
+                "image": "../vwfDataManager.svc/texture?UID=fire.png",
+                "maxLifeTime": 23,
+                "maxOrientation": 19.6,
+                "maxRate": 5,
+                "maxVelocity": [1, 0, 0.2],
+                "minLifeTime": 23,
+                "minOrientation": -21.4,
+                "minVelocity": [-1, 0, 0.011],
+                "owner": "Rob",
+                "particleCount": 100,
+                "startSize": 0.3,
+                "transform": [1, 0, 0, 0, 0, -0.999999979605421, 8.0694074519605e-8, 0, 0, -8.0694074519605e-8, -0.999999979605421, 0, 0, 0, 1.25, 1],
+                "type": "ParticleSystem",
+                "velocityMode": "spherical",
+                "visible": false
+            },
+            "random": {
+                "c": 1,
+                "s0": 0.956842685118318,
+                "s1": 0.666903047123924,
+                "s2": 0.367152417311445
+            },
+            "sequence": 0
+        }
+    },
+    "events": {
+        "pointerClick": {
+            "body": "                    this.fired = true;",
+            "parameters": ["                    eventData", "                    nodeData                    "]
+        }
+    },
+    "extends": "cylinder2.vwf",
+    "methods": {
+        "tick": {
+            "body": "           if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 2)\n    {\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 200, this.random() * 200, this.random() * 1));\n    }\n    if (this.counter < 30)\n    {\n        var force = this.transformAPI.localToGlobal(0, 0, -30 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 10, this.random() * 10, this.random() * 1));\n    }\n    if (this.counter > 60)\n        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 90)\n        vwf.deleteNode(this.id);           ",
+            "parameters": []
+        }
+    },
+    "properties": {
+        "DisplayName": "cylinder4",
+        "___physics_activation_state": 1,
+        "___physics_angular_velocity": [0, 0, 0],
+        "___physics_constant_force": [0, 0, 980],
+        "___physics_deactivation_time": 0,
+        "___physics_enabled": true,
+        "___physics_linear_velocity": [0, 0, 0],
+        "___physics_mass": 100,
+        "___physics_velocity_angular": [0, 0, 0],
+        "___physics_velocity_linear": [0, 0, 0],
+        "counter": 0,
+        "fired": "",
+        "height": 2.6,
+        "materialDef": {
+            "alpha": 1,
+            "ambient": {
+                "b": 1,
+                "g": 1,
+                "r": 1
+            },
+            "color": {
+                "a": 1,
+                "b": 1,
+                "g": 1,
+                "r": 1
+            },
+            "emit": {
+                "b": 0,
+                "g": 0,
+                "r": 0
+            },
+            "layers": [{
+                    "alpha": 1,
+                    "blendMode": 0,
+                    "mapInput": 0,
+                    "mapTo": 1,
+                    "offsetx": 0,
+                    "offsety": 0,
+                    "rot": 0,
+                    "scalex": 1,
+                    "scaley": 1,
+                    "src": "checker.jpg"
+                }
+            ],
+            "reflect": 0.8,
+            "shadeless": false,
+            "shadow": true,
+            "shininess": 15,
+            "specularColor": {
+                "b": 0.577350269189626,
+                "g": 0.577350269189626,
+                "r": 0.577350269189626
+            },
+            "specularLevel": 1
+        },
+        "owner": "Rob",
+        "radius": 0.13,
+        "transform": [1, 0, 0, 0, 0, -0.17364808917045593, -0.9848077893257141, 0, 0, 0.9848077893257141, -0.17364808917045593, 0, -1.5, -3.5, 3, 1],
+        "type": "Primitive"
+    },
+    "random": {
+        "c": 2042503,
+        "s0": 0.573731497628614,
+        "s1": 0.97211644356139,
+        "s2": 0.0282298987731338
+    },
+    "sequence": 0,
+    "source": "vwf/model/threejs/cylinder.js",
+    "type": "subDriver/threejs"
+}
