@@ -1,6 +1,6 @@
 {
     "children": {
-        "N1984e5e": {
+        "Rolando": {
             "extends": "http://vwf.example.com/node3.vwf",
             "properties": {
                 "DisplayName": "enginePos",
