@@ -1,6 +1,13 @@
-{"$$indexCreated":{"fieldName":"_key","unique":true}}
-{"val":[],"_key":"UserIndex","_id":"w96Gwecw9V17VNiq"}
 {"val":[],"_key":"StateIndex","_id":"0zWE8FKFdAsfTUH2"}
-{"val":[],"_key":"6ac583b4-03e2-42cf-97d2-76f46dcf8894","_id":"fu987SRi2OOH6Shs"}
 {"val":{"inventoryKey":"6ac583b4-03e2-42cf-97d2-76f46dcf8894"},"_key":"___Global___","_id":"58qEW4F5Xm1LA85a"}
+{"val":[],"_key":"6ac583b4-03e2-42cf-97d2-76f46dcf8894","_id":"fu987SRi2OOH6Shs"}
 {"val":["___Global___"],"_key":"UserIndex","_id":"w96Gwecw9V17VNiq"}
+{"$$indexCreated":{"fieldName":"_key","unique":true,"sparse":false}}
+{"val":{"objects":10,"owner":"Rob","title":"Imported State _adl_sandbox_orEElYqdQFd0iKyM_","description":"Imported automatically from database update","created":"2015-08-14T20:34:35.682Z"},"_key":"_adl_sandbox_orEElYqdQFd0iKyM_","_id":"KTUaaUVItOQiL8ps"}
+{"val":["_adl_sandbox_orEElYqdQFd0iKyM_"],"_key":"StateIndex","_id":"0zWE8FKFdAsfTUH2"}
+{"$$deleted":true,"_id":"KTUaaUVItOQiL8ps"}
+{"val":{"objects":10,"owner":"Rob","title":"FAC Demo","description":"Imported automatically from database update","created":"2015-08-14T20:34:35.682Z","publishSettings":{"allowAnonymous":false,"SinglePlayer":false,"camera":null,"createAvatar":true,"allowTools":true,"persistence":true},"lastUpdate":"2015-08-14T20:35:15.040Z"},"_key":"_adl_sandbox_orEElYqdQFd0iKyM_","_id":"1p5C67We0Ihl3ADL"}
+{"$$deleted":true,"_id":"1p5C67We0Ihl3ADL"}
+{"val":{"objects":10,"owner":"Rob","title":"FAC Demo","description":"Imported automatically from database update","created":"2015-08-14T20:34:35.682Z","publishSettings":{"singlePlayer":true,"camera":"","allowAnonymous":true,"createAvatar":false,"allowTools":true,"persistence":false},"lastUpdate":"2015-08-14T20:35:15.040Z"},"_key":"_adl_sandbox_orEElYqdQFd0iKyM_","_id":"pItVhIXDs7BlhacB"}
+{"$$deleted":true,"_id":"pItVhIXDs7BlhacB"}
+{"val":{"objects":10,"owner":"Rob","title":"FAC Demo","description":"Imported automatically from database update","created":"2015-08-14T20:34:35.682Z","publishSettings":{"singlePlayer":true,"camera":"","allowAnonymous":true,"createAvatar":false,"allowTools":true,"persistence":false,"SinglePlayer":false},"lastUpdate":"2015-08-14T20:35:15.040Z"},"_key":"_adl_sandbox_orEElYqdQFd0iKyM_","_id":"ZjvItCaSldGDxbV5"}
