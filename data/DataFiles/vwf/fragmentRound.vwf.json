@@ -200,7 +200,7 @@
     "extends": "sandboxGroup.vwf",
     "methods": {
         "explode": {
-            "body": " this.broadcast('hit',50,5);  this.children_by_name.ParticleSystem1.explode();\n    this.children_by_name.ParticleSystem2.explode();\n    if(this.random() > .5)\n        this.audioAPI.playSound(this.explodeSound, false, 600);\n    else\n        this.audioAPI.playSound(this.explodeSound2, false, 600);   ",
+            "body": "  this.broadcast('hit',50,5);  this.children_by_name.ParticleSystem1.explode();\n    this.children_by_name.ParticleSystem2.explode();\n    if(this.random() > .5)\n        this.audioAPI.playSound(this.explodeSound, false, 600);\n    else\n        this.audioAPI.playSound(this.explodeSound2, false, 600);   ",
             "parameters": []
         },
         "tick": {
