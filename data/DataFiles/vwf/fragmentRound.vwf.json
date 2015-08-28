@@ -1,0 +1,258 @@
+{
+    "children": {
+        "N8eaad033": {
+            "extends": "SandboxParticleSystem.vwf",
+            "methods": {
+                "explode": {
+                    "body": "   this.counter = 40;\n    this.visible = true;\n    if (this.explodeSount)\n        this.audioAPI.playSound(this.explodeSount);\n\n    vwf.callMethod(this.id, \"reset\");   ",
+                    "parameters": []
+                },
+                "tick": {
+                    "body": "          // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.counter--\n    if(this.counter < 0)\n    {\n        this.visible = false;   \n    }          ",
+                    "parameters": []
+                }
+            },
+            "properties": {
+                "DisplayName": "ParticleSystem2",
+                "additive": true,
+                "alphaTest": 1,
+                "counter": 30,
+                "damping": 0.25,
+                "depthTest": false,
+                "endAlpha": 0,
+                "endColor": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "endSize": 4,
+                "explodeSount": "",
+                "image": "../vwfDataManager.svc/texture?UID=explode_5.jpg",
+                "mamSpin": 11.3,
+                "maxAcceleration": [
+                    0,
+                    0,
+                    -0.004
+                ],
+                "maxLifeTime": 137,
+                "maxOrientation": 11.4,
+                "maxRate": 10,
+                "maxVelocity": [
+                    1,
+                    1,
+                    0.6
+                ],
+                "minLifeTime": 137,
+                "minOrientation": -20.3,
+                "minSpin": -13.3,
+                "minVelocity": [
+                    0,
+                    0,
+                    0.5
+                ],
+                "owner": "Rob",
+                "particleCount": 100,
+                "renderDepth": 0,
+                "solver": "Euler",
+                "startAlpha": 0.8,
+                "startColor": [
+                    0.980392156862745,
+                    0.6,
+                    0.6,
+                    0.8
+                ],
+                "startColor_noAplha": [
+                    0.980392156862745,
+                    0.6,
+                    0.6
+                ],
+                "startSize": 2,
+                "textureTiles": 4,
+                "transform": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "type": "ParticleSystem",
+                "velocityMode": "spherical",
+                "visible": false
+            },
+            "random": {
+                "c": 1,
+                "s0": 0.981667949585244,
+                "s1": 0.595058325445279,
+                "s2": 0.676680717850104
+            },
+            "sequence": 0
+        },
+        "N8f29f2e5": {
+            "extends": "SandboxParticleSystem.vwf",
+            "methods": {
+                "explode": {
+                    "body": "   this.counter = 40;\n    this.visible = true;\n    if (this.explodeSount)\n        this.audioAPI.playSound(this.explodeSount);\n\n    vwf.callMethod(this.id, \"reset\");   ",
+                    "parameters": []
+                },
+                "tick": {
+                    "body": "         // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.counter--\n    if(this.counter < 0)\n    {\n        this.visible = false;   \n    }         ",
+                    "parameters": []
+                }
+            },
+            "properties": {
+                "DisplayName": "ParticleSystem1",
+                "additive": false,
+                "alphaTest": 0.576,
+                "counter": 0,
+                "damping": 0.25,
+                "depthTest": false,
+                "endAlpha": 0,
+                "endColor": [
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "endSize": 6,
+                "explodeSount": "",
+                "image": "../vwfDataManager.svc/texture?UID=water.png",
+                "mamSpin": 0.1,
+                "maxAcceleration": [
+                    0,
+                    0,
+                    -0.004
+                ],
+                "maxLifeTime": 137,
+                "maxOrientation": 11.4,
+                "maxRate": 10,
+                "maxVelocity": [
+                    1,
+                    1,
+                    0.8
+                ],
+                "minLifeTime": 137,
+                "minOrientation": -20.3,
+                "minSpin": -3.9,
+                "minVelocity": [
+                    0,
+                    0,
+                    0.5
+                ],
+                "owner": "Rob",
+                "particleCount": 100,
+                "solver": "Euler",
+                "startAlpha": 0.74,
+                "startColor": [
+                    0.56078431372549,
+                    0.443137254901961,
+                    0.427450980392157,
+                    0.74
+                ],
+                "startColor_noAplha": [
+                    0.56078431372549,
+                    0.443137254901961,
+                    0.427450980392157
+                ],
+                "textureTiles": 4,
+                "transform": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "type": "ParticleSystem",
+                "velocityMode": "spherical",
+                "visible": false
+            },
+            "random": {
+                "c": 1,
+                "s0": 0.981667949585244,
+                "s1": 0.595058325445279,
+                "s2": 0.676680717850104
+            },
+            "sequence": 0
+        }
+    },
+    "extends": "sandboxGroup.vwf",
+    "methods": {
+        "explode": {
+            "body": " this.broadcast('hit',50,5);  this.children_by_name.ParticleSystem1.explode();\n    this.children_by_name.ParticleSystem2.explode();\n    if(this.random() > .5)\n        this.audioAPI.playSound(this.explodeSound, false, 600);\n    else\n        this.audioAPI.playSound(this.explodeSound2, false, 600);   ",
+            "parameters": []
+        },
+        "tick": {
+            "body": " // The tick function is called 20 times every second.\n    // Write code here to animate over time\n   this.fuse--; if(Math.floor(this.fuse) == 0)\n        this.explode();\n    if(Math.floor(this.fuse) == -130)\n      vwf.deleteNode(this.id); ",
+            "parameters": []
+        }
+    },
+    "properties": {
+        "DisplayName": "Explosion",
+        "___physics_activation_state": 1,
+        "___physics_deactivation_time": 0,
+        "___physics_velocity_angular": [
+            0,
+            0,
+            0
+        ],
+        "___physics_velocity_linear": [
+            0,
+            0,
+            0
+        ],
+        "explodeSound": "./vwfdatamanager.svc/datafile/Sounds/Missile Impact Sound Effect 3.mp3",
+        "explodeSound2": "./vwfdatamanager.svc/datafile/Sounds/Missile Impact Sound Effect 2.mp3",
+        "expodeSound2": "./vwfdatamanager.svc/datafile/Sounds/Missile Impact Sound Effect 2.mp3",
+        "fuse": 10000000,
+        "open": true,
+        "owner": "Rob",
+        "transform": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            7.75,
+            1
+        ],
+        "type": "Group"
+    },
+    "random": {
+        "c": 1248939,
+        "s0": 0.463987119728699,
+        "s1": 0.0462946102488786,
+        "s2": 0.294398021884263
+    },
+    "sequence": 0
+}
