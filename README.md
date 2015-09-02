@@ -8,8 +8,9 @@ We're version controlling the entire data directory for a Sandbox server. This w
 To run the server with this data directory
 
 1. Check out repo
-2. Start the server with the -d flag
-3. use the path to the /data/ directory under this repo
+2. Set the assetDataDir path in your Sandbox config.json to "IITSEC2015_Demo/assets"
+3. Start the server with the -d flag
+4. use the path to the /data/ directory under this repo
 
 ```
 c:\development\Sandbox\node app.js -d "c:\development\iitsecDemo_2015\data"
