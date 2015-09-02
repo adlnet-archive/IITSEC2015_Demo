@@ -751,7 +751,7 @@
                                 "offsety": 0,
                                 "scalex": 1,
                                 "scaley": 1,
-                                "src": "./vwfdatamanager.svc/DataFile/Navy/AttackSpeedBoatAll.jpg"
+                                "src": "/sas/assets/7e6084c4"
                             }
                         ],
                         "reflect": 0.001,
@@ -775,7 +775,7 @@
                     "s2": 0.110384
                 },
                 "sequence": 0,
-                "source": "./vwfdatamanager.svc/DataFile/Navy/AttackSpeedBoat.dae",
+                "source": "/sas/assets/c1064312",
                 "type": "subDriver/threejs/asset/vnd.collada+xml",
                 "name": "Ndef1df6a"
             }
@@ -795,7 +795,7 @@
                 "parameters": ["pos", "force"]
             },
             "launchMissile": {
-                "body": "   var def = this.missileDef.internal_val;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.internal_val.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function()\n    {\n        console.log(performance.now() - now);\n        //   console.profileEnd(\"launch\");\n    });\n    this.audioAPI.playSound(\"./vwfdatamanager.svc/datafile/Sounds/Missile Launch Sound Effect 2.mp3\", false, 100);   ",
+                "body": "   var def = this.missileDef.internal_val;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.internal_val.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function()\n    {\n        console.log(performance.now() - now);\n        //   console.profileEnd(\"launch\");\n    });\n    this.audioAPI.playSound(\"/sas/assets/4334801b\", false, 100);   ",
                 "parameters": []
             },
             "ready": {
