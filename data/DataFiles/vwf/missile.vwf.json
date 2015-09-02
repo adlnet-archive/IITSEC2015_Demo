@@ -1,6 +1,6 @@
 {
     "children": {
-        "N4ac5276b": {
+        "N549473a": {
             "extends": "SandboxParticleSystem.vwf",
             "properties": {
                 "DisplayName": "ParticleSystem1",
@@ -34,18 +34,22 @@
     },
     "events": {
         "pointerClick": {
-            "body": "                           this.fired = true;",
-            "parameters": ["                           eventData", "                           nodeData                           "]
+            "body": "                            this.fired = true;",
+            "parameters": ["                            eventData", "                            nodeData                            "]
         }
     },
     "extends": "cylinder2.vwf",
     "methods": {
+        "collision": {
+            "body": " // The body has collided with another body. The ID of the node is param 1, collision data in param 2\n    if (this.counter > 10 && this.counter < 270)\n    {\n        this.explode();\n        console.log(hit);\n        vwf.deleteNode(this.id);\n        return;\n    } ",
+            "parameters": ["obstacle", "data"]
+        },
         "explode": {
-            "body": "  var def = this.explosionDef.internal_val;\n    var pos = this.transformAPI.getWorldPosition();\n\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    var now = performance.now();\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n    {\n        vwf.callMethod(childID, 'explode');\n    });  ",
+            "body": "   var def = this.explosionDef.internal_val;\n    var pos = this.transformAPI.getWorldPosition();\n\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    var now = performance.now();\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n    {\n        vwf.callMethod(childID, 'explode');\n    });   ",
             "parameters": []
         },
         "tick": {
-            "body": "      if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 2)\n    {\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 200, this.random() * 200, this.random() * 1));\n    }\n    if (this.counter < 30)\n    {\n        var force = this.transformAPI.localToGlobal(0, 0, -30 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 10, this.random() * 10, this.random() * 1));\n    }\n    if (this.counter > 10 && this.counter < 270)\n    {\n        \n        var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var center = this.transformAPI.getPosition();\n        var hit = this.Scene.traceAPI.rayCast(center, offset,\n        {\n            ignore: [findviewnode(this.id)]\n        });\n        if (hit && hit.distance < 2)\n        {\n            this.explode();\n            console.log(hit);\n            vwf.deleteNode(this.id);\n            return;\n        }\n    }\n    if (this.counter > 60)\n        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 270)\n        vwf.deleteNode(this.id);      ",
+            "body": "       if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 2)\n    {\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 200, this.random() * 200, this.random() * 1));\n    }\n    if (this.counter < 30)\n    {\n        var force = this.transformAPI.localToGlobal(0, 0, -30 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 10, this.random() * 10, this.random() * 1));\n    }\n    if (this.counter > 10 && this.counter < 270)\n    {\n        \n        var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var center = this.transformAPI.getPosition();\n        var hit = this.Scene.traceAPI.rayCast(center, offset,\n        {\n            ignore: [findviewnode(this.id)]\n        });\n        if (hit && hit.distance < 2)\n        {\n            this.explode();\n            console.log(hit);\n            vwf.deleteNode(this.id);\n            return;\n        }\n    }\n    if (this.counter > 60)\n        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 270)\n        vwf.deleteNode(this.id);       ",
             "parameters": []
         }
     },
@@ -64,7 +68,8 @@
         "explosionDef": {
             "continues": "./vwfdatamanager.svc/datafile/vwf/fragmentRound.vwf.json",
             "properties": {
-                "transform": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+                "transform": [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                "fuse":1
             }
         },
         "fired": true,
