@@ -222,9 +222,8 @@
             0,
             0
         ],
-        "explodeSound": "./vwfdatamanager.svc/datafile/Sounds/Missile Impact Sound Effect 3.mp3",
-        "explodeSound2": "./vwfdatamanager.svc/datafile/Sounds/Missile Impact Sound Effect 2.mp3",
-        "expodeSound2": "./vwfdatamanager.svc/datafile/Sounds/Missile Impact Sound Effect 2.mp3",
+        "explodeSound": "/sas/assets/3c6b353e",
+        "explodeSound2": "/sas/assets/d714ebe1",
         "fuse": 10000000,
         "open": true,
         "owner": "Rob",
