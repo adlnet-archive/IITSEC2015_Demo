@@ -696,106 +696,104 @@
     "name": "Nf1bee40d"
 },
 {
-    "DisplayName": null,
-    "glyphURL": "../vwf/view/editorview/images/icons/scene.png",
-    "simTime": 0,
-    "placemarks":
-    {
-        "Origin": [0, 0, 0]
-    },
-    "navmode": "none",
-    "sunColor": [1, 0.945098039215686, 0.6],
-    "sunDirection": [1.55, -0.2, 1],
-    "sunIntensity": 1.3,
-    "shadowDarkness": 0.65,
-    "ambientColor": [0.35, 0.35, 0.35],
-    "fogColor": [0.980392156862745, 0.803921568627451, 0.588235294117647],
-    "fogNear": 0,
-    "fogFar": 50,
-    "fogType": "exp",
-    "fogDensity": 0.003,
-    "fogVFalloff": 0.539,
-    "fogVFalloffStart": 22.6,
-    "skyColorBlend": 0.5,
-    "skyFogBlend": 0.16,
-    "skyApexColor": [0.305882352941176, 0.603921568627451, 0.949019607843137],
-    "skyHorizonColor": [1, 0.92156862745098, 0.749019607843137],
-    "___physics_gravity": [0, 0, -9.8],
-    "___physics_accuracy": 10,
-    "___physics_active": true,
-    "vAtmosphereDensity": 0.0005,
-    "playMode": "stop",
-    "octreeObjects": 5,
-    "octreeDepth": 16,
-    "octreeExtents": 640,
-    "materialDef":
-    {
-        "shininess": 4,
-        "alpha": 1,
-        "ambient":
-        {
-            "r": 0.8,
-            "g": 0.8,
-            "b": 0.8
+        "DisplayName": null,
+        "glyphURL": "../vwf/view/editorview/images/icons/scene.png",
+        "simTime": 0,
+        "placemarks": {
+            "Origin": [0, 0, 0]
         },
-        "color":
-        {
-            "r": 1,
-            "g": 1,
-            "b": 1,
-            "a": 1
-        },
-        "emit":
-        {
-            "r": 0,
-            "g": 0,
-            "b": 0
-        },
-        "reflect": 0,
-        "shadeless": false,
-        "shadow": true,
-        "specularColor":
-        {
-            "r": 1,
-            "g": 0.6509803921568628,
-            "b": 0
-        },
-        "specularLevel": 0.305,
-        "layers": [
-        {
+        "navmode": "none",
+        "sunColor": [1, 0.945098039215686, 0.6],
+        "sunDirection": [1.55, -0.2, 1],
+        "sunIntensity": 1.3,
+        "shadowDarkness": 0.65,
+        "ambientColor": [0.35, 0.35, 0.35],
+        "fogColor": [0.8705882352941177, 0.7647058823529411, 0.6862745098039216],
+        "fogNear": 0,
+        "fogFar": 50,
+        "fogType": "exp",
+        "fogDensity": 0.001,
+        "fogVFalloff": 5.515,
+        "fogVFalloffStart": -1.7,
+        "skyColorBlend": 0.18,
+        "skyFogBlend": 0.55,
+        "skyApexColor": [0.305882352941176, 0.603921568627451, 0.949019607843137],
+        "skyHorizonColor": [1, 0.92156862745098, 0.749019607843137],
+        "___physics_gravity": [0, 0, -9.8],
+        "___physics_accuracy": 10,
+        "___physics_active": true,
+        "vAtmosphereDensity": 0.0005,
+        "playMode": "stop",
+        "octreeObjects": 5,
+        "octreeDepth": 16,
+        "octreeExtents": 640,
+        "materialDef": {
             "alpha": 1,
-            "blendMode": 0,
-            "mapInput": 0,
-            "mapTo": 1,
-            "offsetx": 0.11,
-            "offsety": 0.11,
-            "rot": 0,
-            "scalex": "10",
-            "scaley": "10",
-            "src": "./contentlibraries/environments/assets/dirt.jpg"
+            "ambient": {
+                "b": 0.8,
+                "g": 0.8,
+                "r": 0.8
+            },
+            "color": {
+                "a": 1,
+                "b": 1,
+                "g": 1,
+                "r": 1
+            },
+            "combine": 0,
+            "depthtest": true,
+            "depthwrite": true,
+            "emit": {
+                "b": 0,
+                "g": 0,
+                "r": 0
+            },
+            "layers": [{
+                    "alpha": 1,
+                    "blendMode": 0,
+                    "mapInput": 0,
+                    "mapTo": 1,
+                    "offsetx": 0.11,
+                    "offsety": 0.11,
+                    "rot": 0,
+                    "scalex": 10,
+                    "scaley": 10,
+                    "src": "./contentlibraries/environments/assets/dirt.jpg"
+                }, {
+                    "alpha": 0.27,
+                    "blendMode": 0,
+                    "mapInput": 0,
+                    "mapTo": "4",
+                    "offsetx": 0,
+                    "offsety": 0,
+                    "rot": 0,
+                    "scalex": 1,
+                    "scaley": 1,
+                    "src": "./contentlibraries/environments/assets/waternormal.jpg"
+                }
+            ],
+            "metal": false,
+            "reflect": 0,
+            "shadeless": false,
+            "shadow": true,
+            "shininess": 4,
+            "side": 2,
+            "specularColor": {
+                "b": 0,
+                "g": 0.650980392156863,
+                "r": 1
+            },
+            "specularLevel": 0.305,
+            "type": "phong",
+            "wireframe": false,
+            "blendMode": 1,
+            "fog": true,
+            "shading": true,
+            "vertexColors": false
         },
-        {
-            "offsetx": 0,
-            "offsety": 0,
-            "scalex": 1,
-            "scaley": 1,
-            "rot": 0,
-            "blendMode": 0,
-            "mapTo": "4",
-            "mapInput": 0,
-            "alpha": 0.27,
-            "src": "./contentlibraries/environments/assets/waternormal.jpg"
-        }],
-        "type": "phong",
-        "side": 2,
-        "wireframe": false,
-        "metal": false,
-        "combine": 0,
-        "depthtest": true,
-        "depthwrite": true
-    },
-    "skyTexture": "cloudy_noon",
-    "owner": "ADLteam",
-    "type": "scene",
-    "skyAtmosphereDensity": 1
+        "skyTexture": "cloudy_noon",
+        "owner": "ADLteam",
+        "type": "scene",
+        "skyAtmosphereDensity": 1
+    
 }]
