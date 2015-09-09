@@ -220,7 +220,7 @@
                                 "offsety": 0,
                                 "scalex": 1,
                                 "scaley": 1,
-                                "src": "./vwfdatamanager.svc/DataFile/Navy/AttackSpeedBoatAll.jpg"
+                                "src": "/sas/assets/7e6084c4"
                             }
                         ],
                         "reflect": 0.001,
@@ -244,7 +244,7 @@
                     "s2": 0.110384
                 },
                 "sequence": 0,
-                "source": "./vwfdatamanager.svc/DataFile/Navy/AttackSpeedBoat.dae",
+                "source": "/sas/assets/c1064312",
                 "type": "subDriver/threejs/asset/vnd.collada+xml",
                 "name": "-vwfdatamanager-svc-datafile-vwf-FAC-vwf-json-N49745000N7a72e82e"
             },
