@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="description" content="Dialog for VWSandbox navy demo">		
+		<title>Navy Swarm Attack Simulation</title>
+		<script type="text/javascript" src="Scripts/Dialog.js"></script>		
+		<link rel="stylesheet" type="text/css" href="Styles/DialogGlobal.css">			
+	</head>
+	<body>
+		<!-- demo content -->
+		<div class="demo-wrapper">
+			<div class="html5-dialog">
+				<dialog id="mainWindow">
+					<!-- Select Role Panel -->
+					<div id="roleSelection">
+						<h3><em>Select Role</em></h3>
+						<p></p>
+						<input class="simulationRole" type="radio" name="simulationRole" />Tactical Action Officer						
+						<p></p>
+						<input class="simulationRole" type="radio" name="simulationRole" />Officer of the Deck
+						<p></p>
+						<input class="simulationRole" type="radio" name="simulationRole" />Helicopter Pilot
+						<p></p>
+						<input class="simulationRole" type="radio" name="simulationRole" />Small Craft Action Team
+						<p></p>
+						<input class="simulationRole" type="radio" name="simulationRole" />Fast Action Craft Terrorist
+					</div>
+					<!-- Simulation Instructions Panel -->
+					<div id="helpInstructions">
+						<h3><em>Simulation Instructions</em></h3>
+						<h4>Tactical Action Officer (TAO)</h4>
+						<p>How to play TAO</p>
+						<h4>Officer of the Deck (OOD)</h4>
+						<p>How to play OOD</p>
+						<h4>Helicopter Pilot</h4>
+						<p>How to play Helicopter</p>
+						<h4>Small Craft Action Team (SCAT)</h4>
+						<p>How to play SCAT</p>
+						<h4>Fast Action Craft Terrorist (FAC)</h4>
+						<p>How to play FAC</p>
+					</div>
+					<!-- Start Simulation Button -->
+					<button id="startSimulation" onclick='closeDialog()'>Start Simulation</button>
+				</dialog>
+				<button id="showDialog" onclick='showDialog()'>Show Dialog</button>
+			</div>
+		</div>		
+	</body>
+</html>
