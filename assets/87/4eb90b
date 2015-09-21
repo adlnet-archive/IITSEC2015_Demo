@@ -1,1 +1,350 @@
-{"extends":"box2.vwf","source":"vwf/model/threejs/box.js","type":"subDriver/threejs","sequence":0,"random":{"s0":0.134394,"s1":0.921757,"s2":0.045269,"c":1},"properties":{"___physics_activation_state":4,"___physics_deactivation_time":0,"___physics_velocity_linear":[0.0000014165404991217656,-0.00012891086225863546,-0.0032490950543433428],"___physics_velocity_angular":[0.008379931561648846,-0.002338845981284976,0.000013828842384100426],"DisplayName":"DDG51","___physics_angular_velocity":[0.0067684168103513,0.00232219359937594,0.00000300311251272397],"___physics_damping":0.4,"___physics_enabled":true,"___physics_linear_velocity":[-5.51645837632456e-10,2.28675722473472e-8,-0.00000146451189718221],"___physics_mass":80051.2,"_length":135,"counter":14602,"height":10,"materialDef":{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"blendMode":0,"color":{"a":1,"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"blendMode":0,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"rot":0,"scalex":1,"scaley":1,"src":"checker.jpg"}],"metal":false,"reflect":0.8,"shadeless":false,"shading":true,"shadow":true,"shininess":15,"side":0,"specularColor":{"b":0.57735,"g":0.57735,"r":0.57735},"specularLevel":1,"type":"phong","vertexColors":true,"wireframe":false},"owner":"ADLteam","physicsAPI":{},"transform":[1,0,0,0,0,0.9988478422164917,-0.01743495464324951,0,0,0.01743495464324951,0.9988478422164917,0,2.6719589233398438,-4.124145984649658,0.01774579845368862,1],"type":"Primitive","visible":false,"width":20,"sourceAssetId":"874eb90b","states":{"idle":{"buoyancy":true,"movement":false,"transitionFunc":null,"transitions":["navigating"],"updateFunc":null},"navigating":{"buoyancy":true,"movement":true,"transitionFunc":null,"transitions":["idle"],"updateFunc":null}},"activeState":"navigating","rudder":"back","engine":"aheadHalf","ditorData":"","EditorData":{"engine":{"displayname":"engine","labels":["Ahead Full","Ahead Half","Back"],"property":"engine","type":"choice","values":["aheadFull","aheadHalf","back"]},"rudder":{"displayname":"rudder","labels":["Hard Right","Hard Left","center"],"property":"rudder","type":"choice","values":["hardRight","hardLeft","back"]},"state":{"displayname":"state","labels":["idle","navigating"],"property":"activeState","type":"choice","values":["idle","navigating"]}}},"methods":{"buoyancy":{"body":"     var waterDepth = 20;\n    var hullThick = 2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 2;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n        //this.physicsAPI.addForceAtCenter(this.transformAPI.localToGlobal(0, 100, 0));\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 10;\n        vel[1] *= 1.0 - depth / 3;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }     ","parameters":[]},"tick":{"body":" var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if(state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n        \n        \n    } ","parameters":[]},"command":{"body":" var command = args[0];\n    if (command == \"aheadFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadFull\";\n    }\n    if (command == \"backFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"backFull\";\n    }\n    if (command == \"aheadHalf\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadHalf\";\n    }\n    if (command == \"engineIdle\")\n    {\n        this.activateState('navigating');\n        this.engine = \"idle\";\n    }\n    if (command == \"hardRight\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardRight\";\n    }\n    if (command == \"hardLeft\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardLeft\";\n    }\n    if (command == \"rudderCenter\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"center\";\n    } ","parameters":["args"]},"movement":{"body":" var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 50 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -25 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque); ","parameters":[]},"activateState":{"body":" var currentState = this.states[this.activeState];\n    if (currentState.transitions && currentState.transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        newState = this.states[newState];\n        if (!newState)\n        {\n            console.log('state does not exist');\n        }\n        if (newState.transitionFunc && this[newState.transitionFunc])\n        {\n            this[newState.transitionFunc]();\n        }\n\n    }\n    else\n    {\n        console.log('invalid transition');\n    } ","parameters":["newState"]}},"children":{"N7711dbf9":{"extends":"asset.vwf","source":"./vwfdatamanager.svc/3drdownload?pid=adl:1588","type":"subDriver/threejs/asset/vnd.osgjs+json+compressed","sequence":0,"random":{"s0":0.529011,"s1":0.196021,"s2":0.923128,"c":1},"properties":{"___physics_activation_state":1,"___physics_deactivation_time":0,"___physics_velocity_linear":[0,0,0],"___physics_velocity_angular":[0,0,0],"materialDef":[{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"blendMode":0,"color":{"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"scalex":1,"scaley":1,"src":"./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"}],"metal":false,"reflect":0,"shading":true,"shininess":0.004002,"side":0,"specularColor":{"b":0,"g":0,"r":0},"specularLevel":1,"type":"phong","vertexColors":false,"wireframe":false},{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"blendMode":0,"color":{"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"scalex":1,"scaley":1,"src":"./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"}],"metal":false,"reflect":0,"shading":true,"shininess":0.004002,"side":0,"specularColor":{"b":0,"g":0,"r":0},"specularLevel":1,"type":"phong","vertexColors":false,"wireframe":false},{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"blendMode":0,"color":{"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"scalex":1,"scaley":1,"src":"./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"}],"metal":false,"reflect":0,"shading":true,"shininess":0.004002,"side":0,"specularColor":{"b":0,"g":0,"r":0},"specularLevel":1,"type":"phong","vertexColors":false,"wireframe":false},{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"blendMode":0,"color":{"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"scalex":1,"scaley":1,"src":"./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"}],"metal":false,"reflect":0,"shading":true,"shininess":0.004002,"side":0,"specularColor":{"b":0,"g":0,"r":0},"specularLevel":1,"type":"phong","vertexColors":false,"wireframe":false},{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"blendMode":0,"color":{"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"scalex":1,"scaley":1,"src":"./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"}],"metal":false,"reflect":0,"shading":true,"shininess":0.004002,"side":0,"specularColor":{"b":0,"g":0,"r":0},"specularLevel":1,"type":"phong","vertexColors":false,"wireframe":false},{"alpha":1,"ambient":{"b":1,"g":1,"r":1},"blendMode":0,"color":{"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"scalex":1,"scaley":1,"src":"./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"}],"metal":false,"reflect":0,"shading":true,"shininess":0.004002,"side":0,"specularColor":{"b":0,"g":0,"r":0},"specularLevel":1,"type":"phong","vertexColors":false,"wireframe":false}],"DisplayName":"Barry1","owner":"ADLteam","transform":[1,0,0,0,0,0,1,0,0,-1,0,0,0.25,-1.5,-0.75,1],"type":"3DR Object","___assetServerOriginalID":"N7711dbf9"},"children":{"Necdbc16e":{"extends":"SandboxCamera.vwf","source":"vwf/model/threejs/camera.js","type":"subDriver/threejs","sequence":0,"random":{"s0":0.041035,"s1":0.718352,"s2":0.528338,"c":1},"properties":{"DisplayName":"Camera1","owner":"ADLteam","transform":[-1.0000009536743164,0,-9.999999974752427e-7,0,0,0.08715499937534332,0.9961940050125122,0,-9.999999974752427e-7,0.9961940050125122,-0.08715599775314331,0,24.5,15.553004264831543,5.666027069091797,1],"___assetServerOriginalID":"Necdbc16e"}},"N726d2e0d":{"extends":"asset.vwf","source":"rails","type":"link_existing/threejs","sequence":0,"random":{"s0":0.5605327761732042,"s1":0.27802790026180446,"s2":0.10562265035696328,"c":1},"properties":{"___physics_activation_state":1,"___physics_deactivation_time":0,"___physics_velocity_linear":[0,0,0],"___physics_velocity_angular":[0,0,0],"type":"3DR Object","DisplayName":"rails","transform":[1,0,0,0,0,-1,0,0,0,0,-1,0,0.0000019999999949504854,0.000004999999873689376,0,1],"materialDef":{"alpha":0.98,"ambient":{"b":1,"g":1,"r":1},"blendMode":1,"color":{"b":1,"g":1,"r":1},"depthtest":true,"depthwrite":true,"emit":{"b":0,"g":0,"r":0},"fog":true,"layers":[{"alpha":1,"mapInput":0,"mapTo":1,"offsetx":0,"offsety":0,"scalex":1,"scaley":1,"src":"./vwfdatamanager.svc/3drtexture?pid=adl:1588&file=barryatlas.png"}],"metal":false,"reflect":0,"shading":true,"shininess":0.0004022,"side":0,"specularColor":{"b":0,"g":0,"r":0},"specularLevel":1,"type":"phong","vertexColors":false,"wireframe":false},"___assetServerOriginalID":"N726d2e0d"}}}}}}
+{
+	"extends": "box2.vwf",
+	"source": "vwf/model/threejs/box.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.134394,
+		"s1": 0.921757,
+		"s2": 0.045269,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 4,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0.0000014165404991217656,
+			-0.00012891086225863546,
+			-0.0032490950543433428
+		],
+		"___physics_velocity_angular": [
+			0.008379931561648846,
+			-0.002338845981284976,
+			0.000013828842384100426
+		],
+		"DisplayName": "DDG51",
+		"EditorData": {
+			"engine": {
+				"displayname": "engine",
+				"labels": [
+					"Ahead Full",
+					"Ahead Half",
+					"Back"
+				],
+				"property": "engine",
+				"type": "choice",
+				"values": [
+					"aheadFull",
+					"aheadHalf",
+					"back"
+				]
+			},
+			"rudder": {
+				"displayname": "rudder",
+				"labels": [
+					"Hard Right",
+					"Hard Left",
+					"center"
+				],
+				"property": "rudder",
+				"type": "choice",
+				"values": [
+					"hardRight",
+					"hardLeft",
+					"back"
+				]
+			},
+			"state": {
+				"displayname": "state",
+				"labels": [
+					"idle",
+					"navigating"
+				],
+				"property": "activeState",
+				"type": "choice",
+				"values": [
+					"idle",
+					"navigating"
+				]
+			}
+		},
+		"___physics_angular_velocity": [
+			0.0067684168103513,
+			0.00232219359937594,
+			0.00000300311251272397
+		],
+		"___physics_damping": 0.4,
+		"___physics_enabled": true,
+		"___physics_linear_velocity": [
+			-5.51645837632456e-10,
+			2.28675722473472e-8,
+			-0.00000146451189718221
+		],
+		"___physics_mass": 80051.2,
+		"_length": 135,
+		"activeState": "navigating",
+		"counter": 14602,
+		"ditorData": "",
+		"engine": "aheadHalf",
+		"height": 10,
+		"materialDef": {
+			"alpha": 1,
+			"ambient": {
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"blendMode": 0,
+			"color": {
+				"a": 1,
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"depthtest": true,
+			"depthwrite": true,
+			"emit": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
+			"fog": true,
+			"layers": [
+				{
+					"alpha": 1,
+					"blendMode": 0,
+					"mapInput": 0,
+					"mapTo": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"rot": 0,
+					"scalex": 1,
+					"scaley": 1,
+					"src": "checker.jpg"
+				}
+			],
+			"metal": false,
+			"reflect": 0.8,
+			"shadeless": false,
+			"shading": true,
+			"shadow": true,
+			"shininess": 15,
+			"side": 0,
+			"specularColor": {
+				"b": 0.57735,
+				"g": 0.57735,
+				"r": 0.57735
+			},
+			"specularLevel": 1,
+			"type": "phong",
+			"vertexColors": true,
+			"wireframe": false
+		},
+		"owner": "ADLteam",
+		"physicsAPI": {},
+		"rudder": "back",
+		"sourceAssetId": "874eb90b",
+		"states": {
+			"idle": {
+				"buoyancy": true,
+				"movement": false,
+				"transitionFunc": null,
+				"transitions": [
+					"navigating"
+				],
+				"updateFunc": null
+			},
+			"navigating": {
+				"buoyancy": true,
+				"movement": true,
+				"transitionFunc": null,
+				"transitions": [
+					"idle"
+				],
+				"updateFunc": null
+			}
+		},
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			0.9988478422164917,
+			-0.01743495464324951,
+			0,
+			0,
+			0.01743495464324951,
+			0.9988478422164917,
+			0,
+			1.1283061504364014,
+			0.4640020728111267,
+			0.01774579845368862,
+			1
+		],
+		"type": "Primitive",
+		"visible": false,
+		"width": 20
+	},
+	"methods": {
+		"activateState": {
+			"body": "   var currentState = this.states[this.activeState];\n    if (currentState.transitions && currentState.transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        newState = this.states[newState];\n        if (!newState)\n        {\n            console.log('state does not exist');\n        }\n        if (newState.transitionFunc && this[newState.transitionFunc])\n        {\n            this[newState.transitionFunc]();\n        }\n\n    }\n    else\n    {\n        console.log('invalid transition');\n    }   ",
+			"parameters": [
+				"newState"
+			]
+		},
+		"buoyancy": {
+			"body": "       var waterDepth = 20;\n    var hullThick = 2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 2;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n        //this.physicsAPI.addForceAtCenter(this.transformAPI.localToGlobal(0, 100, 0));\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 10;\n        vel[1] *= 1.0 - depth / 3;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }       ",
+			"parameters": []
+		},
+		"command": {
+			"body": "   var command = args[0];\n    if (command == \"aheadFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadFull\";\n    }\n    if (command == \"backFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"backFull\";\n    }\n    if (command == \"aheadHalf\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadHalf\";\n    }\n    if (command == \"engineIdle\")\n    {\n        this.activateState('navigating');\n        this.engine = \"idle\";\n    }\n    if (command == \"hardRight\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardRight\";\n    }\n    if (command == \"hardLeft\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardLeft\";\n    }\n    if (command == \"rudderCenter\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"center\";\n    }   ",
+			"parameters": [
+				"args"
+			]
+		},
+		"movement": {
+			"body": "   var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 50 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -25 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);   ",
+			"parameters": []
+		},
+		"tick": {
+			"body": "   var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if(state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n        \n        \n    }   ",
+			"parameters": []
+		}
+	},
+	"children": {
+		"N7711dbf9": {
+			"extends": "asset.vwf",
+			"source": "/sas/assets/2379f467",
+			"type": "subDriver/threejs/asset/vnd.collada+xml",
+			"sequence": 0,
+			"random": {
+				"s0": 0.529011,
+				"s1": 0.196021,
+				"s2": 0.923128,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"materialDef": {
+					"alpha": 1,
+					"ambient": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"blendMode": 0,
+					"color": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [
+						{
+							"alpha": 1,
+							"mapInput": 0,
+							"mapTo": 1,
+							"offsetx": 0,
+							"offsety": 0,
+							"scalex": 1,
+							"scaley": 1,
+							"src": "/sas/assets/58f95c66"
+						}
+					],
+					"metal": false,
+					"reflect": 0,
+					"shading": true,
+					"shininess": 0.004002,
+					"side": 0,
+					"specularColor": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"DisplayName": "Barry1",
+				"___assetServerOriginalID": "N7711dbf9",
+				"owner": "ADLteam",
+				"transform": [
+					108,
+					0,
+					0,
+					0,
+					0,
+					108,
+					0,
+					0,
+					0,
+					0,
+					108,
+					0,
+					0,
+					0,
+					0,
+					1
+				],
+				"type": "3DR Object"
+			},
+			"children": {
+				"Necdbc16e": {
+					"extends": "SandboxCamera.vwf",
+					"source": "vwf/model/threejs/camera.js",
+					"type": "subDriver/threejs",
+					"sequence": 0,
+					"random": {
+						"s0": 0.041035,
+						"s1": 0.718352,
+						"s2": 0.528338,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "DeckCam",
+						"___assetServerOriginalID": "Necdbc16e",
+						"owner": "ADLteam",
+						"transform": [
+							-0.009000000543892384,
+							6.431299503367738e-12,
+							-5.626657993695883e-13,
+							0,
+							-6.455866657234521e-12,
+							-0.008965750224888325,
+							0.0007844014908187091,
+							0,
+							0,
+							0.0007844014908187091,
+							0.008965750224888325,
+							0,
+							0.2488119751214981,
+							-0.05801611766219139,
+							0.1564117968082428,
+							1
+						]
+					}
+				}
+			}
+		}
+	}
+}
