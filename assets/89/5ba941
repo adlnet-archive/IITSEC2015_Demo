@@ -73,16 +73,16 @@
 		"materialDef": {
 			"alpha": 1,
 			"ambient": {
-				"b": 1,
-				"g": 1,
-				"r": 1
+				"b": 0.4935064935064935,
+				"g": 0.4935064935064935,
+				"r": 0.4935064935064935
 			},
 			"blendMode": 1,
 			"color": {
 				"a": 1,
-				"b": 1,
-				"g": 1,
-				"r": 1
+				"b": 0.4935064935064935,
+				"g": 0.4935064935064935,
+				"r": 0.4935064935064935
 			},
 			"depthtest": true,
 			"depthwrite": true,
@@ -92,20 +92,7 @@
 				"r": 0
 			},
 			"fog": true,
-			"layers": [
-				{
-					"alpha": 1,
-					"blendMode": 0,
-					"mapInput": 0,
-					"mapTo": 1,
-					"offsetx": 0,
-					"offsety": 0,
-					"rot": 0,
-					"scalex": 1,
-					"scaley": 1,
-					"src": "checker.jpg"
-				}
-			],
+			"layers": [],
 			"metal": false,
 			"reflect": 0.8,
 			"shadeless": false,
@@ -283,8 +270,8 @@
 			0,
 			1.001001000404358,
 			0,
-			0.5035927295684814,
-			-1.8417799472808838,
+			0.45357945561408997,
+			-2.4125778675079346,
 			0.01774579845368862,
 			1
 		],
@@ -293,93 +280,93 @@
 	},
 	"methods": {
 		"_keyDown": {
-			"body": "\n          if (!this.verifyCamera()) return;\n    if (e.key.char == ' ') this.activateState(\"firing\");          \n",
+			"body": "\n\n\n            if (!this.verifyCamera()) return;\n      if (e.key.char == ' ') this.activateState(\"firing\");          \n\n",
 			"parameters": [
 				"e"
 			]
 		},
 		"_keyUp": {
-			"body": "\n         if (!this.verifyCamera()) return;\n    if (e.key.char == ' ') this.activateState(\"idle\");\n    if (e.key.char == 'T') this.activateState(\"targeting\");         \n",
+			"body": "\n\n\n           if (!this.verifyCamera()) return;\n      if (e.key.char == ' ') this.activateState(\"idle\");\n      if (e.key.char == 'T') this.activateState(\"targeting\");         \n\n",
 			"parameters": [
 				"e"
 			]
 		},
 		"_pointerDown": {
-			"body": "\n           if (!this.verifyCamera()) return;\n    if (e.button == \"left\")\n    {\n        this.lastx = e.position[0];\n        this.lasty = e.position[1];\n        this.mouseDown = true;\n    }\n    if (e.button == \"right\")\n    {\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].fovGoal = 10;\n    }           \n",
+			"body": "\n\n\n             if (!this.verifyCamera()) return;\n      if (e.button == \"left\")\n      {\n          this.lastx = e.position[0];\n          this.lasty = e.position[1];\n          this.mouseDown = true;\n      }\n      if (e.button == \"right\")\n      {\n          this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].fovGoal = 10;\n      }           \n\n",
 			"parameters": [
 				"e",
 				"d"
 			]
 		},
 		"_pointerMove": {
-			"body": "\n           if (!this.verifyCamera()) return;\n    if (!this.mouseDown) return;\n    var relx = e.position[0] - this.lastx;\n    var rely = e.position[1] - this.lasty;\n\n    this.lastx = e.position[0];\n    this.lasty = e.position[1];\n    this.transformAPI.rotateZ(-relx * 80);\n    this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(rely * 30);           \n",
+			"body": "\n\n\n             if (!this.verifyCamera()) return;\n      if (!this.mouseDown) return;\n      var relx = e.position[0] - this.lastx;\n      var rely = e.position[1] - this.lasty;\n\n      this.lastx = e.position[0];\n      this.lasty = e.position[1];\n      this.transformAPI.rotateZ(-relx * 80);\n      this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(rely * 30);           \n\n",
 			"parameters": [
 				"e",
 				"d"
 			]
 		},
 		"_pointerUp": {
-			"body": "\n           if (!this.verifyCamera()) return;\n    if (e.button == \"left\")\n    {\n        this.lastx = e.position[0];\n        this.lasty = e.position[1];\n        this.mouseDown = false;\n    }\n    if (e.button == \"right\")\n    {\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].fovGoal = 60;\n    }           \n",
+			"body": "\n\n\n             if (!this.verifyCamera()) return;\n      if (e.button == \"left\")\n      {\n          this.lastx = e.position[0];\n          this.lasty = e.position[1];\n          this.mouseDown = false;\n      }\n      if (e.button == \"right\")\n      {\n          this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].fovGoal = 60;\n      }           \n\n",
 			"parameters": [
 				"e",
 				"d"
 			]
 		},
 		"_pointerWheel": {
-			"body": "\n           if (!this.verifyCamera()) return;\n    this.fuse += e.wheelDelta;\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Label2\"].text = this.fuse;           \n",
+			"body": "\n\n\n             if (!this.verifyCamera()) return;\n      this.fuse += e.wheelDelta;\n      this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Label2\"].text = this.fuse;           \n\n",
 			"parameters": [
 				"e"
 			]
 		},
 		"activateState": {
-			"body": "\n         if (this.states[newState] && this.states[newState].transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        console.log(\"transition to \" + newState);\n    }\n    else\n    {\n        console.log(\"invalid transition\");\n    }         \n",
+			"body": "\n\n\n           if (this.states[newState] && this.states[newState].transitions.indexOf(newState))\n      {\n          this.activeState = newState;\n          console.log(\"transition to \" + newState);\n      }\n      else\n      {\n          console.log(\"invalid transition\");\n      }         \n\n",
 			"parameters": [
 				"newState"
 			]
 		},
 		"command": {
-			"body": "\n       var command = args[0];\n    if(command == \"5 inch engage\")\n      this.activateState(\"targeting\");\n    \n    if(command == \"5 inch disengage\")\n      this.activateState(\"idle\");       \n",
+			"body": "\n\n\n         var command = args[0];\n      if(command == \"5 inch engage\")\n        this.activateState(\"targeting\");\n      \n      if(command == \"5 inch disengage\")\n        this.activateState(\"idle\");       \n\n",
 			"parameters": [
 				"args"
 			]
 		},
 		"explode": {
-			"body": "\n       var def = this.explosionDef;\n    if (def.internal_val)\n        def = def.internal_val;\n    def = JSON.parse(JSON.stringify(def));\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = dist / 10;\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);       \n",
+			"body": "\n\n\n         var def = this.explosionDef;\n      if (def.internal_val)\n          def = def.internal_val;\n      def = JSON.parse(JSON.stringify(def));\n      def.properties.transform[12] = pos[0];\n      def.properties.transform[13] = pos[1];\n      def.properties.transform[14] = pos[2];\n      def.properties.fuse = dist / 10;\n      // console.profile(\"launch\");\n      vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);       \n\n",
 			"parameters": [
 				"pos",
 				"dist"
 			]
 		},
 		"fire": {
-			"body": "\n       var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n    this.audioAPI.playSound(this.fireSound, false, 300.0);\n    var dist = this.fuse;\n    if (hit && hit.distance < dist)\n    {\n       dist = hit.distance;\n    }\n\n    var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n    this.explode(point, dist);\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n    var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n    shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);       \n",
+			"body": "\n\n\n         var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n      var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n      var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n      dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n      var hit = this.Scene.traceAPI.rayCast(origin, dir,\n      {\n          ignore: [findviewnode(this.id)]\n      });\n      this.audioAPI.playSound(this.fireSound, false, 300.0);\n      var dist = this.fuse;\n      if (hit && hit.distance < dist)\n      {\n         dist = hit.distance;\n      }\n\n      var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n      this.explode(point, dist);\n      this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n      var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n      this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n      shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n      this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);       \n\n",
 			"parameters": []
 		},
 		"firing": {
-			"body": "\n        if (this.Ammo > 0 && this.activeState == \"firing\")\n    {\n        var target = this.Scene.findNodeByID(this.targetID);\n    if (!target)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    \n        if (this.firecounter < 0)\n        {\n            this.firecounter = 30;\n            this.Ammo -= 1;\n            this.fire();\n            this.activateState(\"targeting\");\n            return;\n        }\n\n        if (this.Ammo == 0)\n        {\n            this.activeState = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    this.firecounter--;        \n",
+			"body": "\n\n\n          if (this.Ammo > 0 && this.activeState == \"firing\")\n      {\n          var target = this.Scene.findNodeByID(this.targetID);\n      if (!target)\n      {\n          this.activateState(\"targeting\");\n          return;\n      }\n      \n          if (this.firecounter < 0)\n          {\n              this.firecounter = 30;\n              this.Ammo -= 1;\n              this.fire();\n              this.activateState(\"targeting\");\n              return;\n          }\n\n          if (this.Ammo == 0)\n          {\n              this.activeState = \"reloading\";\n              this.firecounter = 170;\n              this.playSound(this.reloadSound, false, 10);\n          }\n      }\n      this.firecounter--;        \n\n",
 			"parameters": []
 		},
 		"ready": {
-			"body": "\n                       this.Scene.unbind(\"pointerMove\", this._pv);\n    this.Scene.unbind(\"pointerDown\", this._pd);\n    this.Scene.unbind(\"pointerUp\", this._pu);\n    this.Scene.unbind(\"pointerWheel\", this._pw);\n\n    this.Scene.unbind(\"keyDown\", this._kd);\n    this.Scene.unbind(\"keyUp\", this._ku);\n    var self = this;\n    this._pv = function(e, d)\n    {\n        self._pointerMove(e, d);\n    }\n    this._pd = function(e, d)\n    {\n        self._pointerDown(e, d);\n    }\n    this._pu = function(e, d)\n    {\n        self._pointerUp(e, d);\n    }\n    this._kd = function(e, d)\n    {\n        self._keyDown(e, d);\n    }\n    this._ku = function(e, d)\n    {\n        self._keyUp(e, d);\n    }\n    this._pw = function(e, d)\n    {\n        self._pointerWheel(e, d);\n    }\n    this.Scene.bind(\"pointerMove\", this._pv);\n    this.Scene.bind(\"pointerDown\", this._pd);\n    this.Scene.bind(\"pointerUp\", this._pu);\n    this.Scene.bind(\"pointerWheel\", this._pw);\n    this.Scene.bind(\"keyDown\", this._kd);\n    this.Scene.bind(\"keyUp\", this._ku);                       \n",
+			"body": "\n\n\n                         this.Scene.unbind(\"pointerMove\", this._pv);\n      this.Scene.unbind(\"pointerDown\", this._pd);\n      this.Scene.unbind(\"pointerUp\", this._pu);\n      this.Scene.unbind(\"pointerWheel\", this._pw);\n\n      this.Scene.unbind(\"keyDown\", this._kd);\n      this.Scene.unbind(\"keyUp\", this._ku);\n      var self = this;\n      this._pv = function(e, d)\n      {\n          self._pointerMove(e, d);\n      }\n      this._pd = function(e, d)\n      {\n          self._pointerDown(e, d);\n      }\n      this._pu = function(e, d)\n      {\n          self._pointerUp(e, d);\n      }\n      this._kd = function(e, d)\n      {\n          self._keyDown(e, d);\n      }\n      this._ku = function(e, d)\n      {\n          self._keyUp(e, d);\n      }\n      this._pw = function(e, d)\n      {\n          self._pointerWheel(e, d);\n      }\n      this.Scene.bind(\"pointerMove\", this._pv);\n      this.Scene.bind(\"pointerDown\", this._pd);\n      this.Scene.bind(\"pointerUp\", this._pu);\n      this.Scene.bind(\"pointerWheel\", this._pw);\n      this.Scene.bind(\"keyDown\", this._kd);\n      this.Scene.bind(\"keyUp\", this._ku);                       \n\n",
 			"parameters": []
 		},
 		"reloading": {
-			"body": "\n          if (this.activeState == 'reloading')\n    {\n        this.firecounter--;\n        if (this.firecounter == 0)\n        {\n            this.Ammo = 30;\n            this.activeState = 'firing';\n        }\n\n    }          \n",
+			"body": "\n\n\n            if (this.activeState == 'reloading')\n      {\n          this.firecounter--;\n          if (this.firecounter == 0)\n          {\n              this.Ammo = 30;\n              this.activeState = 'firing';\n          }\n\n      }          \n\n",
 			"parameters": []
 		},
 		"targeting": {
-			"body": "\n       var near = Infinity;\n    var target = null;\n    var thispos = this.transformAPI.getPosition();\n\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var child = this.Scene.children[i];\n        if (child.id == this.id) continue;\n        if (child.parent.id == this.id) continue;\n        var childpos = child.transformAPI.getPosition();\n        var dist = MATH.distanceVec3(thispos, childpos);\n        if (dist < near && child.hostile && child.activeState !== 'disabled')\n        {\n            near = dist;\n            target = child;\n        }\n    }\n    if (target && near < (this.maxRange || 15000))\n    {\n        this.targetID = target.id;\n        this.activateState(\"tracking\");\n    }       \n",
+			"body": "\n\n\n         var near = Infinity;\n      var target = null;\n      var thispos = this.transformAPI.getPosition();\n\n      for (var i = 0; i < this.Scene.children.length; i++)\n      {\n          var child = this.Scene.children[i];\n          if (child.id == this.id) continue;\n          if (child.parent.id == this.id) continue;\n          var childpos = child.transformAPI.getPosition();\n          var dist = MATH.distanceVec3(thispos, childpos);\n          if (dist < near && child.hostile && child.activeState !== 'disabled')\n          {\n              near = dist;\n              target = child;\n          }\n      }\n      if (target && near < (this.maxRange || 15000))\n      {\n          this.targetID = target.id;\n          this.activateState(\"tracking\");\n      }       \n\n",
 			"parameters": []
 		},
 		"tick": {
-			"body": "\n          this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.getPosition();\n    var goal = [.5, 0, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    var pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    var goal = [.0, 0, .75];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n    var state = this.states[this.activeState];\n    if(state)\n    {\n        if(state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]();\n        \n        \n        \n    }          \n",
+			"body": "\n\n\n            this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n\n      var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.getPosition();\n      var goal = [.5, 0, -2];\n      var move = Vec3.subtract(goal, pos, []);\n\n      this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n      var pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n      var goal = [.0, 0, .75];\n      var move = Vec3.subtract(goal, pos, []);\n\n      this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n      var state = this.states[this.activeState];\n      if(state)\n      {\n          if(state.updateFunc && this[state.updateFunc])\n              this[state.updateFunc]();\n          \n          \n          \n      }          \n\n",
 			"parameters": []
 		},
 		"verifyCamera": {
-			"body": "\n           var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n    var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].id;\n    if (!cam || cam.id != thisCam) return false;\n    return true;           \n",
+			"body": "\n\n\n             var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n      var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].id;\n      if (!cam || cam.id != thisCam) return false;\n      return true;           \n\n",
 			"parameters": []
 		},
 		"tracking": {
-			"body": "\n this.firecounter--;\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var thispos = this.transformAPI.getPosition();\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    vec = MATH.subVec3(thispos, MATH.addVec3(targetpos, MATH.scaleVec3(targetSpeed, (dist / 10) + 1)));\n    this.fuse = MATH.lengthVec3(vec);\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * .7);\n\n    var upvec = this.children_by_name[\"50CalPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.min(-0.2, -dot));\n    }\n    if (dot < -.01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.max(0.2, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02 && this.firecounter < 1)\n    {\n        this.activateState(\"firing\");\n    }\n    this.lastTargetPos = targetpos; \n",
+			"body": "\n\n\n   this.firecounter--;\n      if (!this.targetID)\n      {\n          this.activateState(\"targeting\");\n          return;\n      }\n      var target = this.Scene.findNodeByID(this.targetID);\n      if (!target)\n      {\n          this.activateState(\"targeting\");\n          return;\n      }\n      var thispos = this.transformAPI.getPosition();\n      var targetpos = target.transformAPI.getWorldPosition();\n\n      if (this.parent.transformAPI)\n      {\n          targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n      }\n      if (!this.lastTargetPos)\n          this.lastTargetPos = targetpos;\n\n      var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n      // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n      var vec = MATH.subVec3(thispos, targetpos);\n      var dist = MATH.lengthVec3(vec);\n      vec = MATH.subVec3(thispos, MATH.addVec3(targetpos, MATH.scaleVec3(targetSpeed, (dist / 10) + 1)));\n      this.fuse = MATH.lengthVec3(vec);\n      vec = MATH.toUnitVec3(vec);\n      var targetangle = Math.atan2(vec[0], vec[1]);\n      var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n      thisvec = MATH.toUnitVec3(thisvec);\n      if (this.parent.transformAPI)\n      {\n          thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n      }\n      var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n      var angle = targetangle - thisangle;\n\n      if (angle < -Math.PI)\n          angle *= -1;\n      else if (angle > Math.PI)\n      {\n          angle *= -1;\n      }\n      angle *= 10;\n      if (angle > 1) angle = 1;\n      if (angle < -1) angle = -1;\n      this.transformAPI.rotateZ(-angle * .7);\n\n      var upvec = this.children_by_name[\"50CalPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n      if (this.parent.transformAPI)\n      {\n          upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n      }\n\n      var targetvec = MATH.subVec3(thispos, targetpos);\n      targetvec = MATH.toUnitVec3(targetvec);\n\n      var dot = MATH.dotVec3(upvec, targetvec)\n      if (dot > .01)\n      {\n          this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.min(-0.2, -dot));\n      }\n      if (dot < -.01)\n      {\n          this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.max(0.2, -dot));\n      }\n\n      if (Math.abs(angle) < .06 && Math.abs(dot) < .02 && this.firecounter < 1)\n      {\n          this.activateState(\"firing\");\n      }\n      this.lastTargetPos = targetpos; \n\n",
 			"parameters": []
 		}
 	},
@@ -415,16 +402,16 @@
 				"materialDef": {
 					"alpha": 1,
 					"ambient": {
-						"b": 1,
-						"g": 1,
-						"r": 1
+						"b": 0.4935064935064935,
+						"g": 0.4935064935064935,
+						"r": 0.4935064935064935
 					},
 					"blendMode": 1,
 					"color": {
 						"a": 1,
-						"b": 1,
-						"g": 1,
-						"r": 1
+						"b": 0.4935064935064935,
+						"g": 0.4935064935064935,
+						"r": 0.4935064935064935
 					},
 					"depthtest": true,
 					"depthwrite": true,
@@ -434,20 +421,7 @@
 						"r": 0
 					},
 					"fog": true,
-					"layers": [
-						{
-							"alpha": 1,
-							"blendMode": 0,
-							"mapInput": 0,
-							"mapTo": 1,
-							"offsetx": 0,
-							"offsety": 0,
-							"rot": 0,
-							"scalex": 1,
-							"scaley": 1,
-							"src": "checker.jpg"
-						}
-					],
+					"layers": [],
 					"metal": false,
 					"reflect": 0.8,
 					"shadeless": false,
@@ -526,7 +500,7 @@
 					},
 					"methods": {
 						"tick": {
-							"body": "\n                                 // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.fov += (this.fovGoal - this.fov) / 5;                                 \n",
+							"body": "\n\n\n                                   // The tick function is called 20 times every second.\n      // Write code here to animate over time\n      this.fov += (this.fovGoal - this.fov) / 5;                                 \n\n",
 							"parameters": []
 						}
 					},
@@ -642,16 +616,16 @@
 						"materialDef": {
 							"alpha": 1,
 							"ambient": {
-								"b": 1,
-								"g": 1,
-								"r": 1
+								"b": 0.4935064935064935,
+								"g": 0.4935064935064935,
+								"r": 0.4935064935064935
 							},
 							"blendMode": 1,
 							"color": {
 								"a": 1,
-								"b": 1,
-								"g": 1,
-								"r": 1
+								"b": 0.4935064935064935,
+								"g": 0.4935064935064935,
+								"r": 0.4935064935064935
 							},
 							"depthtest": true,
 							"depthwrite": true,
@@ -661,20 +635,7 @@
 								"r": 0
 							},
 							"fog": true,
-							"layers": [
-								{
-									"alpha": 1,
-									"blendMode": 0,
-									"mapInput": 0,
-									"mapTo": 1,
-									"offsetx": 0,
-									"offsety": 0,
-									"rot": 0,
-									"scalex": 1,
-									"scaley": 1,
-									"src": "checker.jpg"
-								}
-							],
+							"layers": [],
 							"metal": false,
 							"reflect": 0.8,
 							"shadeless": false,
@@ -766,11 +727,11 @@
 							},
 							"methods": {
 								"explode": {
-									"body": "\n                      this.children_by_name.ParticleSystem2.explode();                      \n",
+									"body": "\n\n\n                        this.children_by_name.ParticleSystem2.explode();                      \n\n",
 									"parameters": []
 								},
 								"tick": {
-									"body": "\n\n",
+									"body": "\n\n\n\n\n",
 									"parameters": []
 								}
 							},
@@ -859,11 +820,11 @@
 									},
 									"methods": {
 										"explode": {
-											"body": "\n                          this.counter = 40;\n    this.visible = true;\n    if (this.explodeSount)\n        this.audioAPI.playSound(this.explodeSount);\n\n    vwf.callMethod(this.id, \"reset\");                          \n",
+											"body": "\n\n\n                            this.counter = 40;\n      this.visible = true;\n      if (this.explodeSount)\n          this.audioAPI.playSound(this.explodeSount);\n\n      vwf.callMethod(this.id, \"reset\");                          \n\n",
 											"parameters": []
 										},
 										"tick": {
-											"body": "\n                                 // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.counter--\n    if(this.counter < 0)\n    {\n        this.visible = false;   \n    }                                 \n",
+											"body": "\n\n\n                                   // The tick function is called 20 times every second.\n      // Write code here to animate over time\n      this.counter--\n      if(this.counter < 0)\n      {\n          this.visible = false;   \n      }                                 \n\n",
 											"parameters": []
 										}
 									}

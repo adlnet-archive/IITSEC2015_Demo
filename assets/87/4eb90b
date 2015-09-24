@@ -177,9 +177,9 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			1.1283061504364014,
-			0.4640020728111267,
-			0.01774579845368862,
+			0.9872866272926331,
+			-2.2339489459991455,
+			0.09470713883638382,
 			1
 		],
 		"type": "Primitive",
@@ -188,27 +188,27 @@
 	},
 	"methods": {
 		"activateState": {
-			"body": "   var currentState = this.states[this.activeState];\n    if (currentState.transitions && currentState.transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        newState = this.states[newState];\n        if (!newState)\n        {\n            console.log('state does not exist');\n        }\n        if (newState.transitionFunc && this[newState.transitionFunc])\n        {\n            this[newState.transitionFunc]();\n        }\n\n    }\n    else\n    {\n        console.log('invalid transition');\n    }   ",
+			"body": "\n    var currentState = this.states[this.activeState];\n    if (currentState.transitions && currentState.transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        newState = this.states[newState];\n        if (!newState)\n        {\n            console.log('state does not exist');\n        }\n        if (newState.transitionFunc && this[newState.transitionFunc])\n        {\n            this[newState.transitionFunc]();\n        }\n\n    }\n    else\n    {\n        console.log('invalid transition');\n    }    \n",
 			"parameters": [
 				"newState"
 			]
 		},
 		"buoyancy": {
-			"body": "       var waterDepth = 20;\n    var hullThick = 2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 2;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n        //this.physicsAPI.addForceAtCenter(this.transformAPI.localToGlobal(0, 100, 0));\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 10;\n        vel[1] *= 1.0 - depth / 3;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }       ",
+			"body": "\n        var waterDepth = 20;\n    var hullThick = 2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 2;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n        //this.physicsAPI.addForceAtCenter(this.transformAPI.localToGlobal(0, 100, 0));\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 10;\n        vel[1] *= 1.0 - depth / 3;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }        \n",
 			"parameters": []
 		},
 		"command": {
-			"body": "   var command = args[0];\n    if (command == \"aheadFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadFull\";\n    }\n    if (command == \"backFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"backFull\";\n    }\n    if (command == \"aheadHalf\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadHalf\";\n    }\n    if (command == \"engineIdle\")\n    {\n        this.activateState('navigating');\n        this.engine = \"idle\";\n    }\n    if (command == \"hardRight\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardRight\";\n    }\n    if (command == \"hardLeft\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardLeft\";\n    }\n    if (command == \"rudderCenter\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"center\";\n    }   ",
+			"body": "\n    var command = args[0];\n    if (command == \"aheadFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadFull\";\n    }\n    if (command == \"backFull\")\n    {\n        this.activateState('navigating');\n        this.engine = \"backFull\";\n    }\n    if (command == \"aheadHalf\")\n    {\n        this.activateState('navigating');\n        this.engine = \"aheadHalf\";\n    }\n    if (command == \"engineIdle\")\n    {\n        this.activateState('navigating');\n        this.engine = \"idle\";\n    }\n    if (command == \"hardRight\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardRight\";\n    }\n    if (command == \"hardLeft\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"hardLeft\";\n    }\n    if (command == \"rudderCenter\")\n    {\n        this.activateState('navigating');\n        this.rudder = \"center\";\n    }    \n",
 			"parameters": [
 				"args"
 			]
 		},
 		"movement": {
-			"body": "   var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 50 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -25 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);   ",
+			"body": "\n    var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 50 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -25 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);    \n",
 			"parameters": []
 		},
 		"tick": {
-			"body": "   var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if(state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n        \n        \n    }   ",
+			"body": "\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if(state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n        \n        \n    }    \n",
 			"parameters": []
 		}
 	},
@@ -342,6 +342,102 @@
 							0.1564117968082428,
 							1
 						]
+					}
+				},
+				"Ndd622fe7": {
+					"extends": "asset.vwf",
+					"source": "Arleigh_Burke_Railings",
+					"type": "link_existing/threejs",
+					"sequence": 0,
+					"random": {
+						"s0": 0.7373845279216766,
+						"s1": 0.892781610134989,
+						"s2": 0.06203169864602387,
+						"c": 1
+					},
+					"properties": {
+						"___physics_activation_state": 1,
+						"___physics_deactivation_time": 0,
+						"___physics_velocity_linear": [
+							0,
+							0,
+							0
+						],
+						"___physics_velocity_angular": [
+							0,
+							0,
+							0
+						],
+						"type": "3DR Object",
+						"DisplayName": "Arleigh_Burke_Railings",
+						"transform": [
+							0.009999999776482582,
+							0,
+							0,
+							0,
+							0,
+							0.009999999776482582,
+							0,
+							0,
+							0,
+							0,
+							0.009999999776482582,
+							0,
+							0,
+							0,
+							0,
+							1
+						],
+						"materialDef": {
+							"color": {
+								"r": 1,
+								"g": 1,
+								"b": 1
+							},
+							"ambient": {
+								"r": 1,
+								"g": 1,
+								"b": 1
+							},
+							"emit": {
+								"r": 0,
+								"g": 0,
+								"b": 0
+							},
+							"specularColor": {
+								"r": 0,
+								"g": 0,
+								"b": 0
+							},
+							"specularLevel": 1,
+							"alpha": 1,
+							"shininess": 0.00040219999999999996,
+							"side": 0,
+							"reflect": 0,
+							"layers": [
+								{
+									"mapTo": 1,
+									"scalex": 1,
+									"scaley": 1,
+									"offsetx": 0,
+									"offsety": 0,
+									"alpha": 0.58,
+									"src": "/sas/assets/58f95c66",
+									"mapInput": 0
+								}
+							],
+							"type": "phong",
+							"blendMode": 1,
+							"fog": true,
+							"shading": true,
+							"metal": false,
+							"wireframe": false,
+							"depthtest": true,
+							"depthwrite": true,
+							"vertexColors": false
+						},
+						"___assetServerOriginalID": "Ndd622fe7",
+						"renderDepth": 0
 					}
 				}
 			}
