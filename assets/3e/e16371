@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="28.323814"
-     inkscape:cy="16.965271"
+     inkscape:zoom="8"
+     inkscape:cx="18.710733"
+     inkscape:cy="21.738931"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -50,59 +50,58 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,-1002.3622)">
+     id="layer1">
     <g
        id="g6649">
       <path
          inkscape:connector-curvature="0"
          id="path6633"
-         d="m 23,1022.3622 -3,0 0,3"
+         d="m 23,20 -3,0 0,3"
          style="fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="path6635"
-         d="m 20,1029.3622 0,3 3,0"
+         d="m 20,27 0,3 3,0"
          style="fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="path6645"
-         d="m 27,1032.3622 3,0 0,-3"
+         d="m 27,30 3,0 0,-3"
          style="fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="path6647"
-         d="m 30,1025.3622 0,-3 -3,0"
+         d="m 30,23 0,-3 -3,0"
          style="fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
     <circle
        style="fill:none;fill-opacity:1;stroke:#d986f7;stroke-width:1;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1;stroke-opacity:1"
        id="path6655"
        cx="25"
-       cy="1027.3622"
+       cy="25"
        r="2" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1.5,1.5;stroke-dashoffset:1.5"
-       d="m 25,1027.3622 0,-20"
-       id="path6657"
+       style="fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.5, 1.5;stroke-dashoffset:1.5;stroke-opacity:1"
+       d="M 25,25 25,5"
+       id="movementVector"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#d986f7;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="32.5"
-       y="1034.1122"
-       id="text6688"
+       y="32"
+       id="trackingId"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan6690"
          x="32.5"
-         y="1034.1122">02</tspan></text>
+         y="32">02</tspan></text>
   </g>
 </svg>
