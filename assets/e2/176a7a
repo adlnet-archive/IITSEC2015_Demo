@@ -1,0 +1,68 @@
+{
+	"extends": "http://vwf.example.com/html.vwf",
+	"source": "/sas/assets/3ee16371",
+	"sequence": 0,
+	"random": {
+		"s0": 0.224674432072788,
+		"s1": 0.768512473674491,
+		"s2": 0.391481882892549,
+		"c": 1
+	},
+	"properties": {
+		"__innerHTML": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!-- Created with Inkscape (http://www.inkscape.org/) -->\n\n<svg\n   xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n   xmlns:cc=\"http://creativecommons.org/ns#\"\n   xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n   xmlns:svg=\"http://www.w3.org/2000/svg\"\n   xmlns=\"http://www.w3.org/2000/svg\"\n   xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\"\n   xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\"\n   width=\"50\"\n   height=\"50\"\n   viewBox=\"0 0 50 50.000001\"\n   id=\"svg6017\"\n   version=\"1.1\"\n   inkscape:version=\"0.91 r13725\"\n   sodipodi:docname=\"contact.svg\">\n  <defs\n     id=\"defs6019\" />\n  <sodipodi:namedview\n     id=\"base\"\n     pagecolor=\"#000000\"\n     bordercolor=\"#666666\"\n     borderopacity=\"1.0\"\n     inkscape:pageopacity=\"1\"\n     inkscape:pageshadow=\"2\"\n     inkscape:zoom=\"8\"\n     inkscape:cx=\"18.710733\"\n     inkscape:cy=\"21.738931\"\n     inkscape:document-units=\"px\"\n     inkscape:current-layer=\"layer1\"\n     showgrid=\"true\"\n     units=\"px\"\n     inkscape:snap-grids=\"true\"\n     inkscape:window-width=\"1620\"\n     inkscape:window-height=\"1021\"\n     inkscape:window-x=\"56\"\n     inkscape:window-y=\"0\"\n     inkscape:window-maximized=\"1\">\n    <inkscape:grid\n       type=\"xygrid\"\n       id=\"grid6569\" />\n  </sodipodi:namedview>\n  <metadata\n     id=\"metadata6022\">\n    <rdf:RDF>\n      <cc:Work\n         rdf:about=\"\">\n        <dc:format>image/svg+xml</dc:format>\n        <dc:type\n           rdf:resource=\"http://purl.org/dc/dcmitype/StillImage\" />\n        <dc:title />\n      </cc:Work>\n    </rdf:RDF>\n  </metadata>\n  <g\n     inkscape:label=\"Layer 1\"\n     inkscape:groupmode=\"layer\"\n     id=\"layer1\">\n    <g\n       id=\"g6649\">\n      <path\n         inkscape:connector-curvature=\"0\"\n         id=\"path6633\"\n         d=\"m 23,20 -3,0 0,3\"\n         style=\"fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1\" />\n      <path\n         inkscape:connector-curvature=\"0\"\n         id=\"path6635\"\n         d=\"m 20,27 0,3 3,0\"\n         style=\"fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1\" />\n      <path\n         inkscape:connector-curvature=\"0\"\n         id=\"path6645\"\n         d=\"m 27,30 3,0 0,-3\"\n         style=\"fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1\" />\n      <path\n         inkscape:connector-curvature=\"0\"\n         id=\"path6647\"\n         d=\"m 30,23 0,-3 -3,0\"\n         style=\"fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1\" />\n    </g>\n    <circle\n       style=\"fill:none;fill-opacity:1;stroke:#d986f7;stroke-width:1;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1;stroke-opacity:1\"\n       id=\"path6655\"\n       cx=\"25\"\n       cy=\"25\"\n       r=\"2\" />\n    <path\n       style=\"fill:none;fill-rule:evenodd;stroke:#d986f7;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.5, 1.5;stroke-dashoffset:1.5;stroke-opacity:1\"\n       d=\"M 25,25 25,5\"\n       id=\"movementVector\"\n       inkscape:connector-curvature=\"0\" />\n    <text\n       xml:space=\"preserve\"\n       style=\"font-style:normal;font-weight:normal;font-size:7.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#d986f7;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1\"\n       x=\"32.5\"\n       y=\"32\"\n       id=\"trackingId\"\n       sodipodi:linespacing=\"125%\"><tspan\n         sodipodi:role=\"line\"\n         id=\"tspan6690\"\n         x=\"32.5\"\n         y=\"32\">02</tspan></text>\n  </g>\n</svg>\n",
+		"DisplayName": "blip1",
+		"actualPos": [
+			25,
+			25
+		],
+		"background_color": [
+			1,
+			0,
+			0
+		],
+		"background_visible": false,
+		"border_color": [
+			1,
+			1,
+			1
+		],
+		"height": 50,
+		"lastTick": 0,
+		"movementVector": [
+			25,
+			0
+		],
+		"owner": "ADLteam",
+		"style": {
+			"transform": "translate(-50%,-50%)"
+		},
+		"syncOffset": 0,
+		"targetId": "01",
+		"transform": [
+			0.999,
+			0,
+			0,
+			0,
+			0,
+			0.999,
+			0,
+			0,
+			0,
+			0,
+			0.999,
+			0,
+			67.4264705882353,
+			26.5122703788749,
+			1,
+			1
+		],
+		"visible": true,
+		"width": 50
+	},
+	"methods": {
+		"tick": {
+			"body": "\n\n\n   //console.log(this.lastTick);\n      if ((Date.now() + this.syncOffset) > (this.lastTick + 1000))\n      {\n          this.lastTick = Date.now();\n\n          $('#trackingId tspan', this.getHtml()).text(this.targetId);\n\n          // max length of vector is 20px, max velocity is 10m/s\n          var pxvec = new THREE.Vector2(this.movementVector[0], this.movementVector[1]);\n          if (pxvec.length() < 10)\n              pxvec.multiplyScalar(2);\n          else\n              pxvec.setLength(20);\n          pxvec.addScalar(25);\n          $('#movementVector', this.getHtml()).attr('d', 'M 25,25 ' + pxvec.toArray().join(','));\n\n          // 3000m = 50% of radar diameter. x/(3000/50) == x/60\n          this.transform[12] = this.actualPos[0] / 60 + 50;\n          this.transform[13] = -this.actualPos[1] / 60 + 50;\n      } \n\n",
+			"parameters": []
+		}
+	}
+}
