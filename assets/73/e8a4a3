@@ -1,0 +1,237 @@
+{
+	"extends": "cylinder2.vwf",
+	"source": "vwf/model/threejs/cylinder.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.253239535493776,
+		"s1": 0.087662999285385,
+		"s2": 0.0916767625603825,
+		"c": 302051
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			-1.5642577409744263,
+			-39.49485397338867,
+			5.483794689178467
+		],
+		"___physics_velocity_angular": [
+			-7.500029640759286e-41,
+			-1.9139733165873017e-39,
+			4.259989370501374e-40
+		],
+		"DisplayName": "Missile",
+		"___physics_angular_velocity": [
+			0,
+			0,
+			0
+		],
+		"___physics_constant_force": [
+			0,
+			0,
+			980
+		],
+		"___physics_enabled": true,
+		"___physics_linear_velocity": [
+			0,
+			0,
+			0
+		],
+		"___physics_mass": 100,
+		"counter": 28,
+		"explosionDef": {
+			"continues": "/sas/assets/d3402bc3",
+			"properties": {
+				"fuse": 1,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1
+				]
+			}
+		},
+		"fired": true,
+		"height": 1.6,
+		"materialDef": {
+			"alpha": 1,
+			"ambient": {
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"blendMode": 1,
+			"color": {
+				"a": 1,
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"depthtest": true,
+			"depthwrite": true,
+			"emit": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
+			"fog": true,
+			"layers": [],
+			"metal": false,
+			"reflect": 0.8,
+			"shadeless": false,
+			"shading": true,
+			"shadow": true,
+			"shininess": 15,
+			"side": 0,
+			"specularColor": {
+				"b": 0.57735,
+				"g": 0.57735,
+				"r": 0.57735
+			},
+			"specularLevel": 1,
+			"type": "phong",
+			"vertexColors": false,
+			"wireframe": false
+		},
+		"owner": "ADLteam",
+		"radius": 0.05,
+		"sourceAssetId": "d1420470",
+		"transform": [
+			-0.9990593791007996,
+			0.043322641402482986,
+			-0.0005332147120498121,
+			0,
+			0.018682844936847687,
+			0.44188210368156433,
+			0.8968794345855713,
+			0,
+			0.039090778678655624,
+			0.8960252404212952,
+			-0.4422755539417267,
+			0,
+			-1.3839704990386963,
+			-27.88038444519043,
+			6.413534641265869,
+			1
+		],
+		"type": "Primitive",
+		"worldTransform": [
+			-0.9990593791007996,
+			0.043322641402482986,
+			-0.0005332147120498121,
+			0,
+			0.018682844936847687,
+			0.44188210368156433,
+			0.8968794345855713,
+			0,
+			0.039090778678655624,
+			0.8960252404212952,
+			-0.4422755539417267,
+			0,
+			-1.3839704990386963,
+			-27.88038444519043,
+			6.413534641265869,
+			1
+		]
+	},
+	"methods": {
+		"collision": {
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                               // The body has collided with another body. The ID of the node is param 1, collision data in param 2\n                                                                if (this.counter > 10 && this.counter < 270)\n                                                                {\n                                                                    this.explode();\n                                                                    console.log(hit);\n                                                                    vwf.deleteNode(this.id);\n                                                                    return;\n                                                                }   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"parameters": [
+				"obstacle",
+				"data"
+			]
+		},
+		"explode": {
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                             var def = this.explosionDef;\n                                                                var pos = this.transformAPI.getWorldPosition();\n\n                                                                def.properties.transform[12] = pos[0];\n                                                                def.properties.transform[13] = pos[1];\n                                                                def.properties.transform[14] = pos[2];\n                                                                var now = performance.now();\n                                                                // console.profile(\"launch\");\n                                                                vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n                                                                {\n                                                                    vwf.callMethod(childID, 'explode');\n                                                                }); \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"parameters": []
+		},
+		"tick": {
+			"body": "\n\n\n\n\n\n\n       if (!this.fired)\n              return;\n          // The tick function is called 20 times every second.\n          // Write code here to animate over time\n\n          if (this.counter < 2)\n          {\n              //this.physicsAPI.addTorque([this.random() * 200, this.random() * 200, this.random() * 1]);\n          }\n          if (this.counter < 30)\n          {\n              var force = this.transformAPI.localToGlobal(0, 0, -30 * this.physicsAPI.getMass());\n              this.physicsAPI.addForceAtCenter(force);\n              this.children_by_name.ParticleSystem1.visible = true;\n              // this.physicsAPI.addTorque([this.random() * 10, this.random() * 10, this.random() * 1]);\n\n          }\n\n          var localUp = this.transformAPI.localToGlobalRotation(0, 0, 1);\n          var localSide = MATH.crossVec3(localUp, [0, 0, 1]);\n          var angle = MATH.dotVec3(localUp, [0, 0, 1]);\n          angle += 0;\n          if (this.counter > 0)\n          {\n              if (angle < 0)\n              {\n                  this.transformAPI.rotateAroundAxis(-10 * angle, localSide, this.transformAPI.COORDINATES.GLOBAL);\n              }\n              else\n              {\n                  this.transformAPI.rotateAroundAxis(10 * angle, localSide, this.transformAPI.COORDINATES.GLOBAL);\n              }\n          }\n\n          if (this.counter > 10 && this.counter < 270)\n          {\n\n              var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n              var center = this.transformAPI.getPosition();\n              var hit = this.Scene.traceAPI.rayCast(center, offset,\n              {\n                  ignore: [findviewnode(this.id)]\n              });\n              if (hit && hit.distance < 2)\n              {\n                  this.explode();\n                  console.log(hit);\n                  vwf.deleteNode(this.id);\n                  return;\n              }\n          }\n          // if (this.counter > 60)\n          //        this.children_by_name.ParticleSystem1.visible = false;\n          this.counter++;\n\n          var vel = this.physicsAPI.getLinearVelocity();\n          vel = this.transformAPI.globalToLocalRotation(vel);\n          vel[0] = 0;\n          vel[1] = 0;\n          vel = this.transformAPI.localToGlobalRotation(vel);\n          this.physicsAPI.setLinearVelocity(vel);\n\n          if (this.counter > 270)\n              vwf.deleteNode(this.id); \n\n\n\n",
+			"parameters": []
+		}
+	},
+	"events": {
+		"pointerClick": {
+			"parameters": [
+				"                                                            eventData",
+				"                                                            nodeData                                                            "
+			],
+			"body": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n                              this.fired = true;                               "
+		}
+	},
+	"children": {
+		"N8d7fae09": {
+			"extends": "SandboxParticleSystem.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.956842,
+				"s1": 0.666903,
+				"s2": 0.367152,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "ParticleSystem1",
+				"___assetServerOriginalID": "N4cfbf547",
+				"additive": true,
+				"counter": 0,
+				"depthTest": false,
+				"image": "../vwfDataManager.svc/texture?UID=fire.png",
+				"maxLifeTime": 23,
+				"maxOrientation": 19.6,
+				"maxRate": 5,
+				"maxVelocity": [
+					1,
+					0,
+					0.2
+				],
+				"minLifeTime": 23,
+				"minOrientation": -21.4,
+				"minVelocity": [
+					-1,
+					0,
+					0.011
+				],
+				"owner": "Rob",
+				"particleCount": 100,
+				"solver": "AnalyticShader",
+				"startSize": 0.3,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					-1,
+					0,
+					0,
+					0,
+					-0.000001,
+					-1,
+					0,
+					-6.78589867630919e-9,
+					2.58738255126678e-9,
+					0.499998783646291,
+					1
+				],
+				"type": "ParticleSystem",
+				"velocityMode": "spherical",
+				"visible": true
+			}
+		}
+	}
+}
