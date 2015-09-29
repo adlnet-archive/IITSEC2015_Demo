@@ -65,14 +65,14 @@
 		},
 		"sizeRange": 0.62,
 		"solver": "Analytic",
-		"sourceAssetId": "997a4d5a",
+		"sourceAssetId": "aeb3d1dd",
 		"startColor": [
 			0.47843137254902,
 			0.47843137254902,
 			0.47843137254902,
 			0.53
 		],
-		"targetEntity": "cylinder2-vwf-N9a3e4c9e",
+		"targetEntity": "cylinder2-vwf-N3557da21",
 		"transform": [
 			1,
 			0,
@@ -92,7 +92,8 @@
 			1
 		],
 		"type": "ParticleSystem",
-		"visible": true
+		"visible": true,
+		"startSize": 0.45
 	},
 	"methods": {
 		"tick": {
