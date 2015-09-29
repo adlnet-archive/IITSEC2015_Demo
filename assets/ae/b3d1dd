@@ -1,0 +1,103 @@
+{
+	"extends": "SandboxParticleSystem.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.337756,
+		"s1": 0.105646,
+		"s2": 0.018279,
+		"c": 1
+	},
+	"properties": {
+		"DisplayName": "Smoke",
+		"alphaTest": 0,
+		"colorRange": [
+			0,
+			0,
+			0,
+			0
+		],
+		"damping": -0.01,
+		"depthTest": false,
+		"emitterPosition": [
+			-1.3057576417923,
+			-25.9056415557861,
+			6.13934469223022
+		],
+		"emitterSize": [
+			1,
+			1,
+			0.4
+		],
+		"emitterType": "box",
+		"endColor": [
+			0.0431372549019608,
+			0.0470588235294118,
+			0.0509803921568627,
+			0
+		],
+		"endSize": 3,
+		"gravity": -0.02,
+		"image": "../vwfDataManager.svc/texture?UID=smoke.png",
+		"mamSpin": 2.6,
+		"maxLifeTime": 81,
+		"maxOrientation": 19.6,
+		"maxRate": 0.5,
+		"maxVelocity": [
+			0.01,
+			0.01,
+			0.01
+		],
+		"minLifeTime": 81,
+		"minOrientation": -14.8,
+		"minSpin": -3.8,
+		"minVelocity": [
+			-0.011,
+			0.0141,
+			-0.01
+		],
+		"owner": "ADLteam",
+		"renderDepth": -3,
+		"rotation": {
+			"_order": "XYZ",
+			"_x": 0,
+			"_y": 0,
+			"_z": 0
+		},
+		"sizeRange": 0.62,
+		"solver": "Analytic",
+		"sourceAssetId": "997a4d5a",
+		"startColor": [
+			0.47843137254902,
+			0.47843137254902,
+			0.47843137254902,
+			0.53
+		],
+		"targetEntity": "cylinder2-vwf-N9a3e4c9e",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1
+		],
+		"type": "ParticleSystem",
+		"visible": true
+	},
+	"methods": {
+		"tick": {
+			"body": "\n\n\n\n\n\n\n\n\n         // The tick function is called 20 times every second.\n            // Write code here to animate over time\n            try\n            {\n                this.emitterPosition = this.Scene.findNodeByID(this.targetEntity).transformAPI.getWorldPosition();\n                findviewnode(this.id).children[0].children[0].frustumCulled = false\n            }\n            catch (e)\n            {} \n\n\n\n\n",
+			"parameters": []
+		}
+	}
+}
