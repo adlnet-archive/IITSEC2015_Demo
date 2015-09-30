@@ -86,9 +86,9 @@
 			0,
 			1,
 			0,
-			0,
-			0,
-			0,
+			45.603858761687405,
+			35.187398541896705,
+			0.25370027542113505,
 			1
 		],
 		"type": "ParticleSystem",
@@ -97,7 +97,7 @@
 	},
 	"methods": {
 		"tick": {
-			"body": "\n\n\n\n\n\n\n\n\n         // The tick function is called 20 times every second.\n            // Write code here to animate over time\n            try\n            {\n                this.emitterPosition = this.Scene.findNodeByID(this.targetEntity).transformAPI.getWorldPosition();\n                findviewnode(this.id).children[0].children[0].frustumCulled = false\n            }\n            catch (e)\n            {} \n\n\n\n\n",
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n  \n        if (!this.Scene.findNodeByID(this.targetEntity))\n        {\n            vwf.deleteNode(this.id);\n            return;\n        }\n        var pos = this.Scene.findNodeByID(this.targetEntity).transformAPI.getWorldPosition();\n        this.emitterPosition = this.transformAPI.globalToLocal(pos);\n        findviewnode(this.id).children[0].children[0].frustumCulled = false",
 			"parameters": []
 		}
 	}
