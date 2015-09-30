@@ -169,8 +169,8 @@
 			-0.0011265893699601293,
 			0.9992753267288208,
 			0,
-			1.1864852905273438,
-			-1.0321791172027588,
+			-0.09376274794340134,
+			-1.1236076354980469,
 			0.01774579845368862,
 			1
 		],
@@ -490,8 +490,8 @@
 					-0.0011256071738898754,
 					0.9992753267288208,
 					0,
-					1.7791411876678467,
-					-3.97776198387146,
+					0.4988931715488434,
+					-4.069190502166748,
 					-0.7135542631149292,
 					1
 				],
@@ -525,7 +525,7 @@
 				"DisplayName": "box7",
 				"_length": 3.45,
 				"castShadows": false,
-				"height": 1.13,
+				"height": 0.45,
 				"materialDef": {
 					"alpha": 0,
 					"ambient": {
@@ -658,7 +658,17 @@
 						"g": 0.57735,
 						"r": 0.57735
 					},
-					"specularLevel": 1
+					"specularLevel": 1,
+					"type": "phong",
+					"side": 0,
+					"blendMode": 1,
+					"fog": true,
+					"shading": true,
+					"metal": false,
+					"wireframe": false,
+					"depthtest": true,
+					"depthwrite": true,
+					"vertexColors": false
 				},
 				"owner": "ADLteam",
 				"transform": [
