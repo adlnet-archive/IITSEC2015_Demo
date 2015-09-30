@@ -1,0 +1,209 @@
+{
+	"extends": "http://vwf.example.com/panel.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.78119222773239,
+		"s1": 0.545635819900781,
+		"s2": 0.678826798917726,
+		"c": 1
+	},
+	"properties": {
+		"DisplayName": "RadarUI",
+		"background_color": [
+			0,
+			0,
+			0
+		],
+		"background_visible": true,
+		"border_color": [
+			1,
+			1,
+			1
+		],
+		"height": 600,
+		"left": 0,
+		"owner": "ADLteam",
+		"top": 0,
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			8.63095188140869,
+			13.5386762619019,
+			0,
+			1
+		],
+		"visible": true,
+		"width": 600,
+		"radarOrigin": "index-vwf",
+		"EditorData": {
+			"radarOrigin": {
+				"displayname": "Radar Origin",
+				"property": "radarOrigin",
+				"type": "nodeid"
+			},
+			"terrainOrigin": {
+				"displayname": "Terrain Origin",
+				"property": "terrainOrigin",
+				"type": "nodeid"
+			}
+		},
+		"terrainOrigin": "index-vwf"
+	},
+	"methods": {
+		"tick": {
+			"body": "\n\n\n\n\n     // The tick function is called 20 times every second.\n        // Write code here to animate over time\n        //this.children_by_name.contact1.targetId = ('00' + (Math.floor(Date.now() / 1000) % 20)).slice(-2);\n        /*this.children_by_name.contactMask.children_by_name.contact1.movementVector = [\n            25 - 25 * Math.sin(Date.now() / 5000),\n            25 + 25 * Math.cos(Date.now() / 5000)\n        ];\n        this.children_by_name.contactMask.children_by_name.contact1.actualPos = [\n            50 + 25 * Math.cos(Date.now() / 5000),\n            50 + 25 * Math.sin(Date.now() / 5000)\n        ];*/ \n\n\n",
+			"parameters": []
+		}
+	},
+	"children": {
+		"Ne22d85fb": {
+			"extends": "http://vwf.example.com/image.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.707542740274221,
+				"s1": 0.0408043644856662,
+				"s2": 0.175118948332965,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "bgImage",
+				"height": 600,
+				"left": 0,
+				"owner": "ADLteam",
+				"src": "/sas/assets/da7a38b1",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1
+				],
+				"visible": true,
+				"width": 600,
+				"___assetServerOriginalID": "Na9e2f5dd"
+			}
+		},
+		"N72135b06": {
+			"extends": "http://vwf.example.com/panel.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.0316826698835939,
+				"s1": 0.741143801715225,
+				"s2": 0.309962091036141,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "contactMask",
+				"background_color": [
+					0.63921568627451,
+					0.282352941176471,
+					0.282352941176471
+				],
+				"background_visible": false,
+				"border_color": [
+					1,
+					1,
+					1
+				],
+				"border_radius": 50,
+				"border_width": 0,
+				"height": 552,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"border-radius": "50%",
+					"height": "550px",
+					"left": "25px",
+					"overflow": "hidden",
+					"top": "25px",
+					"width": "550px"
+				},
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					1,
+					1
+				],
+				"visible": true,
+				"width": 550,
+				"___assetServerOriginalID": "Ne67a819d"
+			},
+			"children": {
+				"N178e1f6f": {
+					"extends": "http://vwf.example.com/image.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.5461048528086394,
+						"s1": 0.3482963612768799,
+						"s2": 0.9328731603454798,
+						"c": 1
+					},
+					"properties": {
+						"width": 3050,
+						"height": 3050,
+						"left": 0,
+						"top": 0,
+						"transform": [
+							0.999,
+							0,
+							0,
+							0,
+							0,
+							0.999,
+							0,
+							0,
+							0,
+							0,
+							0.999,
+							0,
+							-60,
+							-252,
+							0,
+							1
+						],
+						"owner": "ADLteam",
+						"DisplayName": "terrainOverlay",
+						"visible": true,
+						"src": "/sas/assets/6076863f",
+						"___assetServerOriginalID": "Nc0a0ba97"
+					}
+				}
+			}
+		}
+	}
+}
