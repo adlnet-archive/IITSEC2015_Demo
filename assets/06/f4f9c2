@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.09574622311629355,
-		"s1": 0.34450413240119815,
-		"s2": 0.3057166535872966,
-		"c": 1143294
+		"s0": 0.48853990947827697,
+		"s1": 0.5885910943616182,
+		"s2": 0.2022358060348779,
+		"c": 105962
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -58,7 +58,7 @@
 			}
 		},
 		"EditorDate": "",
-		"_length": 0.33,
+		"_length": 0.23,
 		"accuracy": 50,
 		"controllingCamera": "SandboxCamera-vwf-Na423d1",
 		"fireSound": "/sas/assets/bdd66107",
@@ -67,18 +67,18 @@
 		"lastx": 0.0126315789473684,
 		"lasty": 0.486051905717151,
 		"materialDef": {
-			"alpha": 1,
+			"alpha": 0.993506493506494,
 			"ambient": {
-				"b": 1,
-				"g": 1,
-				"r": 1
+				"b": 0.519480519480519,
+				"g": 0.519480519480519,
+				"r": 0.519480519480519
 			},
 			"blendMode": 1,
 			"color": {
-				"a": 1,
-				"b": 1,
-				"g": 1,
-				"r": 1
+				"a": 0.993506493506494,
+				"b": 0.519480519480519,
+				"g": 0.519480519480519,
+				"r": 0.519480519480519
 			},
 			"depthtest": true,
 			"depthwrite": true,
@@ -88,31 +88,18 @@
 				"r": 0
 			},
 			"fog": true,
-			"layers": [
-				{
-					"alpha": 1,
-					"blendMode": 0,
-					"mapInput": 0,
-					"mapTo": 1,
-					"offsetx": 0,
-					"offsety": 0,
-					"rot": 0,
-					"scalex": 1,
-					"scaley": 1,
-					"src": "checker.jpg"
-				}
-			],
+			"layers": [],
 			"metal": false,
-			"reflect": 0.8,
+			"reflect": 0,
 			"shadeless": false,
 			"shading": true,
 			"shadow": true,
 			"shininess": 15,
-			"side": 0,
+			"side": 2,
 			"specularColor": {
-				"b": 0.577350269189626,
-				"g": 0.577350269189626,
-				"r": 0.577350269189626
+				"b": 0.57,
+				"g": 0.57,
+				"r": 0.57
 			},
 			"specularLevel": 1,
 			"type": "phong",
@@ -237,15 +224,17 @@
 			0,
 			1,
 			0,
-			26.911523818969727,
-			-8.760736465454102,
-			0.04287128895521164,
+			0.014748589135706425,
+			1.2990399599075317,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
-		"width": 0.33,
+		"width": 0.14,
 		"hasSentStatement": "",
-		"___sourceAssetTimestamp": "Wed Sep 30 2015 17:33:10 GMT-0400 (Eastern Daylight Time)"
+		"___sourceAssetTimestamp": "Thu Oct 01 2015 12:08:54 GMT-0400 (Eastern Daylight Time)",
+		"visible": true,
+		"height": 1.16
 	},
 	"methods": {
 		"_keyDown": {
@@ -293,10 +282,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n                  var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n                  if (!cam || cam.id != thisCam) return false;\n                  return true;  \n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
-		"tick": {
-			"body": "if (this.firing() && this.Ammo > 0 && this.state == \"ready\")\n    {\n        var shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(shake);\n        shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);\n        this.firecounter++;\n\n        var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n        if (!sound || !sound.playing)\n            this.audioAPI.playSound(this.fireSound, true, 300.0);\n        if (this.firecounter == 2)\n        {\n            this.firecounter = 0;\n            this.fire();\n        }\n        this.Ammo -= 10;\n\n        if (this.Ammo == 0)\n        {\n            this.state = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    else\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.hasSentStatement = false;\n    }\n    // this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n    if (this.state == 'reloading')\n    {\n        this.firecounter--;\n        if (this.firecounter == 0)\n        {\n            this.Ammo = 1000;\n            // this.hasSentStatement = false;\n            this.state = 'ready';\n        }\n\n    }\n\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.getPosition();\n    var goal = [.5, 0, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    var pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    var goal = [.0, 0, .75];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);",
-			"parameters": []
-		},
 		"fire": {
 			"body": "if (!this.hasSentStatement)\n    {\n        this.xAPISend(\"50 Cal Burst\");\n        this.hasSentStatement = true;\n    }\n    var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        console.log(hit);\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n        if (hit.node && hit.node.hit)\n            hit.node.hit([hit.point, 5]);\n    }\n    else\n    {\n\n    }",
 			"parameters": []
@@ -306,6 +291,10 @@
 			"parameters": [
 				"str"
 			]
+		},
+		"tick": {
+			"body": "if (this.firing() && this.Ammo > 0 && this.state == \"ready\")\n    {\n        var shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(shake);\n        shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);\n        this.firecounter++;\n\n        var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n        if (!sound || !sound.playing)\n            this.audioAPI.playSound(this.fireSound, true, 300.0);\n        if (this.firecounter == 2)\n        {\n            this.firecounter = 0;\n            this.fire();\n        }\n        this.Ammo -= 10;\n\n        if (this.Ammo == 0)\n        {\n            this.state = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    else\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.hasSentStatement = false;\n    }\n    // this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n    if (this.state == 'reloading')\n    {\n        this.firecounter--;\n        if (this.firecounter == 0)\n        {\n            this.Ammo = 1000;\n            // this.hasSentStatement = false;\n            this.state = 'ready';\n        }\n\n    }\n\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.getPosition();\n    var goal = [0.1, -0.01, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    goal = [0.0, 0, 0.75];\n    move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -346,7 +335,6 @@
 					},
 					"blendMode": 1,
 					"color": {
-						"a": 1,
 						"b": 1,
 						"g": 1,
 						"r": 1
@@ -367,10 +355,9 @@
 							"mapTo": 1,
 							"offsetx": 0,
 							"offsety": 0,
-							"rot": 0,
 							"scalex": 1,
 							"scaley": 1,
-							"src": "checker.jpg"
+							"src": "http://54.175.234.78:3030/assets/96493a7c"
 						}
 					],
 					"metal": false,
@@ -378,12 +365,12 @@
 					"shadeless": false,
 					"shading": true,
 					"shadow": true,
-					"shininess": 15,
-					"side": 0,
+					"shininess": 0,
+					"side": 2,
 					"specularColor": {
-						"b": 0.577350269189626,
-						"g": 0.577350269189626,
-						"r": 0.577350269189626
+						"b": 0.57,
+						"g": 0.57,
+						"r": 0.57
 					},
 					"specularLevel": 1,
 					"type": "phong",
@@ -392,25 +379,26 @@
 				},
 				"owner": "Anonymous_srrHyERdWKafkXchAAAA",
 				"transform": [
-					0.02205572836101055,
+					0.017400048673152924,
+					-1.075627586999417e-9,
+					0.9968480467796326,
 					0,
-					0.9997562170028687,
+					4.107491946570008e-8,
+					0.996999979019165,
 					0,
 					0,
-					1,
+					-0.9968481659889221,
+					2.4803838982734305e-8,
+					0.017400044947862625,
 					0,
-					0,
-					-0.9997562170028687,
-					0,
-					0.02205572836101055,
-					0,
-					3.0369096748472657e-7,
-					0.0000013282054851515568,
-					0.7500001192092896,
-					1
+					-0.006963640917092562,
+					-0.0012279483489692211,
+					0.7590001225471497,
+					0.9999998807907104
 				],
 				"type": "Primitive",
-				"width": 0.33
+				"width": 0.33,
+				"visible": false
 			},
 			"children": {
 				"Nc63b7c4e": {
@@ -431,21 +419,21 @@
 						"fovGoal": 60,
 						"owner": "Anonymous_srrHyERdWKafkXchAAAA",
 						"transform": [
-							1.2212452212085538e-15,
-							0.9999999403953552,
-							1.9885579405354292e-8,
 							0,
-							9.80333414446477e-9,
-							-1.988558118171113e-8,
-							1,
+							0.9990000128746033,
+							3.5830061140273983e-10,
 							0,
-							1.0000001192092896,
-							-1.0547119792730171e-15,
-							-9.80333503264319e-9,
+							3.5830061140273983e-10,
+							-3.5830066691389106e-10,
+							0.9990000128746033,
 							0,
-							0.5000016093254089,
-							0.0000028865931653854204,
-							-2.0000011920928955,
+							0.9990000128746033,
+							0,
+							-3.5830066691389106e-10,
+							0,
+							0.20000100135803223,
+							0,
+							-2,
 							1
 						]
 					},
@@ -547,7 +535,6 @@
 							},
 							"blendMode": 1,
 							"color": {
-								"a": 1,
 								"b": 1,
 								"g": 1,
 								"r": 1
@@ -568,10 +555,9 @@
 									"mapTo": 1,
 									"offsetx": 0,
 									"offsety": 0,
-									"rot": 0,
 									"scalex": 1,
 									"scaley": 1,
-									"src": "checker.jpg"
+									"src": "http://54.175.234.78:3030/assets/96493a7c"
 								}
 							],
 							"metal": false,
@@ -580,11 +566,11 @@
 							"shading": true,
 							"shadow": true,
 							"shininess": 15,
-							"side": 0,
+							"side": 2,
 							"specularColor": {
-								"b": 0.577350269189626,
-								"g": 0.577350269189626,
-								"r": 0.577350269189626
+								"b": 0.57,
+								"g": 0.57,
+								"r": 0.57
 							},
 							"specularLevel": 1,
 							"type": "phong",
@@ -613,23 +599,121 @@
 						"type": "Primitive",
 						"width": 0.28,
 						"worldTransform": [
-							0.012650649063289165,
-							-0.018066998571157455,
-							0.9997563362121582,
+							0.009980260394513607,
+							-0.014253290370106697,
+							0.9968481659889221,
 							0,
-							0.8191520571708679,
-							0.5735764503479004,
+							0.8166946172714233,
+							0.5718556642532349,
 							0,
 							0,
-							-0.5734366774559021,
-							0.8189525008201599,
-							0.022055733948946,
+							-0.5717687010765076,
+							0.8165703415870667,
+							0.017400048673152924,
 							0,
-							26.481449127197266,
-							-8.14652156829834,
-							0.8094131946563721,
+							-0.41907799243927,
+							1.9164674282073975,
+							0.7897959351539612,
+							0.9999998807907104
+						],
+						"visible": false
+					}
+				},
+				"N43bdfb3e": {
+					"extends": "asset.vwf",
+					"source": "http://54.175.234.78:3030/assets/6eb1cb39",
+					"type": "subDriver/threejs/asset/vnd.collada+xml",
+					"sequence": 0,
+					"random": {
+						"s0": 0.762904461240396,
+						"s1": 0.445300380233675,
+						"s2": 0.449139307485893,
+						"c": 1
+					},
+					"properties": {
+						"___physics_activation_state": 1,
+						"___physics_deactivation_time": 0,
+						"___physics_velocity_linear": [
+							0,
+							0,
+							0
+						],
+						"___physics_velocity_angular": [
+							0,
+							0,
+							0
+						],
+						"materialDef": {
+							"alpha": 1,
+							"ambient": {
+								"b": 1,
+								"g": 1,
+								"r": 1
+							},
+							"blendMode": 1,
+							"color": {
+								"b": 1,
+								"g": 1,
+								"r": 1
+							},
+							"depthtest": true,
+							"depthwrite": true,
+							"emit": {
+								"b": 0,
+								"g": 0,
+								"r": 0
+							},
+							"fog": true,
+							"layers": [
+								{
+									"alpha": 1,
+									"blendMode": 0,
+									"mapInput": 0,
+									"mapTo": 1,
+									"offsetx": 0,
+									"offsety": 0,
+									"scalex": 1,
+									"scaley": 1,
+									"src": "http://54.175.234.78:3030/assets/96493a7c"
+								}
+							],
+							"metal": false,
+							"reflect": 0,
+							"shadeless": false,
+							"shading": true,
+							"shadow": true,
+							"shininess": 0,
+							"side": 2,
+							"specularColor": {
+								"b": 0.57,
+								"g": 0.57,
+								"r": 0.57
+							},
+							"specularLevel": 1,
+							"type": "phong",
+							"vertexColors": false,
+							"wireframe": false
+						},
+						"owner": "ADLteam",
+						"transform": [
+							0.0218572486191988,
+							-1.6430740101824881e-9,
+							-0.9907594323158264,
+							0,
+							-3.152353933444374e-10,
+							0.9909999966621399,
+							1.3881557237027664e-8,
+							0,
+							0.9907594323158264,
+							-5.011538961596784e-10,
+							0.0218572486191988,
+							0,
+							-0.2998161315917969,
+							-0.009031006135046482,
+							0.05007600039243698,
 							1
-						]
+						],
+						"___assetServerOriginalID": "N43bdfb3e"
 					}
 				}
 			}

@@ -23,7 +23,7 @@
 			0
 		],
 		"DisplayName": "sphere2",
-		"___sourceAssetTimestamp": "Wed Sep 30 2015 17:03:34 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Thu Oct 01 2015 11:06:20 GMT-0400 (Eastern Daylight Time)",
 		"materialDef": {
 			"shininess": 15,
 			"alpha": 1,
@@ -92,9 +92,9 @@
 			0,
 			1,
 			0,
-			-0.19804497063159943,
-			1.0878875255584717,
-			0.041387010365724564,
+			1.169898271560669,
+			0.722052276134491,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive"
