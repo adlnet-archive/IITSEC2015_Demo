@@ -24,10 +24,66 @@
 		],
 		"DisplayName": "FAC_SLAVE5",
 		"EditorData": {
-			"controllingCamera": {
+			"_controllingCamera": {
 				"displayname": "Controlling Camera",
 				"property": "controllingCamera",
 				"type": "nodeid"
+			},
+			"bullets_50_cal": {
+				"displayname": "Bullets (50 cal)",
+				"max": 100000,
+				"min": 1,
+				"property": "bullets_50_cal",
+				"type": "slider"
+			},
+			"fuel": {
+				"displayname": "Fuel",
+				"max": 1000,
+				"min": 1,
+				"property": "fuel",
+				"type": "slider"
+			},
+			"fuelConsumptionRate": {
+				"displayname": "Fuel Consumption Rate",
+				"max": 1,
+				"min": 0,
+				"property": "fuelConsumptionRate",
+				"step": 0.01,
+				"type": "slider"
+			},
+			"health": {
+				"displayname": "Health",
+				"max": 1000,
+				"min": 1,
+				"property": "health",
+				"type": "slider"
+			},
+			"hostile": {
+				"displayname": "Hostile",
+				"property": "hostile",
+				"type": "check"
+			},
+			"hullStrength": {
+				"displayname": "Hull Strength",
+				"max": 1000,
+				"min": 1,
+				"property": "hullStrength",
+				"type": "slider"
+			},
+			"rangeToTarget": {
+				"displayname": "Range to Target",
+				"max": 5000,
+				"min": 0,
+				"property": "rangeToTarget",
+				"step": 100,
+				"type": "slider"
+			},
+			"rockets": {
+				"displayname": "Rockets",
+				"max": 25,
+				"min": 0,
+				"property": "rockets",
+				"type": "slider"
 			}
 		},
 		"___physics_angular_velocity": [
@@ -266,9 +322,9 @@
 			0.037797633558511734,
 			0.9992753267288208,
 			0,
-			-9.5,
-			-58.75,
-			20.25,
+			8.621328353881836,
+			-7.749393939971924,
+			0.1553432047367096,
 			1
 		],
 		"type": "Primitive",
@@ -288,9 +344,9 @@
 			0.037797633558511734,
 			0.9992753267288208,
 			0,
-			-9.5,
-			-58.75,
-			20.25,
+			8.621328353881836,
+			-7.749393939971924,
+			0.1553432047367096,
 			1
 		]
 	},
@@ -834,9 +890,9 @@
 					0.03779767453670502,
 					0.9992753267288208,
 					0,
-					-12.500734329223633,
-					-58.90262985229492,
-					19.518699645996094,
+					5.620594501495361,
+					-7.902022838592529,
+					-0.5759568810462952,
 					1
 				]
 			}

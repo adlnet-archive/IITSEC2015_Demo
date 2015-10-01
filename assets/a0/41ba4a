@@ -1,0 +1,102 @@
+{
+	"extends": "sphere2.vwf",
+	"source": "vwf/model/threejs/sphere.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.434236942324787,
+		"s1": 0.303206610027701,
+		"s2": 0.949259152635932,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"DisplayName": "sphere2",
+		"___sourceAssetTimestamp": "Wed Sep 30 2015 17:03:34 GMT-0400 (Eastern Daylight Time)",
+		"materialDef": {
+			"shininess": 15,
+			"alpha": 1,
+			"ambient": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 1
+			},
+			"emit": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"reflect": 0.8,
+			"shadeless": false,
+			"shadow": true,
+			"specularColor": {
+				"r": 0.5773502691896258,
+				"g": 0.5773502691896258,
+				"b": 0.5773502691896258
+			},
+			"specularLevel": 1,
+			"layers": [
+				{
+					"alpha": 1,
+					"blendMode": 0,
+					"mapInput": 0,
+					"mapTo": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"rot": 0,
+					"scalex": 1,
+					"scaley": 1,
+					"src": "checker.jpg"
+				}
+			],
+			"type": "phong",
+			"side": 0,
+			"blendMode": 1,
+			"fog": true,
+			"shading": true,
+			"metal": false,
+			"wireframe": false,
+			"depthtest": true,
+			"depthwrite": true,
+			"vertexColors": false
+		},
+		"owner": "ADLteam",
+		"sourceAssetId": "a041ba4a",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			-0.19804497063159943,
+			1.0878875255584717,
+			0.041387010365724564,
+			1
+		],
+		"type": "Primitive"
+	}
+}

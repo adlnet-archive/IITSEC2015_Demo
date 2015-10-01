@@ -24,10 +24,66 @@
 		],
 		"DisplayName": "FAC_MASTER",
 		"EditorData": {
-			"controllingCamera": {
+			"_controllingCamera": {
 				"displayname": "Controlling Camera",
 				"property": "controllingCamera",
 				"type": "nodeid"
+			},
+			"bullets_50_cal": {
+				"displayname": "Bullets (50 cal)",
+				"max": 100000,
+				"min": 1,
+				"property": "bullets_50_cal",
+				"type": "slider"
+			},
+			"fuel": {
+				"displayname": "Fuel",
+				"max": 1000,
+				"min": 1,
+				"property": "fuel",
+				"type": "slider"
+			},
+			"fuelConsumptionRate": {
+				"displayname": "Fuel Consumption Rate",
+				"max": 1,
+				"min": 0,
+				"property": "fuelConsumptionRate",
+				"step": 0.01,
+				"type": "slider"
+			},
+			"health": {
+				"displayname": "Health",
+				"max": 1000,
+				"min": 1,
+				"property": "health",
+				"type": "slider"
+			},
+			"hostile": {
+				"displayname": "Hostile",
+				"property": "hostile",
+				"type": "check"
+			},
+			"hullStrength": {
+				"displayname": "Hull Strength",
+				"max": 1000,
+				"min": 1,
+				"property": "hullStrength",
+				"type": "slider"
+			},
+			"rangeToTarget": {
+				"displayname": "Range to Target",
+				"max": 5000,
+				"min": 0,
+				"property": "rangeToTarget",
+				"step": 100,
+				"type": "slider"
+			},
+			"rockets": {
+				"displayname": "Rockets",
+				"max": 25,
+				"min": 0,
+				"property": "rockets",
+				"type": "slider"
 			}
 		},
 		"___physics_angular_velocity": [
@@ -46,7 +102,7 @@
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
-		"bullets_50_cal": 1000,
+		"bullets_50_cal": 987,
 		"controllingCamera": "SandboxCamera-vwf-N373ec60b",
 		"counter": 14602,
 		"currentState": null,
@@ -141,22 +197,23 @@
 		"missileDef": {
 			"continues": "/sas/assets/73e8a4a3",
 			"properties": {
+				"fired": true,
 				"transform": [
-					1,
+					-0.241058230400085,
+					0.0219730380922556,
+					0.969229340553284,
 					0,
+					-0.139989301562309,
+					0.987488389015198,
+					-0.0572049580514431,
 					0,
+					-0.959318161010742,
+					-0.149620994925499,
+					-0.235202088952065,
 					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
+					4.95079517364502,
+					-1.64401972293854,
+					1.5334906578064,
 					1
 				]
 			}
@@ -266,9 +323,9 @@
 			0.03486459702253342,
 			0.9983914494514465,
 			0,
-			14.805215835571289,
-			32.364288330078125,
-			20.23938751220703,
+			48.07454299926758,
+			-3.9936413764953613,
+			0.04287128895521164,
 			1
 		],
 		"type": "Primitive",
@@ -288,15 +345,15 @@
 			0.03486459702253342,
 			0.9983914494514465,
 			0,
-			14.805215835571289,
-			32.364288330078125,
-			20.23938751220703,
+			48.07454299926758,
+			-3.9936413764953613,
+			0.04287128895521164,
 			1
 		],
 		"smokeDef": {
 			"continues": "/sas/assets/aeb3d1dd",
 			"properties": {
-				"targetEntity": null,
+				"targetEntity": "-sas-assets-73e8a4a3-N8008a8f",
 				"transform": [
 					1,
 					0,
@@ -443,10 +500,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               //console.log(\"playHelicopter\");\n                                // #1:\n                                //this.audioAPI.playSound(\"/sas/assets/af90534a\", false, 100);\n                                //#2:\n                                this.audioAPI.playSound(\"/sas/assets/dc81768a\", false, 100);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
-		"playMissileLaunch": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"playMissileLaunch\");\n                                // #1:\n                                //this.audioAPI.playSound(\"/sas/assets/744acf2e\", false, 100);\n                                // #2:\n                                //this.audioAPI.playSound(\"/sas/assets/4334801b\", false, 100);\n                                // #3:\n                                //this.audioAPI.playSound(\"/sas/assets/10b027bd\", false, 100);\n                                // #4:\n                                //this.audioAPI.playSound(\"/sas/assets/94d508e3\", false, 100);\n                                // #5:\n                                this.audioAPI.playSound(\"/sas/assets/263beb86\", false, 100);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
 		"playMotorIdle": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"playMotorIdle\");\n                                this.audioAPI.playSound(\"\", false, 100);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -478,6 +531,16 @@
 		"launchMissile": {
 			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
+		},
+		"playMissileLaunch": {
+			"body": "console.log(\"playMissileLaunch\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/744acf2e\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/4334801b\", false, 100);\n    // #3:\n    //this.audioAPI.playSound(\"/sas/assets/10b027bd\", false, 100);\n    // #4:\n    //this.audioAPI.playSound(\"/sas/assets/94d508e3\", false, 100);\n    // #5:\n    this.audioAPI.playSound(\"/sas/assets/263beb86\", false, 100);\n    this.xAPISend(\"Fired Missile\");",
+			"parameters": []
+		},
+		"xAPISend": {
+			"body": "console.log(\"FAC Missile Launcher xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    //Change string after actor.name field to role player is assuming\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName() + '/Fast Attack Craft',\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/launched\",\n        display:\n        {\n            \"en-US\": \"launched\",\n        }\n    };\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.id,\n        definition:\n        {\n            name:\n            {\n                \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.DisplayName + \"/\" + str,\n            },\n            description:\n            {\n                \"en-US\": _DataManager.getInstanceData().description,\n            }\n        }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo/dev/vw\"\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            }\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
+			"parameters": [
+				"str"
+			]
 		}
 	},
 	"children": {
@@ -596,19 +659,19 @@
 					-0.14962099492549896,
 					-0.23520208895206451,
 					0,
-					13.815937995910645,
-					32.27763366699219,
-					21.7418270111084,
+					47.08526611328125,
+					-4.080295085906982,
+					1.5453100204467773,
 					1
 				]
 			},
 			"events": {
 				"pointerClick": {
 					"parameters": [
-						"                                                          eventData",
-						"                                                          nodeData                                                          "
+						"eventData",
+						"nodeData"
 					],
-					"body": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n                                            this.parent.launchMissile()               "
+					"body": "this.parent.launchMissile();"
 				}
 			}
 		},
@@ -674,7 +737,15 @@
 						"r": 0
 					},
 					"specularLevel": 1,
-					"type": "phong"
+					"type": "phong",
+					"blendMode": 1,
+					"fog": true,
+					"shading": true,
+					"metal": false,
+					"wireframe": false,
+					"depthtest": true,
+					"depthwrite": true,
+					"vertexColors": false
 				},
 				"DisplayName": "./vwfdatamanager.svc/DataFile/Navy/AttackSpeedBoat.dae1",
 				"___assetServerOriginalID": "N958e2662",
@@ -751,9 +822,9 @@
 					0.03486473485827446,
 					0.9983914494514465,
 					0,
-					11.837382316589355,
-					31.92129135131836,
-					19.505149841308594,
+					45.10670852661133,
+					-4.4366374015808105,
+					-0.691365659236908,
 					1
 				]
 			}

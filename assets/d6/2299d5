@@ -122,13 +122,20 @@
 			-0.9797827005386353,
 			-0.06082130968570709,
 			0,
-			-3.316743850708008,
-			-9.815455436706543,
-			0.07808607071638107,
+			2.394693613052368,
+			7.01098108291626,
+			0.1746593713760376,
 			1
 		],
 		"type": "Primitive",
-		"sourceAssetId": "d62299d5"
+		"sourceAssetId": "d62299d5",
+		"EditorData": {
+			"fired": {
+				"displayname": "Fired",
+				"property": "fired",
+				"type": "check"
+			}
+		}
 	},
 	"methods": {
 		"collision": {

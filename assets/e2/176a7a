@@ -51,13 +51,33 @@
 			0,
 			0.999,
 			0,
-			67.4264705882353,
-			26.5122703788749,
-			1,
+			2.1528923857768945,
+			-23.6626329152395,
+			0.1553431987762437,
 			1
 		],
 		"visible": true,
-		"width": 50
+		"width": 50,
+		"sourceAssetId": "e2176a7a",
+		"EditorData": {
+			"movementVector": {
+				"displayname": "Movement Vector",
+				"property": "movementVector",
+				"type": "vector"
+			},
+			"syncOffset": {
+				"displayname": "Sync Offset",
+				"max": 100,
+				"min": 0,
+				"property": "syncOffset",
+				"type": "slider"
+			},
+			"targetId": {
+				"displayname": "Target ID",
+				"property": "targetId",
+				"type": "text"
+			}
+		}
 	},
 	"methods": {
 		"tick": {

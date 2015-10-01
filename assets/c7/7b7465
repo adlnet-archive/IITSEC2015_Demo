@@ -9,6 +9,26 @@
 	},
 	"properties": {
 		"DisplayName": "RadarUI",
+		"EditorData": {
+			"radarOrigin": {
+				"displayname": "Radar Origin",
+				"property": "radarOrigin",
+				"type": "nodeid"
+			},
+			"radarRange": {
+				"displayname": "Radar Range",
+				"max": 3000,
+				"min": 500,
+				"property": "radarRange",
+				"step": 50,
+				"type": "slider"
+			},
+			"terrainOrigin": {
+				"displayname": "Terrain Origin",
+				"property": "terrainOrigin",
+				"type": "nodeid"
+			}
+		},
 		"background_color": [
 			0,
 			0,
@@ -23,6 +43,10 @@
 		"height": 600,
 		"left": 0,
 		"owner": "ADLteam",
+		"radarOrigin": "sphere2-vwf-Ncaabe728",
+		"radarRange": 1500,
+		"sourceAssetId": "c77b7465",
+		"terrainOrigin": "box2-vwf-Nd4c1702c",
 		"top": 0,
 		"transform": [
 			1,
@@ -37,36 +61,75 @@
 			0,
 			1,
 			0,
-			8.63095188140869,
-			13.5386762619019,
+			0,
+			0,
 			0,
 			1
 		],
 		"visible": true,
-		"width": 600,
-		"radarOrigin": "index-vwf",
-		"EditorData": {
-			"radarOrigin": {
-				"displayname": "Radar Origin",
-				"property": "radarOrigin",
-				"type": "nodeid"
-			},
-			"terrainOrigin": {
-				"displayname": "Terrain Origin",
-				"property": "terrainOrigin",
-				"type": "nodeid"
-			}
-		},
-		"terrainOrigin": "index-vwf"
+		"width": 600
 	},
 	"methods": {
+		"ready": {
+			"body": "// scale the terrain overlay\n    var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n    var imageSize = 550 * (6000 / (2 * this.radarRange));\n\n    terrainOverlay.width = imageSize;\n    terrainOverlay.height = imageSize;\n    \n    this.children_by_name.scale.text = Math.round(this.radarRange/6)+'m';",
+			"parameters": []
+		},
 		"tick": {
-			"body": "\n\n\n\n\n     // The tick function is called 20 times every second.\n        // Write code here to animate over time\n        //this.children_by_name.contact1.targetId = ('00' + (Math.floor(Date.now() / 1000) % 20)).slice(-2);\n        /*this.children_by_name.contactMask.children_by_name.contact1.movementVector = [\n            25 - 25 * Math.sin(Date.now() / 5000),\n            25 + 25 * Math.cos(Date.now() / 5000)\n        ];\n        this.children_by_name.contactMask.children_by_name.contact1.actualPos = [\n            50 + 25 * Math.cos(Date.now() / 5000),\n            50 + 25 * Math.sin(Date.now() / 5000)\n        ];*/ \n\n\n",
+			"body": "var radar = this.Scene.findNodeByID(this.radarOrigin);\n    var terrain = this.Scene.findNodeByID(this.terrainOrigin);\n\n    // get terrain origin in radar space\n    var terrainTransform = new THREE.Matrix4().fromArray(terrain.worldTransform);\n    var radarInv = new THREE.Matrix4().fromArray(radar.worldTransform);\n\n    terrainTransform.scale(new THREE.Vector4(1 / 3000, 1 / 3000, 1 / 3000, 1));\n    terrainTransform.multiplyMatrices(radarInv, terrainTransform);\n    var position = new THREE.Vector3(-terrainTransform.elements[12] / 30 - 50, terrainTransform.elements[13] / 30 - 50, 0);\n    terrainTransform.setPosition(position);\n\n    // update radar terrain display\n    var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n    terrainOverlay.transform = Array.prototype.slice.call(terrainTransform.elements);\n\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    //this.children_by_name.contact1.targetId = ('00' + (Math.floor(Date.now() / 1000) % 20)).slice(-2);\n    /*this.children_by_name.contactMask.children_by_name.contact1.movementVector = [\n                      25 - 25 * Math.sin(Date.now() / 5000),\n                      25 + 25 * Math.cos(Date.now() / 5000)\n                  ];\n                  this.children_by_name.contactMask.children_by_name.contact1.actualPos = [\n                      50 + 25 * Math.cos(Date.now() / 5000),\n                      50 + 25 * Math.sin(Date.now() / 5000)\n                  ];*/",
 			"parameters": []
 		}
 	},
 	"children": {
-		"Ne22d85fb": {
+		"N2ca58639": {
+			"extends": "http://vwf.example.com/label.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.33815628150478,
+				"s1": 0.713276613503695,
+				"s2": 0.316370985005051,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "scale",
+				"font_color": [
+					0.254901960784314,
+					0.741176470588235,
+					0.717647058823529
+				],
+				"font_size": 15,
+				"height": 19,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"font-family": "sans-serif"
+				},
+				"text": "250m",
+				"text_align": "center",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					2.60400009155273,
+					91.6679992675781,
+					1,
+					1
+				],
+				"visible": true,
+				"width": 54,
+				"___assetServerOriginalID": "N2ca58639"
+			}
+		},
+		"Na9e2f5dd": {
 			"extends": "http://vwf.example.com/image.vwf",
 			"sequence": 0,
 			"random": {
@@ -77,6 +140,7 @@
 			},
 			"properties": {
 				"DisplayName": "bgImage",
+				"___assetServerOriginalID": "Na9e2f5dd",
 				"height": 600,
 				"left": 0,
 				"owner": "ADLteam",
@@ -101,11 +165,10 @@
 					1
 				],
 				"visible": true,
-				"width": 600,
-				"___assetServerOriginalID": "Na9e2f5dd"
+				"width": 600
 			}
 		},
-		"N72135b06": {
+		"Ne67a819d": {
 			"extends": "http://vwf.example.com/panel.vwf",
 			"sequence": 0,
 			"random": {
@@ -116,6 +179,7 @@
 			},
 			"properties": {
 				"DisplayName": "contactMask",
+				"___assetServerOriginalID": "Ne67a819d",
 				"background_color": [
 					0.63921568627451,
 					0.282352941176471,
@@ -160,47 +224,46 @@
 					1
 				],
 				"visible": true,
-				"width": 550,
-				"___assetServerOriginalID": "Ne67a819d"
+				"width": 550
 			},
 			"children": {
-				"N178e1f6f": {
+				"Nc0a0ba97": {
 					"extends": "http://vwf.example.com/image.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.5461048528086394,
-						"s1": 0.3482963612768799,
-						"s2": 0.9328731603454798,
+						"s0": 0.546104852808639,
+						"s1": 0.34829636127688,
+						"s2": 0.93287316034548,
 						"c": 1
 					},
 					"properties": {
-						"width": 3050,
-						"height": 3050,
+						"DisplayName": "terrainOverlay",
+						"___assetServerOriginalID": "Nc0a0ba97",
+						"height": 1100,
 						"left": 0,
+						"owner": "ADLteam",
+						"src": "/sas/assets/6076863f",
 						"top": 0,
 						"transform": [
-							0.999,
+							0.9990000128746033,
 							0,
 							0,
 							0,
 							0,
-							0.999,
+							0.9990000128746033,
 							0,
 							0,
 							0,
 							0,
-							0.999,
+							0.9989833831787109,
 							0,
-							-60,
-							-252,
+							-50,
+							-50.008323669433594,
 							0,
 							1
 						],
-						"owner": "ADLteam",
-						"DisplayName": "terrainOverlay",
 						"visible": true,
-						"src": "/sas/assets/6076863f",
-						"___assetServerOriginalID": "Nc0a0ba97"
+						"width": 1100
 					}
 				}
 			}
