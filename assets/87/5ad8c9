@@ -44,58 +44,15 @@
 			0,
 			1,
 			0,
-			5.01808688846443,
-			1.61277162301966,
-			0.017745798826218,
+			59.3922770803585,
+			-15.0437798466262,
+			0.01,
 			1
 		],
 		"visible": true,
 		"width": 618
 	},
 	"children": {
-		"Ncce5e553": {
-			"extends": "http://vwf.example.com/image.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.744555229321122,
-				"s1": 0.413308354094625,
-				"s2": 0.613262355560437,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "RadarImage",
-				"___assetServerOriginalID": "Ncce5e553",
-				"height": 311,
-				"left": 0,
-				"owner": "ADLteam",
-				"src": "../vwfDataManager.svc/texture?UID=GreenRadarScreen.jpg",
-				"style": {
-					"border": "inset grey 3px",
-					"border-style": "inset"
-				},
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					55,
-					4,
-					1,
-					1
-				],
-				"visible": true,
-				"width": 260
-			}
-		},
 		"N3bbe75e": {
 			"extends": "http://vwf.example.com/panel.vwf",
 			"sequence": 0,
@@ -153,302 +110,14 @@
 			},
 			"methods": {
 				"xAPISend": {
-					"body": "console.log(\"TAO Control Main Panel xAPI Send\");\n    \n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n    \n    //2 - Wrapper setup\n    var conf = {\n            \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n            \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n        };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n    \n    //3 - Who is playing\n    //Change string after actor.name field to role player is assuming\n    var actor = {\n            account:\n            {\n                name: _UserManager.GetCurrentUserName() + '/Tactical Action Officer',\n                homePage: \"https://sandbox.adlnet.gov\",\n            },\n            name: _UserManager.GetCurrentUserName(),\n        };\n    \n    //4 - Verb = did\n    //Double check to have the best verb - this can be passed in\n    var verb = ADL.verbs.responded;\n    \n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n            id: window.location.toString() + \"#\" + this.parent.id,\n            definition:\n            {\n                name:\n                {\n                    \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.parent.DisplayName + \"/\" + str,\n                },\n                description:\n                {\n                    \"en-US\": _DataManager.getInstanceData().description,\n                }\n            }\n        };\n    \n    //6 - Additional context\n    var contextActivities = {\n            \"grouping\": [\n                {\n                    \"id\": \"http://adlnet.gov/event/2015/iitsecdemo/dev/vw\"\n                }\n            ],\n            \"category\": [\n                {\n                    \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n                }\n            ],\n            \"other\": [\n                {\n                    \"id\": _DataManager.getCurrentApplication(),\n                    definition:\n                    {\n                        type: \"https://sandbox.adlnet.gov/world\"\n                    }\n                }\n            ]\n        };\n    \n    //7 - Result of the goals\n    var result = {\n            duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n    \n    //8 - Roll it all into one statement\n    \n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n    \n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n    \n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
+					"body": "console.log(\"TAO Control Main Panel xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    //Change string after actor.name field to role player is assuming\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName() + '/Tactical Action Officer',\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    //Double check to have the best verb - this can be passed in\n    // var verb = ADL.verbs.responded;\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/\" + v,\n        display:\n        {\n            \"en-US\": v,\n        }\n    };\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.parent.id,\n        definition:\n        {\n            name:\n            {\n                \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.parent.DisplayName + \"/\" + str,\n            },\n            description:\n            {\n                \"en-US\": _DataManager.getInstanceData().description,\n            }\n        }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo/dev/vw\"\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            }\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
 					"parameters": [
-						"str"
+						"str",
+						"v"
 					]
 				}
 			},
 			"children": {
-				"N7befa27b": {
-					"extends": "http://vwf.example.com/label.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.0526214626152068,
-						"s1": 0.871348941931501,
-						"s2": 0.569057182176039,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "OodWarnLight",
-						"___assetServerOriginalID": "N7befa27b",
-						"height": 20,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, yellow, white)",
-							"border": "outset gray 3px",
-							"border-style": "outset"
-						},
-						"text": "",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							55,
-							16,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 30
-					}
-				},
-				"N962cabf7": {
-					"extends": "http://vwf.example.com/panel.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.136150605743751,
-						"s1": 0.721612263238057,
-						"s2": 0.672958408715203,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "SeaHawkTopPanel",
-						"___assetServerOriginalID": "N962cabf7",
-						"background_color": [
-							0.8,
-							0.749019607843137,
-							0
-						],
-						"background_visible": true,
-						"border_color": [
-							0,
-							0,
-							0
-						],
-						"height": 100,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, rgba(255,255,255,0) -1%,rgba(255,255,255,0) 0%,rgba(255,255,255,0.99) 90%,rgba(255,255,255,0.99) 100%)",
-							"border": "inset gray 3px",
-							"border-style": "inset"
-						},
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							3.20337009429932,
-							26.7534160614014,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 135
-					}
-				},
-				"N8fb168d3": {
-					"extends": "http://vwf.example.com/label.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.766992454882711,
-						"s1": 0.114075613208115,
-						"s2": 0.676234684884548,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "SeaHawkLabel",
-						"___assetServerOriginalID": "N8fb168d3",
-						"font_size": 14,
-						"height": 18,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"font-weight": "bold"
-						},
-						"text": "SeaHawk",
-						"text_align": "center",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							13,
-							6,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 100
-					}
-				},
-				"N7cd7975c": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.177814689232036,
-						"s1": 0.631648205220699,
-						"s2": 0.215841572964564,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "SeaHawkWarnButton",
-						"___assetServerOriginalID": "N7cd7975c",
-						"height": 20,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)",
-							"border": "outset gray 3px",
-							"border-style": "outset",
-							"foreground": "blue"
-						},
-						"text": "Warning",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							19,
-							16,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 75
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								"eventData",
-								"nodeData"
-							],
-							"body": "//this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    this.parent.xAPISend(\"Issue SeaHawk Warning\");"
-						}
-					}
-				},
-				"Nfe32e6f7": {
-					"extends": "http://vwf.example.com/label.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.38418030878529,
-						"s1": 0.520888480357826,
-						"s2": 0.590818216791376,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "SeaHawkWarnLight",
-						"___assetServerOriginalID": "Nfe32e6f7",
-						"font_color": [
-							0.450980392156863,
-							1,
-							0
-						],
-						"height": 20,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, yellow, white)",
-							"border": "outset gray 3px",
-							"border-style": "outset"
-						},
-						"text": "",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							7,
-							16,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 30
-					}
-				},
-				"N7a9c83ba": {
-					"extends": "http://vwf.example.com/label.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.140073040733114,
-						"s1": 0.0470814672298729,
-						"s2": 0.570698548574001,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "ScatOodLabel",
-						"___assetServerOriginalID": "N7a9c83ba",
-						"font_size": 14,
-						"height": 18,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"font-weight": "bold"
-						},
-						"text": "SCAT / OOD",
-						"text_align": "center",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							57,
-							6,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 100
-					}
-				},
 				"N3cbf8024": {
 					"extends": "http://vwf.example.com/panel.vwf",
 					"sequence": 0,
@@ -552,7 +221,7 @@
 										"eventData",
 										"nodeData"
 									],
-									"body": "//this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    this.parent.parent.xAPISend(\"5 Inch Disengage\");"
+									"body": "//this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    this.parent.parent.xAPISend(\"5 Inch Disengage\", \"disengaged\");"
 								}
 							}
 						},
@@ -605,34 +274,34 @@
 										"eventData",
 										"nodeData"
 									],
-									"body": "//this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    this.parent.parent.xAPISend(\"5 Inch Engage\");"
+									"body": "//this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    this.parent.parent.xAPISend(\"5 Inch Engage\", \"engaged\");"
 								}
 							}
 						}
 					}
 				},
-				"N3ea7b658": {
+				"N962cabf7": {
 					"extends": "http://vwf.example.com/panel.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.984803988365456,
-						"s1": 0.924281523097306,
-						"s2": 0.293187781935558,
+						"s0": 0.136150605743751,
+						"s1": 0.721612263238057,
+						"s2": 0.672958408715203,
 						"c": 1
 					},
 					"properties": {
-						"DisplayName": "ScatOodBottomPanel",
-						"___assetServerOriginalID": "N3ea7b658",
+						"DisplayName": "SeaHawkTopPanel",
+						"___assetServerOriginalID": "N962cabf7",
 						"background_color": [
+							0.8,
+							0.749019607843137,
+							0
+						],
+						"background_visible": true,
+						"border_color": [
 							0,
 							0,
 							0
-						],
-						"background_visible": false,
-						"border_color": [
-							1,
-							1,
-							1
 						],
 						"height": 100,
 						"left": 0,
@@ -656,120 +325,203 @@
 							0,
 							1,
 							0,
-							50.8522758483887,
-							64.0524520874023,
+							3.20337009429932,
+							26.7534160614014,
 							0,
 							1
 						],
 						"visible": true,
 						"width": 135
+					}
+				},
+				"N7befa27b": {
+					"extends": "http://vwf.example.com/label.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.0526214626152068,
+						"s1": 0.871348941931501,
+						"s2": 0.569057182176039,
+						"c": 1
 					},
-					"children": {
-						"N31c0e583": {
-							"extends": "http://vwf.example.com/button.vwf",
-							"sequence": 0,
-							"random": {
-								"s0": 0.0115671833045781,
-								"s1": 0.978064217371866,
-								"s2": 0.543363055679947,
-								"c": 1
-							},
-							"properties": {
-								"DisplayName": "ScatEngageButton",
-								"___assetServerOriginalID": "N31c0e583",
-								"height": 35,
-								"left": 0,
-								"owner": "ADLteam",
-								"style": {
-									"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
-									"border": "outset grey 3px",
-									"border-style": "outset"
-								},
-								"text": "Engage",
-								"top": 0,
-								"transform": [
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									12,
-									10,
-									0,
-									1
-								],
-								"visible": true,
-								"width": 100
-							},
-							"events": {
-								"pointerClick": {
-									"parameters": [
-										"eventData",
-										"nodeData"
-									],
-									"body": "//this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    this.parent.parent.xAPISend(\"50 Cal Engage\");"
-								}
-							}
+					"properties": {
+						"DisplayName": "OodWarnLight",
+						"___assetServerOriginalID": "N7befa27b",
+						"height": 20,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, yellow, white)",
+							"border": "outset gray 3px",
+							"border-style": "outset"
 						},
-						"N1debf91": {
-							"extends": "http://vwf.example.com/button.vwf",
-							"sequence": 0,
-							"random": {
-								"s0": 0.172570912633091,
-								"s1": 0.171410870039836,
-								"s2": 0.455334351398051,
-								"c": 1
-							},
-							"properties": {
-								"DisplayName": "ScatDisengageButton",
-								"___assetServerOriginalID": "N1debf91",
-								"height": 35,
-								"left": 0,
-								"owner": "ADLteam",
-								"style": {
-									"background": "linear-gradient(to bottom, #cb60b3 0%,#ad1283 50%,#de47ac 100%)",
-									"border": "outset grey 3px",
-									"border-style": "outset"
-								},
-								"text": "Disengage",
-								"top": 0,
-								"transform": [
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									13,
-									55,
-									1,
-									1
-								],
-								"visible": true,
-								"width": 100
-							},
-							"events": {
-								"pointerClick": {
-									"parameters": [
-										"eventData",
-										"nodeData"
-									],
-									"body": "// this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    this.parent.parent.xAPISend(\"50 Cal Disengage\");"
-								}
-							}
+						"text": "",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							55,
+							16,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 30
+					}
+				},
+				"Nfe32e6f7": {
+					"extends": "http://vwf.example.com/label.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.38418030878529,
+						"s1": 0.520888480357826,
+						"s2": 0.590818216791376,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "SeaHawkWarnLight",
+						"___assetServerOriginalID": "Nfe32e6f7",
+						"font_color": [
+							0.450980392156863,
+							1,
+							0
+						],
+						"height": 20,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, yellow, white)",
+							"border": "outset gray 3px",
+							"border-style": "outset"
+						},
+						"text": "",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							7,
+							16,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 30
+					}
+				},
+				"N8fb168d3": {
+					"extends": "http://vwf.example.com/label.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.766992454882711,
+						"s1": 0.114075613208115,
+						"s2": 0.676234684884548,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "SeaHawkLabel",
+						"___assetServerOriginalID": "N8fb168d3",
+						"font_size": 14,
+						"height": 18,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"font-weight": "bold"
+						},
+						"text": "SeaHawk",
+						"text_align": "center",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							13,
+							6,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 100
+					}
+				},
+				"N7cd7975c": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.177814689232036,
+						"s1": 0.631648205220699,
+						"s2": 0.215841572964564,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "SeaHawkWarnButton",
+						"___assetServerOriginalID": "N7cd7975c",
+						"height": 20,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)",
+							"border": "outset gray 3px",
+							"border-style": "outset",
+							"foreground": "blue"
+						},
+						"text": "Warning",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							19,
+							16,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 75
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "//this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    this.parent.xAPISend(\"Issue SeaHawk Warning\", \"warned\");"
 						}
 					}
 				},
@@ -823,7 +575,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n    this.parent.xAPISend(\"Issue Radio Warning\");"
+							"body": "//this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n    this.parent.xAPISend(\"Issue Radio Warning\", \"warned\");"
 						}
 					}
 				},
@@ -930,7 +682,7 @@
 										"eventData",
 										"nodeData"
 									],
-									"body": "// this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawk Disengage\");"
+									"body": "// this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawk Disengage\", \"disengaged\");"
 								}
 							}
 						},
@@ -983,12 +735,261 @@
 										"eventData",
 										"nodeData"
 									],
-									"body": "//this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawk Engage\");"
+									"body": "//this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawk Engage\", \"engaged\");"
+								}
+							}
+						}
+					}
+				},
+				"N7a9c83ba": {
+					"extends": "http://vwf.example.com/label.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.140073040733114,
+						"s1": 0.0470814672298729,
+						"s2": 0.570698548574001,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "ScatOodLabel",
+						"___assetServerOriginalID": "N7a9c83ba",
+						"font_size": 14,
+						"height": 18,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"font-weight": "bold"
+						},
+						"text": "SCAT / OOD",
+						"text_align": "center",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							57,
+							6,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 100
+					}
+				},
+				"N3ea7b658": {
+					"extends": "http://vwf.example.com/panel.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.984803988365456,
+						"s1": 0.924281523097306,
+						"s2": 0.293187781935558,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "ScatOodBottomPanel",
+						"___assetServerOriginalID": "N3ea7b658",
+						"background_color": [
+							0,
+							0,
+							0
+						],
+						"background_visible": false,
+						"border_color": [
+							1,
+							1,
+							1
+						],
+						"height": 100,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, rgba(255,255,255,0) -1%,rgba(255,255,255,0) 0%,rgba(255,255,255,0.99) 90%,rgba(255,255,255,0.99) 100%)",
+							"border": "inset gray 3px",
+							"border-style": "inset"
+						},
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							50.8522758483887,
+							64.0524520874023,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 135
+					},
+					"children": {
+						"N31c0e583": {
+							"extends": "http://vwf.example.com/button.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.0115671833045781,
+								"s1": 0.978064217371866,
+								"s2": 0.543363055679947,
+								"c": 1
+							},
+							"properties": {
+								"DisplayName": "ScatEngageButton",
+								"___assetServerOriginalID": "N31c0e583",
+								"height": 35,
+								"left": 0,
+								"owner": "ADLteam",
+								"style": {
+									"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
+									"border": "outset grey 3px",
+									"border-style": "outset"
+								},
+								"text": "Engage",
+								"top": 0,
+								"transform": [
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									12,
+									10,
+									0,
+									1
+								],
+								"visible": true,
+								"width": 100
+							},
+							"events": {
+								"pointerClick": {
+									"parameters": [
+										"eventData",
+										"nodeData"
+									],
+									"body": "//this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    this.parent.parent.xAPISend(\"50 Cal Engage\", \"engaged\");"
+								}
+							}
+						},
+						"N1debf91": {
+							"extends": "http://vwf.example.com/button.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.172570912633091,
+								"s1": 0.171410870039836,
+								"s2": 0.455334351398051,
+								"c": 1
+							},
+							"properties": {
+								"DisplayName": "ScatDisengageButton",
+								"___assetServerOriginalID": "N1debf91",
+								"height": 35,
+								"left": 0,
+								"owner": "ADLteam",
+								"style": {
+									"background": "linear-gradient(to bottom, #cb60b3 0%,#ad1283 50%,#de47ac 100%)",
+									"border": "outset grey 3px",
+									"border-style": "outset"
+								},
+								"text": "Disengage",
+								"top": 0,
+								"transform": [
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									13,
+									55,
+									1,
+									1
+								],
+								"visible": true,
+								"width": 100
+							},
+							"events": {
+								"pointerClick": {
+									"parameters": [
+										"eventData",
+										"nodeData"
+									],
+									"body": "// this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    this.parent.parent.xAPISend(\"50 Cal Disengage\", \"disengaged\");"
 								}
 							}
 						}
 					}
 				}
+			}
+		},
+		"Ncce5e553": {
+			"extends": "http://vwf.example.com/image.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.744555229321122,
+				"s1": 0.413308354094625,
+				"s2": 0.613262355560437,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "RadarImage",
+				"___assetServerOriginalID": "Ncce5e553",
+				"height": 311,
+				"left": 0,
+				"owner": "ADLteam",
+				"src": "../vwfDataManager.svc/texture?UID=GreenRadarScreen.jpg",
+				"style": {
+					"border": "inset grey 3px",
+					"border-style": "inset"
+				},
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					55,
+					4,
+					1,
+					1
+				],
+				"visible": true,
+				"width": 260
 			}
 		}
 	}

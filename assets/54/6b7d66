@@ -42,9 +42,9 @@
 			0,
 			1,
 			0,
-			1.9950560835013,
-			-0.365946304671471,
-			0.017745798826218,
+			8.78931085048715,
+			-0.356803436527509,
+			0.0177457988262173,
 			1
 		],
 		"visible": true,
@@ -52,9 +52,10 @@
 	},
 	"methods": {
 		"xAPIsend": {
-			"body": "console.log(\"Officer Of the Deck\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    //Change string after actor.name field to role player is assuming\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName() + '/Officer Of the Deck',\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    //Double check to have the best verb - this can be passed in\n    var verb = ADL.verbs.responded;\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.parent.id,\n        definition:\n        {\n            name:\n            {\n                \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.DisplayName + \"/\" + str, //Change Me\",\n            },\n            description:\n            {\n                \"en-US\": _DataManager.getInstanceData().description,\n            }\n        }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo/dev/vw\"\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            }\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
+			"body": "console.log(\"Officer Of the Deck\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    //Change string after actor.name field to role player is assuming\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName() + '/Officer Of the Deck',\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/\" + v,\n        display:\n        {\n            \"en-US\": v,\n        }\n    };\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.parent.id,\n        definition:\n        {\n            name:\n            {\n                \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.DisplayName + \"/\" + str, //Change Me\",\n            },\n            description:\n            {\n                \"en-US\": _DataManager.getInstanceData().description,\n            }\n        }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo/dev/vw\"\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            }\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
 			"parameters": [
-				"str"
+				"str",
+				"v"
 			]
 		}
 	},
@@ -111,7 +112,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "this.broadcast(\"command\", [\"backFull\"], 0);\n    this.parent.xAPIsend('Engine Back');"
+					"body": "this.broadcast(\"command\", [\"backFull\"], 0);\n    this.parent.xAPIsend('Engine Back', 'engaged');"
 				}
 			}
 		},
@@ -262,7 +263,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "this.broadcast(\"command\", [\"rudderCenter\"], 0);\n    this.parent.xAPIsend('Rudder Idle');"
+					"body": "this.broadcast(\"command\", [\"rudderCenter\"], 0);\n    this.parent.xAPIsend('Rudder Idle', 'disengaged');"
 				}
 			}
 		},
@@ -319,7 +320,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "this.broadcast(\"command\", [\"hardRight\"], 0);\n    this.parent.xAPIsend('Rudder Right');"
+					"body": "this.broadcast(\"command\", [\"hardRight\"], 0);\n    this.parent.xAPIsend('Rudder Right', 'engaged');"
 				}
 			}
 		},
@@ -375,7 +376,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "this.broadcast(\"command\", [\"engineIdle\"], 0);\n    this.parent.xAPIsend('Engine Idle');"
+					"body": "this.broadcast(\"command\", [\"engineIdle\"], 0);\n    this.parent.xAPIsend('Engine Idle', \"disengaged\");"
 				}
 			}
 		},
@@ -432,7 +433,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "this.broadcast(\"command\", [\"hardLeft\"], 0);\n    this.parent.xAPIsend('Rudder Left');"
+					"body": "this.broadcast(\"command\", [\"hardLeft\"], 0);\n    this.parent.xAPIsend('Rudder Left', 'engaged');"
 				}
 			}
 		},
@@ -488,7 +489,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "this.broadcast(\"command\", [\"aheadHalf\"], 0);\n    this.parent.xAPIsend(\"Engine Ahead Half\");"
+					"body": "this.broadcast(\"command\", [\"aheadHalf\"], 0);\n    this.parent.xAPIsend(\"Engine Ahead Half\", \"engaged\");"
 				}
 			}
 		},
@@ -544,7 +545,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "this.broadcast(\"command\", [\"aheadFull\"], 0);\n    this.parent.xAPIsend(\"Engine Ahead Full\");"
+					"body": "this.broadcast(\"command\", [\"aheadFull\"], 0);\n    this.parent.xAPIsend(\"Engine Ahead Full\", \"engaged\");"
 				}
 			}
 		}
