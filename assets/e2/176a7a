@@ -51,9 +51,9 @@
 			0,
 			0.999,
 			0,
-			2.1528923857768945,
-			-23.6626329152395,
-			0.1553431987762437,
+			70,
+			10,
+			0.017000000923871994,
 			1
 		],
 		"visible": true,
@@ -77,11 +77,12 @@
 				"property": "targetId",
 				"type": "text"
 			}
-		}
+		},
+		"___sourceAssetTimestamp": "Mon Oct 05 2015 17:24:23 GMT-0400 (EDT)"
 	},
 	"methods": {
 		"tick": {
-			"body": "\n\n\n   //console.log(this.lastTick);\n      if ((Date.now() + this.syncOffset) > (this.lastTick + 1000))\n      {\n          this.lastTick = Date.now();\n\n          $('#trackingId tspan', this.getHtml()).text(this.targetId);\n\n          // max length of vector is 20px, max velocity is 10m/s\n          var pxvec = new THREE.Vector2(this.movementVector[0], this.movementVector[1]);\n          if (pxvec.length() < 10)\n              pxvec.multiplyScalar(2);\n          else\n              pxvec.setLength(20);\n          pxvec.addScalar(25);\n          $('#movementVector', this.getHtml()).attr('d', 'M 25,25 ' + pxvec.toArray().join(','));\n\n          // 3000m = 50% of radar diameter. x/(3000/50) == x/60\n          this.transform[12] = this.actualPos[0] / 60 + 50;\n          this.transform[13] = -this.actualPos[1] / 60 + 50;\n      } \n\n",
+			"body": "//console.log(this.lastTick);\n    if ((Date.now() + this.syncOffset) > (this.lastTick + 1000))\n    {\n        this.lastTick = Date.now();\n\n        $('#trackingId tspan', this.getHtml()).text(this.targetId);\n\n        // max length of vector is 20px, max velocity is 10m/s\n        var pxvec = new THREE.Vector2(this.movementVector[0], this.movementVector[1]);\n        if (pxvec.length() < 10)\n            pxvec.multiplyScalar(2);\n        else\n            pxvec.setLength(20);\n        pxvec.addScalar(25);\n        $('#movementVector', this.getHtml()).attr('d', 'M 25,25 ' + pxvec.toArray().join(','));\n        \n        this.transform[12] = this.actualPos[0];\n        this.transform[13] = this.actualPos[1];\n    }",
 			"parameters": []
 		}
 	}

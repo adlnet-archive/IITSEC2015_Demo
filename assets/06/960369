@@ -1,0 +1,73 @@
+{
+	"extends": "http://vwf.example.com/node3.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.7295823600143194,
+		"s1": 0.40187019295990467,
+		"s2": 0.3188572076614946,
+		"c": 1
+	},
+	"properties": {
+		"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0.5976289510726929,
+			-0.2142006903886795,
+			0.01774579845368862,
+			1
+		],
+		"owner": "ADLteam",
+		"DisplayName": "Camera Toggler",
+		"___sourceAssetTimestamp": "Mon Oct 05 2015 15:12:45 GMT-0400 (Eastern Daylight Time)",
+		"sourceAssetId": "06960369",
+		"isToggleActive": true,
+		"EditorData": {
+			"_isToggleActive": {
+				"displayname": "Toggling enabled",
+				"property": "isToggleActive",
+				"type": "check"
+			},
+			"cycleEditor": {
+				"displayname": "Include Editor camera",
+				"property": "cycleEditor",
+				"type": "check"
+			}
+		},
+		"cycleEditor": true
+	},
+	"methods": {
+		"rotateCamera": {
+			"body": "console.log(\"got here\");",
+			"parameters": []
+		},
+		"ready": {
+			"body": "// The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n        // The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n    this.Scene.unbind(\"keyDown\", this._kd);\n    this.Scene.unbind(\"keyUp\", this._ku);\n    var self = this;\n    this._kd = function(e, d)\n    {\n        self._keyDown(e, d)\n    };\n    this._ku = function(e, d)\n    {\n        self._keyUp(e, d)\n    };\n    this.Scene.bind(\"keyDown\", this._kd);\n    this.Scene.bind(\"keyUp\", this._ku);",
+			"parameters": []
+		},
+		"_keyUp": {
+			"body": "console.log(\"key up\");",
+			"parameters": []
+		},
+		"tick": {
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time",
+			"parameters": []
+		},
+		"_keyDown": {
+			"body": "var camList = _dView.getCameraList()[1];\n    var camera = _dView.getCamera().parent;\n    var toCamera;\n\n    if (camList.length >= 2 && e.key.key === \"space\" && this.isToggleActive)\n    {\n        var baseIndex = 1;\n        if (!this.cycleEditor && !camList[0])\n        {\n            camList.splice(0, 1);\n            baseIndex = 0;\n        }\n\n        if (camera)\n        {\n            var index = (camList.indexOf(camera.vwfID) + 1) % camList.length;\n            toCamera = camList[index];\n        }\n        else toCamera = camList[baseIndex];\n\n        _dView.setCamera(toCamera);\n    }",
+			"parameters": [
+				"e"
+			]
+		}
+	}
+}

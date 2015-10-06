@@ -29,6 +29,7 @@
 				"type": "nodeid"
 			}
 		},
+		"___sourceAssetTimestamp": "Mon Oct 05 2015 14:42:09 GMT-0400 (EDT)",
 		"background_color": [
 			0,
 			0,
@@ -40,6 +41,7 @@
 			1,
 			1
 		],
+		"contacts": [],
 		"height": 600,
 		"left": 0,
 		"owner": "ADLteam",
@@ -61,9 +63,9 @@
 			0,
 			1,
 			0,
-			0,
-			0,
-			0,
+			1,
+			1,
+			1,
 			1
 		],
 		"visible": true,
@@ -71,11 +73,11 @@
 	},
 	"methods": {
 		"ready": {
-			"body": "// scale the terrain overlay\n    var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n    var imageSize = 550 * (6000 / (2 * this.radarRange));\n\n    terrainOverlay.width = imageSize;\n    terrainOverlay.height = imageSize;\n    \n    this.children_by_name.scale.text = Math.round(this.radarRange/6)+'m';",
+			"body": "// scale the terrain overlay\n    var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n    var imageSize = 550 * (6000 / (2 * this.radarRange));\n    \n    if(this.Scene.findNodeByID(this.terrainOrigin)){\n        terrainOverlay.visible = true;\n        terrainOverlay.width = imageSize;\n        terrainOverlay.height = imageSize;\n    }\n    else {\n        terrainOverlay.visible = false;\n    }\n    \n    this.children_by_name.scale.text = Math.round(this.radarRange / 6) + 'm';",
 			"parameters": []
 		},
 		"tick": {
-			"body": "var radar = this.Scene.findNodeByID(this.radarOrigin);\n    var terrain = this.Scene.findNodeByID(this.terrainOrigin);\n\n    // get terrain origin in radar space\n    var terrainTransform = new THREE.Matrix4().fromArray(terrain.worldTransform);\n    var radarInv = new THREE.Matrix4().fromArray(radar.worldTransform);\n\n    terrainTransform.scale(new THREE.Vector4(1 / 3000, 1 / 3000, 1 / 3000, 1));\n    terrainTransform.multiplyMatrices(radarInv, terrainTransform);\n    var position = new THREE.Vector3(-terrainTransform.elements[12] / 30 - 50, terrainTransform.elements[13] / 30 - 50, 0);\n    terrainTransform.setPosition(position);\n\n    // update radar terrain display\n    var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n    terrainOverlay.transform = Array.prototype.slice.call(terrainTransform.elements);\n\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    //this.children_by_name.contact1.targetId = ('00' + (Math.floor(Date.now() / 1000) % 20)).slice(-2);\n    /*this.children_by_name.contactMask.children_by_name.contact1.movementVector = [\n                      25 - 25 * Math.sin(Date.now() / 5000),\n                      25 + 25 * Math.cos(Date.now() / 5000)\n                  ];\n                  this.children_by_name.contactMask.children_by_name.contact1.actualPos = [\n                      50 + 25 * Math.cos(Date.now() / 5000),\n                      50 + 25 * Math.sin(Date.now() / 5000)\n                  ];*/",
+			"body": "var radar = this.Scene.findNodeByID(this.radarOrigin);\n    var radarTransform = new THREE.Matrix4().fromArray(radar.worldTransform);\n    var terrain = this.Scene.findNodeByID(this.terrainOrigin);\n\n    // get terrain origin in radar space\n    if (terrain)\n    {\n        var terrainTransform = new THREE.Matrix4().fromArray(terrain.worldTransform);\n\n        terrainTransform.scale(new THREE.Vector4(1 / 3000, 1 / 3000, 1 / 3000, 1));\n        terrainTransform.multiplyMatrices(radarTransform, terrainTransform);\n        var position = new THREE.Vector3(-terrainTransform.elements[12] / 30 - 50, terrainTransform.elements[13] / 30 - 50, 0);\n        terrainTransform.setPosition(position);\n\n        // update radar terrain display\n        var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n        terrainOverlay.transform = Array.prototype.slice.call(terrainTransform.elements);\n    }\n    var radarToUI = new THREE.Matrix4().makeScale(50 / this.radarRange);\n    radarToUI.multiply(new THREE.Matrix4().makeTranslation(50, 50, 0));\n\n    // check contacts\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        if (this.Scene.children[i].radarTracked)\n        {\n            // compute range\n            var node = this.Scene.children[i];\n            var nodePos = new THREE.Vector3().fromArray(node.transformAPI.getWorldPosition());\n            if (nodePos.sub(new THREE.Vector3().setFromMatrixPosition(radarTransform)).length() < 120 * this.radarRange)\n            {\n                // compute relative position\n                var blipPosition = new THREE.Vector4(nodePos.x, nodePos.y, 0, 1);\n                blipPosition.applyMatrix4(radarTransform);\n                blipPosition.applyMatrix4(radarToUI);\n\n                var index = this.contacts.indexOf(node.id);\n                if (index === -1)\n                {\n                    // create contact\n                    this.contacts.push(node.id);\n                    var blipId = (\"00\" + this.contacts.length.toString()).slice(-2);\n\n                    vwf.createChild(this.children_by_name.contactMask.id, GUID(),\n                    {\n                        continues: '/sas/assets/e2176a7a',\n                        properties:\n                        {\n                            DisplayName: \"Contact\" + blipId,\n                            actualPos: [blipPosition.x, blipPosition.y],\n                            movementVector: [0, 0],\n                            targetId: blipId\n                        }\n                    });\n                }\n                else\n                {\n                    // update contact\n                    var label = \"Contact\" + (\"00\" + (index + 1).toString()).slice(-2);\n                    var blip = this.children_by_name.contactMask.children_by_name[label];\n                    console.log(this.contacts);\n                    //blip.actualPos = [blipPosition.x, blipPosition.y];\n                }\n            }\n            // else it's already offscreen, just stop updating it\n        }\n    }",
 			"parameters": []
 		}
 	},
@@ -91,6 +93,7 @@
 			},
 			"properties": {
 				"DisplayName": "scale",
+				"___assetServerOriginalID": "N2ca58639",
 				"font_color": [
 					0.254901960784314,
 					0.741176470588235,
@@ -125,8 +128,7 @@
 					1
 				],
 				"visible": true,
-				"width": 54,
-				"___assetServerOriginalID": "N2ca58639"
+				"width": 54
 			}
 		},
 		"Na9e2f5dd": {
@@ -245,24 +247,24 @@
 						"src": "/sas/assets/6076863f",
 						"top": 0,
 						"transform": [
-							0.9990000128746033,
+							0.999000012874603,
 							0,
 							0,
 							0,
 							0,
-							0.9990000128746033,
+							0.999000012874603,
 							0,
 							0,
 							0,
 							0,
-							0.9989833831787109,
+							0.998983383178711,
 							0,
 							-50,
-							-50.008323669433594,
+							-50.0083236694336,
 							0,
 							1
 						],
-						"visible": true,
+						"visible": false,
 						"width": 1100
 					}
 				}
