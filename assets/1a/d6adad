@@ -323,9 +323,9 @@
 			0.0173894502222538,
 			0.9962409138679504,
 			0,
-			3.2070000171661377,
-			-2.4709999561309814,
-			20,
+			6.63100004196167,
+			-5.210999965667725,
+			20.399999618530273,
 			1
 		],
 		"type": "Primitive",
@@ -345,9 +345,9 @@
 			0.0173894502222538,
 			0.9962409138679504,
 			0,
-			3.2070000171661377,
-			-2.4709999561309814,
-			20,
+			6.63100004196167,
+			-5.210999965667725,
+			20.399999618530273,
 			1
 		],
 		"smokeDef": {
@@ -374,7 +374,7 @@
 				]
 			}
 		},
-		"___sourceAssetTimestamp": "Mon Oct 05 2015 15:41:31 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 06 2015 15:41:43 GMT-0400 (Eastern Daylight Time)",
 		"tickCount": 0
 	},
 	"methods": {
@@ -661,9 +661,9 @@
 					-0.8456173539161682,
 					-0.24162431061267853,
 					0,
-					2.6566123962402344,
-					-3.308516025543213,
-					21.492034912109375,
+					6.0806121826171875,
+					-6.048516273498535,
+					21.89203453063965,
 					1
 				]
 			},
@@ -824,106 +824,11 @@
 					0.017390314489603043,
 					0.9962409138679504,
 					0,
-					1.7385071516036987,
-					-5.074840545654297,
-					19.24584197998047,
+					5.162507057189941,
+					-7.814840316772461,
+					19.645841598510742,
 					1
 				]
-			},
-			"children": {
-				"Nafc04425": {
-					"extends": "SandboxParticleSystem.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.337756,
-						"s1": 0.105646,
-						"s2": 0.018279,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "Wake",
-						"alphaTest": 0,
-						"colorRange": [
-							0,
-							0,
-							0.231372,
-							0
-						],
-						"damping": -0.01,
-						"depthTest": false,
-						"emitterPosition": [
-							41.4999923706055,
-							-62.0858726501465,
-							19.9328174591064
-						],
-						"emitterSize": [
-							1,
-							1,
-							0.4
-						],
-						"emitterType": "box",
-						"endColor": [
-							0.741176,
-							0.854901,
-							0.988235,
-							0.24
-						],
-						"endSize": 3,
-						"gravity": -0.02,
-						"image": "../vwfDataManager.svc/texture?UID=smoke.png",
-						"mamSpin": 2.6,
-						"maxOrientation": 19.6,
-						"maxVelocity": [
-							0.01,
-							0.01,
-							0.01
-						],
-						"minOrientation": -14.8,
-						"minSpin": -3.8,
-						"minVelocity": [
-							-0.011,
-							-0.01,
-							-0.01
-						],
-						"owner": "ADLteam",
-						"renderDepth": -3,
-						"sizeRange": 0.62,
-						"solver": "Analytic",
-						"sourceAssetId": "ee09777b",
-						"startColor": [
-							1,
-							1,
-							1,
-							0.98
-						],
-						"transform": [
-							0.577344726164327,
-							0.770921653073968,
-							-0.261451471581131,
-							0,
-							-0.766162329482909,
-							0.622908430848168,
-							0.144859834528399,
-							0,
-							0.275086081166534,
-							0.116914035085497,
-							0.952188403809071,
-							0,
-							0,
-							0,
-							0,
-							1
-						],
-						"type": "ParticleSystem",
-						"___assetServerOriginalID": "Nafc04425"
-					},
-					"methods": {
-						"tick": {
-							"body": "  // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    try{\n    this.emitterPosition = this.Scene.children_by_name.box4.children_by_name.enginePos.transformAPI.getWorldPosition();\n    findviewnode(this.id).children[0].children[0].frustumCulled = false\n    }catch(e)\n    {\n    }  ",
-							"parameters": []
-						}
-					}
-				}
 			}
 		},
 		"N83e3ec00": {

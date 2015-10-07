@@ -1,1 +1,100 @@
-{"extends":"SandboxParticleSystem.vwf","sequence":0,"random":{"s0":0.337756,"s1":0.105646,"s2":0.018279,"c":1},"properties":{"DisplayName":"Wake","alphaTest":0,"colorRange":[0,0,0.231372,0],"damping":-0.01,"depthTest":false,"emitterPosition":[41.4999923706055,-62.0858726501465,19.9328174591064],"emitterSize":[1,1,0.4],"emitterType":"box","endColor":[0.741176,0.854901,0.988235,0.24],"endSize":3,"gravity":-0.02,"image":"../vwfDataManager.svc/texture?UID=smoke.png","mamSpin":2.6,"maxOrientation":19.6,"maxVelocity":[0.01,0.01,0.01],"minOrientation":-14.8,"minSpin":-3.8,"minVelocity":[-0.011,-0.01,-0.01],"owner":"ADLteam","renderDepth":-3,"rotation":{"_x":0,"_y":0,"_z":0,"_order":"XYZ"},"sizeRange":0.62,"solver":"Analytic","startColor":[1,1,1,0.98],"transform":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],"type":"ParticleSystem"},"methods":{"tick":{"body":"  // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    try{\n    this.emitterPosition = this.Scene.children_by_name.box4.children_by_name.enginePos.transformAPI.getWorldPosition();\n    findviewnode(this.id).children[0].children[0].frustumCulled = false\n    }catch(e)\n    {\n    }  ","parameters":[]}}}
+{
+	"extends": "SandboxParticleSystem.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.337756,
+		"s1": 0.105646,
+		"s2": 0.018279,
+		"c": 1
+	},
+	"properties": {
+		"DisplayName": "Wake",
+		"alphaTest": 0,
+		"colorRange": [
+			0,
+			0,
+			0.231372,
+			0
+		],
+		"damping": -0.01,
+		"depthTest": false,
+		"emitterPosition": [
+			0,
+			0,
+			0
+		],
+		"emitterSize": [
+			1,
+			1,
+			0.4
+		],
+		"emitterType": "box",
+		"endColor": [
+			0.741176,
+			0.854901,
+			0.988235,
+			0.24
+		],
+		"endSize": 3,
+		"gravity": -0.02,
+		"image": "../vwfDataManager.svc/texture?UID=smoke.png",
+		"mamSpin": 2.6,
+		"maxOrientation": 19.6,
+		"maxVelocity": [
+			0.01,
+			0.01,
+			0.01
+		],
+		"minOrientation": -14.8,
+		"minSpin": -3.8,
+		"minVelocity": [
+			-0.011,
+			-0.01,
+			-0.01
+		],
+		"owner": "ADLteam",
+		"renderDepth": -3,
+		"rotation": {
+			"_order": "XYZ",
+			"_x": 0,
+			"_y": 0,
+			"_z": 0
+		},
+		"sizeRange": 0.62,
+		"solver": "Analytic",
+		"startColor": [
+			1,
+			1,
+			1,
+			0.98
+		],
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1
+		],
+		"type": "ParticleSystem",
+		"___sourceAssetTimestamp": "Tue Oct 06 2015 15:42:46 GMT-0400 (Eastern Daylight Time)",
+		"sourceAssetId": "ee09777b",
+		"target": ""
+	},
+	"methods": {
+		"tick": {
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    try\n    {\n        //OLd code\n        // this.emitterPosition = this.Scene.children_by_name.FAC_MASTER.children_by_name.enginePos.transformAPI.getWorldPosition();\n        // findviewnode(this.id).children[0].children[0].frustumCulled = false\n\n        //New code\n        // var fac_master_enginePos = this.Scene.findNodeByID(\"http-vwf-example-com-node3-vwf-N4c4d951\");\n        this.target = this.Scene.findNodeByID(\"http-vwf-example-com-node3-vwf-N4c4d951\");\n\n        if (!this.target) return;\n\n        var fac_master_enginePos_pos = this.target.transformAPI.localToGlobal(0, 0, 0);\n\n        this.emitterPosition = fac_master_enginePos_pos;\n\n    }\n    catch (e)\n    {}",
+			"parameters": []
+		}
+	}
+}

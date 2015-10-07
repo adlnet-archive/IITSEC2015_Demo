@@ -22,41 +22,41 @@
 			0,
 			1,
 			0,
-			0.5976289510726929,
-			-0.2142006903886795,
-			0.01774579845368862,
+			0.7040963172912598,
+			-0.06339511275291443,
+			0.015536176972091198,
 			1
 		],
 		"owner": "ADLteam",
 		"DisplayName": "Camera Toggler",
-		"___sourceAssetTimestamp": "Mon Oct 05 2015 15:12:45 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 06 2015 16:01:16 GMT-0400 (Eastern Daylight Time)",
 		"sourceAssetId": "06960369",
 		"isToggleActive": true,
 		"EditorData": {
-			"_isToggleActive": {
-				"displayname": "Toggling enabled",
-				"property": "isToggleActive",
-				"type": "check"
-			},
 			"cycleEditor": {
 				"displayname": "Include Editor camera",
 				"property": "cycleEditor",
 				"type": "check"
+			},
+			"keyCode": {
+				"displayname": "Main toggle key code",
+				"property": "keyCode",
+				"type": "text"
+			},
+			"bindNumbers": {
+				"displayname": "Number press skips to camera",
+				"property": "bindNumbers",
+				"type": "check"
 			}
 		},
-		"cycleEditor": true
+		"cycleEditor": true,
+		"isCameraToggler": true,
+		"keyCode": 84,
+		"bindNumbers": true
 	},
 	"methods": {
 		"rotateCamera": {
 			"body": "console.log(\"got here\");",
-			"parameters": []
-		},
-		"ready": {
-			"body": "// The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n        // The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n    this.Scene.unbind(\"keyDown\", this._kd);\n    this.Scene.unbind(\"keyUp\", this._ku);\n    var self = this;\n    this._kd = function(e, d)\n    {\n        self._keyDown(e, d)\n    };\n    this._ku = function(e, d)\n    {\n        self._keyUp(e, d)\n    };\n    this.Scene.bind(\"keyDown\", this._kd);\n    this.Scene.bind(\"keyUp\", this._ku);",
-			"parameters": []
-		},
-		"_keyUp": {
-			"body": "console.log(\"key up\");",
 			"parameters": []
 		},
 		"tick": {
@@ -64,10 +64,20 @@
 			"parameters": []
 		},
 		"_keyDown": {
-			"body": "var camList = _dView.getCameraList()[1];\n    var camera = _dView.getCamera().parent;\n    var toCamera;\n\n    if (camList.length >= 2 && e.key.key === \"space\" && this.isToggleActive)\n    {\n        var baseIndex = 1;\n        if (!this.cycleEditor && !camList[0])\n        {\n            camList.splice(0, 1);\n            baseIndex = 0;\n        }\n\n        if (camera)\n        {\n            var index = (camList.indexOf(camera.vwfID) + 1) % camList.length;\n            toCamera = camList[index];\n        }\n        else toCamera = camList[baseIndex];\n\n        _dView.setCamera(toCamera);\n    }",
-			"parameters": [
-				"e"
-			]
+			"body": "",
+			"parameters": []
+		},
+		"ready": {
+			"body": "",
+			"parameters": []
+		},
+		"_keyUp": {
+			"body": "",
+			"parameters": []
+		},
+		"bindToggle": {
+			"body": "var self = this;\n\n    $(\"canvas\").off(\".cameraToggler\");\n    $(\"canvas\").on(\"keyup.cameraToggler\", function(e)\n    {\n\n        var camList = _dView.getCameraList()[1];\n        var camera = _dView.getCamera().parent;\n        var toCamera;\n        var baseIndex = removeEditorCam(camList) || self.cycleEditor ? 0 : 1;\n\n        if (camList.length >= 2 && e.keyCode === parseInt(self.keyCode, 10))\n        {\n            if (camera)\n            {\n                var index = (camList.indexOf(camera.vwfID) + 1) % camList.length;\n                toCamera = camList[index];\n            }\n            else toCamera = camList[baseIndex];\n\n            _dView.setCamera(toCamera);\n        }\n\n        else if (self.bindNumbers)\n        {\n            var numPad = e.keyCode - 96;\n            var numRow = e.keyCode - 48;\n            if (numPad >= 0 && numPad <= 9 && numPad < camList.length)\n            {\n                _dView.setCamera(camList[numPad]);\n            }\n            else if (numRow >= 0 && numRow <= 9 && numRow < camList.length)\n            {\n                _dView.setCamera(camList[numRow]);\n            }\n        }\n    });\n\n    function removeEditorCam(camList)\n    {\n        if (!self.cycleEditor && !camList[0])\n        {\n            camList.splice(0, 1);\n            return true;\n        }\n\n        return false;\n    }",
+			"parameters": []
 		}
 	}
 }

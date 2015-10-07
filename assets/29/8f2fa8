@@ -36,9 +36,9 @@
 			0,
 			1,
 			0,
-			50,
-			50,
-			0,
+			-1.47220202609293,
+			0.264917419964697,
+			0.0177457988262177,
 			1
 		],
 		"owner": "ADLteam",
@@ -69,7 +69,8 @@
 			"Seahawk Pilot": "SandboxCamera-vwf-N6b282caa",
 			"Small Craft Action Team": "SandboxCamera-vwf-N6b282caa",
 			"Tactical Action Officer": "SandboxCamera-vwf-N6b282caa"
-		}
+		},
+		"___sourceAssetTimestamp": "Tue Oct 06 2015 11:25:12 GMT-0400 (Eastern Daylight Time)"
 	},
 	"methods": {
 		"selectRole": {
@@ -79,7 +80,11 @@
 			]
 		},
 		"startSimulation": {
-			"body": " debugger;\n    var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    } ",
+			"body": "debugger;\n    var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }",
+			"parameters": []
+		},
+		"getCameraToggler": {
+			"body": "var children = this.Scene.children;\n\n    for (var i = 0; i < children.length; i++)\n    {\n        var child = children[i];\n        if (child && child.isCameraToggler === true) return child;\n    }\n\n    return null;",
 			"parameters": []
 		}
 	},
@@ -170,7 +175,7 @@
 					1,
 					0,
 					16.125,
-					16.874000549316406,
+					16.8740005493164,
 					1,
 					1
 				],
@@ -602,7 +607,7 @@
 					1,
 					0,
 					57.125,
-					17.089000701904297,
+					17.0890007019043,
 					1,
 					1
 				],
@@ -695,8 +700,8 @@
 							0,
 							1,
 							0,
-							10.015000343322754,
-							13.581999778747559,
+							10.0150003433228,
+							13.5819997787476,
 							1,
 							1
 						],
@@ -735,8 +740,8 @@
 					0,
 					1,
 					0,
-					16.312000274658203,
-					57.17599868774414,
+					16.3120002746582,
+					57.1759986877441,
 					1,
 					1
 				],
