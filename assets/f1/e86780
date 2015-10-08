@@ -99,7 +99,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Fri Oct 02 2015 10:16:47 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Wed Oct 07 2015 10:36:46 GMT-0400 (EDT)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -249,7 +249,7 @@
 				]
 			}
 		},
-		"sourceAssetId": "f997b70e",
+		"sourceAssetId": "f1e86780",
 		"states": {
 			"approaching": {
 				"name": "approaching",
@@ -350,9 +350,9 @@
 			-0.049899205565452576,
 			0.9987170100212097,
 			0,
-			16.25,
-			18.75,
-			20,
+			0.960865318775177,
+			0.810040295124054,
+			0.01882782392203808,
 			1
 		],
 		"type": "Primitive",
@@ -372,11 +372,12 @@
 			-0.049899205565452576,
 			0.9987170100212097,
 			0,
-			16.25,
-			18.75,
-			20,
+			0.960865318775177,
+			0.810040295124054,
+			0.01882782392203808,
 			1
-		]
+		],
+		"radarTracked": true
 	},
 	"methods": {
 		"FACMovementDirection": {
@@ -593,7 +594,7 @@
 		}
 	},
 	"children": {
-		"Ncb31e458": {
+		"N83e3ec00": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -686,7 +687,7 @@
 				"width": 2.18
 			}
 		},
-		"N65b6b706": {
+		"N958e2662": {
 			"extends": "asset.vwf",
 			"source": "/sas/assets/c1064312",
 			"type": "subDriver/threejs/asset/vnd.collada+xml",
@@ -781,7 +782,7 @@
 				]
 			}
 		},
-		"N648f81cc": {
+		"N8cf5a8e2": {
 			"extends": "http://vwf.example.com/node3.vwf",
 			"sequence": 0,
 			"random": {
@@ -833,14 +834,14 @@
 					-0.04989820718765259,
 					0.9987170696258545,
 					0,
-					16.266870498657227,
-					15.79126262664795,
-					19.101062774658203,
+					0.9777355790138245,
+					-2.1486973762512207,
+					-0.8801096677780151,
 					1
 				]
 			}
 		},
-		"Na95250f1": {
+		"N8c4837dd": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -945,9 +946,9 @@
 					-0.9906798005104065,
 					-0.13583536446094513,
 					0,
-					16.270721435546875,
-					17.676429748535156,
-					21.448108673095703,
+					0.981586754322052,
+					-0.2635292112827301,
+					1.466936707496643,
 					1
 				]
 			},

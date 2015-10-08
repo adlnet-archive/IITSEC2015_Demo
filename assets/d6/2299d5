@@ -22,7 +22,7 @@
 			0,
 			0
 		],
-		"DisplayName": "cylinder4",
+		"DisplayName": "Missile",
 		"___physics_angular_velocity": [
 			0,
 			0,
@@ -122,9 +122,9 @@
 			-0.9797827005386353,
 			-0.06082130968570709,
 			0,
-			2.394693613052368,
-			7.01098108291626,
-			0.1746593713760376,
+			25.008604049682617,
+			-59.03677749633789,
+			20.274612426757812,
 			1
 		],
 		"type": "Primitive",
@@ -135,7 +135,8 @@
 				"property": "fired",
 				"type": "check"
 			}
-		}
+		},
+		"___sourceAssetTimestamp": "Wed Oct 07 2015 10:41:08 GMT-0400 (Eastern Daylight Time)"
 	},
 	"methods": {
 		"collision": {

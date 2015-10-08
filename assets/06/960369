@@ -22,36 +22,36 @@
 			0,
 			1,
 			0,
-			0.7040963172912598,
-			-0.06339511275291443,
-			0.015536176972091198,
+			1,
+			0,
+			0,
 			1
 		],
 		"owner": "ADLteam",
 		"DisplayName": "Camera Toggler",
-		"___sourceAssetTimestamp": "Tue Oct 06 2015 16:01:16 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Wed Oct 07 2015 10:09:50 GMT-0400 (Eastern Daylight Time)",
 		"sourceAssetId": "06960369",
 		"isToggleActive": true,
 		"EditorData": {
+			"bindNumbers": {
+				"displayname": "Camera shortcuts (numpad)",
+				"property": "bindNumbers",
+				"type": "check"
+			},
 			"cycleEditor": {
-				"displayname": "Include Editor camera",
+				"displayname": "Include editor camera",
 				"property": "cycleEditor",
 				"type": "check"
 			},
 			"keyCode": {
-				"displayname": "Main toggle key code",
+				"displayname": "Toggle key",
 				"property": "keyCode",
 				"type": "text"
-			},
-			"bindNumbers": {
-				"displayname": "Number press skips to camera",
-				"property": "bindNumbers",
-				"type": "check"
 			}
 		},
 		"cycleEditor": true,
 		"isCameraToggler": true,
-		"keyCode": 84,
+		"keyCode": "T",
 		"bindNumbers": true
 	},
 	"methods": {
@@ -76,7 +76,7 @@
 			"parameters": []
 		},
 		"bindToggle": {
-			"body": "var self = this;\n\n    $(\"canvas\").off(\".cameraToggler\");\n    $(\"canvas\").on(\"keyup.cameraToggler\", function(e)\n    {\n\n        var camList = _dView.getCameraList()[1];\n        var camera = _dView.getCamera().parent;\n        var toCamera;\n        var baseIndex = removeEditorCam(camList) || self.cycleEditor ? 0 : 1;\n\n        if (camList.length >= 2 && e.keyCode === parseInt(self.keyCode, 10))\n        {\n            if (camera)\n            {\n                var index = (camList.indexOf(camera.vwfID) + 1) % camList.length;\n                toCamera = camList[index];\n            }\n            else toCamera = camList[baseIndex];\n\n            _dView.setCamera(toCamera);\n        }\n\n        else if (self.bindNumbers)\n        {\n            var numPad = e.keyCode - 96;\n            var numRow = e.keyCode - 48;\n            if (numPad >= 0 && numPad <= 9 && numPad < camList.length)\n            {\n                _dView.setCamera(camList[numPad]);\n            }\n            else if (numRow >= 0 && numRow <= 9 && numRow < camList.length)\n            {\n                _dView.setCamera(camList[numRow]);\n            }\n        }\n    });\n\n    function removeEditorCam(camList)\n    {\n        if (!self.cycleEditor && !camList[0])\n        {\n            camList.splice(0, 1);\n            return true;\n        }\n\n        return false;\n    }",
+			"body": "var self = this;\n\n    $(\"canvas\").off(\".cameraToggler\");\n    $(\"canvas\").on(\"keyup.cameraToggler\", function(e)\n    {\n        var camList = _dView.getCameraList()[1];\n        var camera = _dView.getCamera().parent;\n        var toCamera;\n        var key = self.keyCode ? self.keyCode.toUpperCase() : \" \";\n\n        //If necessary, remove the editor cam from camList\n        if (!self.cycleEditor && !camList[0]) camList.splice(0, 1);\n\n        //If the toggle button has been pressed and there are at least two cams in camList\n        if (camList.length >= 2 && e.keyCode === key.charCodeAt(0))\n        {\n            if (camera)\n            {\n                var index = (camList.indexOf(camera.vwfID) + 1) % camList.length;\n                toCamera = camList[index];\n            }\n\n            //If camera is falsy, then the editor cam is assumed active (camList[0])\n            else toCamera = camList[1];\n\n            _dView.setCamera(toCamera);\n        }\n\n        //Else, handle numpad and numbers row presses\n        else if (self.bindNumbers)\n        {\n            var numPad = e.keyCode - 96;\n            var numRow = e.keyCode - 48;\n            if (numPad >= 0 && numPad <= 9 && numPad < camList.length)\n            {\n                _dView.setCamera(camList[numPad]);\n            }\n            else if (numRow >= 0 && numRow <= 9 && numRow < camList.length)\n            {\n                _dView.setCamera(camList[numRow]);\n            }\n        }\n    });",
 			"parameters": []
 		}
 	}
