@@ -93,16 +93,18 @@
 			0,
 			1,
 			0,
-			-10.588888168334961,
-			-4.092870235443115,
-			0.03760938346385956,
+			5.3672776222229,
+			0.9822741150856018,
+			0.05629592388868332,
 			1
 		],
 		"type": "Primitive",
 		"width": 10000,
 		"sourceAssetId": "0c42853d",
 		"lsegs": 30,
-		"wsegs": 30
+		"wsegs": 30,
+		"___sourceAssetTimestamp": "Thu Oct 08 2015 13:47:31 GMT-0400 (Eastern Daylight Time)",
+		"visible": false
 	},
 	"methods": {
 		"splash": {

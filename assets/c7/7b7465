@@ -29,7 +29,7 @@
 				"type": "nodeid"
 			}
 		},
-		"___sourceAssetTimestamp": "Wed Oct 07 2015 09:05:41 GMT-0400 (EDT)",
+		"___sourceAssetTimestamp": "Thu Oct 08 2015 11:17:14 GMT-0400 (EDT)",
 		"background_color": [
 			0,
 			0,
@@ -45,10 +45,10 @@
 		"height": 600,
 		"left": 0,
 		"owner": "ADLteam",
-		"radarOrigin": "sphere2-vwf-Nef8965b9",
+		"radarOrigin": "box2-vwf-Nb5e6329c",
 		"radarRange": 1500,
 		"sourceAssetId": "c77b7465",
-		"terrainOrigin": "asset-vwf-N8bb9bc4a",
+		"terrainOrigin": "asset-vwf-N1e068df3",
 		"top": 0,
 		"transform": [
 			1,
@@ -63,8 +63,8 @@
 			0,
 			1,
 			0,
-			1,
-			1,
+			5,
+			5,
 			1,
 			1
 		],
@@ -77,99 +77,11 @@
 			"parameters": []
 		},
 		"tick": {
-			"body": "var radar = this.Scene.findNodeByID(this.radarOrigin);\n    if(!radar) return;\n    \n    var radarTransform = new THREE.Matrix4().fromArray(radar.worldTransform);\n    radarTransform.getInverse(radarTransform);\n\n    var terrain = this.Scene.findNodeByID(this.terrainOrigin);\n\n    // get terrain origin in radar space\n    if (terrain)\n    {\n        var terrainOffset = radar.transformAPI.globalToLocal(terrain.transformAPI.getWorldPosition());\n        terrainOffset = new THREE.Vector3(terrainOffset[0], terrainOffset[1], 0);\n        terrainOffset.applyMatrix4(new THREE.Matrix4().makeScale(50 / this.radarRange, -50 / this.radarRange, 50 / this.radarRange));\n        terrainOffset.addScalar(-50);\n        terrainOffset = new THREE.Matrix4().makeTranslation(terrainOffset.x, terrainOffset.y, 0);\n\n        var terrainRotation = terrain.transformAPI.localToGlobalRotation(terrain.transformAPI.getRotation());\n        terrainRotation = radar.transformAPI.globalRotationToLocalRotation(terrainRotation);\n        terrainRotation = new THREE.Matrix4().makeRotationZ(-terrainRotation[2] * 3.14159265 / 180);\n        //terrainRotation.identity();\n\n        var terrainTransform = new THREE.Matrix4().multiplyMatrices(terrainOffset, terrainRotation);\n\n        // update radar terrain display\n        var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n        terrainOverlay.transform = Array.prototype.slice.call(terrainTransform.elements);\n    }\n\n    var radarToUI = new THREE.Matrix4(\n        50 / this.radarRange, 0, 0, 50,\n        0, -50 / this.radarRange, 0, 50,\n        0, 0, 50 / this.radarRange, 0,\n        0, 0, 0, 1);\n\n    // check contacts\n    \n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        if (this.Scene.children[i].radarTracked)\n        {\n            // compute range\n            var node = this.Scene.children[i];\n            var nodePos = new THREE.Vector3().fromArray(node.transformAPI.getWorldPosition());\n            if (nodePos.clone().sub(new THREE.Vector3().fromArray(radar.transformAPI.getWorldPosition())).length() < 1.2 * this.radarRange)\n            {\n                // compute relative position\n                var blipPosition = radar.transformAPI.globalToLocal(nodePos.toArray())\n                blipPosition = new THREE.Vector4(blipPosition[0], blipPosition[1], 0, 1);\n                blipPosition.applyMatrix4(radarToUI);\n\n                // compute relative velocity\n                var blipVelocity = radar.transformAPI.globalToLocalRotation(node.physicsAPI.getLinearVelocity());\n                blipVelocity = [blipVelocity[0], -blipVelocity[1]];\n\n                var index = this.contacts.indexOf(node.id);\n                if (index === -1)\n                {\n                    // create contact\n                    this.contacts.push(node.id);\n                    var blipId = (\"00\" + this.contacts.length.toString()).slice(-2);\n\n                    vwf.createChild(this.children_by_name.contactMask.id, GUID(),\n                    {\n                        continues: '/sas/assets/e2176a7a',\n                        properties:\n                        {\n                            DisplayName: \"Contact\" + blipId,\n                            actualPos: [blipPosition.x, blipPosition.y],\n                            movementVector: blipVelocity,\n                            targetId: blipId\n                        }\n                    });\n                }\n                else\n                {\n                    // update contact\n                    var label = \"Contact\" + (\"00\" + (index + 1).toString()).slice(-2);\n                    var blip = this.children_by_name.contactMask.children_by_name[label];\n                    blip.actualPos = [blipPosition.x, blipPosition.y];\n                    blip.movementVector = blipVelocity;\n                }\n            }\n            // else it's already offscreen, just stop updating it\n        }\n    }",
+			"body": "var radar = this.Scene.findNodeByID(this.radarOrigin);\n    if (!radar) return;\n\n    var radarTransform = new THREE.Matrix4().fromArray(radar.worldTransform);\n    radarTransform.getInverse(radarTransform);\n\n    var terrain = this.Scene.findNodeByID(this.terrainOrigin);\n\n    // get terrain origin in radar space\n    if (terrain)\n    {\n        var terrainOffset = radar.transformAPI.globalToLocal(terrain.transformAPI.getWorldPosition());\n        terrainOffset = new THREE.Vector3(terrainOffset[1], terrainOffset[0], 0);\n        terrainOffset.applyMatrix4(new THREE.Matrix4().makeScale(50 / this.radarRange, -50 / this.radarRange, 50 / this.radarRange));\n        terrainOffset.addScalar(-50);\n        terrainOffset = new THREE.Matrix4().makeTranslation(terrainOffset.x, terrainOffset.y, 0);\n\n        var terrainRotation = terrain.transformAPI.localToGlobal([0, -1, 0]);\n        terrainRotation = radar.transformAPI.globalToLocal(terrainRotation);\n        terrainRotation = Math.atan2(terrainRotation[1], terrainRotation[0]);\n        terrainRotation = new THREE.Matrix4().makeRotationZ(terrainRotation);\n\n        var terrainTransform = new THREE.Matrix4().multiplyMatrices(terrainOffset, terrainRotation);\n\n        // update radar terrain display\n        var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n        terrainOverlay.transform = Array.prototype.slice.call(terrainTransform.elements);\n    }\n\n    var radarToUI = new THREE.Matrix4(\n        0, -50 / this.radarRange, 0, 50, -50 / this.radarRange, 0, 0, 50,\n        0, 0, 50 / this.radarRange, 0,\n        0, 0, 0, 1);\n\n    // check contacts\n\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        if (this.Scene.children[i].radarTracked)\n        {\n            // compute range\n            var node = this.Scene.children[i];\n            var nodePos = new THREE.Vector3().fromArray(node.transformAPI.getWorldPosition());\n            if (nodePos.clone().sub(new THREE.Vector3().fromArray(radar.transformAPI.getWorldPosition())).length() < 1.2 * this.radarRange)\n            {\n                // compute relative position\n                var blipPosition = radar.transformAPI.globalToLocal(nodePos.toArray())\n                blipPosition = new THREE.Vector4(blipPosition[0], blipPosition[1], 0, 1);\n                blipPosition.applyMatrix4(radarToUI);\n\n                // compute relative velocity\n                var blipVelocity = radar.transformAPI.globalToLocalRotation(node.physicsAPI.getLinearVelocity());\n                blipVelocity = [blipVelocity[0], -blipVelocity[1]];\n\n                var index = this.contacts.indexOf(node.id);\n                if (index === -1)\n                {\n                    // create contact\n                    this.contacts.push(node.id);\n                    var blipId = (\"00\" + this.contacts.length.toString()).slice(-2);\n\n                    vwf.createChild(this.children_by_name.contactMask.id, GUID(),\n                    {\n                        continues: '/sas/assets/e2176a7a',\n                        properties:\n                        {\n                            DisplayName: \"Contact\" + blipId,\n                            actualPos: [blipPosition.x, blipPosition.y],\n                            movementVector: blipVelocity,\n                            targetId: blipId\n                        }\n                    });\n                }\n                else\n                {\n                    // update contact\n                    var label = \"Contact\" + (\"00\" + (index + 1).toString()).slice(-2);\n                    var blip = this.children_by_name.contactMask.children_by_name[label];\n                    try\n                    {\n                        blip.actualPos = [blipPosition.x, blipPosition.y];\n                        blip.movementVector = blipVelocity;\n                    }\n                    catch (e)\n                    {\n                        console.error('Failed to update radar blip', label);\n                    }\n                }\n            }\n            // else it's already offscreen, just stop updating it\n        }\n    }",
 			"parameters": []
 		}
 	},
 	"children": {
-		"N2ca58639": {
-			"extends": "http://vwf.example.com/label.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.33815628150478,
-				"s1": 0.713276613503695,
-				"s2": 0.316370985005051,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "scale",
-				"___assetServerOriginalID": "N2ca58639",
-				"font_color": [
-					0.254901960784314,
-					0.741176470588235,
-					0.717647058823529
-				],
-				"font_size": 15,
-				"height": 19,
-				"left": 0,
-				"owner": "ADLteam",
-				"style": {
-					"font-family": "sans-serif"
-				},
-				"text": "250m",
-				"text_align": "center",
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					2.60400009155273,
-					91.6679992675781,
-					1,
-					1
-				],
-				"visible": true,
-				"width": 54
-			}
-		},
-		"Na9e2f5dd": {
-			"extends": "http://vwf.example.com/image.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.707542740274221,
-				"s1": 0.0408043644856662,
-				"s2": 0.175118948332965,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "bgImage",
-				"___assetServerOriginalID": "Na9e2f5dd",
-				"height": 600,
-				"left": 0,
-				"owner": "ADLteam",
-				"src": "/sas/assets/da7a38b1",
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1
-				],
-				"visible": true,
-				"width": 600
-			}
-		},
 		"Ne67a819d": {
 			"extends": "http://vwf.example.com/panel.vwf",
 			"sequence": 0,
@@ -268,6 +180,94 @@
 						"width": 1100
 					}
 				}
+			}
+		},
+		"Na9e2f5dd": {
+			"extends": "http://vwf.example.com/image.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.707542740274221,
+				"s1": 0.0408043644856662,
+				"s2": 0.175118948332965,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "bgImage",
+				"___assetServerOriginalID": "Na9e2f5dd",
+				"height": 600,
+				"left": 0,
+				"owner": "ADLteam",
+				"src": "/sas/assets/da7a38b1",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1
+				],
+				"visible": true,
+				"width": 600
+			}
+		},
+		"N2ca58639": {
+			"extends": "http://vwf.example.com/label.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.33815628150478,
+				"s1": 0.713276613503695,
+				"s2": 0.316370985005051,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "scale",
+				"___assetServerOriginalID": "N2ca58639",
+				"font_color": [
+					0.254901960784314,
+					0.741176470588235,
+					0.717647058823529
+				],
+				"font_size": 15,
+				"height": 19,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"font-family": "sans-serif"
+				},
+				"text": "250m",
+				"text_align": "center",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					2.60400009155273,
+					91.6679992675781,
+					1,
+					1
+				],
+				"visible": true,
+				"width": 54
 			}
 		}
 	}
