@@ -29,7 +29,7 @@
 				"type": "nodeid"
 			}
 		},
-		"___sourceAssetTimestamp": "Thu Oct 08 2015 11:17:14 GMT-0400 (EDT)",
+		"___sourceAssetTimestamp": "Thu Oct 08 2015 15:44:05 GMT-0400 (EDT)",
 		"background_color": [
 			0,
 			0,
@@ -63,9 +63,9 @@
 			0,
 			1,
 			0,
-			5,
-			5,
-			1,
+			0.28281100147193855,
+			0.042724342256340364,
+			0.017745798826217518,
 			1
 		],
 		"visible": true,
@@ -78,6 +78,10 @@
 		},
 		"tick": {
 			"body": "var radar = this.Scene.findNodeByID(this.radarOrigin);\n    if (!radar) return;\n\n    var radarTransform = new THREE.Matrix4().fromArray(radar.worldTransform);\n    radarTransform.getInverse(radarTransform);\n\n    var terrain = this.Scene.findNodeByID(this.terrainOrigin);\n\n    // get terrain origin in radar space\n    if (terrain)\n    {\n        var terrainOffset = radar.transformAPI.globalToLocal(terrain.transformAPI.getWorldPosition());\n        terrainOffset = new THREE.Vector3(terrainOffset[1], terrainOffset[0], 0);\n        terrainOffset.applyMatrix4(new THREE.Matrix4().makeScale(50 / this.radarRange, -50 / this.radarRange, 50 / this.radarRange));\n        terrainOffset.addScalar(-50);\n        terrainOffset = new THREE.Matrix4().makeTranslation(terrainOffset.x, terrainOffset.y, 0);\n\n        var terrainRotation = terrain.transformAPI.localToGlobal([0, -1, 0]);\n        terrainRotation = radar.transformAPI.globalToLocal(terrainRotation);\n        terrainRotation = Math.atan2(terrainRotation[1], terrainRotation[0]);\n        terrainRotation = new THREE.Matrix4().makeRotationZ(terrainRotation);\n\n        var terrainTransform = new THREE.Matrix4().multiplyMatrices(terrainOffset, terrainRotation);\n\n        // update radar terrain display\n        var terrainOverlay = this.children_by_name.contactMask.children_by_name.terrainOverlay;\n        terrainOverlay.transform = Array.prototype.slice.call(terrainTransform.elements);\n    }\n\n    var radarToUI = new THREE.Matrix4(\n        0, -50 / this.radarRange, 0, 50, -50 / this.radarRange, 0, 0, 50,\n        0, 0, 50 / this.radarRange, 0,\n        0, 0, 0, 1);\n\n    // check contacts\n\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        if (this.Scene.children[i].radarTracked)\n        {\n            // compute range\n            var node = this.Scene.children[i];\n            var nodePos = new THREE.Vector3().fromArray(node.transformAPI.getWorldPosition());\n            if (nodePos.clone().sub(new THREE.Vector3().fromArray(radar.transformAPI.getWorldPosition())).length() < 1.2 * this.radarRange)\n            {\n                // compute relative position\n                var blipPosition = radar.transformAPI.globalToLocal(nodePos.toArray())\n                blipPosition = new THREE.Vector4(blipPosition[0], blipPosition[1], 0, 1);\n                blipPosition.applyMatrix4(radarToUI);\n\n                // compute relative velocity\n                var blipVelocity = radar.transformAPI.globalToLocalRotation(node.physicsAPI.getLinearVelocity());\n                blipVelocity = [blipVelocity[0], -blipVelocity[1]];\n\n                var index = this.contacts.indexOf(node.id);\n                if (index === -1)\n                {\n                    // create contact\n                    this.contacts.push(node.id);\n                    var blipId = (\"00\" + this.contacts.length.toString()).slice(-2);\n\n                    vwf.createChild(this.children_by_name.contactMask.id, GUID(),\n                    {\n                        continues: '/sas/assets/e2176a7a',\n                        properties:\n                        {\n                            DisplayName: \"Contact\" + blipId,\n                            actualPos: [blipPosition.x, blipPosition.y],\n                            movementVector: blipVelocity,\n                            targetId: blipId\n                        }\n                    });\n                }\n                else\n                {\n                    // update contact\n                    var label = \"Contact\" + (\"00\" + (index + 1).toString()).slice(-2);\n                    var blip = this.children_by_name.contactMask.children_by_name[label];\n                    try\n                    {\n                        blip.actualPos = [blipPosition.x, blipPosition.y];\n                        blip.movementVector = blipVelocity;\n                    }\n                    catch (e)\n                    {\n                        console.error('Failed to update radar blip', label);\n                    }\n                }\n            }\n            // else it's already offscreen, just stop updating it\n        }\n    }",
+			"parameters": []
+		},
+		"initialize": {
+			"body": "this.contacts = [];",
 			"parameters": []
 		}
 	},
@@ -176,7 +180,7 @@
 							0,
 							1
 						],
-						"visible": true,
+						"visible": false,
 						"width": 1100
 					}
 				}

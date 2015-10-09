@@ -13,14 +13,14 @@
 		"___physics_activation_state": 1,
 		"___physics_deactivation_time": 0.05000000074505806,
 		"___physics_velocity_linear": [
-			0,
-			0,
-			0
+			-0.06483523547649384,
+			0.2917110025882721,
+			-0.21153783798217773
 		],
 		"___physics_velocity_angular": [
-			0,
-			0,
-			0
+			2.096552697399575e-40,
+			-2.6438298126416324e-41,
+			-0.000797823304310441
 		],
 		"materialDef": [
 			{
@@ -1910,7 +1910,7 @@
 		"___physics_constant_force": [
 			0,
 			0,
-			0
+			9.8
 		],
 		"___physics_enabled": true,
 		"___physics_linear_velocity": [
@@ -1934,9 +1934,9 @@
 			0,
 			1,
 			0,
-			2.25,
-			0.25,
-			4.249999046325684,
+			-1.9160953760147095,
+			3.6563456058502197,
+			0.025258762761950493,
 			1
 		],
 		"translation": [
@@ -1944,17 +1944,17 @@
 			-0.105291242445312,
 			0.0100000000000002
 		],
-		"___sourceAssetTimestamp": "Thu Oct 08 2015 18:11:50 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Thu Oct 08 2015 18:04:37 GMT-0400 (Eastern Daylight Time)",
 		"sourceAssetId": "1462ff1d"
 	},
 	"methods": {
 		"tick": {
-			"body": "this.transformAPI.rotateZ(10);",
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                  this.counter += .05;\n                                                      var amt1 = Math.cos(this.counter) / 10;\n                                                      var amt2 = Math.cos(this.counter / 3) / 10;\n                                                      var amt3 = Math.cos(this.counter / 1) / 3;\n                                                      this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);\n                                                      if (this.transformAPI.getPosition()[2] < 30)\n                                                          this.physicsAPI.addForceAtCenter(0, 0, .1);\n                                                      if (this.transformAPI.getPosition()[2] > 35)\n                                                          this.physicsAPI.addForceAtCenter(0, 0, -.1);\n\n                                                      /// this.physicsAPI.addTorque(this.transformAPI.localToGlobalRotation([amt1 / 2, amt2 / 2, amt3 / 2]));\n\n                                                      this.children_by_name.Mrotor.transformAPI.rotateZ(20, this.transformAPI.COORDINATES.LOCAL);\n",
 			"parameters": []
 		}
 	},
 	"children": {
-		"N2c7ab914": {
+		"N40d24b39": {
 			"extends": "asset.vwf",
 			"source": "RBack",
 			"type": "link_existing/threejs",
@@ -2002,7 +2002,7 @@
 				"___assetServerOriginalID": "N2c7ab914"
 			}
 		},
-		"Nad4d203": {
+		"Nfa53565b": {
 			"extends": "SandboxCamera.vwf",
 			"source": "vwf/model/threejs/camera.js",
 			"type": "subDriver/threejs",
@@ -2051,7 +2051,7 @@
 				}
 			}
 		},
-		"N1244aaff": {
+		"N41f84052": {
 			"extends": "asset.vwf",
 			"source": "Joy01",
 			"type": "link_existing/threejs",
@@ -2139,7 +2139,7 @@
 				}
 			}
 		},
-		"N3898105b": {
+		"N216235ce": {
 			"extends": "SandboxCamera.vwf",
 			"source": "vwf/model/threejs/camera.js",
 			"type": "subDriver/threejs",
@@ -2188,7 +2188,7 @@
 				}
 			}
 		},
-		"Nf8ace667": {
+		"N7bb327b7": {
 			"extends": "asset.vwf",
 			"source": "DBackM1",
 			"type": "link_existing/threejs",
@@ -2236,7 +2236,7 @@
 				"___assetServerOriginalID": "Nf8ace667"
 			}
 		},
-		"N6eab8edd": {
+		"N3caa97f9": {
 			"extends": "asset.vwf",
 			"source": "UH-60",
 			"type": "link_existing/threejs",
@@ -2284,7 +2284,7 @@
 				"___assetServerOriginalID": "N6eab8edd"
 			}
 		},
-		"Nef6875fd": {
+		"N73ae7293": {
 			"extends": "asset.vwf",
 			"source": "Object01",
 			"type": "link_existing/threejs",
@@ -2332,7 +2332,7 @@
 				"___assetServerOriginalID": "Nef6875fd"
 			}
 		},
-		"N22932da0": {
+		"N8cfde23b": {
 			"extends": "asset.vwf",
 			"source": "Mrotor",
 			"type": "link_existing/threejs",
