@@ -1,0 +1,106 @@
+{
+	"extends": "box2.vwf",
+	"source": "vwf/model/threejs/box.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.896643950603902,
+		"s1": 0.738107624696568,
+		"s2": 0.207115379394963,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"DisplayName": "box3",
+		"materialDef": {
+			"shininess": 15,
+			"alpha": 1,
+			"ambient": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 1
+			},
+			"emit": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"reflect": 0.8,
+			"shadeless": false,
+			"shadow": true,
+			"specularColor": {
+				"r": 0.5773502691896258,
+				"g": 0.5773502691896258,
+				"b": 0.5773502691896258
+			},
+			"specularLevel": 1,
+			"layers": [
+				{
+					"alpha": 1,
+					"blendMode": 0,
+					"mapInput": 0,
+					"mapTo": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"rot": 0,
+					"scalex": 1,
+					"scaley": 1,
+					"src": "checker.jpg"
+				}
+			],
+			"type": "phong",
+			"side": 0,
+			"blendMode": 1,
+			"fog": true,
+			"shading": true,
+			"metal": false,
+			"wireframe": false,
+			"depthtest": true,
+			"depthwrite": true,
+			"vertexColors": false
+		},
+		"owner": "ADLteam",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			27.25,
+			3.75,
+			0.0010000000474974513,
+			1
+		],
+		"type": "Primitive"
+	},
+	"methods": {
+		"ready": {
+			"body": "debugger;\n    // The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects",
+			"parameters": []
+		}
+	}
+}
