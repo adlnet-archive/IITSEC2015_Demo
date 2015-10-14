@@ -99,7 +99,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Wed Oct 07 2015 10:36:46 GMT-0400 (EDT)",
+		"___sourceAssetTimestamp": "Tue Oct 13 2015 16:45:36 GMT-0400 (Eastern Daylight Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -350,9 +350,9 @@
 			-0.049899205565452576,
 			0.9987170100212097,
 			0,
-			0.960865318775177,
-			0.810040295124054,
-			0.01882782392203808,
+			-2.0446314811706543,
+			2.0921149253845215,
+			0.03130466118454933,
 			1
 		],
 		"type": "Primitive",
@@ -372,9 +372,9 @@
 			-0.049899205565452576,
 			0.9987170100212097,
 			0,
-			0.960865318775177,
-			0.810040295124054,
-			0.01882782392203808,
+			-2.0446314811706543,
+			2.0921149253845215,
+			0.03130466118454933,
 			1
 		],
 		"radarTracked": true
@@ -462,12 +462,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                            console.log(\"fire_rocketUpdate\");\n                                            this.launchMissile();\n                                            this.playMissileLaunch();\n                                            this.rockets = this.rockets - 1;\n                                            if (this.rockets > 0)\n                                            {\n                                                this.currentState = this.states[\"fire_rocket\"];\n                                                console.log(\"rocketUpdate state fire \");\n                                            }\n                                            else\n                                            {\n                                                this.currentState = this.states[\"idle\"];\n                                                console.log(\"rocketUpdate state idle\");\n                                            }    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": [
 				"statename"
-			]
-		},
-		"hit": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                         var pos = args[0];\n                                            var force = args[1];\n                                            if (typeof force == 'number')\n                                                this.health -= force;\n                                            else\n                                                this.health -= 101;\n\n                                            if (this.health < 0)\n                                            {\n                                                var def = this.explosionDef;\n                                                var pos = this.transformAPI.getWorldPosition();\n                                                def.properties.transform[12] = pos[0];\n                                                def.properties.transform[13] = pos[1];\n                                                def.properties.transform[14] = pos[2];\n                                                def.properties.fuse = 1;\n                                                vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);\n                                                this.parent.children.delete(this);\n                                            } \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
-			"parameters": [
-				"args"
 			]
 		},
 		"idleTransition": {
@@ -590,6 +584,12 @@
 			"body": "// Check to ensure peer is not myself\n    if (peer_info[1] == this.id) return;\n\n    var safe_distance = 40;\n    var mass = this.physicsAPI.getMass();\n\n    // Get peer world position\n    var peer_pos = peer_info[0];\n\n    // Get my world position\n    var my_pos = this.transformAPI.getWorldPosition();\n\n    // Get the distance between me and the leader\n    var distance = MATH.distanceVec3(peer_pos, my_pos);\n    //console.log(\"facFollowBehavior: distance: \" + distance);\n\n    if (distance < safe_distance)\n    {\n        //console.log(\"Move to Avoid Peer (\" + this.id + \")\");\n        var direction = MATH.subVec3(my_pos, peer_pos);\n        //console.log(\"diff: \" + direction);\n\n        direction[2] = 0;\n\n        var norm_direction = MATH.toUnitVec3(direction);\n\n        norm_direction = this.transformAPI.globalToLocalRotation(norm_direction);\n\n        var x = norm_direction[0];\n        var y = norm_direction[1];\n\n        //console.log(\"x: \" + x);\n        //console.log(\"y: \" + y);\n\n        if (y >= 0)\n        {\n            if (x >= -.25 && x <= 1)\n            {\n                this.moveRight(.5);\n            }\n        }\n        else\n        {\n            if (x >= -.25 && x <= 1)\n            {\n                this.moveLeft(.5);\n            }\n        }\n    }\n\n    // Go forward\n    var force = this.transformAPI.localToGlobalRotation(-5 * mass, 0, 0);\n    this.physicsAPI.addForceAtCenter(force);\n    this.playMotorRunning();\n\n    return;",
 			"parameters": [
 				"peer_info"
+			]
+		},
+		"hit": {
+			"body": "if(this.currentState == this.states[\"defeated\"]) return;\n    \n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n        this.health -= force;\n    else\n        this.health -= 101;\n\n    if (this.health < 0)\n    {\n        var def = this.explosionDef;\n        var pos = this.transformAPI.getWorldPosition();\n        def.properties.transform[12] = pos[0];\n        def.properties.transform[13] = pos[1];\n        def.properties.transform[14] = pos[2];\n        def.properties.fuse = 1;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);\n        this.currentState = this.states[\"defeated\"]\n        this.parent.children.delete(this);\n    }",
+			"parameters": [
+				"args"
 			]
 		}
 	},
@@ -834,9 +834,9 @@
 					-0.04989820718765259,
 					0.9987170696258545,
 					0,
-					0.9777355790138245,
-					-2.1486973762512207,
-					-0.8801096677780151,
+					-2.027761220932007,
+					-0.866622805595398,
+					-0.8676328063011169,
 					1
 				]
 			}
@@ -946,9 +946,9 @@
 					-0.9906798005104065,
 					-0.13583536446094513,
 					0,
-					0.981586754322052,
-					-0.2635292112827301,
-					1.466936707496643,
+					-2.0239100456237793,
+					1.018545389175415,
+					1.479413628578186,
 					1
 				]
 			},

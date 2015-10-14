@@ -23,6 +23,13 @@
 			0
 		],
 		"DisplayName": "Missile",
+		"EditorData": {
+			"fired": {
+				"displayname": "Fired",
+				"property": "fired",
+				"type": "check"
+			}
+		},
 		"___physics_angular_velocity": [
 			0,
 			0,
@@ -40,6 +47,7 @@
 			0
 		],
 		"___physics_mass": 100,
+		"___sourceAssetTimestamp": "Tue Oct 13 2015 16:59:25 GMT-0400 (Eastern Daylight Time)",
 		"counter": 0,
 		"explosionDef": {
 			"continues": "/sas/assets/d3402bc3",
@@ -67,6 +75,7 @@
 		},
 		"fired": true,
 		"height": 1.6,
+		"launchedBy": "",
 		"materialDef": {
 			"alpha": 1,
 			"ambient": {
@@ -74,22 +83,29 @@
 				"g": 1,
 				"r": 1
 			},
+			"blendMode": 1,
 			"color": {
 				"a": 1,
 				"b": 1,
 				"g": 1,
 				"r": 1
 			},
+			"depthtest": true,
+			"depthwrite": true,
 			"emit": {
 				"b": 0,
 				"g": 0,
 				"r": 0
 			},
+			"fog": true,
 			"layers": [],
+			"metal": false,
 			"reflect": 0.8,
 			"shadeless": false,
+			"shading": true,
 			"shadow": true,
 			"shininess": 15,
+			"side": 0,
 			"specularColor": {
 				"b": 0.57735,
 				"g": 0.57735,
@@ -97,18 +113,12 @@
 			},
 			"specularLevel": 1,
 			"type": "phong",
-			"side": 0,
-			"blendMode": 1,
-			"fog": true,
-			"shading": true,
-			"metal": false,
-			"wireframe": false,
-			"depthtest": true,
-			"depthwrite": true,
-			"vertexColors": false
+			"vertexColors": false,
+			"wireframe": false
 		},
 		"owner": "ADLteam",
 		"radius": 0.05,
+		"sourceAssetId": "d62299d5",
 		"transform": [
 			0.7999482154846191,
 			0.1909199357032776,
@@ -122,21 +132,12 @@
 			-0.9797827005386353,
 			-0.06082130968570709,
 			0,
-			25.008604049682617,
-			-59.03677749633789,
-			20.274612426757812,
+			6.5603132247924805,
+			-3.604379892349243,
+			0.027014706283807755,
 			1
 		],
-		"type": "Primitive",
-		"sourceAssetId": "d62299d5",
-		"EditorData": {
-			"fired": {
-				"displayname": "Fired",
-				"property": "fired",
-				"type": "check"
-			}
-		},
-		"___sourceAssetTimestamp": "Wed Oct 07 2015 10:41:08 GMT-0400 (Eastern Daylight Time)"
+		"type": "Primitive"
 	},
 	"methods": {
 		"collision": {
@@ -146,13 +147,20 @@
 				"data"
 			]
 		},
+		"explode": {
+			"body": "var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    var now = performance.now();\n    // console.profile(\"launch\");\n    this.xAPISend('Missile Hit!!', pos);\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n    {\n        vwf.callMethod(childID, 'explode');\n    });",
+			"parameters": []
+		},
 		"tick": {
 			"body": "\n         if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 2)\n    {\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 200, this.random() * 200, this.random() * 1));\n    }\n    if (this.counter < 30)\n    {\n        var force = this.transformAPI.localToGlobal(0, 0, -30 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 10, this.random() * 10, this.random() * 1));\n    }\n    if (this.counter > 10 && this.counter < 270)\n    {\n        \n        var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var center = this.transformAPI.getPosition();\n        var hit = this.Scene.traceAPI.rayCast(center, offset,\n        {\n            ignore: [findviewnode(this.id)]\n        });\n        if (hit && hit.distance < 2)\n        {\n            this.explode();\n            console.log(hit);\n            vwf.deleteNode(this.id);\n            return;\n        }\n    }\n    if (this.counter > 60)\n        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 270)\n        vwf.deleteNode(this.id);         \n",
 			"parameters": []
 		},
-		"explode": {
-			"body": "\n var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    var now = performance.now();\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n    {\n        vwf.callMethod(childID, 'explode');\n    }); \n",
-			"parameters": []
+		"xAPISend": {
+			"body": "console.log(\"Missile Hit xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName(),\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/hit\",\n        display:\n        {\n            \"en-US\": \"hit\",\n        }\n    };\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.DisplayName + \"/\" + this.id,\n        definition:\n        {\n            name:\n            {\n                \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.DisplayName + \"/\" + this.Scene.attempt,\n            },\n            description:\n            {\n                \"en-US\": _DataManager.getInstanceData().description,\n            }\n        }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/\" + this.Scene.attempt\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/gametime/\" + this.Scene.time\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo\"\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/role/\" + this.launchedBy\n            },\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/hit_position/\" + pos,\n            },\n        ],\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
+			"parameters": [
+				"str",
+				"pos"
+			]
 		}
 	},
 	"events": {
@@ -176,6 +184,7 @@
 			},
 			"properties": {
 				"DisplayName": "ParticleSystem1",
+				"___assetServerOriginalID": "N4cfbf547",
 				"additive": true,
 				"counter": 0,
 				"depthTest": false,
@@ -218,8 +227,7 @@
 				],
 				"type": "ParticleSystem",
 				"velocityMode": "spherical",
-				"visible": true,
-				"___assetServerOriginalID": "N4cfbf547"
+				"visible": true
 			}
 		}
 	}

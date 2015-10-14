@@ -198,6 +198,7 @@
 			"continues": "/sas/assets/73e8a4a3",
 			"properties": {
 				"fired": true,
+				"launchedBy": "",
 				"transform": [
 					-0.241058230400085,
 					0.0219730380922556,
@@ -311,21 +312,21 @@
 			}
 		},
 		"transform": [
-			-0.4981963336467743,
-			-0.8635994791984558,
+			-0.09127666801214218,
+			-0.9928102493286133,
 			-0.002325864741578698,
 			0,
-			0.8629013299942017,
-			-0.4978981912136078,
+			0.992051362991333,
+			-0.09129790961742401,
 			0.038828615099191666,
 			0,
-			-0.034794799983501434,
-			0.0173894502222538,
+			-0.0388784296810627,
+			0.0012404904700815678,
 			0.9962409138679504,
 			0,
-			1.0580084323883057,
-			-2.196382999420166,
-			0.01774579845368862,
+			-16.5,
+			1.75,
+			0.5,
 			1
 		],
 		"type": "Primitive",
@@ -333,21 +334,21 @@
 		"warningsReceived": 0,
 		"width": 2.5,
 		"worldTransform": [
-			-0.4981963336467743,
-			-0.8635994791984558,
+			-0.09127666801214218,
+			-0.9928102493286133,
 			-0.002325864741578698,
 			0,
-			0.8629013299942017,
-			-0.4978981912136078,
+			0.992051362991333,
+			-0.09129790961742401,
 			0.038828615099191666,
 			0,
-			-0.034794799983501434,
-			0.0173894502222538,
+			-0.0388784296810627,
+			0.0012404904700815678,
 			0.9962409138679504,
 			0,
-			1.0580084323883057,
-			-2.196382999420166,
-			0.01774579845368862,
+			-16.5,
+			1.75,
+			0.5,
 			1
 		],
 		"smokeDef": {
@@ -374,7 +375,7 @@
 				]
 			}
 		},
-		"___sourceAssetTimestamp": "Thu Oct 08 2015 14:31:41 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 13 2015 17:27:18 GMT-0400 (Eastern Daylight Time)",
 		"tickCount": 0,
 		"radarTracked": true
 	},
@@ -531,12 +532,6 @@
 			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    this.xAPISend(\"Fired Missile\");\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
 		},
-		"hit": {
-			"body": "var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n        this.health -= force;\n    else\n        this.health -= 101;\n\n    if (this.health < 0)\n    {\n        var def = this.explosionDef;\n        var pos = this.transformAPI.getWorldPosition();\n        def.properties.transform[12] = pos[0];\n        def.properties.transform[13] = pos[1];\n        def.properties.transform[14] = pos[2];\n        def.properties.fuse = 1;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);\n        // this.parent.children.delete(this);\n    }",
-			"parameters": [
-				"args"
-			]
-		},
 		"tick": {
 			"body": "var my_position = this.transformAPI.getPosition();    \n    this.tickCount++;\n\n    if (this.tickCount == 4 || this.tickCount == 8)\n    {\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward], 50);\n    }\n\n    if (this.tickCount > 10)\n    {\n        var leader_projection = this.transformAPI.localToGlobal(-150, 0, 0);\n\n        this.broadcast(\"facLeaderInput\", [leader_projection], 500);\n        this.tickCount = 0;\n    }\n\n    var waterDepth = 20;\n    var hullThick = 2.2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 5;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    if (this._keysDown.indexOf(\"W\") !== -1)\n    {\n        this.consumeFuel();\n        if (this.currentState.name === this.states[\"out_of_gas\"].name)\n        {\n            console.log(\"(W) out of gas!\");\n            this.activateState(\"out_of_gas\");\n        }\n        else\n        {\n            var force = this.transformAPI.localToGlobal(-10 * mass, 0, 0);\n            this.physicsAPI.addForceAtCenter(force[0], force[1], force[2]);\n            this.playMotorRunning();\n            switch (this.FACMovementDirection())\n            {\n                case \"approaching\":\n                    this.activateState(\"approaching\");\n                    break;\n                case \"idle\":\n                    this.activateState(\"idle\");\n                    break;\n                case \"moving_away\":\n                    this.activateState(\"moving_away\");\n                    break;\n            }\n        }\n    }\n    if (this._keysDown.indexOf(\"S\") !== -1)\n    {\n        this.consumeFuel();\n        if (this.currentState.name === this.states[\"out_of_gas\"].name)\n        {\n            console.log(\"(S) out of gas!\");\n            this.activateState(\"out_of_gas\");\n        }\n        else\n        {\n            var force = this.transformAPI.localToGlobal(10 * mass, 0, 0);\n            this.physicsAPI.addForceAtCenter(force[0], force[1], force[2]);\n            this.playMotorRunning();\n            switch (this.FACMovementDirection())\n            {\n                case \"approaching\":\n                    this.activateState(\"approaching\");\n                    break;\n                case \"idle\":\n                    this.activateState(\"idle\");\n                    break;\n                case \"moving_away\":\n                    this.activateState(\"moving_away\");\n                    break;\n            }\n        }\n    }\n    var vel = this.physicsAPI.getLinearVelocity();\n    vel = this.transformAPI.globalToLocalRotation(vel);\n    var speedTorqueFactor = (Math.abs(vel[0]) / 3);\n    if (this._keysDown.indexOf(\"A\") !== -1)\n    {\n\n        this.physicsAPI.addTorque(0, 0, speedTorqueFactor * mass * 3);\n        var force = this.transformAPI.localToGlobal(speedTorqueFactor * mass, 0, 0);\n        this.physicsAPI.addTorque(force);\n    }\n    if (this._keysDown.indexOf(\"D\") !== -1)\n    {\n        this.physicsAPI.addTorque(0, 0, -speedTorqueFactor * mass * 3);\n        var force = this.transformAPI.localToGlobal(-speedTorqueFactor * mass, 0, 0);\n        this.physicsAPI.addTorque(force);\n    }\n    if (this._keysDown.indexOf(\" \") !== -1)\n    {\n        if (this.rockets > 0)\n        {\n            this.currentState = this.states[\"fire_rocket\"];\n        }\n        else\n        {\n            this.currentState = this.states[\"moving_away\"];\n        }\n    }",
 			"parameters": []
@@ -544,6 +539,12 @@
 		"verifyCamera": {
 			"body": "var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.controllingCamera) return false;\n    return true;",
 			"parameters": []
+		},
+		"hit": {
+			"body": "if (this.currentState == this.states[\"defeated\"]) return;\n    \n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n        this.health -= force;\n    else\n        this.health -= 101;\n\n    if (this.health < 0)\n    {\n        var def = this.explosionDef;\n        var pos = this.transformAPI.getWorldPosition();\n        def.properties.transform[12] = pos[0];\n        def.properties.transform[13] = pos[1];\n        def.properties.transform[14] = pos[2];\n        def.properties.fuse = 1;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);\n        this.currentState = this.states[\"defeated\"];\n        // this.parent.children.delete(this);\n    }",
+			"parameters": [
+				"args"
+			]
 		}
 	},
 	"children": {
@@ -650,21 +651,21 @@
 				"visible": false,
 				"width": 1.36,
 				"worldTransform": [
-					-0.1724608689546585,
-					-0.18004721403121948,
+					-0.08133497089147568,
+					-0.2356785386800766,
 					0.9653215408325195,
 					0,
-					-0.8623870015144348,
-					0.4965091347694397,
+					-0.991003155708313,
+					0.0902513638138771,
 					-0.06146547570824623,
 					0,
-					-0.46963274478912354,
-					-0.8456173539161682,
+					-0.07285391539335251,
+					-0.9645288586616516,
 					-0.24162431061267853,
 					0,
-					0.5076208114624023,
-					-3.0338990688323975,
-					1.5097806453704834,
+					-16.649593353271484,
+					0.7590501308441162,
+					1.9920347929000854,
 					1
 				]
 			},
@@ -813,21 +814,21 @@
 					}
 				},
 				"worldTransform": [
-					-0.4981963336467743,
-					-0.8635994791984558,
+					-0.09127666801214218,
+					-0.9928102493286133,
 					-0.002325864741578698,
 					0,
-					0.8629013299942017,
-					-0.4978981912136078,
+					0.992051362991333,
+					-0.09129790961742401,
 					0.038828615099191666,
 					0,
-					-0.03479430079460144,
-					0.017390314489603043,
+					-0.03887833654880524,
+					0.0012414832599461079,
 					0.9962409138679504,
 					0,
-					-0.4104844629764557,
-					-4.800223350524902,
-					-0.7364124655723572,
+					-16.744670867919922,
+					-1.2293610572814941,
+					-0.25415828824043274,
 					1
 				]
 			}

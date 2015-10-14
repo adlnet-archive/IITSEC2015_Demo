@@ -81,19 +81,27 @@
 			0,
 			1,
 			0,
-			0,
-			0,
-			0,
+			-3.41771212234567,
+			-0.840254343394557,
+			0.017745798826218,
 			1
 		],
 		"type": "ParticleSystem",
-		"___sourceAssetTimestamp": "Tue Oct 06 2015 15:42:46 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 13 2015 11:41:39 GMT-0400 (Eastern Daylight Time)",
 		"sourceAssetId": "ee09777b",
-		"target": ""
+		"target": "",
+		"targetNode": "box2-vwf-N87298fe5",
+		"EditorData": {
+			"targetNode": {
+				"displayname": "Target node",
+				"property": "targetNode",
+				"type": "nodeid"
+			}
+		}
 	},
 	"methods": {
 		"tick": {
-			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    try\n    {\n        //OLd code\n        // this.emitterPosition = this.Scene.children_by_name.FAC_MASTER.children_by_name.enginePos.transformAPI.getWorldPosition();\n        // findviewnode(this.id).children[0].children[0].frustumCulled = false\n\n        //New code\n        // var fac_master_enginePos = this.Scene.findNodeByID(\"http-vwf-example-com-node3-vwf-N4c4d951\");\n        this.target = this.Scene.findNodeByID(\"http-vwf-example-com-node3-vwf-N4c4d951\");\n\n        if (!this.target) return;\n\n        var fac_master_enginePos_pos = this.target.transformAPI.localToGlobal(0, 0, 0);\n\n        this.emitterPosition = fac_master_enginePos_pos;\n\n    }\n    catch (e)\n    {}",
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    try\n    {\n        //OLd code\n        // this.emitterPosition = this.Scene.children_by_name.FAC_MASTER.children_by_name.enginePos.transformAPI.getWorldPosition();\n        // findviewnode(this.id).children[0].children[0].frustumCulled = false\n\n        //New code\n        // var fac_master_enginePos = this.Scene.findNodeByID(\"http-vwf-example-com-node3-vwf-N4c4d951\");\n        var target = this.Scene.findNodeByID(this.targetNode || \"\");\n\n        if (!target) return;\n\n        var fac_master_enginePos_pos = target.transformAPI.localToGlobal(0, 0, 0);\n\n        this.emitterPosition = fac_master_enginePos_pos;\n\n    }\n    catch (e)\n    {\n        console.log(e);\n    }",
 			"parameters": []
 		}
 	}
