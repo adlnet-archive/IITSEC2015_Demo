@@ -1,0 +1,44 @@
+{
+	"extends": "http://vwf.example.com/node3.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.4859701544046402,
+		"s1": 0.6074203411117196,
+		"s2": 0.7958496401552111,
+		"c": 1
+	},
+	"properties": {
+		"100": "",
+		"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			-18,
+			62.25,
+			0.75,
+			1
+		],
+		"owner": "ADLteam",
+		"DisplayName": "Target_Beacon",
+		"counter": "",
+		"force": "A",
+		"range": 100,
+		"": null
+	},
+	"methods": {
+		"tick": {
+			"body": "this.counter++;\n    if(this.counter == 10)\n    {\n        this.counter = 0;\n        this.broadcast(\"target_info\",[this.force,this.transformAPI.getWorldPosition(),this.id],this.range);\n    }",
+			"parameters": []
+		}
+	}
+}

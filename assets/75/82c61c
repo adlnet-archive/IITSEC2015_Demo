@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.9713244056329131,
-		"s1": 0.9675256609916687,
-		"s2": 0.15322676883079112,
-		"c": 1282552
+		"s0": 0.46952064568176866,
+		"s1": 0.5699375921394676,
+		"s2": 0.3042706483975053,
+		"c": 1927927
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -100,19 +100,19 @@
 		"transform": [
 			0.9305679798126221,
 			0.3658199906349182,
-			0.014796221628785133,
+			0.014796044677495956,
 			0,
 			-0.36589545011520386,
 			0.9306521415710449,
-			0.002665121341124177,
+			0.002665045903995633,
 			0,
-			-0.012795181013643742,
-			-0.007893946953117847,
+			-0.012795044109225273,
+			-0.007893811911344528,
 			0.9998869895935059,
 			0,
-			-1.499999761581421,
-			11.25,
-			10.50000286102295,
+			-31.25,
+			-69.25,
+			67,
 			1
 		],
 		"type": "Primitive",
@@ -120,7 +120,7 @@
 		"width": 8.49,
 		"keysDown": [],
 		"___physics_damping": 0.7,
-		"___sourceAssetTimestamp": "Tue Oct 13 2015 17:34:53 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Wed Oct 14 2015 16:23:09 GMT-0400 (Eastern Daylight Time)",
 		"sourceAssetId": "7582c61c",
 		"elevation": 21.1810722351074,
 		"missileDef": {
@@ -171,7 +171,13 @@
 				]
 			}
 		},
-		"Missiles": 16
+		"Missiles": 16,
+		"isHit": false,
+		"worldPosition": [
+			-31.25,
+			-69.25,
+			67
+		]
 	},
 	"methods": {
 		"ready": {
@@ -191,10 +197,6 @@
 				"char"
 			]
 		},
-		"tick": {
-			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    this.elevation = this.transformAPI.getPosition()[2];\n    var waterDepth = this.elevation;\n    var hullThick = 0;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 10;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    this.counter += .05;\n    var mass = this.physicsAPI.getMass() * 10;\n    var amt1 = Math.cos(this.counter) / 10;\n    var amt2 = Math.cos(this.counter / 3) / 10;\n    var amt3 = Math.cos(this.counter / 1) / 3;\n    this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);\n\n    var topKey = this.keysDown[this.keysDown.length - 1];\n    if (topKey)\n    {\n\n        var thispos = this.transformAPI.getPosition();\n        if (this.keyIsDown('W'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('S'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('Q'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, -mass)\n        }\n        if (this.keyIsDown('E'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, mass)\n        }\n        if (this.keyIsDown('A'))\n        {\n            this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n        if (this.keyIsDown('D'))\n        {\n            this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n\n    }\n    var t = this.physicsAPI.getLinearVelocity();\n    t = this.transformAPI.globalToLocalRotation(t)\n    var z = t[2];\n    t[2] = 0;\n    var len = MATH.lengthVec3(t) * Math.sign(t[1]);\n    t[0] = 0;\n    t[1] = len;\n    t[2] = z;\n    t = this.transformAPI.localToGlobalRotation(t);\n    this.physicsAPI.setLinearVelocity(t);",
-			"parameters": []
-		},
 		"_ku": {
 			"body": "if (this.keysDown.indexOf(e.key.key) != -1)\n    {\n        this.keysDown.splice(this.keysDown.indexOf(e.key.key), 1);\n    }\n \n    if (e.key.key == 'space')\n    {\n        this.launchMissile();\n    }",
 			"parameters": [
@@ -210,8 +212,12 @@
 			"body": "if(this.Missiles ==0) return;\n    this.Missiles--;\n    var def = this.missileDef;\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        var pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    this.xAPISend(\"Fired Missile\");\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
 		},
+		"tick": {
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    \n    if (!this.isHit)\n    {\n        this.elevation =  this.transformAPI.getPosition()[2];\n    }\n    var waterDepth = this.elevation;\n    var hullThick = 0;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 10;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    if (this.isHit)\n    {\n        this.elevation = 20;\n        this.children_by_name.art.children_by_name.Mrotor.children_by_name.rotator1.Amount *= .8;\n        return;\n    }\n    this.counter += .05;\n    var mass = this.physicsAPI.getMass() * 10;\n    var amt1 = Math.cos(this.counter) / 10;\n    var amt2 = Math.cos(this.counter / 3) / 10;\n    var amt3 = Math.cos(this.counter / 1) / 3;\n    this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);\n\n    var topKey = this.keysDown[this.keysDown.length - 1];\n    if (topKey)\n    {\n\n        var thispos = this.transformAPI.getPosition();\n        if (this.keyIsDown('W'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('S'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('Q'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, -mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('E'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('A'))\n        {\n            this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n        if (this.keyIsDown('D'))\n        {\n            this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n\n    }\n    var t = this.physicsAPI.getLinearVelocity();\n    t = this.transformAPI.globalToLocalRotation(t)\n    var z = t[2];\n    t[2] = 0;\n    var len = MATH.lengthVec3(t) * Math.sign(t[1]);\n    t[0] = 0;\n    t[1] = len;\n    t[2] = z;\n    t = this.transformAPI.localToGlobalRotation(t);\n    this.physicsAPI.setLinearVelocity(t);",
+			"parameters": []
+		},
 		"hit": {
-			"body": "this.children_by_name.art.materialDef.layers[0].url = \"/sas/assets/d2f274ee\";\n    this.children_by_name.smoke.visible = true;",
+			"body": "this.children_by_name.art.materialDef.layers[0].src = \"/sas/assets/d2f274ee\";\n    this.children_by_name.smoke.visible = true;\n    this.isHit = true;\n    this.___physics_constant_force[2] = 0;\n    this.___physics_damping = .1;",
 			"parameters": []
 		}
 	},
@@ -735,19 +741,19 @@
 				"worldTransform": [
 					0.9305679798126221,
 					0.3658199906349182,
-					0.014796221628785133,
+					0.014796044677495956,
 					0,
-					0.04712795466184616,
-					-0.0796101987361908,
+					0.047127820551395416,
+					-0.07961033284664154,
 					-0.9957113862037659,
 					0,
 					-0.3630731999874115,
-					0.9272744655609131,
-					-0.09132304787635803,
+					0.9272744059562683,
+					-0.091323122382164,
 					0,
-					-2.2478551864624023,
-					8.545454978942871,
-					9.506972312927246,
+					-31.99785614013672,
+					-71.95454406738281,
+					66.00697326660156,
 					1
 				]
 			}
@@ -857,19 +863,19 @@
 				"worldTransform": [
 					0.9305679798126221,
 					0.3658199906349182,
-					0.014796221628785133,
+					0.014796044677495956,
 					0,
-					0.0401194766163826,
-					-0.06171838939189911,
+					0.040119338780641556,
+					-0.061718523502349854,
 					-0.9972870349884033,
 					0,
 					-0.3639143407344818,
 					0.9286369681358337,
-					-0.07210966944694519,
+					-0.07210974395275116,
 					0,
-					0.6419245004653931,
-					9.68039608001709,
-					9.552911758422852,
+					-29.108076095581055,
+					-70.8196029663086,
+					66.05290985107422,
 					1
 				]
 			}
@@ -971,6 +977,51 @@
 				],
 				"visible": false,
 				"___assetServerOriginalID": "N969ed85"
+			}
+		},
+		"N3710f70": {
+			"extends": "http://vwf.example.com/node3.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.48597015440464,
+				"s1": 0.60742034111172,
+				"s2": 0.795849640155211,
+				"c": 1
+			},
+			"properties": {
+				"100": "",
+				"": null,
+				"DisplayName": "Target_Beacon",
+				"counter": "",
+				"force": "A",
+				"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
+				"owner": "ADLteam",
+				"range": 100,
+				"transform": [
+					0.933438241481781,
+					-0.3583679497241974,
+					-0.016293225809931755,
+					0,
+					0.35795506834983826,
+					0.9326468706130981,
+					-0.006248128600418568,
+					0,
+					0.017452405765652657,
+					0,
+					0.9998477101325989,
+					0,
+					0,
+					0,
+					0,
+					1
+				],
+				"___assetServerOriginalID": "N3710f70"
+			},
+			"methods": {
+				"tick": {
+					"body": "this.counter++;\n    if (this.counter == 10)\n    {\n        this.counter = 0;\n        this.broadcast(\"target_info\", {force:this.force, position: this.transformAPI.getWorldPosition(), id:this.id}, this.range);\n    }",
+					"parameters": []
+				}
 			}
 		}
 	}

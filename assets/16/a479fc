@@ -32,7 +32,7 @@
       <path
          id="path4426"
          d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
-         style="fill-rule:evenodd;stroke:#41bdb6;stroke-width:1pt;stroke-opacity:1;fill:#41bdb6;fill-opacity:1"
+         style="fill-rule:evenodd;stroke:#3ea254;stroke-width:1pt;stroke-opacity:1;fill:#3ea254;fill-opacity:1"
          transform="scale(0.4) translate(7.4, 1)" />
     </marker>
     <marker
@@ -140,7 +140,7 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="245.58101"
+     inkscape:cx="19.08101"
      inkscape:cy="285.48146"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
@@ -149,7 +149,7 @@
      inkscape:showpageshadow="true"
      inkscape:window-width="1620"
      inkscape:window-height="1021"
-     inkscape:window-x="56"
+     inkscape:window-x="60"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
@@ -209,7 +209,7 @@
      rx="45.834236"
      ry="45.834232" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#41bdb6;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;opacity:0.25;marker-start:url(#DotM)"
+     style="fill:none;fill-rule:evenodd;stroke:#3ea254;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;opacity:1;marker-start:url(#DotM)"
      d="M 300,300 300,25"
      id="sweepline"
      inkscape:connector-curvature="0" />
