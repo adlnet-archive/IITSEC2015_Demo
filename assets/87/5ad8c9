@@ -44,18 +44,19 @@
 			0,
 			1,
 			0,
-			2.28600001335144,
-			4.64200019836426,
-			0,
+			4.934000015258789,
+			0.5400000214576721,
+			0.017000000923871994,
 			1
 		],
 		"visible": true,
 		"width": 319,
-		"sourceAssetId": "875ad8c9"
+		"sourceAssetId": "875ad8c9",
+		"___sourceAssetTimestamp": "Thu Oct 15 2015 12:46:34 GMT-0400 (Eastern Daylight Time)"
 	},
 	"methods": {
 		"xAPISend": {
-			"body": "console.log(\"TAO Control Main Panel xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    //Change string after actor.name field to role player is assuming\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName() + '/Tactical Action Officer',\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    //Double check to have the best verb - this can be passed in\n    // var verb = ADL.verbs.responded;\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/\" + v,\n        display:\n        {\n            \"en-US\": v,\n        }\n    };\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.parent.id,\n        definition:\n        {\n            name:\n            {\n                \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.parent.DisplayName + \"/\" + str,\n            },\n            description:\n            {\n                \"en-US\": _DataManager.getInstanceData().description,\n            }\n        }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo/dev/vw\"\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            }\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
+			"body": "console.log(\"TAO Control Main Panel xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName(),\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/\" + v,\n        display:\n        {\n            \"en-US\": v || \"default\",\n        }\n    };\n\n    //5 What happened and where\n    //name and id of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + str,\n        // definition:\n        // {\n        //     name:\n        //     {\n        //         \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.parent.DisplayName + \"/\" + str,\n        //     },\n        //     description:\n        //     {\n        //         \"en-US\": _DataManager.getInstanceData().description,\n        //     }\n        // }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/ruuid/\" + this.Scene.attempt\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/gametime/\" + this.Scene.time\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/role/TacticalActionOfficer\"\n            },\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n    stmt.timestamp = new Date().toISOString();\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
 			"parameters": [
 				"str",
 				"v"
@@ -210,7 +211,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    this.parent.parent.xAPISend(\"5 Inch Disengage\", \"disengaged\");"
+							"body": "//this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    this.parent.parent.xAPISend(\"5InchDisengage\", \"disengaged\");"
 						}
 					}
 				},
@@ -263,7 +264,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    this.parent.parent.xAPISend(\"5 Inch Engage\", \"engaged\");"
+							"body": "//this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    this.parent.parent.xAPISend(\"5InchEngage\", \"engaged\");"
 						}
 					}
 				}
@@ -519,7 +520,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    this.parent.parent.xAPISend(\"50 Cal Engage\", \"engaged\");"
+							"body": "//this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    this.parent.parent.xAPISend(\"50CalEngage\", \"engaged\");"
 						}
 					}
 				},
@@ -572,7 +573,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "// this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    this.parent.parent.xAPISend(\"50 Cal Disengage\", \"disengaged\");"
+							"body": "// this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    this.parent.parent.xAPISend(\"SCATDisengage\", \"disengaged\");"
 						}
 					}
 				}
@@ -725,7 +726,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawk Engage\", \"engaged\");"
+							"body": "//this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawkEngage\", \"engaged\");"
 						}
 					}
 				},
@@ -778,7 +779,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "// this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawk Disengage\", \"disengaged\");"
+							"body": "// this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    this.parent.parent.xAPISend(\"SeaHawkDisengage\", \"disengaged\");"
 						}
 					}
 				}
@@ -834,7 +835,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "//this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    this.parent.xAPISend(\"Issue SeaHawk Warning\", \"warned\");"
+					"body": "//this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    this.parent.xAPISend(\"IssueSeaHawkWarning\", \"warned\");"
 				}
 			}
 		},
@@ -888,7 +889,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "//this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n    this.parent.xAPISend(\"Issue Radio Warning\", \"warned\");"
+					"body": "//this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n    this.parent.xAPISend(\"IssueSCAT/OODRadioWarning\", \"warned\");"
 				}
 			}
 		}
