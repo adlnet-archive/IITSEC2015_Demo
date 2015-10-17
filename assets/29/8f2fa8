@@ -36,9 +36,9 @@
 			0,
 			1,
 			0,
-			0.14756691887254433,
-			0.2739348136762856,
-			0.017745798826217518,
+			23.01206774543583,
+			-13.513038998514745,
+			0.18174253463744705,
 			1
 		],
 		"owner": "ADLteam",
@@ -70,7 +70,8 @@
 			"Small Craft Action Team": "SandboxCamera-vwf-N6b282caa",
 			"Tactical Action Officer": "SandboxCamera-vwf-N6b282caa"
 		},
-		"___sourceAssetTimestamp": "Thu Oct 15 2015 15:19:56 GMT-0400 (Eastern Daylight Time)"
+		"___sourceAssetTimestamp": "Fri Oct 16 2015 09:46:12 GMT-0400 (Eastern Daylight Time)",
+		"simulationStarted": false
 	},
 	"methods": {
 		"selectRole": {
@@ -89,8 +90,12 @@
 				"str"
 			]
 		},
+		"getSender": {
+			"body": "// var children = this.Scene.children;\n\n    // for (var i = 0; i < children.length; i++)\n    // {\n    //     var child = children[i];\n    //     if (child && child.isCameraToggler === true) return child;\n    // }\n    \n    // if (this.Scene.children_by_name.xAPISender)\n\n    return this.Scene.children_by_name.xAPISender;",
+			"parameters": []
+		},
 		"startSimulation": {
-			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    this.xAPISend(choice.replace(/\\s/g, ''));",
+			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    var sender = this.getSender();\n    if (!this.simulationStarted && sender)\n    {\n        this.simulationStarted = true;\n        sender.xAPISend(\"started\", \"object\", \"role\", null);\n    }\n\n    // this.xAPISend(choice.replace(/\\s/g, ''));\n    if (sender)\n    {\n        sender.xAPISend(\"selected\", choice.replace(/\\s/g, ''), choice.replace(/\\s/g, ''), null)\n    }",
 			"parameters": []
 		}
 	},

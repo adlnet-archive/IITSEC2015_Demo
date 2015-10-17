@@ -1,0 +1,54 @@
+{
+	"extends": "http://vwf.example.com/node3.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.2935250839218497,
+		"s1": 0.8833305018488318,
+		"s2": 0.4025755792390555,
+		"c": 1
+	},
+	"properties": {
+		"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			19.212276458740234,
+			17.713184356689453,
+			0.16350868344306946,
+			1
+		],
+		"owner": "ADLteam",
+		"DisplayName": "xAPISender",
+		"baseURL": "https://sandbox.adlnet.gov/",
+		"EditorData": {
+			"baseURL": {
+				"property": "baseURL",
+				"type": "text",
+				"displayname": "Base URL"
+			}
+		},
+		"___sourceAssetTimestamp": "Fri Oct 16 2015 17:40:12 GMT-0400 (Eastern Daylight Time)",
+		"sourceAssetId": "6acb0557"
+	},
+	"methods": {
+		"xAPISend": {
+			"body": "//xAPISend in the xAPISender entity\n    //Sends an xAPI sttement for tracking in an lrs\n    //Accepts:\n    //v - verb / action\n    //obj - object\n    //role - role assumed in the simulation\n    //context - items to be appended into contextActviities for greater sortability\n    //Returns:\n    //well, contructs and sends an xapi statement to an lrs\n\n    console.log(role + \" xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n\n    //3 - Who is playing\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName(),\n            homePage: this.baseURL, //\"https://sandbox.adlnet.gov/\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    var verb = {\n        id: this.baseURL + \"verbs/\" + v,\n        display:\n        {\n            \"en-US\": v || \"default\",\n        }\n    };\n\n    //5 What happened and where\n    var object = {\n        id: window.location.toString() + (obj || \"object\"),\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": this.baseURL + \"ruuid/\" + this.Scene.attempt\n            },\n        ],\n        \"category\": [\n            {\n                \"id\": this.baseURL + \"event/2015/iitsecdemo\"\n            },\n            {\n                \"id\": this.baseURL + \"role/\" + (role || \"default\")\n            },\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: this.baseURL + \"world\"\n                }\n            }\n        ],\n    };\n\n    //6.5 - Add any additional keys to Context Activies\n    // if (\n    // for (var a in context)\n    // {\n    //     if (context[a] === \"\n    //     contextActivities.c\n    // }\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description, this.Scene.attempt));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    // stmt.context.extensions = {\n    //     \"id\": this.baseURL + \"context/extensions/gametime/\" // + this.Scene.time //(this.Scene.time.toISOString || \"default\")\n    // }\n    stmt.result = result;\n    stmt.timestamp = new Date().toISOString();\n\n    this.Scene.___xAPI.sendStatement(null, stmt);",
+			"parameters": [
+				"v",
+				"obj",
+				"role",
+				"context"
+			]
+		}
+	}
+}
