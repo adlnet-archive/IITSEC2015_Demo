@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.911282535642385,
-		"s1": 0.0422953860834241,
-		"s2": 0.3721477023791522,
-		"c": 1035075
+		"s0": 0.0918094997759908,
+		"s1": 0.679495939533808,
+		"s2": 0.64807722507976,
+		"c": 778398
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -23,7 +23,14 @@
 			-0.0005916752852499485
 		],
 		"DisplayName": "SeaHawk",
-		"Missiles": 16,
+		"EditorData": {
+			"_controllingCamera": {
+				"displayname": "Controlling Camera",
+				"property": "controllingCamera",
+				"type": "nodeid"
+			}
+		},
+		"Missiles": 13,
 		"___physics_angular_velocity": [
 			0,
 			0,
@@ -41,8 +48,9 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Thu Oct 15 2015 15:26:37 GMT-0400 (EDT)",
+		"___sourceAssetTimestamp": "Mon Oct 19 2015 14:01:31 GMT-0400 (EDT)",
 		"_length": 2.98,
+		"controllingCamera": "null",
 		"counter": 2062.19999999994,
 		"elevation": 21.1810722351074,
 		"height": 2.53,
@@ -107,21 +115,21 @@
 			"properties": {
 				"fired": true,
 				"transform": [
-					0.929083585739136,
-					0.369514733552933,
-					0.0162031427025795,
+					0.931571364402771,
+					0.357651203870773,
+					0.016260638833046,
 					0,
-					0.0506180226802826,
-					-0.0836308673024178,
-					-0.995210409164429,
+					0.0441699139773846,
+					-0.069739393889904,
+					-0.996581375598907,
 					0,
-					-0.366389811038971,
-					0.925453782081604,
-					-0.096404179930687,
+					-0.355647921562195,
+					0.930035889148712,
+					-0.0809950232505798,
 					0,
-					1.08404541015625,
-					-15.5695552825928,
-					20.0420570373535,
+					5.66416072845459,
+					-2.40864944458008,
+					-0.914967656135559,
 					1
 				]
 			}
@@ -130,7 +138,7 @@
 		"smokeDef": {
 			"continues": "/sas/assets/aeb3d1dd",
 			"properties": {
-				"targetEntity": "-sas-assets-73e8a4a3-Nc5d6b843",
+				"targetEntity": "-sas-assets-73e8a4a3-Neb52bc42",
 				"transform": [
 					1,
 					0,
@@ -155,40 +163,40 @@
 		"transform": [
 			0.931571364402771,
 			0.3576512038707733,
-			0.01626063883304596,
+			0.016260351985692978,
 			0,
 			-0.35795506834983826,
 			0.9326468706130981,
-			-0.006248128600418568,
+			-0.006248871795833111,
 			0,
 			-0.017452405765652657,
-			0,
+			7.96783581336058e-7,
 			0.9998477101325989,
 			0,
-			7.125999927520752,
-			4.539000034332275,
-			4,
+			7.25,
+			37.25,
+			44.25,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 8.49,
 		"worldPosition": [
-			7.125999927520752,
-			4.539000034332275,
-			4
+			7.25,
+			37.25,
+			44.25
 		]
 	},
 	"methods": {
 		"_kd": {
-			"body": "if (this.keysDown.indexOf(e.key.key) == -1)\n    {\n        this.keysDown.push(e.key.key);\n    }",
+			"body": "if (!this.verifyCamera()) return;\n    if (this.keysDown.indexOf(e.key.key) == -1)\n    {\n        this.keysDown.push(e.key.key);\n    }",
 			"parameters": [
 				"e",
 				"d"
 			]
 		},
 		"_ku": {
-			"body": "if (this.keysDown.indexOf(e.key.key) != -1)\n    {\n        this.keysDown.splice(this.keysDown.indexOf(e.key.key), 1);\n    }\n \n    if (e.key.key == 'space')\n    {\n        this.launchMissile();\n    }",
+			"body": "if (!this.verifyCamera()) return;\n    if (this.keysDown.indexOf(e.key.key) != -1)\n    {\n        this.keysDown.splice(this.keysDown.indexOf(e.key.key), 1);\n    }\n\n    if (e.key.key == 'space')\n    {\n        this.launchMissile();\n    }",
 			"parameters": [
 				"e",
 				"d"
@@ -204,123 +212,24 @@
 				"char"
 			]
 		},
+		"launchMissile": {
+			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = this.missileDef;\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    \n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"fired\", \"SeahawkMissile\", this.DisplayName, null);\n    }\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"parameters": []
+		},
 		"ready": {
 			"body": "this.Scene.unbind(\"keyDown\",this.__kd);\n            this.Scene.unbind(\"keyUp\",this.__ku);\n            \n            var self = this;\n            this.__ku = function(e,d)\n            {\n                self._ku(e,d);\n            }\n            \n            this.__kd = function(e,d)\n            {\n                self._kd(e,d);\n            }\n            \n            this.Scene.bind(\"keyDown\",this.__kd);\n            this.Scene.bind(\"keyUp\",this.__ku);",
 			"parameters": []
 		},
 		"tick": {
-			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    \n    if (!this.isHit)\n    {\n        this.elevation =  this.transformAPI.getPosition()[2];\n    }\n    var waterDepth = this.elevation;\n    var hullThick = 0;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 10;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    if (this.isHit)\n    {\n        this.elevation = 20;\n        this.children_by_name.art.children_by_name.Mrotor.children_by_name.rotator1.Amount *= .8;\n        return;\n    }\n    this.counter += .05;\n    var mass = this.physicsAPI.getMass() * 10;\n    var amt1 = Math.cos(this.counter) / 10;\n    var amt2 = Math.cos(this.counter / 3) / 10;\n    var amt3 = Math.cos(this.counter / 1) / 3;\n    this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);\n\n    var topKey = this.keysDown[this.keysDown.length - 1];\n    if (topKey)\n    {\n\n        var thispos = this.transformAPI.getPosition();\n        if (this.keyIsDown('W'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('S'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('Q'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, -mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('E'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('A'))\n        {\n            this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n        if (this.keyIsDown('D'))\n        {\n            this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n\n    }\n    var t = this.physicsAPI.getLinearVelocity();\n    t = this.transformAPI.globalToLocalRotation(t)\n    var z = t[2];\n    t[2] = 0;\n    var len = MATH.lengthVec3(t) * Math.sign(t[1]);\n    t[0] = 0;\n    t[1] = len;\n    t[2] = z;\n    t = this.transformAPI.localToGlobalRotation(t);\n    this.physicsAPI.setLinearVelocity(t);",
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (!this.isHit)\n    {\n        this.elevation = this.transformAPI.getPosition()[2];\n    }\n    var waterDepth = this.elevation;\n    var hullThick = 0;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 10;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    if (this.isHit)\n    {\n        this.elevation = 20;\n        this.children_by_name.art.children_by_name.Mrotor.children_by_name.rotator1.Amount *= .8;\n        return;\n    }\n    this.counter += .05;\n    var mass = this.physicsAPI.getMass() * 10;\n    var amt1 = Math.cos(this.counter) / 10;\n    var amt2 = Math.cos(this.counter / 3) / 10;\n    var amt3 = Math.cos(this.counter / 1) / 3;\n    this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);\n\n    var topKey = this.keysDown[this.keysDown.length - 1];\n    if (topKey)\n    {\n\n        var thispos = this.transformAPI.getPosition();\n        if (this.keyIsDown('W'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('S'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('Q'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, -mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('E'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('A'))\n        {\n            this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n        if (this.keyIsDown('D'))\n        {\n            this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n\n    }\n    var t = this.physicsAPI.getLinearVelocity();\n    t = this.transformAPI.globalToLocalRotation(t)\n    var z = t[2];\n    t[2] = 0;\n    var len = MATH.lengthVec3(t) * Math.sign(t[1]);\n    t[0] = 0;\n    t[1] = len;\n    t[2] = z;\n    t = this.transformAPI.localToGlobalRotation(t);\n    this.physicsAPI.setLinearVelocity(t);",
 			"parameters": []
 		},
-		"xAPISend": {
-			"body": "console.log(\"got here\");",
-			"parameters": []
-		},
-		"launchMissile": {
-			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = this.missileDef;\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    this.xAPISend(\"Fired Missile\");\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+		"verifyCamera": {
+			"body": "var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.controllingCamera) return false;\n    return true;",
 			"parameters": []
 		}
 	},
 	"children": {
-		"N969ed85": {
-			"extends": "SandboxParticleSystem.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.380000642035156,
-				"s1": 0.368383316323161,
-				"s2": 0.00437599862925708,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "smoke",
-				"___assetServerOriginalID": "N969ed85",
-				"alphaTest": 0,
-				"colorRange": [
-					0,
-					0,
-					0,
-					0
-				],
-				"depthTest": false,
-				"emitterPosition": [
-					0,
-					0,
-					0
-				],
-				"emitterSize": [
-					1,
-					1,
-					1
-				],
-				"emitterType": "sphere",
-				"endColor": [
-					0,
-					0,
-					0,
-					0
-				],
-				"endSize": 0.99,
-				"image": "../vwfDataManager.svc/texture?UID=smoke.png",
-				"maxAcceleration": [
-					0,
-					0,
-					-1
-				],
-				"maxLifeTime": 1,
-				"maxOrientation": 13.5,
-				"maxRate": 0.75,
-				"maxVelocity": [
-					1,
-					1,
-					5
-				],
-				"minAcceleration": [
-					0,
-					0,
-					-1
-				],
-				"minLifeTime": 1,
-				"minOrientation": -18.4,
-				"minSpin": 20,
-				"minVelocity": [
-					-1,
-					-1,
-					3
-				],
-				"owner": "ADLteam",
-				"particleCount": 200,
-				"sizeRange": 0.02,
-				"solver": "AnalyticShader",
-				"startColor": [
-					0.4,
-					0.4,
-					0.4,
-					1
-				],
-				"startSize": 0.94,
-				"transform": [
-					0.930568039417267,
-					-0.365895479917526,
-					-0.0127951297909021,
-					0,
-					0.365820020437241,
-					0.93065220117569,
-					-0.00789403822273016,
-					0,
-					0.0147962002083659,
-					0.0026652398519218,
-					0.999886989593506,
-					0,
-					-0.217235177755356,
-					-1.25345528125763,
-					0.506611049175262,
-					1
-				],
-				"type": "ParticleSystem",
-				"velocityMode": "cartesian",
-				"visible": false
-			}
-		},
 		"N9db3f32f": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
@@ -426,19 +335,19 @@
 				"worldTransform": [
 					0.931571364402771,
 					0.3576512038707733,
-					0.01626063883304596,
+					0.016260351985692978,
 					0,
 					0.04416991397738457,
-					-0.06973939388990402,
-					-0.9965813755989075,
+					-0.0697401911020279,
+					-0.9965813159942627,
 					0,
 					-0.3556479215621948,
-					0.9300358891487122,
-					-0.08099502325057983,
+					0.9300358295440674,
+					-0.08099576830863953,
 					0,
-					9.255971908569336,
-					2.9458425045013428,
-					3.0750324726104736,
+					9.379972457885742,
+					35.65684127807617,
+					43.325035095214844,
 					1
 				]
 			}
@@ -552,6 +461,59 @@
 				}
 			},
 			"children": {
+				"N6800ef37": {
+					"extends": "asset.vwf",
+					"source": "RotorBack",
+					"type": "link_existing/threejs",
+					"sequence": 0,
+					"random": {
+						"s0": 0.45686529786326,
+						"s1": 0.470268527045846,
+						"s2": 0.272260453319177,
+						"c": 1
+					},
+					"properties": {
+						"___physics_activation_state": 1,
+						"___physics_deactivation_time": 0,
+						"___physics_velocity_linear": [
+							0,
+							0,
+							0
+						],
+						"___physics_velocity_angular": [
+							0,
+							0,
+							0
+						],
+						"DisplayName": "RotorBack",
+						"___assetServerOriginalID": "N6800ef37",
+						"transform": [
+							0.00800000037997961,
+							0,
+							0,
+							0,
+							0,
+							0.007000000216066837,
+							0,
+							0,
+							0,
+							0,
+							0.008999999612569809,
+							0,
+							-0.210999995470047,
+							7.117000102996826,
+							2.552000045776367,
+							1
+						],
+						"type": "3DR Object"
+					},
+					"methods": {
+						"tick": {
+							"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    //var parent_y = this.parent.transformAPI.localToGlobalRotation([1, 0, 0]);\n    //parent_y = this.transformAPI.globalToLocalRotation(parent_y);\n    //this.transformAPI.rotateAroundAxis(80, parent_y, this.transformAPI.COORDINATES.LOCAL);\n    this.transformAPI.rotateAroundAxis(80, [1, 0, 0], this.transformAPI.COORDINATES.LOCAL);",
+							"parameters": []
+						}
+					}
+				},
 				"Nf03e7073": {
 					"extends": "asset.vwf",
 					"source": "Mrotor",
@@ -668,6 +630,91 @@
 						}
 					}
 				},
+				"N5828cc": {
+					"extends": "asset.vwf",
+					"source": "UH_60_Glass1",
+					"type": "link_existing/threejs",
+					"sequence": 0,
+					"random": {
+						"s0": 0.270047802012414,
+						"s1": 0.809990369481966,
+						"s2": 0.618073079036549,
+						"c": 1
+					},
+					"properties": {
+						"___physics_activation_state": 1,
+						"___physics_deactivation_time": 0,
+						"___physics_velocity_linear": [
+							0,
+							0,
+							0
+						],
+						"___physics_velocity_angular": [
+							0,
+							0,
+							0
+						],
+						"DisplayName": "UH_60_Glass1",
+						"___assetServerOriginalID": "N5828cc",
+						"materialDef": {
+							"alpha": 0.24025974025974,
+							"ambient": {
+								"b": 0.5,
+								"g": 0.5,
+								"r": 0.5
+							},
+							"blendMode": 1,
+							"color": {
+								"a": 0.24025974025974,
+								"b": 0.5,
+								"g": 0.5,
+								"r": 0.5
+							},
+							"depthtest": true,
+							"depthwrite": true,
+							"emit": {
+								"b": 0,
+								"g": 0,
+								"r": 0
+							},
+							"fog": true,
+							"layers": [],
+							"metal": false,
+							"reflect": 0.6,
+							"shading": true,
+							"shininess": 0.0020022,
+							"side": 0,
+							"specularColor": {
+								"b": 0.898,
+								"g": 0.898,
+								"r": 0.898
+							},
+							"specularLevel": 1,
+							"type": "phong",
+							"vertexColors": false,
+							"wireframe": false
+						},
+						"transform": [
+							0.009999999776482582,
+							0,
+							0,
+							0,
+							0,
+							0.009999999776482582,
+							0,
+							0,
+							0,
+							0,
+							0.009999999776482582,
+							0,
+							0,
+							0,
+							0,
+							1
+						],
+						"type": "3DR Object"
+					}
+				},
 				"N912c6b53": {
 					"extends": "SandboxCamera.vwf",
 					"source": "vwf/model/threejs/camera.js",
@@ -774,7 +821,7 @@
 							},
 							"methods": {
 								"tick": {
-									"body": "var origin = this.parent.transformAPI.getWorldPosition();\n    var dir = this.parent.transformAPI.localToGlobalRotation([0, 0, 1]);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.parent.parent.id), findviewnode(this.parent.parent.parent.id)]\n    });\n\n    console.log(hit);\n    if (hit)\n        this.border_color = [1, 0, 0];\n    else\n        this.border_color = [0, 1, 0];",
+									"body": "var origin = this.parent.transformAPI.getWorldPosition();\n    var dir = this.parent.transformAPI.localToGlobalRotation([0, 1, 0]);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.parent.parent.id), findviewnode(this.parent.parent.parent.id)]\n    });\n    console.log(dir);\n    if (hit && hit.node)\n    {\n        console.log(hit);\n        this.border_color = [1, 0, 0];\n    }\n    else\n        this.border_color = [0, 1, 0];",
 									"parameters": []
 								}
 							},
@@ -836,144 +883,6 @@
 								}
 							}
 						}
-					}
-				},
-				"N6800ef37": {
-					"extends": "asset.vwf",
-					"source": "RotorBack",
-					"type": "link_existing/threejs",
-					"sequence": 0,
-					"random": {
-						"s0": 0.45686529786326,
-						"s1": 0.470268527045846,
-						"s2": 0.272260453319177,
-						"c": 1
-					},
-					"properties": {
-						"___physics_activation_state": 1,
-						"___physics_deactivation_time": 0,
-						"___physics_velocity_linear": [
-							0,
-							0,
-							0
-						],
-						"___physics_velocity_angular": [
-							0,
-							0,
-							0
-						],
-						"DisplayName": "RotorBack",
-						"___assetServerOriginalID": "N6800ef37",
-						"transform": [
-							0.0062094503082334995,
-							-0.007423106115311384,
-							-0.002517951186746359,
-							0,
-							5.408616332580607e-10,
-							-0.0032122775446623564,
-							0.009470018558204174,
-							0,
-							-0.0009450679644942284,
-							-0.009427645243704319,
-							-0.0031979079358279705,
-							0,
-							-0.21033203601837158,
-							7.118720054626465,
-							2.552799940109253,
-							1
-						],
-						"type": "3DR Object"
-					},
-					"methods": {
-						"tick": {
-							"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    var parent_y = this.parent.transformAPI.localToGlobalRotation([1, 0, 0]);\n    parent_y = this.transformAPI.globalToLocalRotation(parent_y);\n    this.transformAPI.rotateAroundAxis(80, parent_y, this.transformAPI.COORDINATES.LOCAL);",
-							"parameters": []
-						}
-					}
-				},
-				"N5828cc": {
-					"extends": "asset.vwf",
-					"source": "UH_60_Glass1",
-					"type": "link_existing/threejs",
-					"sequence": 0,
-					"random": {
-						"s0": 0.270047802012414,
-						"s1": 0.809990369481966,
-						"s2": 0.618073079036549,
-						"c": 1
-					},
-					"properties": {
-						"___physics_activation_state": 1,
-						"___physics_deactivation_time": 0,
-						"___physics_velocity_linear": [
-							0,
-							0,
-							0
-						],
-						"___physics_velocity_angular": [
-							0,
-							0,
-							0
-						],
-						"DisplayName": "UH_60_Glass1",
-						"___assetServerOriginalID": "N5828cc",
-						"materialDef": {
-							"alpha": 0.24025974025974,
-							"ambient": {
-								"b": 0.5,
-								"g": 0.5,
-								"r": 0.5
-							},
-							"blendMode": 1,
-							"color": {
-								"a": 0.24025974025974,
-								"b": 0.5,
-								"g": 0.5,
-								"r": 0.5
-							},
-							"depthtest": true,
-							"depthwrite": true,
-							"emit": {
-								"b": 0,
-								"g": 0,
-								"r": 0
-							},
-							"fog": true,
-							"layers": [],
-							"metal": false,
-							"reflect": 0.6,
-							"shading": true,
-							"shininess": 0.0020022,
-							"side": 0,
-							"specularColor": {
-								"b": 0.898,
-								"g": 0.898,
-								"r": 0.898
-							},
-							"specularLevel": 1,
-							"type": "phong",
-							"vertexColors": false,
-							"wireframe": false
-						},
-						"transform": [
-							0.009999999776482582,
-							0,
-							0,
-							0,
-							0,
-							0.009999999776482582,
-							0,
-							0,
-							0,
-							0,
-							0.009999999776482582,
-							0,
-							0,
-							0,
-							0,
-							1
-						],
-						"type": "3DR Object"
 					}
 				}
 			}
@@ -1083,21 +992,120 @@
 				"worldTransform": [
 					0.931571364402771,
 					0.3576512038707733,
-					0.01626063883304596,
+					0.016260351985692978,
 					0,
 					0.05101827159523964,
-					-0.08765667676925659,
-					-0.9948345422744751,
+					-0.08765747398138046,
+					-0.9948344826698303,
 					0,
 					-0.3547302484512329,
-					0.9285184144973755,
-					-0.10019315034151077,
+					0.9285183548927307,
+					-0.10019389539957047,
 					0,
-					6.36308479309082,
-					1.8362680673599243,
-					3.0245368480682373,
+					6.487084865570068,
+					34.54726791381836,
+					43.274539947509766,
 					1
 				]
+			}
+		},
+		"N969ed85": {
+			"extends": "SandboxParticleSystem.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.380000642035156,
+				"s1": 0.368383316323161,
+				"s2": 0.00437599862925708,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "smoke",
+				"___assetServerOriginalID": "N969ed85",
+				"alphaTest": 0,
+				"colorRange": [
+					0,
+					0,
+					0,
+					0
+				],
+				"depthTest": false,
+				"emitterPosition": [
+					0,
+					0,
+					0
+				],
+				"emitterSize": [
+					1,
+					1,
+					1
+				],
+				"emitterType": "sphere",
+				"endColor": [
+					0,
+					0,
+					0,
+					0
+				],
+				"endSize": 0.99,
+				"image": "../vwfDataManager.svc/texture?UID=smoke.png",
+				"maxAcceleration": [
+					0,
+					0,
+					-1
+				],
+				"maxLifeTime": 1,
+				"maxOrientation": 13.5,
+				"maxRate": 0.75,
+				"maxVelocity": [
+					1,
+					1,
+					5
+				],
+				"minAcceleration": [
+					0,
+					0,
+					-1
+				],
+				"minLifeTime": 1,
+				"minOrientation": -18.4,
+				"minSpin": 20,
+				"minVelocity": [
+					-1,
+					-1,
+					3
+				],
+				"owner": "ADLteam",
+				"particleCount": 200,
+				"sizeRange": 0.02,
+				"solver": "AnalyticShader",
+				"startColor": [
+					0.4,
+					0.4,
+					0.4,
+					1
+				],
+				"startSize": 0.94,
+				"transform": [
+					0.930568039417267,
+					-0.365895479917526,
+					-0.0127951297909021,
+					0,
+					0.365820020437241,
+					0.93065220117569,
+					-0.00789403822273016,
+					0,
+					0.0147962002083659,
+					0.0026652398519218,
+					0.999886989593506,
+					0,
+					-0.217235177755356,
+					-1.25345528125763,
+					0.506611049175262,
+					1
+				],
+				"type": "ParticleSystem",
+				"velocityMode": "cartesian",
+				"visible": false
 			}
 		}
 	}

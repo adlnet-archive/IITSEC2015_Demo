@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.48853990947827697,
-		"s1": 0.5885910943616182,
-		"s2": 0.2022358060348779,
-		"c": 105962
+		"s0": 0.051266484428197145,
+		"s1": 0.7858737094793469,
+		"s2": 0.14674848527647555,
+		"c": 807755
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -224,15 +224,15 @@
 			0,
 			1,
 			0,
-			0.3395763039588928,
-			0.4817143380641937,
-			0.019184881821274757,
+			3.1349358558654785,
+			-1.152213215827942,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
 		"width": 0.14,
-		"hasSentStatement": "",
-		"___sourceAssetTimestamp": "Wed Oct 14 2015 13:34:24 GMT-0400 (EDT)",
+		"hasSentStatement": false,
+		"___sourceAssetTimestamp": "Mon Oct 19 2015 17:10:31 GMT-0400 (Eastern Daylight Time)",
 		"visible": true,
 		"height": 1.16
 	},
@@ -283,17 +283,11 @@
 			"parameters": []
 		},
 		"fire": {
-			"body": "if (!this.hasSentStatement)\n    {\n        this.xAPISend(\"50 Cal Burst\");\n        this.hasSentStatement = true;\n    }\n    var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        console.log(hit);\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n        if (hit.node && hit.node.hit)\n            hit.node.hit([hit.point, 5]);\n    }\n    else\n    {\n\n    }",
+			"body": "var sender = this.Scene.children_by_name.xAPISender;\n    var role = \"SmallCraftActionTeam\";\n\n    if (sender && !this.hasSentStatement)\n    {\n        sender.xAPISend(\"fired\", \"50CalMachineGunBurst\", role, null);\n        this.hasSentStatement = true;\n    }\n\n    var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        console.log(hit);\n         console.log(hit.node);\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n        if (hit.node && hit.node.hit)\n        {\n            hit.node.hit([hit.point, 5]);\n            console.log(hit.node);\n            if (sender)\n            {\n                sender.xAPISend(\"hit\", \"what\" /*hit.node*/ , role, null);\n            }\n        }\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", \"nothing\" /*hit.node*/ , role, null);\n        }\n    }\n    else\n    {\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", \"everything\", role, null);\n        }\n    }",
 			"parameters": []
 		},
-		"xAPISend": {
-			"body": "console.log(\"50 Cal Firing xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    //Change string after actor.name field to role player is assuming\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName() + '/Small Craft Action Team',\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    //Double check to have the best verb - this can be passed in\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/fired\",\n        display:\n        {\n            \"en-US\": \"fired\",\n        }\n    };\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.id,\n        definition:\n        {\n            name:\n            {\n                \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.DisplayName + \"/\" + str,\n            },\n            description:\n            {\n                \"en-US\": _DataManager.getInstanceData().description,\n            }\n        }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo/dev/vw\"\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            }\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);\n    this.hasSentStatement = false;",
-			"parameters": [
-				"str"
-			]
-		},
 		"tick": {
-			"body": "if (this.firing() && this.Ammo > 0 && this.state == \"ready\")\n    {\n        var shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(shake);\n        shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);\n        this.firecounter++;\n\n        var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n        if (!sound || !sound.playing)\n            this.audioAPI.playSound(this.fireSound, true, 300.0);\n        if (this.firecounter == 2)\n        {\n            this.firecounter = 0;\n            this.fire();\n        }\n        this.Ammo -= 10;\n\n        if (this.Ammo == 0)\n        {\n            this.state = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    else\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.hasSentStatement = false;\n    }\n    // this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n    if (this.state == 'reloading')\n    {\n        this.firecounter--;\n        if (this.firecounter == 0)\n        {\n            this.Ammo = 1000;\n            // this.hasSentStatement = false;\n            this.state = 'ready';\n        }\n\n    }\n\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.getPosition();\n    var goal = [0.1, -0.01, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    goal = [0.0, 0, 0.75];\n    move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);",
+			"body": "if (this.firing() && this.Ammo > 0 && this.state == \"ready\")\n    {\n        var shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(shake);\n        shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);\n        this.firecounter++;\n\n        var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n        if (!sound || !sound.playing)\n            this.audioAPI.playSound(this.fireSound, true, 300.0);\n        if (this.firecounter == 2)\n        {\n            this.firecounter = 0;\n            this.fire();\n        }\n        this.Ammo -= 2;\n\n        if (this.Ammo == 0)\n        {\n            this.state = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    else\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.hasSentStatement = false;\n    }\n    // this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n    if (this.state == 'reloading')\n    {\n        this.firecounter--;\n        if (this.firecounter == 0)\n        {\n            this.Ammo = 1000;\n            // this.hasSentStatement = false;\n            this.state = 'ready';\n        }\n\n    }\n\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.getPosition();\n    var goal = [0.1, -0.01, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    goal = [0.0, 0, 0.75];\n    move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);",
 			"parameters": []
 		}
 	},
@@ -612,9 +606,9 @@
 							0.8165703415870667,
 							0.017400048673152924,
 							0,
-							-0.09425029903650284,
-							1.0991419553756714,
-							0.7912350296974182,
+							2.701108932495117,
+							-0.5347853899002075,
+							0.7897959351539612,
 							0.9999998807907104
 						],
 						"visible": false

@@ -36,9 +36,9 @@
 			0,
 			1,
 			0,
-			23.01206774543583,
-			-13.513038998514745,
-			0.18174253463744705,
+			-2.697874809071361,
+			-0.1902104794378623,
+			0.01774579882621774,
 			1
 		],
 		"owner": "ADLteam",
@@ -70,7 +70,7 @@
 			"Small Craft Action Team": "SandboxCamera-vwf-N6b282caa",
 			"Tactical Action Officer": "SandboxCamera-vwf-N6b282caa"
 		},
-		"___sourceAssetTimestamp": "Fri Oct 16 2015 09:46:12 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Mon Oct 19 2015 11:33:58 GMT-0400 (Eastern Daylight Time)",
 		"simulationStarted": false
 	},
 	"methods": {
@@ -84,18 +84,8 @@
 			"body": "var children = this.Scene.children;\n\n    for (var i = 0; i < children.length; i++)\n    {\n        var child = children[i];\n        if (child && child.isCameraToggler === true) return child;\n    }\n\n    return null;",
 			"parameters": []
 		},
-		"xAPISend": {
-			"body": "console.log(\"User joined simulation as \" + str);\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName(),\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/selected\",\n        display:\n        {\n            \"en-US\": \"selected\",\n        }\n    };\n\n    //5 What happened and where\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + str,\n        // definition:\n        // {\n        //     name:\n        //     {\n        //         \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.DisplayName + \"/\" + str,\n        //     },\n        //     description:\n        //     {\n        //         \"en-US\": _DataManager.getInstanceData().description,\n        //     }\n        // }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/ruuid/\" + this.Scene.attempt\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/gametime/\" + this.Scene.time\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http:adlnet.gov/event/2015/iitsecdemo\"\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/role/\" + str\n            },\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ]\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n    stmt.timestamp = new Date().toISOString();\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
-			"parameters": [
-				"str"
-			]
-		},
-		"getSender": {
-			"body": "// var children = this.Scene.children;\n\n    // for (var i = 0; i < children.length; i++)\n    // {\n    //     var child = children[i];\n    //     if (child && child.isCameraToggler === true) return child;\n    // }\n    \n    // if (this.Scene.children_by_name.xAPISender)\n\n    return this.Scene.children_by_name.xAPISender;",
-			"parameters": []
-		},
 		"startSimulation": {
-			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    var sender = this.getSender();\n    if (!this.simulationStarted && sender)\n    {\n        this.simulationStarted = true;\n        sender.xAPISend(\"started\", \"object\", \"role\", null);\n    }\n\n    // this.xAPISend(choice.replace(/\\s/g, ''));\n    if (sender)\n    {\n        sender.xAPISend(\"selected\", choice.replace(/\\s/g, ''), choice.replace(/\\s/g, ''), null)\n    }",
+			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (!this.simulationStarted && sender)\n    {\n        this.simulationStarted = true;\n        sender.xAPISend(\"started\", \"object\", \"role\", null);\n    }\n\n    if (sender)\n    {\n        sender.xAPISend(\"selected\", choice.replace(/\\s/g, ''), choice.replace(/\\s/g, ''), null)\n    }",
 			"parameters": []
 		}
 	},

@@ -41,9 +41,9 @@
 			-0.22189253568649292,
 			0.975071132183075,
 			0,
-			0.19827541708946228,
-			0.41340431571006775,
-			0.01882782392203808,
+			1.242106556892395,
+			4.544918060302734,
+			0.029490264132618904,
 			1
 		],
 		"worldTransform": [
@@ -59,9 +59,9 @@
 			-0.22189253568649292,
 			0.975071132183075,
 			0,
-			0.19827541708946228,
-			0.41340431571006775,
-			0.01882782392203808,
+			1.242106556892395,
+			4.544918060302734,
+			0.029490264132618904,
 			1
 		],
 		"zoom": "",
@@ -78,7 +78,7 @@
 				"type": "vector"
 			}
 		},
-		"___sourceAssetTimestamp": "Wed Oct 14 2015 13:36:17 GMT-0400 (EDT)"
+		"___sourceAssetTimestamp": "Mon Oct 19 2015 13:23:34 GMT-0400 (Eastern Daylight Time)"
 	},
 	"methods": {
 		"TAOCommandRadioWarn": {
@@ -91,10 +91,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                     this.Scene.unbind('pointerMove', this.mousemove);\n                    this.Scene.unbind('pointerDown', this.mousepress);\n                    this.Scene.unbind('pointerUp', this.mouseup);\n                    this.Scene.unbind('pointerWheel', this.mousewheel);\n                    this.Scene.unbind('keyDown', this.keydown);\n                    this.Scene.unbind('keyUp', this.keyup);     \n\n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
-		"ready": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n           this.Scene.unbind('pointerMove', this.mousemove);\n              this.Scene.unbind('pointerDown', this.mousepress);\n              this.Scene.unbind('pointerUp', this.mouseup);\n              this.Scene.unbind('pointerWheel', this.mousewheel);\n              this.Scene.unbind('keyDown', this.keydown);\n              this.Scene.unbind('keyUp', this.keyup);\n              var self = this;\n              this.mousemove = function(e, d)\n              {\n\n                  var rel_x = self.last_x - e.position[0];\n                  var rel_y = self.last_y - e.position[1];\n                  self.rotateCam(rel_x * 3, rel_y * 3);\n                  self.last_x = e.position[0];\n                  self.last_y = e.position[1];\n              }\n              this.mousewheel = function(e, d)\n              {\n                  self.zoom += e.wheelDelta;\n              }\n              this.mousepress = function(e, d)\n              {\n\n                  self.mousedown = true;\n                  self.last_x = e.position[0];\n                  self.last_y = e.position[1];\n              }\n              this.mouseup = function(e, d)\n              {\n                  self.mousedown = false;\n              }\n              this.keydown = function(e, d)\n              {\n                  if (e.key.key == 'W')\n                      self.movement = Vec3.add(self.movement, [0, 1, 0], []);\n                  if (e.key.key == 'S')\n                      self.movement = Vec3.add(self.movement, [0, -1, 0], []);\n                  if (e.key.key == 'A')\n                      self.movement = Vec3.add(self.movement, [1, 0, 0], []);\n                  if (e.key.key == 'D')\n                      self.movement = Vec3.add(self.movement, [-1, 0, 0], []);\n              }\n              this.keyup = function(e, d)\n              {\n                  console.log(e);\n                  if (e.key.key == 'W')\n                      self.movement = Vec3.add(self.movement, [0, -1, 0], []);\n                  if (e.key.key == 'S')\n                      self.movement = Vec3.add(self.movement, [0, 1, 0], []);\n                  if (e.key.key == 'A')\n                      self.movement = Vec3.add(self.movement, [-1, 0, 0], []);\n                  if (e.key.key == 'D')\n                      self.movement = Vec3.add(self.movement, [1, 0, 0], []);\n              }\n\n              this.Scene.bind('pointerMove', this.mousemove);\n              this.Scene.bind('pointerDown', this.mousepress);\n              this.Scene.bind('pointerUp', this.mouseup);\n              this.Scene.bind('pointerWheel', this.mousewheel);\n              this.Scene.bind('keyDown', this.keydown);\n              this.Scene.bind('keyUp', this.keyup); \n\n\n\n\n\n",
-			"parameters": []
-		},
 		"rotateCam": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n             var xrot = Quaternion.fromAngleAxis(rel_x, [0, 0, 1], []);\n                var offset = this.offset;\n                offset = Mat4.multVec3NoTranslate(Quaternion.toRotationMatrix4(xrot, []), offset, []);\n\n                var side = Vec3.cross(offset, [0, 0, 1], []);\n                var yrot = Quaternion.fromAngleAxis(rel_y, side, []);\n                offset = Mat4.multVec3NoTranslate(Quaternion.toRotationMatrix4(yrot, []), offset, []);\n                this.offset = offset; \n\n\n\n\n\n\n",
 			"parameters": [
@@ -104,6 +100,14 @@
 		},
 		"tick": {
 			"body": "\n\n\n\n\n\n\n\n\n         var pos = Vec3.add(this.transformAPI.getPosition(), this.offset, []);\n\n            //this.transformAPI.setPosition(MATH.addVec3(pos, offset));\n            this.transformAPI.lookat(pos, '', '-Y', 'Z');\n            var movement = this.movement;\n            movement = this.transformAPI.localToGlobalRotation(movement);\n            movement[2] = 0;\n            if(MATH.lengthVec3(movement) == 0) return;\n            movement = Vec3.normalize(movement, []);\n            this.transformAPI.move(movement[0] / 10, movement[1] / 10, 0); \n\n\n\n\n",
+			"parameters": []
+		},
+		"verifyCamera": {
+			"body": "var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.id) return false;\n    return true;",
+			"parameters": []
+		},
+		"ready": {
+			"body": "this.Scene.unbind('pointerMove', this.mousemove);\n    this.Scene.unbind('pointerDown', this.mousepress);\n    this.Scene.unbind('pointerUp', this.mouseup);\n    this.Scene.unbind('pointerWheel', this.mousewheel);\n    this.Scene.unbind('keyDown', this.keydown);\n    this.Scene.unbind('keyUp', this.keyup);\n    var self = this;\n    this.mousemove = function(e, d)\n    {\n        if(!self.verifyCamera()) return;\n        var rel_x = self.last_x - e.position[0];\n        var rel_y = self.last_y - e.position[1];\n        self.rotateCam(rel_x * 3, rel_y * 3);\n        self.last_x = e.position[0];\n        self.last_y = e.position[1];\n    }\n    this.mousewheel = function(e, d)\n    {\n        if(!self.verifyCamera()) return;\n        self.zoom += e.wheelDelta;\n    }\n    this.mousepress = function(e, d)\n    {\n    if(!self.verifyCamera()) return;\n        self.mousedown = true;\n        self.last_x = e.position[0];\n        self.last_y = e.position[1];\n    }\n    this.mouseup = function(e, d)\n    {\n        if(!self.verifyCamera()) return;\n        self.mousedown = false;\n    }\n    this.keydown = function(e, d)\n    {\n        return;\n        if (e.key.key == 'W')\n            self.movement = Vec3.add(self.movement, [0, 1, 0], []);\n        if (e.key.key == 'S')\n            self.movement = Vec3.add(self.movement, [0, -1, 0], []);\n        if (e.key.key == 'A')\n            self.movement = Vec3.add(self.movement, [1, 0, 0], []);\n        if (e.key.key == 'D')\n            self.movement = Vec3.add(self.movement, [-1, 0, 0], []);\n    }\n    this.keyup = function(e, d)\n    {\n        return;\n        if (e.key.key == 'W')\n            self.movement = Vec3.add(self.movement, [0, -1, 0], []);\n        if (e.key.key == 'S')\n            self.movement = Vec3.add(self.movement, [0, 1, 0], []);\n        if (e.key.key == 'A')\n            self.movement = Vec3.add(self.movement, [-1, 0, 0], []);\n        if (e.key.key == 'D')\n            self.movement = Vec3.add(self.movement, [1, 0, 0], []);\n    }\n\n    this.Scene.bind('pointerMove', this.mousemove);\n    this.Scene.bind('pointerDown', this.mousepress);\n    this.Scene.bind('pointerUp', this.mouseup);\n    this.Scene.bind('pointerWheel', this.mousewheel);\n    this.Scene.bind('keyDown', this.keydown);\n    this.Scene.bind('keyUp', this.keyup);",
 			"parameters": []
 		}
 	},
@@ -116,49 +120,168 @@
 				"visibleToAncestor": true
 			},
 			"children": {
+				"-sas-assets-546b7d66-N67ebf2abN5111c16a": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN5111c16a"
+					}
+				},
+				"-sas-assets-546b7d66-N67ebf2abN58f296e0": {
+					"children": {
+						"-sas-assets-546b7d66-N67ebf2abN35c0d585": {
+							"properties": {
+								"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN35c0d585"
+							}
+						}
+					},
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN58f296e0"
+					}
+				},
+				"-sas-assets-546b7d66-N67ebf2abN6444e6eb": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN6444e6eb"
+					}
+				},
+				"-sas-assets-546b7d66-N67ebf2abN762225da": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN762225da"
+					}
+				},
+				"-sas-assets-546b7d66-N67ebf2abN7dbb5d5b": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN7dbb5d5b"
+					}
+				},
+				"-sas-assets-546b7d66-N67ebf2abNe63ee92c": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abNe63ee92c"
+					}
+				},
+				"-sas-assets-546b7d66-N67ebf2abNe73b9040": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abNe73b9040"
+					}
+				},
+				"-sas-assets-546b7d66-N67ebf2abNef06867c": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abNef06867c"
+					}
+				},
 				"-sas-assets-546b7d66-N83f74cd6N5111c16a": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.45943566667847335,
+						"s1": 0.9768545073457062,
+						"s2": 0.9814811346586794,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6N5111c16a"
 					}
 				},
 				"-sas-assets-546b7d66-N83f74cd6N58f296e0": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.48181421658955514,
+						"s1": 0.6750772772356868,
+						"s2": 0.07415874535217881,
+						"c": 1
+					},
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6N58f296e0"
+					},
 					"children": {
 						"-sas-assets-546b7d66-N83f74cd6N35c0d585": {
+							"extends": "http://vwf.example.com/node.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.11368100624531507,
+								"s1": 0.17944170464761555,
+								"s2": 0.10287511628121138,
+								"c": 1
+							},
 							"properties": {
 								"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6N35c0d585"
 							}
 						}
-					},
-					"properties": {
-						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6N58f296e0"
 					}
 				},
 				"-sas-assets-546b7d66-N83f74cd6N6444e6eb": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.9255222084466368,
+						"s1": 0.8526940259616822,
+						"s2": 0.9474052714649588,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6N6444e6eb"
 					}
 				},
 				"-sas-assets-546b7d66-N83f74cd6N762225da": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.05858331033959985,
+						"s1": 0.3818757582921535,
+						"s2": 0.39307404099963605,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6N762225da"
 					}
 				},
 				"-sas-assets-546b7d66-N83f74cd6N7dbb5d5b": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.19437363278120756,
+						"s1": 0.795195902697742,
+						"s2": 0.8243777314200997,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6N7dbb5d5b"
 					}
 				},
 				"-sas-assets-546b7d66-N83f74cd6Ne63ee92c": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.5685718555469066,
+						"s1": 0.5698332847096026,
+						"s2": 0.6631030135322362,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6Ne63ee92c"
 					}
 				},
 				"-sas-assets-546b7d66-N83f74cd6Ne73b9040": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.9735635465476662,
+						"s1": 0.8838063823059201,
+						"s2": 0.42938029230572283,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6Ne73b9040"
 					}
 				},
 				"-sas-assets-546b7d66-N83f74cd6Nef06867c": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.699356714496389,
+						"s1": 0.05991409602575004,
+						"s2": 0.10589280142448843,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N83f74cd6Nef06867c"
 					}

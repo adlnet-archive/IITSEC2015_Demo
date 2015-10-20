@@ -184,14 +184,21 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			0.18666329979896545,
-			-0.9351544380187988,
+			0.9999029636383057,
+			0.049677155911922455,
 			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
-		"width": 20
+		"width": 20,
+		"___sourceAssetTimestamp": "Mon Oct 19 2015 14:31:26 GMT-0400 (Eastern Daylight Time)",
+		"damageTexture": "/sas/assets/dde67e10",
+		"worldPosition": [
+			0.9999029636383057,
+			0.049677155911922455,
+			0.01774579845368862
+		]
 	},
 	"methods": {
 		"activateState": {
@@ -210,13 +217,20 @@
 				"args"
 			]
 		},
-		"movement": {
-			"body": "\n    var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 50 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -25 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);    \n",
-			"parameters": []
-		},
 		"tick": {
 			"body": "\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if(state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n        \n        \n    }    \n",
 			"parameters": []
+		},
+		"movement": {
+			"body": "var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 12 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -12 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);",
+			"parameters": []
+		},
+		"hit": {
+			"body": "if (force > 5) //cannot be hurt by 50 cal\n    {\n\n    this.children_by_name.Barry1.materialDef.layers[0].src = this.damageTexture;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-damaged\", this.DisplayName, \"TacticalActionOfficer\", null);\n    }\n    }",
+			"parameters": [
+				"pos",
+				"force"
+			]
 		}
 	},
 	"children": {
@@ -274,7 +288,7 @@
 							"offsety": 0,
 							"scalex": 1,
 							"scaley": 1,
-							"src": "/sas/assets/58f95c66"
+							"src": "/sas/assets/dde67e10"
 						}
 					],
 					"metal": false,
@@ -313,7 +327,21 @@
 					0,
 					1
 				],
-				"type": "3DR Object"
+				"type": "3DR Object",
+				"worldPosition": [
+					0.9999029636383057,
+					0.049677155911922455,
+					0.01774579845368862
+				]
+			},
+			"methods": {
+				"hit": {
+					"body": "this.parent.hit(point, force);",
+					"parameters": [
+						"point",
+						"force"
+					]
+				}
 			},
 			"children": {
 				"Necdbc16e": {
@@ -396,52 +424,52 @@
 							1
 						],
 						"materialDef": {
-							"color": {
-								"r": 1,
-								"g": 1,
-								"b": 1
-							},
-							"ambient": {
-								"r": 1,
-								"g": 1,
-								"b": 1
-							},
-							"emit": {
-								"r": 0,
-								"g": 0,
-								"b": 0
-							},
-							"specularColor": {
-								"r": 0,
-								"g": 0,
-								"b": 0
-							},
-							"specularLevel": 1,
 							"alpha": 1,
-							"shininess": 0.00040219999999999996,
-							"side": 0,
-							"reflect": 0,
-							"layers": [
-								{
-									"mapTo": 1,
-									"scalex": 1,
-									"scaley": 1,
-									"offsetx": 0,
-									"offsety": 0,
-									"alpha": 0.58,
-									"src": "/sas/assets/58f95c66",
-									"mapInput": 0
-								}
-							],
-							"type": "phong",
+							"ambient": {
+								"b": 1,
+								"g": 1,
+								"r": 1
+							},
 							"blendMode": 1,
-							"fog": true,
-							"shading": true,
-							"metal": false,
-							"wireframe": false,
+							"color": {
+								"b": 1,
+								"g": 1,
+								"r": 1
+							},
 							"depthtest": true,
 							"depthwrite": true,
-							"vertexColors": false
+							"emit": {
+								"b": 0,
+								"g": 0,
+								"r": 0
+							},
+							"fog": true,
+							"layers": [
+								{
+									"alpha": 0.58,
+									"mapInput": 0,
+									"mapTo": 1,
+									"offsetx": 0,
+									"offsety": 0,
+									"scalex": 1,
+									"scaley": 1,
+									"src": "/sas/assets/58f95c66"
+								}
+							],
+							"metal": false,
+							"reflect": 0,
+							"shading": true,
+							"shininess": 0.0004022,
+							"side": 0,
+							"specularColor": {
+								"b": 0,
+								"g": 0,
+								"r": 0
+							},
+							"specularLevel": 1,
+							"type": "phong",
+							"vertexColors": false,
+							"wireframe": false
 						},
 						"___assetServerOriginalID": "Ndd622fe7",
 						"renderDepth": 0

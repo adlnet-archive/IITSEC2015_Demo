@@ -103,9 +103,17 @@
 		"_length": 7,
 		"activeState": "active",
 		"bullets_50_cal": 987,
-		"controllingCamera": "SandboxCamera-vwf-Nb400690e",
+		"controllingCamera": "SandboxCamera-vwf-N7974f482",
 		"counter": 14602,
-		"currentState": null,
+		"currentState": {
+			"name": "defeated",
+			"properties": {},
+			"transitionFunction": "defeatedTransition",
+			"transitions": [
+				"defeated"
+			],
+			"updateFunction": "defeatedUpdate"
+		},
 		"editorData": {
 			"controllingCamera": {
 				"displayName": "controllingCamera",
@@ -200,21 +208,21 @@
 				"fired": true,
 				"launchedBy": "",
 				"transform": [
-					-0.0813349708914757,
-					-0.235678538680077,
-					0.96532154083252,
+					-0.0762954279780388,
+					-0.237075522542,
+					0.96539044380188,
 					0,
-					-0.991003155708313,
-					0.0902513638138771,
-					-0.0614654757082462,
+					-0.99064576625824,
+					0.0857895314693451,
+					-0.0572697296738625,
 					0,
-					-0.0728539153933525,
-					-0.964528858661652,
-					-0.241624310612679,
+					-0.0695339739322662,
+					-0.964585840702057,
+					-0.242373824119568,
 					0,
-					2.42561888694763,
-					-9.77604579925537,
-					1.50978064537048,
+					-3.49457359313965,
+					0.889579296112061,
+					1.50155580043793,
 					1
 				]
 			}
@@ -324,9 +332,9 @@
 			0,
 			0.9963926672935486,
 			0,
-			10.25,
-			104,
-			20,
+			1.5035655498504639,
+			-2.771700620651245,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
@@ -346,15 +354,15 @@
 			0,
 			0.9963926672935486,
 			0,
-			10.25,
-			104,
-			20,
+			1.5035655498504639,
+			-2.771700620651245,
+			0.01774579845368862,
 			1
 		],
 		"smokeDef": {
 			"continues": "/sas/assets/aeb3d1dd",
 			"properties": {
-				"targetEntity": "-sas-assets-73e8a4a3-N1fc87d36",
+				"targetEntity": "-sas-assets-73e8a4a3-N39813b7d",
 				"transform": [
 					1,
 					0,
@@ -375,13 +383,13 @@
 				]
 			}
 		},
-		"___sourceAssetTimestamp": "Wed Oct 14 2015 16:39:10 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Mon Oct 19 2015 16:47:34 GMT-0400 (Eastern Daylight Time)",
 		"tickCount": 0,
 		"radarTracked": true,
 		"worldPosition": [
-			10.25,
-			104,
-			20
+			1.5035655498504639,
+			-2.771700620651245,
+			0.01774579845368862
 		]
 	},
 	"methods": {
@@ -411,10 +419,6 @@
 			"parameters": [
 				"statename"
 			]
-		},
-		"defeatedTransition": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                console.log(\"defeatedTransition\");\n                                this.currentState = this.states[\"defeated\"];    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
-			"parameters": []
 		},
 		"defeatedUpdate": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                console.log(\"defeatedUpdate\");\n                                this.currentState = this.states[\"defeated\"];    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
@@ -451,10 +455,6 @@
 			"parameters": [
 				"statename"
 			]
-		},
-		"out_of_gasTransition": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"out_of_gasTransition\");\n                                //this.currentState = this.states[\"out_of_gas\"];\n                                this.out_of_gasUpdate(this.currentState);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
-			"parameters": []
 		},
 		"out_of_gasUpdate": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"out_of_gasUpdate\");\n                                console.log(statename);\n                                if (this.fuel <= 0)\n                                {\n                                    this.currentState = this.states[\"out_of_gas\"];\n                                    console.log(\"out_of_gasUpdate now out_of_gas state\");\n                                }\n                                else if (this.hullStrength <= 0)\n                                {\n                                    this.currentState = this.states[\"defeated\"];\n                                    console.log(\"out_of_gasUpdate now defaeted state\");\n                                }   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
@@ -516,13 +516,6 @@
 			"body": "if (this.fuel <= 0.0)\n    {\n        this.currentState = this.states[\"out_of_gas\"];\n    }\n    else\n    {\n        this.fuel = this.fuel - this.fuelConsumptionRate;\n        //console.log(\"fuel: \" + this.fuel);\n    }",
 			"parameters": []
 		},
-		"_keyUp": {
-			"body": "if (!this.verifyCamera()) return;\n    if (this._keysDown.indexOf(e.key.char) !== -1)\n    {\n        this._keysDown.splice(this._keysDown.indexOf(e.key.char), 1);\n    }\n    if (e.key.char == \" \")\n    {\n        if (this.rockets > 0)\n        {\n            this.activateState(\"fire_rocket\");\n            console.log(\"rockets: \" + this.rockets);\n\n            console.log(\"Broadcasting leader fire...\");\n            this.broadcast(\"facLeaderFire\", [], 500);\n        }\n    }",
-			"parameters": [
-				"e",
-				"d"
-			]
-		},
 		"playMissileLaunch": {
 			"body": "console.log(\"playMissileLaunch\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/744acf2e\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/4334801b\", false, 100);\n    // #3:\n    //this.audioAPI.playSound(\"/sas/assets/10b027bd\", false, 100);\n    // #4:\n    //this.audioAPI.playSound(\"/sas/assets/94d508e3\", false, 100);\n    // #5:\n    this.audioAPI.playSound(\"/sas/assets/263beb86\", false, 100);",
 			"parameters": []
@@ -548,8 +541,23 @@
 			]
 		},
 		"launchMissile": {
-			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n    this.xAPISend(pos);\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", pos);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
+		},
+		"out_of_gasTransition": {
+			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    }",
+			"parameters": []
+		},
+		"defeatedTransition": {
+			"body": "console.log(\"defeatedTransition\");\n    this.currentState = this.states[\"defeated\"];\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName, \"FastAttackCraft\", null);\n    }",
+			"parameters": []
+		},
+		"_keyUp": {
+			"body": "if (!this.verifyCamera()) return;\n    if (this._keysDown.indexOf(e.key.char) !== -1)\n    {\n        this._keysDown.splice(this._keysDown.indexOf(e.key.char), 1);\n    }\n    if (e.key.char == \" \")\n    {\n        if (this.rockets > 0)\n        {\n            this.activateState(\"fire_rocket\");\n            console.log(\"rockets: \" + this.rockets);\n\n            console.log(\"Broadcasting leader fire...\");\n           // this.broadcast(\"facLeaderFire\", [], 500);\n        }\n    }",
+			"parameters": [
+				"e",
+				"d"
+			]
 		}
 	},
 	"children": {
@@ -668,9 +676,9 @@
 					-0.9645858407020569,
 					-0.24237382411956787,
 					0,
-					10.110967636108398,
-					103.00679016113281,
-					21.49155616760254,
+					1.3645331859588623,
+					-3.764907121658325,
+					1.5093015432357788,
 					1
 				]
 			}
@@ -822,9 +830,9 @@
 					9.932061857398367e-7,
 					0.9963926672935486,
 					0,
-					10.015571594238281,
-					101.02037811279297,
-					19.243608474731445,
+					1.2691376209259033,
+					-5.75131893157959,
+					-0.738646388053894,
 					1
 				]
 			}
