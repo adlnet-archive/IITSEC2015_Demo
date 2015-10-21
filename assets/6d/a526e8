@@ -1,0 +1,96 @@
+{
+	"extends": "asset.vwf",
+	"source": "http://54.175.234.78:3030/assets/04eed7d1",
+	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"sequence": 0,
+	"random": {
+		"s0": 0.3379601661581546,
+		"s1": 0.11839399044401944,
+		"s2": 0.987737625837326,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": {
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"ambient": {
+				"r": 0.42,
+				"g": 0.42,
+				"b": 0.42
+			},
+			"emit": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularLevel": 1,
+			"alpha": 1,
+			"shininess": 0.004002,
+			"side": 0,
+			"reflect": 0.01,
+			"layers": [
+				{
+					"mapTo": 1,
+					"scalex": 1,
+					"scaley": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"alpha": 1,
+					"src": "http://54.175.234.78:3030/assets/23659e9a.jpg",
+					"mapInput": 0
+				}
+			],
+			"type": "phong",
+			"wireframe": false,
+			"metal": false,
+			"combine": 0,
+			"depthtest": true,
+			"depthwrite": true,
+			"blendMode": 1,
+			"fog": true,
+			"shading": true,
+			"vertexColors": false
+		},
+		"owner": "ADLteam",
+		"transform": [
+			3.700000047683716,
+			0,
+			0,
+			0,
+			0,
+			3.700000047683716,
+			0,
+			0,
+			0,
+			0,
+			3.700000047683716,
+			0,
+			-9.75,
+			8.25,
+			-8,
+			1
+		],
+		"___sourceAssetTimestamp": "Tue Oct 20 2015 14:37:44 GMT-0400 (Eastern Daylight Time)",
+		"DisplayName": "RENA Container Ship"
+	}
+}

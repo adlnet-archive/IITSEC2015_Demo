@@ -99,14 +99,30 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Wed Oct 14 2015 15:40:59 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 20 2015 12:17:18 GMT-0400 (Eastern Daylight Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
 		"bullets_50_cal": 1000,
 		"controllingCamera": "SandboxCamera-vwf-N373ec60b",
 		"counter": 14738,
-		"currentState": null,
+		"currentState": {
+			"approaching": {
+				"name": "approaching",
+				"properties": {},
+				"transitionFunction": "approachingTransition",
+				"transitions": [
+					"approaching",
+					"moving_away",
+					"idle",
+					"out_of_gas",
+					"fire_rocket",
+					"colliding",
+					"defeated"
+				],
+				"updateFunction": "approachingUpdate"
+			}
+		},
 		"editorData": {
 			"controllingCamera": {
 				"displayName": "controllingCamera",
@@ -214,21 +230,21 @@
 			"properties": {
 				"fired": true,
 				"transform": [
-					-0.012888817116618156,
-					-0.08797090500593185,
-					0.9940299391746521,
+					-0.0128888171166182,
+					-0.0879709050059319,
+					0.994029939174652,
 					0,
-					-0.9915449023246765,
-					-0.11103932559490204,
-					-0.02268454059958458,
+					-0.991544902324677,
+					-0.111039325594902,
+					-0.0226845405995846,
 					0,
-					0.11259710788726807,
-					-0.9878926873207092,
-					-0.08596871793270111,
+					0.112597107887268,
+					-0.987892687320709,
+					-0.0859687179327011,
 					0,
-					-17.10487174987793,
-					-25.30080795288086,
-					1.765204906463623,
+					-17.1048717498779,
+					-25.3008079528809,
+					1.76520490646362,
 					1
 				]
 			}
@@ -362,9 +378,9 @@
 			0,
 			0.9980000257492065,
 			0,
-			-17.21494483947754,
-			-24.308897018432617,
-			0.26820483803749084,
+			41.59610366821289,
+			-60.15208435058594,
+			20.28838348388672,
 			1
 		],
 		"type": "Primitive",
@@ -384,13 +400,109 @@
 			0,
 			0.9980000257492065,
 			0,
-			-17.21494483947754,
-			-24.308897018432617,
-			0.26820483803749084,
+			41.59610366821289,
+			-60.15208435058594,
+			20.28838348388672,
 			1
 		],
 		"tickCount": 0,
-		"radarTracked": true
+		"radarTracked": true,
+		"isSlave": true,
+		"destroyedFACDef": {
+			"extends": "SandboxParticleSystem.vwf",
+			"properties": {
+				"DisplayName": "ParticleSystem1",
+				"alphaRange": 0,
+				"alphaTest": 0,
+				"colorRange": [
+					0,
+					0,
+					0,
+					0
+				],
+				"depthTest": false,
+				"emitterType": "point",
+				"endAlpha": 0.04,
+				"endColor": [
+					0,
+					0,
+					0,
+					0.04
+				],
+				"endSize": 0.95,
+				"gravity": 0.77,
+				"image": "../vwfDataManager.svc/texture?UID=water.png",
+				"maxAcceleration": [
+					0,
+					0,
+					9.82
+				],
+				"maxLifeTime": 1,
+				"maxRate": 0.614,
+				"maxVelocity": [
+					1,
+					1,
+					0
+				],
+				"minAcceleration": [
+					0,
+					0,
+					9.82
+				],
+				"minLifeTime": 1,
+				"minVelocity": [
+					-1,
+					-1,
+					0
+				],
+				"owner": "ADLteam",
+				"particleCount": 200,
+				"rotation": [
+					1,
+					0,
+					0,
+					0
+				],
+				"sizeRange": 0.02,
+				"solver": "AnalyticShader",
+				"startAlpha": 1,
+				"startColor": [
+					1,
+					1,
+					1,
+					1
+				],
+				"startSize": 0.17,
+				"textureTiles": 4,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1
+				],
+				"type": "ParticleSystem",
+				"velocityMode": "cartesian"
+			},
+			"random": {
+				"c": 1,
+				"s0": 0.0699641346000135,
+				"s1": 0.0342938848771155,
+				"s2": 0.282638816628605
+			},
+			"sequence": 0
+		}
 	},
 	"methods": {
 		"FACMovementDirection": {
@@ -589,16 +701,6 @@
 			"body": "var peer_info = this.facPeerMovementCandidate;\n    \n    if (peer_info[1] == this.id) return;\n\n    var safe_distance = 40;\n    var mass = this.physicsAPI.getMass();\n\n    // Get peer world position\n    var peer_pos = peer_info[0];\n\n    // Get my world position\n    var my_pos = this.transformAPI.getWorldPosition();\n\n    // Get the distance between me and the leader\n    var distance = MATH.distanceVec3(peer_pos, my_pos);\n    //console.log(\"facFollowBehavior: distance: \" + distance);\n\n    if (distance < safe_distance)\n    {\n        //console.log(\"Move to Avoid Peer (\" + this.id + \")\");\n        var direction = MATH.subVec3(my_pos, peer_pos);\n        //console.log(\"diff: \" + direction);\n\n        direction[2] = 0;\n\n        var norm_direction = MATH.toUnitVec3(direction);\n\n        norm_direction = this.transformAPI.globalToLocalRotation(norm_direction);\n\n        var x = norm_direction[0];\n        var y = norm_direction[1];\n\n        //console.log(\"x: \" + x);\n        //console.log(\"y: \" + y);\n\n        var peer_heading = this.transformAPI.globalToLocalRotation(peer_info[2]);\n\n        //console.log(peer_heading);\n\n        // if the peer is headed right at me, then I should turn right\n        if (peer_heading[0] > 0 && Math.abs(peer_heading[1]) < .25)\n        {\n            //console.log(\"peer heading at me, turn right!\");\n            this.turnRight(1);\n        }\n        else\n        {\n            if (y >= 0)\n            {\n                if (x > 0) // 1st quadrant\n                {\n                    this.turnRight(1);\n                }\n                else // 2nd quadrant\n                {\n                    // 2nd quadrant -- angled sufficiently away\n                    if (this.facLeaderMovementCandidate.length > 0)\n                        this.moveTowardLeader();\n\n                    return;\n                }\n            }\n            else\n            {\n                if (x > 0) // 4th quardrant\n                {\n                    this.turnLeft(1);\n                }\n                else // 3rd quadrant\n                {\n                    // 3rd quadrant -- angled sufficiently away\n                    if (this.facLeaderMovementCandidate.length > 0)\n                        this.moveTowardLeader();\n\n                    return;\n                }\n            }\n        }\n    }\n\n    // Go forward\n    var force = this.transformAPI.localToGlobalRotation(-5 * mass, 0, 0);\n    this.physicsAPI.addForceAtCenter(force);\n    this.playMotorRunning();\n\n    return;",
 			"parameters": []
 		},
-		"tick": {
-			"body": "var my_position = this.transformAPI.getPosition();\n\n\n    this.tickCount++;\n    \n    if (this.tickCount > 3)\n    {\n        // Broadcast position and orientation to nearby peers\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward], 50);\n\n        this.tickCount = 0;\n    }\n\n    var waterDepth = 20;\n    var hullThick = 2.2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 5;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, my_position, []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, my_position, []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - my_position[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    if (this._keysDown.length == 0)\n    {\n        // No user input detected, so move based on AI\n        this.movementDecision();\n        return;\n    }\n\n    if (this._keysDown.indexOf(\"W\") !== -1)\n    {\n        this.consumeFuel();\n        if (this.currentState.name === this.states[\"out_of_gas\"].name)\n        {\n            console.log(\"(W) out of gas!\");\n            this.activateState(\"out_of_gas\");\n        }\n        else\n        {\n            var force = this.transformAPI.localToGlobal(-10 * mass, 0, 0);\n            this.physicsAPI.addForceAtCenter(force[0], force[1], force[2]);\n            this.playMotorRunning();\n            switch (this.FACMovementDirection())\n            {\n                case \"approaching\":\n                    this.activateState(\"approaching\");\n                    break;\n                case \"idle\":\n                    this.activateState(\"idle\");\n                    break;\n                case \"moving_away\":\n                    this.activateState(\"moving_away\");\n                    break;\n            }\n        }\n    }\n    if (this._keysDown.indexOf(\"S\") !== -1)\n    {\n        this.consumeFuel();\n        if (this.currentState.name === this.states[\"out_of_gas\"].name)\n        {\n            console.log(\"(S) out of gas!\");\n            this.activateState(\"out_of_gas\");\n        }\n        else\n        {\n            var force = this.transformAPI.localToGlobal(10 * mass, 0, 0);\n            this.physicsAPI.addForceAtCenter(force[0], force[1], force[2]);\n            this.playMotorRunning();\n            switch (this.FACMovementDirection())\n            {\n                case \"approaching\":\n                    this.activateState(\"approaching\");\n                    break;\n                case \"idle\":\n                    this.activateState(\"idle\");\n                    break;\n                case \"moving_away\":\n                    this.activateState(\"moving_away\");\n                    break;\n            }\n        }\n    }\n    var vel = this.physicsAPI.getLinearVelocity();\n    vel = this.transformAPI.globalToLocalRotation(vel);\n    var speedTorqueFactor = (Math.abs(vel[0]) / 3);\n    if (this._keysDown.indexOf(\"A\") !== -1)\n    {\n\n        this.physicsAPI.addTorque(0, 0, speedTorqueFactor * mass * 3);\n        var force = this.transformAPI.localToGlobal(speedTorqueFactor * mass, 0, 0);\n        this.physicsAPI.addTorque(force);\n    }\n    if (this._keysDown.indexOf(\"D\") !== -1)\n    {\n        this.physicsAPI.addTorque(0, 0, -speedTorqueFactor * mass * 3);\n        var force = this.transformAPI.localToGlobal(-speedTorqueFactor * mass, 0, 0);\n        this.physicsAPI.addTorque(force);\n    }\n    if (this._keysDown.indexOf(\" \") !== -1)\n    {\n        if (this.rockets > 0)\n        {\n            this.currentState = this.states[\"fire_rocket\"];\n        }\n        else\n        {\n            this.currentState = this.states[\"moving_away\"];\n        }\n    }",
-			"parameters": []
-		},
-		"hit": {
-			"body": "if (this.currentState == this.states[\"defeated\"]) return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n        this.health -= force;\n    else\n        this.health -= 101;\n\n    if (this.health < 0)\n    {\n        var def = this.explosionDef;\n        var pos = this.transformAPI.getWorldPosition();\n        def.properties.transform[12] = pos[0];\n        def.properties.transform[13] = pos[1];\n        def.properties.transform[14] = pos[2];\n        def.properties.fuse = 1;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);\n        this.currentState = this.states[\"defeated\"]\n        this.parent.children.delete(this);\n    }",
-			"parameters": [
-				"args"
-			]
-		},
 		"launchMissile": {
 			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    this.xAPISend(pos);\n    // console.profile(\"launch\");\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
@@ -608,6 +710,24 @@
 			"parameters": [
 				"pos"
 			]
+		},
+		"createExplosion": {
+			"body": "console.log(\"explosion!!\");\n    var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = 1;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);",
+			"parameters": []
+		},
+		"destroyFAC": {
+			"body": "var def = this.destroyedFACDef;\n\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    this.children_by_name[\"3D_model\"].transformAPI.setRotation(210, 45, 100);",
+			"parameters": []
+		},
+		"hit": {
+			"body": "if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n        console.log(\"(hit) \" + this.health);\n    }\n    else\n    {\n        this.health -= 101;\n    }\n\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
+			"parameters": [
+				"args"
+			]
+		},
+		"tick": {
+			"body": "var my_position = this.transformAPI.getPosition();\n\n    this.tickCount++;\n\n    if (this.tickCount > 3)\n    {\n        // Broadcast position and orientation to nearby peers\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward], 50);\n\n        this.tickCount = 0;\n    }\n\n    var waterDepth = 20;\n    var hullThick = 2.2;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 5;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, my_position, []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, my_position, []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - my_position[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    if (this._keysDown.length == 0)\n    {\n        // No user input detected, so move based on AI\n        this.movementDecision();\n        return;\n    }\n\n    if (this._keysDown.indexOf(\"W\") !== -1)\n    {\n        console.log(\"(W)\");\n        this.consumeFuel();\n        switch (this.currentState.name)\n        {\n            case \"out_of_gas\":\n                console.log(\"(W) out of gas!\");\n                this.activateState(\"out_of_gas\");\n                break;\n            case \"defeated\":\n                console.log(\"(W) defeated!\");\n                this.activateState(\"defeated\");\n                break;\n            default:\n                var force = this.transformAPI.localToGlobal(-10 * mass, 0, 0);\n                this.physicsAPI.addForceAtCenter(force[0], force[1], force[2]);\n                this.playMotorRunning();\n                switch (this.FACMovementDirection())\n                {\n                    case \"approaching\":\n                        this.activateState(\"approaching\");\n                        break;\n                    case \"idle\":\n                        this.activateState(\"idle\");\n                        break;\n                    case \"moving_away\":\n                        this.activateState(\"moving_away\");\n                        break;\n                }\n                break;\n        }\n    }\n    if (this._keysDown.indexOf(\"S\") !== -1)\n    {\n        console.log(\"(S)\");\n        this.consumeFuel();\n        switch (this.currentState.name)\n        {\n            case \"out_of_gas\":\n                console.log(\"(S) out of gas!\");\n                this.activateState(\"out_of_gas\");\n                break;\n            case \"defeated\":\n                console.log(\"defeated!\");\n                this.activateState(\"defeated\");\n                break;\n            default:\n                var force = this.transformAPI.localToGlobal(10 * mass, 0, 0);\n                this.physicsAPI.addForceAtCenter(force[0], force[1], force[2]);\n                this.playMotorRunning();\n                switch (this.FACMovementDirection())\n                {\n                    case \"approaching\":\n                        this.activateState(\"approaching\");\n                        break;\n                    case \"idle\":\n                        this.activateState(\"idle\");\n                        break;\n                    case \"moving_away\":\n                        this.activateState(\"moving_away\");\n                        break;\n                }\n                break;\n        }\n    }\n    var vel = this.physicsAPI.getLinearVelocity();\n    vel = this.transformAPI.globalToLocalRotation(vel);\n    var speedTorqueFactor = (Math.abs(vel[0]) / 3);\n    if (this._keysDown.indexOf(\"A\") !== -1)\n    {\n\n        this.physicsAPI.addTorque(0, 0, speedTorqueFactor * mass * 3);\n        var force = this.transformAPI.localToGlobal(speedTorqueFactor * mass, 0, 0);\n        this.physicsAPI.addTorque(force);\n    }\n    if (this._keysDown.indexOf(\"D\") !== -1)\n    {\n        this.physicsAPI.addTorque(0, 0, -speedTorqueFactor * mass * 3);\n        var force = this.transformAPI.localToGlobal(-speedTorqueFactor * mass, 0, 0);\n        this.physicsAPI.addTorque(force);\n    }\n    if (this._keysDown.indexOf(\" \") !== -1)\n    {\n        if (this.rockets > 0)\n        {\n            this.currentState = this.states[\"fire_rocket\"];\n        }\n        else\n        {\n            this.currentState = this.states[\"moving_away\"];\n        }\n    }",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -683,7 +803,7 @@
 					"vertexColors": false,
 					"wireframe": false
 				},
-				"DisplayName": "./vwfdatamanager.svc/DataFile/Navy/AttackSpeedBoat.dae1",
+				"DisplayName": "3D_model",
 				"___assetServerOriginalID": "N958e2662",
 				"owner": "ADLteam",
 				"transform": [
@@ -758,9 +878,9 @@
 					9.91911065284512e-7,
 					0.9980000257492065,
 					0,
-					-16.884723663330078,
-					-27.284629821777344,
-					-0.48029518127441406,
+					41.926326751708984,
+					-63.1278190612793,
+					19.53988265991211,
 					1
 				]
 			}
@@ -963,9 +1083,9 @@
 					-0.9878926873207092,
 					-0.08596871793270111,
 					0,
-					-17.10487174987793,
-					-25.30080795288086,
-					1.765204906463623,
+					41.7061767578125,
+					-61.14399719238281,
+					21.785383224487305,
 					1
 				]
 			},

@@ -1,0 +1,32 @@
+{
+	"extends": "./customObjectDemo/customSphere.vwf",
+	"source": "./customObjectDemo/customSphere.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.328346252907068,
+		"s1": 0.390328560257331,
+		"s2": 0.462338479235768,
+		"c": 1
+	},
+	"properties": {
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0.75,
+			1
+		]
+	}
+}
