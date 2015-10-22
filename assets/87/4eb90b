@@ -92,7 +92,7 @@
 		"activeState": "navigating",
 		"counter": 14602,
 		"ditorData": "",
-		"engine": "aheadHalf",
+		"engine": "idle",
 		"height": 10,
 		"materialDef": {
 			"alpha": 1,
@@ -149,7 +149,7 @@
 		},
 		"owner": "ADLteam",
 		"physicsAPI": {},
-		"rudder": "back",
+		"rudder": "center",
 		"sourceAssetId": "874eb90b",
 		"states": {
 			"idle": {
@@ -184,20 +184,20 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			0.9999029636383057,
-			0.049677155911922455,
-			0.01774579845368862,
+			-0.6477532386779785,
+			50.55853271484375,
+			0.1897919476032257,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 20,
-		"___sourceAssetTimestamp": "Mon Oct 19 2015 14:31:26 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Wed Oct 21 2015 10:14:11 GMT-0400 (Eastern Daylight Time)",
 		"damageTexture": "/sas/assets/dde67e10",
 		"worldPosition": [
-			0.9999029636383057,
-			0.049677155911922455,
-			0.01774579845368862
+			-0.6477532386779785,
+			50.55853271484375,
+			0.1897919476032257
 		]
 	},
 	"methods": {
@@ -288,7 +288,7 @@
 							"offsety": 0,
 							"scalex": 1,
 							"scaley": 1,
-							"src": "/sas/assets/dde67e10"
+							"src": "/sas/assets/f110f46d"
 						}
 					],
 					"metal": false,
@@ -329,9 +329,9 @@
 				],
 				"type": "3DR Object",
 				"worldPosition": [
-					0.9999029636383057,
-					0.049677155911922455,
-					0.01774579845368862
+					-0.6477532386779785,
+					50.55853271484375,
+					0.1897919476032257
 				]
 			},
 			"methods": {

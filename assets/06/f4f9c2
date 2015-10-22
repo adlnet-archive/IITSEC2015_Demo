@@ -207,15 +207,15 @@
 			0,
 			1,
 			0,
-			0.5315200090408325,
-			1.232393503189087,
-			0.01774579845368862,
+			-39.856346130371094,
+			-9.905110359191895,
+			0.38653743267059326,
 			1
 		],
 		"type": "Primitive",
 		"width": 0.14,
 		"hasSentStatement": false,
-		"___sourceAssetTimestamp": "Tue Oct 20 2015 12:08:22 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Wed Oct 21 2015 11:10:43 GMT-0400 (Eastern Daylight Time)",
 		"visible": true,
 		"height": 1.16,
 		"states": {
@@ -303,10 +303,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n                  var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n                  if (!cam || cam.id != thisCam) return false;\n                  return true;  \n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
-		"fire": {
-			"body": "var sender = this.Scene.children_by_name.xAPISender;\n    var role = \"SmallCraftActionTeam\";\n\n    if (sender && !this.hasSentStatement)\n    {\n        sender.xAPISend(\"fired\", \"50CalMachineGunBurst\", role, null);\n        this.hasSentStatement = true;\n    }\n\n    var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        console.log(hit);\n         console.log(hit.node);\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n        if (hit.node && hit.node.hit)\n        {\n            hit.node.hit([hit.point, 5]);\n            console.log(hit.node);\n            if (sender)\n            {\n                sender.xAPISend(\"hit\", \"what\" /*hit.node*/ , role, null);\n            }\n        }\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", \"nothing\" /*hit.node*/ , role, null);\n        }\n    }\n    else\n    {\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", \"everything\", role, null);\n        }\n    }",
-			"parameters": []
-		},
 		"userControlled": {
 			"body": "var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n    return this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
@@ -342,6 +338,10 @@
 			"parameters": [
 				"args"
 			]
+		},
+		"fire": {
+			"body": "var sender = this.Scene.children_by_name.xAPISender;\n    var role = \"SmallCraftActionTeam\";\n\n    if (sender && !this.hasSentStatement)\n    {\n        sender.xAPISend(\"fired\", \"50CalMachineGunBurst\", role, null);\n        this.hasSentStatement = true;\n    }\n\n    var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        console.log(hit);\n        console.log(hit.node);\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n        if (hit.node && hit.node.hit)\n        {\n            hit.node.hit([hit.point, 5]);\n            console.log(hit.node);\n            if (sender)\n            {\n                sender.xAPISend(\"hit\", (hit.node || \"what\") /*hit.node*/ , role, null);\n            }\n        }\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", (hit.node || \"nothing\") /*hit.node*/ , role, null);\n        }\n    }\n    else\n    {\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", (hit.node || \"everything\"), role, null);\n        }\n    }",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -653,9 +653,9 @@
 							0.8165703415870667,
 							0.017400048673152924,
 							0,
-							0.09769337624311447,
-							1.8498209714889526,
-							0.7897959351539612,
+							-40.290164947509766,
+							-9.287681579589844,
+							1.1585875749588013,
 							0.9999998807907104
 						],
 						"visible": false
