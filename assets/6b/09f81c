@@ -1,0 +1,96 @@
+{
+	"extends": "asset.vwf",
+	"source": "http://54.175.234.78:3030/assets/649a2d70",
+	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"sequence": 0,
+	"random": {
+		"s0": 0.9439447079785168,
+		"s1": 0.7924379715695977,
+		"s2": 0.33443279354833066,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": {
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"ambient": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"emit": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularLevel": 1,
+			"alpha": 1,
+			"shininess": 0.000002,
+			"side": 0,
+			"reflect": 0.01,
+			"layers": [
+				{
+					"mapTo": 1,
+					"scalex": 1,
+					"scaley": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"alpha": 1,
+					"src": "http://54.175.234.78:3030/assets/d91d1b6a.jpg",
+					"mapInput": 0
+				}
+			],
+			"type": "phong",
+			"wireframe": false,
+			"metal": false,
+			"combine": 0,
+			"depthtest": true,
+			"depthwrite": true,
+			"blendMode": 1,
+			"fog": true,
+			"shading": true,
+			"vertexColors": false
+		},
+		"owner": "ADLteam",
+		"transform": [
+			-0.9079856872558594,
+			-1.0445181131362915,
+			3.8087120124430385e-9,
+			0,
+			1.0438125133514404,
+			-0.9073723554611206,
+			0.07318461686372757,
+			0,
+			-0.05563192442059517,
+			0.04836009442806244,
+			1.393051028251648,
+			0,
+			-6.473999977111816,
+			-92.56999969482422,
+			1.1670000553131104,
+			1
+		],
+		"___sourceAssetTimestamp": "Thu Oct 22 2015 11:51:23 GMT-0400 (Eastern Daylight Time)",
+		"DisplayName": "Fishing Boat"
+	}
+}
