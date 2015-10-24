@@ -2,16 +2,14 @@
 	"extends": "http://vwf.example.com/panel.vwf",
 	"sequence": 0,
 	"random": {
-		"s0": 0.6407507706899196,
+		"s0": 0.64075077068992,
 		"s1": 0.777328419033438,
-		"s2": 0.23421752057038248,
+		"s2": 0.234217520570382,
 		"c": 1
 	},
 	"properties": {
-		"width": 100,
-		"height": 100,
-		"left": 0,
-		"top": 0,
+		"DisplayName": "IntroScreen",
+		"___sourceAssetTimestamp": "Fri Oct 23 2015 14:38:18 GMT-0400 (EDT)",
 		"background_color": [
 			1,
 			0,
@@ -23,6 +21,48 @@
 			1,
 			1
 		],
+		"cameraChoiceIDs": {
+			"Fast Attact Craft": "SandboxCamera-vwf-N6b282caa",
+			"Instructor": "SandboxCamera-vwf-N82daec42",
+			"Officer Of The Deck": "SandboxCamera-vwf-N6b282caa",
+			"Seahawk Pilot": "SandboxCamera-vwf-N6b282caa",
+			"Small Craft Action Team": "SandboxCamera-vwf-N6b282caa",
+			"Tactical Action Officer": "SandboxCamera-vwf-N6b282caa"
+		},
+		"controls": {
+			"Fast Attack Craft": "/sas/assets/c9d6167a",
+			"Instructor": "/sas/assets/26345faa",
+			"Officer Of The Deck": "/sas/assets/0e0d5b9c",
+			"Seahawk Pilot": "/sas/assets/cfe6e93d",
+			"Small Craft Action Team": "/sas/assets/e99f1067",
+			"Tactical Action Officer": ""
+		},
+		"height": 100,
+		"instructions": {
+			"Fast Attack Craft": "Guide your fleet of attack boats through the defenses of the USS Stockdale, and sink her with your rockets.",
+			"Instructor": "Observe the exercise from every point of view, and evaluate the participants' performances.",
+			"Officer Of The Deck": "Take command of the USS Stockdale, an Arleigh Burke-class destroyer, and defend her against a swarm of Fast Attack Crafts (FACs).",
+			"Seahawk Pilot": "Aid in the defense of the USS Stockdale by scouting incoming ships, and using your guided missiles to destroy incoming hostiles.",
+			"Small Craft Action Team": "Use your deck-mounted 50-caliber machine gun to take out incoming hostiles, as identified by your team.",
+			"Tactical Action Officer": "Man the radar of the USS Stockdale, and use your knowledge of the surroundings to direct the defenders to incoming threats."
+		},
+		"left": 0,
+		"owner": "ADLteam",
+		"simulationStarted": false,
+		"sourceAssetId": "298f2fa8",
+		"style": {
+			"align-items": "center",
+			"background": "url(/sas/assets/7fcc5d9f) center / cover no-repeat",
+			"bottom": "0px",
+			"display": "flex",
+			"height": "100%",
+			"justify-content": "space-around",
+			"left": "0px",
+			"right": "0px",
+			"top": "0px",
+			"width": "100%"
+		},
+		"top": 0,
 		"transform": [
 			1,
 			0,
@@ -36,53 +76,25 @@
 			0,
 			1,
 			0,
-			-2.697874809071361,
-			-0.1902104794378623,
-			0.01774579882621774,
+			5.52834035521336,
+			-0.66119739582066,
+			0.0177457988262173,
 			1
 		],
-		"owner": "ADLteam",
-		"DisplayName": "IntroScreen",
 		"visible": true,
-		"style": {
-			"bottom": "0px",
-			"height": "100%",
-			"left": "0px",
-			"right": "0px",
-			"top": "0px",
-			"width": "100%"
-		},
-		"sourceAssetId": "298f2fa8",
-		"instructions": {
-			"Fast Attack Craft": "Lorem ipsum blandit sem nostra netus nibh molestie eleifend rhoncus morbi, fusce rutrum eget consequat cubilia nisi fermentum pharetra elit, sociosqu pellentesque et nam condimentum vestibulum netus rhoncus aliquet varius velit sodales amet faucibus vestibulum ultricies pellentesque est, suscipit curae facilisis praesent vivamus posuere sit ipsum erat, semper sapien nibh ultricies ad massa per ultrices dictumst erat donec curabitur eget phasellus nostra dictumst sapien, feugiat dui id lacus venenatis fusce viverra aptent aenean, venenatis mollis torquent suscipit eros auctor condimentum varius faucibus ut sodales lacus curae pulvinar molestie purus elementum proin tellus imperdiet per.",
-			"Instructor": "Lorem ipsum conubia cubilia himenaeos ligula vulputate mattis turpis lacinia, ullamcorper ante fames vestibulum bibendum diam fermentum ligula eu, vel nam aenean ligula neque vehicula fringilla ultricies sociosqu curae justo morbi lacinia praesent inceptos erat donec ligula, at feugiat laoreet imperdiet justo eget aenean mollis, feugiat potenti viverra sed faucibus pretium curabitur duis cursus aenean lacinia et taciti risus nibh laoreet, nibh habitasse venenatis torquent curabitur potenti primis, rhoncus vestibulum proin imperdiet adipiscing vehicula aptent lacinia litora condimentum aliquam non varius nisi faucibus, integer vulputate fermentum hendrerit himenaeos blandit interdum sem, ligula praesent habitasse phasellus faucibus ut pellentesque.",
-			"Officer Of The Deck": "Lorem ipsum lacus cras class commodo ipsum sit rutrum dolor arcu risus, non ultrices ullamcorper facilisis sapien tellus sapien dolor pulvinar cubilia sem, litora tristique himenaeos proin ultrices varius pretium quis per blandit cubilia metus quis eleifend malesuada quam sociosqu duis lacus, quisque eu non eu tortor facilisis lacinia, litora sodales curae donec dictumst egestas amet primis amet aliquet mauris fringilla conubia sit purus sollicitudin lobortis, aliquam aenean ipsum sollicitudin habitant dui accumsan iaculis sagittis porttitor elit risus habitasse metus torquent interdum conubia.",
-			"Seahawk Pilot": "Lorem ipsum diam molestie nulla odio tincidunt nibh dolor, consectetur rhoncus class duis adipiscing mi tempus, ac dictum metus nunc neque tellus a aenean metus mi auctor etiam lorem facilisis fringilla, quam porta tempus luctus platea nisl, curabitur egestas netus lectus urna curabitur nulla sociosqu habitant inceptos porta placerat luctus accumsan pretium nec morbi quis.",
-			"Small Craft Action Team": "Lorem ipsum odio posuere fringilla hendrerit vitae maecenas habitasse, lorem ullamcorper fames inceptos fames ad nec, fringilla taciti magna hac erat conubia fringilla per elementum felis hac justo duis ullamcorper lobortis tortor, sodales sed ante hendrerit himenaeos orci massa mollis, nisl commodo senectus fermentum magna bibendum risus.",
-			"Tactical Action Officer": "Lorem ipsum est lobortis proin blandit aliquam tincidunt, ultrices nec nulla quisque proin per volutpat quisque, fusce feugiat eros eu torquent nibh molestie bibendum hendrerit tempor ornare tellus justo bibendum eleifend elit, ullamcorper libero ut risus ad sagittis justo elementum, nisi mattis pellentesque fringilla phasellus vulputate magna habitant etiam tempor dui facilisis per feugiat habitant."
-		},
-		"visibleToCamera": "SandboxCamera-vwf-N803895c1",
-		"cameraChoiceIDs": {
-			"Fast Attact Craft": "SandboxCamera-vwf-N6b282caa",
-			"Instructor": "SandboxCamera-vwf-N82daec42",
-			"Officer Of The Deck": "SandboxCamera-vwf-N6b282caa",
-			"Seahawk Pilot": "SandboxCamera-vwf-N6b282caa",
-			"Small Craft Action Team": "SandboxCamera-vwf-N6b282caa",
-			"Tactical Action Officer": "SandboxCamera-vwf-N6b282caa"
-		},
-		"___sourceAssetTimestamp": "Mon Oct 19 2015 11:33:58 GMT-0400 (Eastern Daylight Time)",
-		"simulationStarted": false
+		"visibleToCamera": "",
+		"width": 100
 	},
 	"methods": {
-		"selectRole": {
-			"body": " this.children_by_name.ChoicePanel.children_by_name.YourChoice.text = role;\n    this.children_by_name.InstructionPAnel.children_by_name.Instructions.text = this.instructions[role]; ",
-			"parameters": [
-				"role"
-			]
-		},
 		"getCameraToggler": {
 			"body": "var children = this.Scene.children;\n\n    for (var i = 0; i < children.length; i++)\n    {\n        var child = children[i];\n        if (child && child.isCameraToggler === true) return child;\n    }\n\n    return null;",
 			"parameters": []
+		},
+		"selectRole": {
+			"body": "this.children_by_name.ChoicePanel.children_by_name.YourChoice.text = role;\n    this.children_by_name.InstructionPAnel.visible = true;\n    this.children_by_name.InstructionPAnel.children_by_name.Instructions.text = this.instructions[role];\n    if (this.controls[role])\n    {\n        this.children_by_name.InstructionPAnel.children_by_name.Controls.visible = true;\n        this.children_by_name.InstructionPAnel.children_by_name.Controls.src = this.controls[role];\n    }\n    else\n    {\n        this.children_by_name.InstructionPAnel.children_by_name.Controls.visible = false;\n    }",
+			"parameters": [
+				"role"
+			]
 		},
 		"startSimulation": {
 			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (!this.simulationStarted && sender)\n    {\n        this.simulationStarted = true;\n        sender.xAPISend(\"started\", \"object\", \"role\", null);\n    }\n\n    if (sender)\n    {\n        sender.xAPISend(\"selected\", choice.replace(/\\s/g, ''), choice.replace(/\\s/g, ''), null)\n    }",
@@ -90,499 +102,18 @@
 		}
 	},
 	"children": {
-		"N8e85dd88": {
-			"extends": "http://vwf.example.com/image.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.845537452958524,
-				"s1": 0.627771944273263,
-				"s2": 0.922125005396083,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "Background",
-				"height": 100,
-				"left": 0,
-				"owner": "ADLteam",
-				"src": "/sas/assets/7fcc5d9f",
-				"style": {
-					"bottom": "0px",
-					"height": "100%",
-					"left": "0px",
-					"right": "0px",
-					"top": "0px",
-					"width": "100%"
-				},
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					50,
-					50,
-					0,
-					1
-				],
-				"visible": true,
-				"width": 100,
-				"___assetServerOriginalID": "N8e85dd88"
-			}
-		},
-		"N87a5a3d8": {
-			"extends": "http://vwf.example.com/panel.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.819274035980925,
-				"s1": 0.9752298854291439,
-				"s2": 0.7848246407229453,
-				"c": 1
-			},
-			"properties": {
-				"width": 519,
-				"height": 349,
-				"left": 0,
-				"top": 0,
-				"background_color": [
-					0.0196078431372549,
-					0.0196078431372549,
-					0.0196078431372549
-				],
-				"background_visible": true,
-				"border_color": [
-					1,
-					1,
-					1
-				],
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					16.125,
-					16.8740005493164,
-					1,
-					1
-				],
-				"owner": "ADLteam",
-				"DisplayName": "ChoicePanel",
-				"visible": true,
-				"border_width": 2,
-				"___assetServerOriginalID": "N87a5a3d8"
-			},
-			"children": {
-				"N741cce22": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.8389047221280634,
-						"s1": 0.5202984167262912,
-						"s2": 0.9058927020523697,
-						"c": 1
-					},
-					"properties": {
-						"width": 259,
-						"height": 28,
-						"text": "Tactical Action Officer",
-						"left": 0,
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							25,
-							30,
-							0,
-							1
-						],
-						"owner": "ADLteam",
-						"DisplayName": "TAO",
-						"visible": true,
-						"___assetServerOriginalID": "N741cce22"
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								" eventData",
-								" nodeData "
-							],
-							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
-						}
-					}
-				},
-				"Ndd7965d9": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "OOD",
-						"height": 28,
-						"left": 0,
-						"owner": "ADLteam",
-						"text": "Officer Of The Deck",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							25,
-							40,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 259,
-						"___assetServerOriginalID": "Ndd7965d9"
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								" eventData",
-								" nodeData "
-							],
-							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
-						}
-					}
-				},
-				"Ne130b22": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "SCAT",
-						"height": 28,
-						"left": 0,
-						"owner": "ADLteam",
-						"text": "Small Craft Action Team",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							25,
-							50,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 259,
-						"___assetServerOriginalID": "Ne130b22"
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								" eventData",
-								" nodeData "
-							],
-							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
-						}
-					}
-				},
-				"N9f1fe69": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "SeaHawk",
-						"height": 28,
-						"left": 0,
-						"owner": "ADLteam",
-						"text": "Seahawk Pilot",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							25,
-							60,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 259,
-						"___assetServerOriginalID": "N9f1fe69"
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								" eventData",
-								" nodeData "
-							],
-							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
-						}
-					}
-				},
-				"Nb331742c": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "FAC",
-						"height": 28,
-						"left": 0,
-						"owner": "ADLteam",
-						"text": "Fast Attack Craft",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							25,
-							80,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 259,
-						"___assetServerOriginalID": "Nb331742c"
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								" eventData",
-								" nodeData "
-							],
-							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
-						}
-					}
-				},
-				"Ne935b34d": {
-					"extends": "http://vwf.example.com/label.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.7299794729333371,
-						"s1": 0.21683713211677969,
-						"s2": 0.581641138298437,
-						"c": 1
-					},
-					"properties": {
-						"width": 520,
-						"height": 29,
-						"text": "Choose Your Role",
-						"left": 0,
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							-0.189999997615814,
-							5,
-							0,
-							1
-						],
-						"owner": "ADLteam",
-						"DisplayName": "Title",
-						"visible": true,
-						"font_color": [
-							1,
-							1,
-							1
-						],
-						"text_align": "center",
-						"font_size": 19,
-						"___assetServerOriginalID": "Ne935b34d"
-					}
-				},
-				"N5e24739c": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "Instructor",
-						"height": 28,
-						"left": 0,
-						"owner": "ADLteam",
-						"text": "Instructor",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							25,
-							90,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 259,
-						"___assetServerOriginalID": "N5e24739c"
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								" eventData",
-								" nodeData "
-							],
-							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
-						}
-					}
-				},
-				"N380036af": {
-					"extends": "http://vwf.example.com/label.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.729979472933337,
-						"s1": 0.21683713211678,
-						"s2": 0.581641138298437,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "YourChoice",
-						"font_color": [
-							1,
-							1,
-							1
-						],
-						"font_size": 26,
-						"height": 37,
-						"left": 0,
-						"owner": "ADLteam",
-						"text": "You Are:",
-						"text_align": "center",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							-0.189999997615814,
-							15,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 520,
-						"___assetServerOriginalID": "N380036af"
-					}
-				}
-			}
-		},
 		"Nb57658e8": {
 			"extends": "http://vwf.example.com/panel.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.47708680224604905,
-				"s1": 0.6624827636405826,
-				"s2": 0.22952223336324096,
+				"s0": 0.477086802246049,
+				"s1": 0.662482763640583,
+				"s2": 0.229522233363241,
 				"c": 1
 			},
 			"properties": {
-				"width": 629,
-				"height": 700,
-				"left": 0,
-				"top": 0,
+				"DisplayName": "InstructionPAnel",
+				"___assetServerOriginalID": "Nb57658e8",
 				"background_color": [
 					0.0196078431372549,
 					0.0196078431372549,
@@ -594,6 +125,22 @@
 					1,
 					1
 				],
+				"border_width": 2,
+				"height": 700,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"align-items": "center",
+					"display": "flex",
+					"flex-direction": "column",
+					"height": "auto",
+					"order": 1,
+					"padding": "20px",
+					"position": "relative",
+					"width": "45%",
+					"max-width": "600px"
+				},
+				"top": 0,
 				"transform": [
 					1,
 					0,
@@ -607,16 +154,13 @@
 					0,
 					1,
 					0,
-					57.125,
-					17.0890007019043,
-					1,
+					0,
+					0,
+					0,
 					1
 				],
-				"owner": "ADLteam",
-				"DisplayName": "InstructionPAnel",
-				"visible": true,
-				"border_width": 2,
-				"___assetServerOriginalID": "Nb57658e8"
+				"visible": false,
+				"width": 629
 			},
 			"children": {
 				"N5d32f9e0": {
@@ -630,6 +174,7 @@
 					},
 					"properties": {
 						"DisplayName": "InstructionTitle",
+						"___assetServerOriginalID": "N5d32f9e0",
 						"font_color": [
 							1,
 							1,
@@ -639,6 +184,13 @@
 						"height": 100,
 						"left": 0,
 						"owner": "ADLteam",
+						"style": {
+							"height": "auto",
+							"margin-bottom": "20px",
+							"order": 0,
+							"position": "static",
+							"width": "auto"
+						},
 						"text": "Instructions",
 						"text_align": "center",
 						"top": 0,
@@ -661,8 +213,51 @@
 							1
 						],
 						"visible": true,
-						"width": 520,
-						"___assetServerOriginalID": "N5d32f9e0"
+						"width": 520
+					}
+				},
+				"Nbaf6bd84": {
+					"extends": "http://vwf.example.com/image.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.11204170063138,
+						"s1": 0.625456349691376,
+						"s2": 0.0114210785832256,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "Controls",
+						"___assetServerOriginalID": "Nbaf6bd84",
+						"height": 180,
+						"left": 0,
+						"owner": "ADLteam",
+						"src": "/sas/assets/cfe6e93d",
+						"style": {
+							"margin-top": "15px",
+							"order": 2,
+							"position": "static"
+						},
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 300
 					}
 				},
 				"Ned8ae2b8": {
@@ -676,6 +271,7 @@
 					},
 					"properties": {
 						"DisplayName": "Instructions",
+						"___assetServerOriginalID": "Ned8ae2b8",
 						"font_color": [
 							1,
 							1,
@@ -685,7 +281,12 @@
 						"height": 549,
 						"left": 0,
 						"owner": "ADLteam",
-						"text": "Lorem ipsum orci aliquam rhoncus erat luctus a, himenaeos fermentum sodales sociosqu convallis torquent venenatis accumsan, volutpat metus auctor aliquet arcu tempor.  Eu primis neque dictum suspendisse eget tellus nec, mattis lacus vel dui enim accumsan, lectus imperdiet varius torquent scelerisque mattis.  Quam risus sollicitudin non vitae ac lorem conubia, rhoncus ullamcorper senectus aliquet quisque ligula, lorem in nec egestas habitant consequat dui etiam nunc potenti porttitor et ac.  Nunc tristique enim pharetra tempus ligula egestas donec primis, platea vel inceptos faucibus auctor cubilia vestibulum, curabitur quisque neque viverra augue inceptos placerat nostra vehicula ac eros neque pharetra euismod netus.  Posuere nec pulvinar curabitur rhoncus nisl nullam sollicitudin nisi, interdum quam eros vitae erat potenti conubia, sapien faucibus etiam libero euismod consequat ut.",
+						"style": {
+							"height": "auto",
+							"position": "static",
+							"width": "auto"
+						},
+						"text": "Lorem ipsum orci aliquam rhoncus erat luctus a, himenaeos fermentum sodales sociosqu convallis torquent venenatis accumsan, volutpat metus auctor aliquet arcu tempor.",
 						"text_align": "left",
 						"top": 0,
 						"transform": [
@@ -707,26 +308,48 @@
 							1
 						],
 						"visible": true,
-						"width": 520,
-						"___assetServerOriginalID": "Ned8ae2b8"
+						"width": 520
 					}
 				}
 			}
 		},
-		"Ne0ed98c5": {
-			"extends": "http://vwf.example.com/button.vwf",
+		"N87a5a3d8": {
+			"extends": "http://vwf.example.com/panel.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.22166854492388666,
-				"s1": 0.18214424885809422,
-				"s2": 0.42450695135630667,
+				"s0": 0.819274035980925,
+				"s1": 0.975229885429144,
+				"s2": 0.784824640722945,
 				"c": 1
 			},
 			"properties": {
-				"width": 517,
-				"height": 100,
-				"text": "Join Simulation!",
+				"DisplayName": "ChoicePanel",
+				"___assetServerOriginalID": "N87a5a3d8",
+				"background_color": [
+					0.0196078431372549,
+					0.0196078431372549,
+					0.0196078431372549
+				],
+				"background_visible": true,
+				"border_color": [
+					1,
+					1,
+					1
+				],
+				"border_width": 2,
+				"height": 403,
 				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"align-items": "center",
+					"display": "flex",
+					"flex-direction": "column",
+					"order": 0,
+					"padding": "10px",
+					"position": "relative",
+					"width": "37%",
+					"max-width": "500px"
+				},
 				"top": 0,
 				"transform": [
 					1,
@@ -741,26 +364,490 @@
 					0,
 					1,
 					0,
-					16.3120002746582,
-					57.1759986877441,
-					1,
+					0,
+					0,
+					0,
 					1
 				],
-				"owner": "ADLteam",
-				"DisplayName": "Button1",
 				"visible": true,
-				"style": {
-					"font-size": "30px"
-				},
-				"___assetServerOriginalID": "Ne0ed98c5"
+				"width": 519
 			},
-			"events": {
-				"pointerClick": {
-					"parameters": [
-						" eventData",
-						" nodeData "
-					],
-					"body": " this.parent.startSimulation();"
+			"children": {
+				"Ndd7965d9": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.838904722128063,
+						"s1": 0.520298416726291,
+						"s2": 0.90589270205237,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "OOD",
+						"___assetServerOriginalID": "Ndd7965d9",
+						"height": 28,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"margin": "3px",
+							"order": 2,
+							"position": "static"
+						},
+						"text": "Officer Of The Deck",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							25,
+							40,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 259
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								" eventData",
+								" nodeData "
+							],
+							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
+						}
+					}
+				},
+				"N9f1fe69": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.838904722128063,
+						"s1": 0.520298416726291,
+						"s2": 0.90589270205237,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "SeaHawk",
+						"___assetServerOriginalID": "N9f1fe69",
+						"height": 28,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"margin": "3px",
+							"order": 3,
+							"position": "static"
+						},
+						"text": "Seahawk Pilot",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							25,
+							60,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 259
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								" eventData",
+								" nodeData "
+							],
+							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
+						}
+					}
+				},
+				"Ne0ed98c5": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.221668544923887,
+						"s1": 0.182144248858094,
+						"s2": 0.424506951356307,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "Button1",
+						"___assetServerOriginalID": "Ne0ed98c5",
+						"height": 68,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"font-size": "30px",
+							"margin-top": "20px",
+							"order": 30,
+							"position": "static",
+							"width": "95%"
+						},
+						"text": "Join Simulation!",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							16.3120002746582,
+							57.1759986877441,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 517
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "this.parent.parent.startSimulation();"
+						}
+					}
+				},
+				"Nb331742c": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.838904722128063,
+						"s1": 0.520298416726291,
+						"s2": 0.90589270205237,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "FAC",
+						"___assetServerOriginalID": "Nb331742c",
+						"height": 28,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"margin": "3px",
+							"margin-top": "15px",
+							"order": 6,
+							"position": "static"
+						},
+						"text": "Fast Attack Craft",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							25,
+							80,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 259
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								" eventData",
+								" nodeData "
+							],
+							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
+						}
+					}
+				},
+				"N380036af": {
+					"extends": "http://vwf.example.com/label.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.729979472933337,
+						"s1": 0.21683713211678,
+						"s2": 0.581641138298437,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "YourChoice",
+						"___assetServerOriginalID": "N380036af",
+						"font_color": [
+							1,
+							1,
+							1
+						],
+						"font_size": 26,
+						"height": 37,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"margin-bottom": "20px",
+							"order": 1,
+							"position": "static"
+						},
+						"text": "You Are:",
+						"text_align": "center",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							-0.189999997615814,
+							15,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 520
+					}
+				},
+				"Ne130b22": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.838904722128063,
+						"s1": 0.520298416726291,
+						"s2": 0.90589270205237,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "SCAT",
+						"___assetServerOriginalID": "Ne130b22",
+						"height": 28,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"margin": "3px",
+							"order": 4,
+							"position": "static"
+						},
+						"text": "Small Craft Action Team",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							25,
+							50,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 259
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								" eventData",
+								" nodeData "
+							],
+							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
+						}
+					}
+				},
+				"Ne935b34d": {
+					"extends": "http://vwf.example.com/label.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.729979472933337,
+						"s1": 0.21683713211678,
+						"s2": 0.581641138298437,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "Title",
+						"___assetServerOriginalID": "Ne935b34d",
+						"font_color": [
+							1,
+							1,
+							1
+						],
+						"font_size": 19,
+						"height": 29,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"order": 0,
+							"position": "static"
+						},
+						"text": "Choose Your Role",
+						"text_align": "center",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							-0.189999997615814,
+							5,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 520
+					}
+				},
+				"N741cce22": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.838904722128063,
+						"s1": 0.520298416726291,
+						"s2": 0.90589270205237,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "TAO",
+						"___assetServerOriginalID": "N741cce22",
+						"height": 28,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"margin": "3px",
+							"order": 5,
+							"position": "static"
+						},
+						"text": "Tactical Action Officer",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							25,
+							30,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 259
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								" eventData",
+								" nodeData "
+							],
+							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
+						}
+					}
+				},
+				"N5e24739c": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.838904722128063,
+						"s1": 0.520298416726291,
+						"s2": 0.90589270205237,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "Instructor",
+						"___assetServerOriginalID": "N5e24739c",
+						"height": 28,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"margin": "3px",
+							"margin-top": "15px",
+							"order": 7,
+							"position": "static"
+						},
+						"text": "Instructor",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							25,
+							90,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 259
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								" eventData",
+								" nodeData "
+							],
+							"body": " if(vwf.client() !== vwf.moniker()) return;\n    this.parent.parent.selectRole(this.text);"
+						}
+					}
 				}
 			}
 		}

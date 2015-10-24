@@ -1,0 +1,420 @@
+{
+	"extends": "http://vwf.example.com/panel.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.477923698723316,
+		"s1": 0.68751523271203,
+		"s2": 0.0785004610661417,
+		"c": 1
+	},
+	"properties": {
+		"DisplayName": "Panel4",
+		"background_color": [
+			0.870588235294118,
+			0.870588235294118,
+			0.870588235294118
+		],
+		"background_visible": false,
+		"border_color": [
+			1,
+			1,
+			1
+		],
+		"height": 110,
+		"left": 0,
+		"owner": "Anonymous_9vmgT-vvm68FRVuiAAAD",
+		"style": {},
+		"top": 0,
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			2.1875,
+			2.35108568075117,
+			0,
+			1
+		],
+		"visible": true,
+		"visibleToAncestor": true,
+		"width": 157
+	},
+	"children": {
+		"N8c18cdf1": {
+			"extends": "http://vwf.example.com/panel.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.612893612589687,
+				"s1": 0.265669293934479,
+				"s2": 0.679882327560335,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "Panel3",
+				"___assetServerOriginalID": "N2bb3ebcf",
+				"background_color": [
+					1,
+					0,
+					0
+				],
+				"background_visible": false,
+				"border_color": [
+					1,
+					1,
+					1
+				],
+				"height": 91,
+				"left": 0,
+				"owner": "drnager",
+				"style": "",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					63.0573248407643,
+					7.27272727272727,
+					0,
+					1
+				],
+				"visible": true,
+				"visibleToAncestor": false,
+				"width": 50
+			},
+			"children": {
+				"Ndd528ac3": {
+					"extends": "http://vwf.example.com/label.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.930666561704129,
+						"s1": 0.561994474148378,
+						"s2": 0.397850641747937,
+						"c": 1
+					},
+					"properties": {
+						"": null,
+						"DisplayName": "Label1",
+						"___assetServerOriginalID": "N3bfcd342",
+						"font_color": [
+							0,
+							0,
+							0
+						],
+						"font_size": 12,
+						"height": 20,
+						"left": 0,
+						"owner": "drnager",
+						"style": {
+							"font-weight": "bold"
+						},
+						"text": "Zoom",
+						"text_align": "left",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							6.30630630630631,
+							0.995879120879121,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 38
+					}
+				},
+				"N2ead8283": {
+					"extends": "http://vwf.example.com/slider.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.741897383471951,
+						"s1": 0.830695839831606,
+						"s2": 0.609284000471234,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "Slider1",
+						"___assetServerOriginalID": "Nd4dcb8fe",
+						"height": 59,
+						"left": 0,
+						"max": 10,
+						"min": 1,
+						"orientation": "vertical",
+						"owner": "drnager",
+						"step": 1,
+						"top": 0,
+						"transform": [
+							0.998,
+							0,
+							0,
+							0,
+							0,
+							0.998,
+							0,
+							0,
+							0,
+							0,
+							0.999,
+							0,
+							26,
+							22.9739010989011,
+							0,
+							1
+						],
+						"value": 1,
+						"visible": true,
+						"width": 10
+					},
+					"methods": {
+						"tick": {
+							"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    this.Scene.children_by_name.OrbitCamera.zoom = 11 - this.value;",
+							"parameters": []
+						}
+					},
+					"events": {
+						"pointerOut": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "this.Scene.findNode(\"Panel2\").hide( \"drop\", { direction: \"down\" }, \"slow\" );"
+						},
+						"pointerOver": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "this.Scene.findNode(\"Panel2\").show( \"fold\", 1000 );"
+						}
+					}
+				}
+			}
+		},
+		"N8a181ef8": {
+			"extends": "http://vwf.example.com/panel.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.472297183005139,
+				"s1": 0.392624928150326,
+				"s2": 0.337626715190709,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "Panel1",
+				"___assetServerOriginalID": "N30933d3e",
+				"background_color": [
+					1,
+					0,
+					0
+				],
+				"background_visible": false,
+				"border_color": [
+					1,
+					1,
+					1
+				],
+				"height": 108,
+				"left": 0,
+				"owner": "drnager",
+				"style": {},
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					5.69395017793594,
+					8.24298469387755,
+					0,
+					1
+				],
+				"visible": true,
+				"visibleToAncestor": false,
+				"width": 86
+			},
+			"children": {
+				"Nf321a215": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.685128063661978,
+						"s1": 0.164849372813478,
+						"s2": 0.416094677057117,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "btnReload",
+						"___assetServerOriginalID": "N1ef2a038",
+						"height": 22,
+						"left": 0,
+						"owner": "drnager",
+						"style": {},
+						"text": "Reload",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							4,
+							56,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 75
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "console.log(\"Stop\");\n    this.Scene.playMode = \"stop\";\n    window.location.reload();"
+						}
+					}
+				},
+				"Na5e92cb5": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.685128063661978,
+						"s1": 0.164849372813478,
+						"s2": 0.416094677057117,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "btnPlay",
+						"___assetServerOriginalID": "N3270923f",
+						"height": 22,
+						"left": 0,
+						"owner": "drnager",
+						"style": {},
+						"text": "Play",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							4,
+							0,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 75
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "console.log(\"Play\");\n    this.Scene.playMode = \"play\";"
+						}
+					}
+				},
+				"Ne16b2a46": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.685128063661978,
+						"s1": 0.164849372813478,
+						"s2": 0.416094677057117,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "btnPause",
+						"___assetServerOriginalID": "N9086fee1",
+						"height": 22,
+						"left": 0,
+						"owner": "drnager",
+						"style": {},
+						"text": "Pause",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							4,
+							28,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 75
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "console.log(\"Pause\");\n    this.Scene.playMode = \"paused\";"
+						}
+					}
+				}
+			}
+		}
+	}
+}
