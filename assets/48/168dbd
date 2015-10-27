@@ -1,1 +1,106 @@
-{"extends":"SandboxCamera.vwf","source":"vwf/model/threejs/camera.js","type":"subDriver/threejs","sequence":0,"random":{"s0":0.762165,"s1":0.779216,"s2":0.235236,"c":1},"properties":{"DisplayName":"LookatCamera","EditorData":{"Target":{"displayname":"Target","property":"objectToLookAt","type":"nodeid"}},"last_x":0,"last_y":0,"mousedown":0,"objectToLookAt":"box2-vwf-Nc5cb6be","offset":[1,0,0],"owner":"ADLteam","quaternion":[-0.168121,0.013128,-0.076735,0.982687],"rotation":[-0.907434,0.070859,-0.414178,21.353824],"scale":[1,0.998998,0.999],"transform":[0.9822478890419006,0.18758542835712433,6.341603153714459e-8,0,-0.18156394362449646,0.9507178664207458,-0.247330904006958,0,-0.046395592391490936,0.24293950200080872,0.9678964018821716,0,42.397239685058594,-67.00320434570312,22.711191177368164,1],"translation":[-4.978086,-9.806168,1.459538],"zoom":1},"methods":{"tick":{"body":"         var node = this.Scene.findNodeByID(this.objectToLookAt);\n    var pos = [0, 0, 0];\n    if (node)\n        pos = node.transformAPI.localToGlobal([0, 0, 0]);\n    var offset = this.offset;\n    offset = MATH.scaleVec3(offset, this.zoom);\n\n    this.transformAPI.lookat(pos, '', '-Y', 'Z');         ","parameters":[]}},"children":{"N3b5a255a":{"extends":"Seek.vwf","sequence":0,"random":{"s0":0.127052,"s1":0.514706,"s2":0.823928,"c":1},"properties":{"DisplayName":"seek1","Offset":[8,0,2],"Target":"box2-vwf-Nc5cb6be","owner":"ADLteam","strength":0.3,"type":"behavior"}}}}
+{
+	"extends": "SandboxCamera.vwf",
+	"source": "vwf/model/threejs/camera.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.762165,
+		"s1": 0.779216,
+		"s2": 0.235236,
+		"c": 1
+	},
+	"properties": {
+		"DisplayName": "LookatCamera",
+		"EditorData": {
+			"Target": {
+				"displayname": "Target",
+				"property": "objectToLookAt",
+				"type": "nodeid"
+			}
+		},
+		"last_x": 0,
+		"last_y": 0,
+		"mousedown": 0,
+		"objectToLookAt": "box2-vwf-Nc5cb6be",
+		"offset": [
+			1,
+			0,
+			0
+		],
+		"owner": "ADLteam",
+		"quaternion": [
+			-0.168121,
+			0.013128,
+			-0.076735,
+			0.982687
+		],
+		"rotation": [
+			-0.907434,
+			0.070859,
+			-0.414178,
+			21.353824
+		],
+		"scale": [
+			1,
+			0.998998,
+			0.999
+		],
+		"transform": [
+			0.9822478890419006,
+			0.18758542835712433,
+			6.341603153714459e-8,
+			0,
+			-0.18156394362449646,
+			0.9507178664207458,
+			-0.247330904006958,
+			0,
+			-0.046395592391490936,
+			0.24293950200080872,
+			0.9678964018821716,
+			0,
+			5.5,
+			37.5,
+			1.25,
+			1
+		],
+		"translation": [
+			-4.978086,
+			-9.806168,
+			1.459538
+		],
+		"zoom": 1,
+		"___sourceAssetTimestamp": "Mon Oct 26 2015 10:12:49 GMT-0400 (Eastern Daylight Time)",
+		"sourceAssetId": "48168dbd"
+	},
+	"methods": {
+		"tick": {
+			"body": "         var node = this.Scene.findNodeByID(this.objectToLookAt);\n    var pos = [0, 0, 0];\n    if (node)\n        pos = node.transformAPI.localToGlobal([0, 0, 0]);\n    var offset = this.offset;\n    offset = MATH.scaleVec3(offset, this.zoom);\n\n    this.transformAPI.lookat(pos, '', '-Y', 'Z');         ",
+			"parameters": []
+		}
+	},
+	"children": {
+		"N5f7e8c14": {
+			"extends": "Seek.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.127052,
+				"s1": 0.514706,
+				"s2": 0.823928,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "seek1",
+				"Offset": [
+					8,
+					0,
+					2
+				],
+				"Target": "box2-vwf-Nc5cb6be",
+				"owner": "ADLteam",
+				"strength": 0.3,
+				"type": "behavior",
+				"___assetServerOriginalID": "N5f7e8c14"
+			}
+		}
+	}
+}

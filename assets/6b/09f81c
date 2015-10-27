@@ -85,12 +85,13 @@
 			0.04836009442806244,
 			1.393051028251648,
 			0,
-			-6.473999977111816,
-			-92.56999969482422,
-			1.1670000553131104,
+			7.257575035095215,
+			54.02721405029297,
+			0.6139530539512634,
 			1
 		],
-		"___sourceAssetTimestamp": "Thu Oct 22 2015 11:51:23 GMT-0400 (Eastern Daylight Time)",
-		"DisplayName": "Fishing Boat"
+		"___sourceAssetTimestamp": "Mon Oct 26 2015 10:10:48 GMT-0400 (Eastern Daylight Time)",
+		"DisplayName": "Fishing Boat",
+		"sourceAssetId": "6b09f81c"
 	}
 }

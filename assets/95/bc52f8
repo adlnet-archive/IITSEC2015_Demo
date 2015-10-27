@@ -1,0 +1,916 @@
+{
+	"extends": "asset.vwf",
+	"source": "http://54.175.234.78:3030/assets/adb9520a",
+	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"sequence": 0,
+	"random": {
+		"s0": 0.770068238954991,
+		"s1": 0.372494086623192,
+		"s2": 0.669335008133203,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": [
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"wireframe": false,
+				"metal": false,
+				"combine": 0,
+				"depthtest": true,
+				"depthwrite": true,
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"wireframe": false,
+				"metal": false,
+				"combine": 0,
+				"depthtest": true,
+				"depthwrite": true,
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 0.99,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 0.73,
+						"src": "http://54.175.234.78:3030/assets/b191c0f5.png",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 0.4832881401913861,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"wireframe": false,
+				"metal": false,
+				"combine": 0,
+				"depthtest": true,
+				"depthwrite": true,
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			},
+			{
+				"color": {
+					"r": 1,
+					"g": 1,
+					"b": 1
+				},
+				"ambient": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"emit": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularColor": {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				"specularLevel": 1,
+				"alpha": 1,
+				"shininess": 0.000002,
+				"side": 0,
+				"reflect": 0.01,
+				"layers": [
+					{
+						"mapTo": 1,
+						"scalex": 1,
+						"scaley": 1,
+						"offsetx": 0,
+						"offsety": 0,
+						"alpha": 1,
+						"src": "http://54.175.234.78:3030/assets/51c1a77e.jpg",
+						"mapInput": 0
+					}
+				],
+				"type": "phong",
+				"blendMode": 1,
+				"fog": true,
+				"shading": true,
+				"metal": false,
+				"wireframe": false,
+				"depthtest": true,
+				"depthwrite": true,
+				"vertexColors": false
+			}
+		],
+		"___sourceAssetTimestamp": "Mon Oct 26 2015 11:33:52 GMT-0400 (Eastern Daylight Time)",
+		"owner": "ADLteam",
+		"transform": [
+			1.3940000534057617,
+			0,
+			0,
+			0,
+			0,
+			1.3940000534057617,
+			0,
+			0,
+			0,
+			0,
+			1.3940000534057617,
+			0,
+			-20.5,
+			-278.5,
+			-3,
+			1
+		],
+		"DisplayName": "Chemical Tanker"
+	}
+}

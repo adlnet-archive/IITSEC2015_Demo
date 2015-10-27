@@ -283,15 +283,15 @@
 			0,
 			0.9860000014305115,
 			0,
-			4.312709331512451,
-			2.7534286975860596,
-			0.039947010576725006,
+			-21.204927444458008,
+			42.87405014038086,
+			0.031816016882658005,
 			1
 		],
 		"type": "Primitive",
 		"width": 1.31,
 		"visible": true,
-		"___sourceAssetTimestamp": "Tue Oct 20 2015 11:25:38 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Mon Oct 26 2015 09:31:01 GMT-0400 (Eastern Daylight Time)",
 		"manualFiring": false
 	},
 	"methods": {

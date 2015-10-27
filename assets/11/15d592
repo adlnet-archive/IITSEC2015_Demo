@@ -15,6 +15,27 @@
 		"uChop": 0.733,
 		"uNormalPower": 0.184,
 		"uOceanDepth": 0.037,
-		"uReflectPow": 3
+		"uReflectPow": 3,
+		"owner": "ADLteam",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			36.17620086669922,
+			16.202177047729492,
+			20.12802505493164,
+			1
+		],
+		"___sourceAssetTimestamp": "Mon Oct 26 2015 09:51:12 GMT-0400 (Eastern Daylight Time)",
+		"sourceAssetId": "1115d592"
 	}
 }

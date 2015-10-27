@@ -42,14 +42,14 @@
 			0,
 			1,
 			0,
-			-1.56848695587304,
-			1.48215425270564,
-			0.0177457988262177,
+			-40.31746800454474,
+			15.992572202562826,
+			0.4218246078491177,
 			1
 		],
 		"visible": true,
 		"width": 500,
-		"___sourceAssetTimestamp": "Mon Oct 19 2015 13:34:03 GMT-0400 (Eastern Daylight Time)"
+		"___sourceAssetTimestamp": "Mon Oct 26 2015 11:18:28 GMT-0400 (Eastern Daylight Time)"
 	},
 	"children": {
 		"N5111c16a": {
