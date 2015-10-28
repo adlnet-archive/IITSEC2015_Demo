@@ -1,0 +1,308 @@
+{
+    "accessors": {
+        "accessor_21": {
+            "bufferView": "bufferView_29",
+            "byteOffset": 0,
+            "byteStride": 0,
+            "count": 53841,
+            "type": 5123
+        },
+        "accessor_23": {
+            "bufferView": "bufferView_30",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "count": 53841,
+            "max": [
+                1612.11,
+                12631.1,
+                2934.18
+            ],
+            "min": [
+                -1612.11,
+                -8296.61,
+                -3051.85
+            ],
+            "type": 35665
+        },
+        "accessor_25": {
+            "bufferView": "bufferView_30",
+            "byteOffset": 646092,
+            "byteStride": 12,
+            "count": 53841,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_27": {
+            "bufferView": "bufferView_30",
+            "byteOffset": 1292184,
+            "byteStride": 8,
+            "count": 53841,
+            "max": [
+                0.99882,
+                0.99866
+            ],
+            "min": [
+                -0.00014,
+                0.000989974
+            ],
+            "type": 35664
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+        "premultipliedAlpha": true,
+        "profile": "WebGL 1.0.2",
+        "version": 0.6
+    },
+    "bufferViews": {
+        "bufferView_29": {
+            "buffer": "resupply-ship",
+            "byteLength": 107684,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_30": {
+            "buffer": "resupply-ship",
+            "byteLength": 1722912,
+            "byteOffset": 107684,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "resupply-ship": {
+            "byteLength": 1830596,
+            "path": "11688aa5",
+            "type": "arraybuffer"
+        }
+    },
+    "images": {
+        "Hull_Gr3_bmp-image": {
+            "path": "/Navy"
+        },
+        "TAKE7_bmp-image": {
+            "path": "/Navy"
+        },
+        "TAKE7_op_bmp-image": {
+            "path": "/Navy"
+        }
+    },
+    "materials": {
+        "TAKE7_Mat-fx": {
+            "instanceTechnique": {
+                "technique": "technique0",
+                "values": {
+                    "ambient": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "shininess": 57.076,
+                    "transparency": 0
+                }
+            },
+            "name": "TAKE7_Mat"
+        }
+    },
+    "meshes": {
+        "USNS_Carl_Brashear-lib": {
+            "name": "USNS_Carl_BrashearMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_25",
+                        "POSITION": "accessor_23",
+                        "TEXCOORD_0": "accessor_27"
+                    },
+                    "indices": "accessor_21",
+                    "material": "TAKE7_Mat-fx",
+                    "primitive": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "TAKE7_01": {
+            "children": [
+                "USNS_Carl_Brashear"
+            ],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "name": "TAKE7_01"
+        },
+        "USNS_Carl_Brashear": {
+            "children": [],
+            "matrix": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                -1,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                2276.14,
+                690.055,
+                1
+            ],
+            "meshes": [
+                "USNS_Carl_Brashear-lib"
+            ],
+            "name": "USNS_Carl_Brashear"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "resupply-ship0FS",
+            "vertexShader": "resupply-ship0VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "TAKE7_01"
+            ]
+        }
+    },
+    "shaders": {
+        "resupply-ship0FS": {
+            "path": "resupply-ship0FS.glsl",
+            "type": 35632
+        },
+        "resupply-ship0VS": {
+            "path": "resupply-ship0VS.glsl",
+            "type": 35633
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                },
+                "shininess": {
+                    "type": 5126
+                },
+                "transparency": {
+                    "type": 5126
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Phong",
+                            "parameters": [
+                                "ambient",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix",
+                                "shininess",
+                                "transparency"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_0",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix",
+                            "u_shininess": "shininess",
+                            "u_transparency": "transparency"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 1,
+                        "blendEquation": 32774,
+                        "blendFunc": {
+                            "dfactor": 771,
+                            "sfactor": 1
+                        },
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        }
+    }
+}

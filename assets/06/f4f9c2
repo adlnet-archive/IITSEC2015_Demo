@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.05304533988237381,
-		"s1": 0.3225355208851397,
-		"s2": 0.6220968244597316,
-		"c": 53625
+		"s0": 0.6551256380043924,
+		"s1": 0.3533425950445235,
+		"s2": 0.79552753851749,
+		"c": 1625350
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -207,15 +207,15 @@
 			0,
 			1,
 			0,
-			-21.68721580505371,
-			44.83231735229492,
-			0.014847729355096817,
+			5.5,
+			-15,
+			19,
 			1
 		],
 		"type": "Primitive",
 		"width": 0.14,
 		"hasSentStatement": false,
-		"___sourceAssetTimestamp": "Mon Oct 26 2015 09:24:36 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 27 2015 16:36:49 GMT-0400 (Eastern Daylight Time)",
 		"visible": true,
 		"height": 1.16,
 		"states": {
@@ -255,7 +255,8 @@
 		"targetID": null,
 		"lastTargetPos": null,
 		"fuse": 0,
-		"maxRange": 100
+		"maxRange": 100,
+		"isUserControlled": false
 	},
 	"methods": {
 		"_keyDown": {
@@ -303,10 +304,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n                  var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n                  if (!cam || cam.id != thisCam) return false;\n                  return true;  \n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
-		"userControlled": {
-			"body": "var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n    return this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
-			"parameters": []
-		},
 		"activateState": {
 			"body": "if (this.states[newState] && this.states[newState].transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        console.log(\"transition to \" + newState);\n    }\n    else\n    {\n        console.log(\"invalid transition\");\n    }",
 			"parameters": [
@@ -329,18 +326,28 @@
 			"body": "this.firecounter--;\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var thispos = this.transformAPI.getPosition();\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    vec = MATH.subVec3(thispos, MATH.addVec3(targetpos, MATH.scaleVec3(targetSpeed, (dist / 10) + 1)));\n    this.fuse = MATH.lengthVec3(vec) / 1000; //the 50 cal does not need to lead the target nearly so much\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * 1.7);\n\n    var upvec = this.children_by_name[\"50CalPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.min(-0.5, -dot));\n    }\n    if (dot < -.01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.max(0.5, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02 && this.firecounter < 1)\n    {\n        this.activateState(\"engaging\");\n    }\n    this.lastTargetPos = targetpos;",
 			"parameters": []
 		},
+		"fire": {
+			"body": "var sender = this.Scene.children_by_name.xAPISender;\n    var role = \"SmallCraftActionTeam\";\n\n    if (sender && !this.hasSentStatement)\n    {\n        sender.xAPISend(\"fired\", \"50CalMachineGunBurst\", role, null);\n        this.hasSentStatement = true;\n    }\n\n    var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        console.log(hit);\n        console.log(hit.node);\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n        if (hit.node && hit.node.hit)\n        {\n            hit.node.hit([hit.point, 5]);\n            console.log(hit.node);\n            if (sender)\n            {\n                sender.xAPISend(\"hit\", (hit.node || \"what\") /*hit.node*/ , role, null);\n            }\n        }\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", (hit.node || \"nothing\") /*hit.node*/ , role, null);\n        }\n    }\n    else\n    {\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", (hit.node || \"everything\"), role, null);\n        }\n    }",
+			"parameters": []
+		},
 		"targeting": {
-			"body": "var near = Infinity;\n    var target = null;\n    var thispos = this.transformAPI.getPosition();\n\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var child = this.Scene.children[i];\n        if (child.id == this.id) continue;\n        if (child.parent.id == this.id) continue;\n        var childpos = child.transformAPI.getPosition();\n        var dist = MATH.distanceVec3(thispos, childpos);\n        if (dist < near && child.hostile && child.activeState !== 'disabled')\n        {\n            near = dist;\n            target = child;\n        }\n    }\n    if (target && near < (this.maxRange || 100))\n    {\n        this.targetID = target.id;\n        this.activateState(\"tracking\");\n    }",
+			"body": "var near = Infinity;\n    var target = null;\n    var thispos = this.transformAPI.getPosition();\n\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var child = this.Scene.children[i];\n        if (child.id == this.id) continue;\n        if (child.parent.id == this.id) continue;\n        if(!child.transformAPI) continue;\n        \n        var childpos = child.transformAPI.getPosition();\n        var dist = MATH.distanceVec3(thispos, childpos);\n        if (dist < near && child.hostile && child.activeState !== 'disabled')\n        {\n            near = dist;\n            target = child;\n        }\n    }\n    if (target && near < (this.maxRange || 100))\n    {\n        this.targetID = target.id;\n        this.activateState(\"tracking\");\n    }",
 			"parameters": []
 		},
 		"TAOCommand50Cal": {
-			"body": "var command = args[0];\n    var label = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name.CommandDisplayLabel;\n    label.text = command;\n    label.visible = true;\n    if (command == \"50 Cal Engage\")\n    {\n        this.activateState(\"targeting\");\n    }\n    if (command == \"50 Cal disengage\")\n    {\n        this.activateState(\"idle\");\n    }",
+			"body": "var command = args[0];\n    var label = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name.CommandDisplayLabel;\n\n    \n    if (command === \"toggleControl\")\n    {\n        this.toggleControl();\n        return;\n    }\n    \n    label.text = command;\n    label.visible = true;\n    \n    if (command == \"50 Cal Engage\")\n    {\n        this.activateState(\"targeting\");\n    }\n    if (command == \"50 Cal disengage\")\n    {\n        this.activateState(\"idle\");\n    }",
 			"parameters": [
 				"args"
 			]
 		},
-		"fire": {
-			"body": "var sender = this.Scene.children_by_name.xAPISender;\n    var role = \"SmallCraftActionTeam\";\n\n    if (sender && !this.hasSentStatement)\n    {\n        sender.xAPISend(\"fired\", \"50CalMachineGunBurst\", role, null);\n        this.hasSentStatement = true;\n    }\n\n    var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        console.log(hit);\n        console.log(hit.node);\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n        if (hit.node && hit.node.hit)\n        {\n            hit.node.hit([hit.point, 5]);\n            console.log(hit.node);\n            if (sender)\n            {\n                sender.xAPISend(\"hit\", (hit.node || \"what\") /*hit.node*/ , role, null);\n            }\n        }\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", (hit.node || \"nothing\") /*hit.node*/ , role, null);\n        }\n    }\n    else\n    {\n        if (sender)\n        {\n            sender.xAPISend(\"missed\", (hit.node || \"everything\"), role, null);\n        }\n    }",
+		"toggleControl": {
+			"body": "if (disable) this.isUserControlled = false;\n    else this.isUserControlled = !this.isUserControlled;\n\n    var button = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name[\"Button1\"];\n    button.text = this.isUserControlled ? \"Enable AI\" : \"Take Control\";",
+			"parameters": [
+				"disable"
+			]
+		},
+		"userControlled": {
+			"body": "var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n    var isUserControlled = this.isUserControlled && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;\n\n    if (isUserControlled && this.activeState != \"idle\") this.activeState = \"targeting\";\n\n    return isUserControlled;",
 			"parameters": []
 		}
 	},
@@ -478,9 +485,9 @@
 							0,
 							-3.5830066691389106e-10,
 							0,
-							0.20000000298023224,
-							-1.0058238331112079e-7,
-							-2,
+							0.19999900460243225,
+							2.3134312243655586e-7,
+							-1.999999761581421,
 							1
 						]
 					},
@@ -537,6 +544,55 @@
 								"visible": false,
 								"width": 294,
 								"visibleToAncestor": true
+							}
+						},
+						"N1c1b0e9": {
+							"extends": "http://vwf.example.com/button.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.8968342074658722,
+								"s1": 0.5586358273867518,
+								"s2": 0.5987354265525937,
+								"c": 1
+							},
+							"properties": {
+								"width": 100,
+								"height": 38,
+								"text": "Take Control",
+								"left": 0,
+								"top": 0,
+								"transform": [
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									3,
+									90,
+									0,
+									1
+								],
+								"owner": "ADLteam",
+								"DisplayName": "Button1",
+								"visible": true,
+								"visibleToAncestor": true,
+								"___assetServerOriginalID": "N1c1b0e9"
+							},
+							"events": {
+								"pointerClick": {
+									"parameters": [
+										"eventData",
+										"nodeData"
+									],
+									"body": "this.broadcast(\"TAOCommand50Cal\", [\"toggleControl\"], 0);"
+								}
 							}
 						}
 					}
@@ -653,23 +709,23 @@
 							0.8165703415870667,
 							0.017400048673152924,
 							0,
-							-22.12104034423828,
-							45.449737548828125,
-							0.7868978977203369,
+							5.066173076629639,
+							-14.382570266723633,
+							19.77204704284668,
 							0.9999998807907104
 						],
 						"visible": false
 					}
 				},
-				"N43bdfb3e": {
+				"Nf113456": {
 					"extends": "asset.vwf",
-					"source": "http://54.175.234.78:3030/assets/6eb1cb39",
-					"type": "subDriver/threejs/asset/vnd.collada+xml",
+					"source": "http://54.175.234.78:3030/assets/744f77e3",
+					"type": "subDriver/threejs/asset/vnd.gltf+json",
 					"sequence": 0,
 					"random": {
-						"s0": 0.762904461240396,
-						"s1": 0.445300380233675,
-						"s2": 0.449139307485893,
+						"s0": 0.0964645275380462,
+						"s1": 0.534941863268614,
+						"s2": 0.233227088116109,
 						"c": 1
 					},
 					"properties": {
@@ -736,26 +792,27 @@
 							"vertexColors": false,
 							"wireframe": false
 						},
+						"___sourceAssetTimestamp": "Tue Oct 27 2015 14:15:57 GMT-0400 (EDT)",
 						"owner": "ADLteam",
 						"transform": [
-							0.0218572486191988,
-							-1.6430740101824881e-9,
-							-0.9907594323158264,
+							0.01746985875070095,
 							0,
-							-3.152353933444374e-10,
-							0.9909999966621399,
-							1.3881557237027664e-8,
+							-1.000847578048706,
 							0,
-							0.9907594323158264,
-							-5.011538961596784e-10,
-							0.0218572486191988,
 							0,
-							-0.2998161315917969,
-							-0.009031006135046482,
-							0.05007600039243698,
+							1.0010000467300415,
+							0,
+							0,
+							1.000847578048706,
+							0,
+							0.01746985875070095,
+							0,
+							-0.3009999990463257,
+							-0.009999999776482582,
+							0.05000000074505806,
 							1
 						],
-						"___assetServerOriginalID": "N43bdfb3e"
+						"___assetServerOriginalID": "Nf113456"
 					}
 				}
 			}

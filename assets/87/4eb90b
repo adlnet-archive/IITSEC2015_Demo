@@ -236,8 +236,8 @@
 	"children": {
 		"N7711dbf9": {
 			"extends": "asset.vwf",
-			"source": "/sas/assets/2379f467",
-			"type": "subDriver/threejs/asset/vnd.collada+xml",
+			"source": "/sas/assets/b318ad31",
+			"type": "subDriver/threejs/asset/vnd.gltf+json",
 			"sequence": 0,
 			"random": {
 				"s0": 0.529011,

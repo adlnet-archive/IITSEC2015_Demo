@@ -99,7 +99,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Thu Oct 22 2015 17:42:47 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 27 2015 13:15:13 GMT-0400 (EDT)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -378,9 +378,9 @@
 			0,
 			0.9980000257492065,
 			0,
-			-3.211045742034912,
-			-4.501212120056152,
-			0.018955938518047333,
+			10.270715713500977,
+			1.3400859832763672,
+			0.050745293498039246,
 			1
 		],
 		"type": "Primitive",
@@ -400,9 +400,9 @@
 			0,
 			0.9980000257492065,
 			0,
-			-3.211045742034912,
-			-4.501212120056152,
-			0.018955938518047333,
+			10.270715713500977,
+			1.3400859832763672,
+			0.050745293498039246,
 			1
 		],
 		"tickCount": 0,
@@ -725,101 +725,6 @@
 		}
 	},
 	"children": {
-		"N958e2662": {
-			"extends": "asset.vwf",
-			"source": "/sas/assets/c1064312",
-			"type": "subDriver/threejs/asset/vnd.collada+xml",
-			"sequence": 0,
-			"random": {
-				"s0": 0.375302,
-				"s1": 0.872168,
-				"s2": 0.110384,
-				"c": 1
-			},
-			"properties": {
-				"___physics_activation_state": 1,
-				"___physics_deactivation_time": 0,
-				"___physics_velocity_linear": [
-					0,
-					0,
-					0
-				],
-				"___physics_velocity_angular": [
-					0,
-					0,
-					0
-				],
-				"materialDef": {
-					"alpha": 1,
-					"ambient": {
-						"b": 0.584,
-						"g": 0.584,
-						"r": 0.584
-					},
-					"blendMode": 1,
-					"color": {
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"depthtest": true,
-					"depthwrite": true,
-					"emit": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"fog": true,
-					"layers": [
-						{
-							"alpha": 1,
-							"mapInput": 0,
-							"mapTo": 1,
-							"offsetx": 0,
-							"offsety": 0,
-							"scalex": 1,
-							"scaley": 1,
-							"src": "/sas/assets/7e6084c4"
-						}
-					],
-					"metal": false,
-					"reflect": 0.001,
-					"shading": true,
-					"shininess": 0.004002,
-					"side": 0,
-					"specularColor": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"specularLevel": 1,
-					"type": "phong",
-					"vertexColors": false,
-					"wireframe": false
-				},
-				"DisplayName": "3D_model",
-				"___assetServerOriginalID": "N958e2662",
-				"owner": "ADLteam",
-				"transform": [
-					-9.999999974752427e-7,
-					1,
-					-9.999999974752427e-7,
-					0,
-					-1.0000009536743164,
-					-9.999999974752427e-7,
-					-9.999999974752427e-7,
-					0,
-					-9.999999974752427e-7,
-					0,
-					1,
-					0,
-					0.5,
-					0,
-					-0.5,
-					1
-				]
-			}
-		},
 		"N8cf5a8e2": {
 			"extends": "http://vwf.example.com/node3.vwf",
 			"sequence": 0,
@@ -872,9 +777,9 @@
 					9.91911065284512e-7,
 					0.9980000257492065,
 					0,
-					-2.880824327468872,
-					-7.476945400238037,
-					-0.7295441031455994,
+					10.600936889648438,
+					-1.6356472969055176,
+					-0.6977547407150269,
 					1
 				]
 			}
@@ -1077,9 +982,9 @@
 					-0.9878926873207092,
 					-0.08596871793270111,
 					0,
-					-3.1009719371795654,
-					-5.4931230545043945,
-					1.515955924987793,
+					10.380789756774902,
+					0.3481748700141907,
+					1.5477453470230103,
 					1
 				]
 			},
@@ -1091,6 +996,102 @@
 					],
 					"body": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n                                            this.parent.launchMissile()                     "
 				}
+			}
+		},
+		"Ned0c4c0a": {
+			"extends": "asset.vwf",
+			"source": "http://54.175.234.78:3030/assets/a31ba113",
+			"type": "subDriver/threejs/asset/vnd.gltf+json",
+			"sequence": 0,
+			"random": {
+				"s0": 0.434828226920217,
+				"s1": 0.189991779392585,
+				"s2": 0.484111914644018,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"materialDef": {
+					"alpha": 1,
+					"ambient": {
+						"b": 0.584,
+						"g": 0.584,
+						"r": 0.584
+					},
+					"blendMode": 1,
+					"color": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [
+						{
+							"alpha": 1,
+							"mapInput": 0,
+							"mapTo": 1,
+							"offsetx": 0,
+							"offsety": 0,
+							"scalex": 1,
+							"scaley": 1,
+							"src": "/sas/assets/7e6084c4"
+						}
+					],
+					"metal": false,
+					"reflect": 0.001,
+					"shading": true,
+					"shininess": 0.004002,
+					"side": 0,
+					"specularColor": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"DisplayName": "3D_model",
+				"___assetServerOriginalID": "Ned0c4c0a",
+				"___sourceAssetTimestamp": "Tue Oct 27 2015 13:10:22 GMT-0400 (EDT)",
+				"owner": "ADLteam",
+				"transform": [
+					-3.593586583860997e-8,
+					100.19499969482422,
+					0,
+					0,
+					-100.1989974975586,
+					-3.5937301134936206e-8,
+					0,
+					0,
+					0,
+					0,
+					100.19400024414062,
+					0,
+					0.5,
+					0,
+					-0.5,
+					1
+				]
 			}
 		}
 	}

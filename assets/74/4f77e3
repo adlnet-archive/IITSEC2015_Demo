@@ -1,0 +1,468 @@
+{
+    "accessors": {
+        "accessor_51": {
+            "bufferView": "bufferView_78",
+            "byteOffset": 0,
+            "byteStride": 0,
+            "count": 65532,
+            "type": 5123
+        },
+        "accessor_53": {
+            "bufferView": "bufferView_79",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "count": 65532,
+            "max": [
+                67.7297,
+                30.4967,
+                47.5022
+            ],
+            "min": [
+                -100.033,
+                -33.7655,
+                -14.0023
+            ],
+            "type": 35665
+        },
+        "accessor_55": {
+            "bufferView": "bufferView_79",
+            "byteOffset": 786384,
+            "byteStride": 12,
+            "count": 65532,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_57": {
+            "bufferView": "bufferView_79",
+            "byteOffset": 1572768,
+            "byteStride": 8,
+            "count": 65532,
+            "max": [
+                0.98186,
+                0.975616
+            ],
+            "min": [
+                0.002624,
+                0.00514698
+            ],
+            "type": 35664
+        },
+        "accessor_61": {
+            "bufferView": "bufferView_78",
+            "byteOffset": 131064,
+            "byteStride": 0,
+            "count": 9579,
+            "type": 5123
+        },
+        "accessor_70": {
+            "bufferView": "bufferView_78",
+            "byteOffset": 150222,
+            "byteStride": 0,
+            "count": 12,
+            "type": 5123
+        },
+        "accessor_72": {
+            "bufferView": "bufferView_79",
+            "byteOffset": 2097024,
+            "byteStride": 12,
+            "count": 9591,
+            "max": [
+                56.9221,
+                4.60246,
+                26.8267
+            ],
+            "min": [
+                -3.97751,
+                -4.43344,
+                14.9817
+            ],
+            "type": 35665
+        },
+        "accessor_74": {
+            "bufferView": "bufferView_79",
+            "byteOffset": 2212116,
+            "byteStride": 12,
+            "count": 9591,
+            "max": [
+                1,
+                0.987689,
+                1
+            ],
+            "min": [
+                -1,
+                -0.987689,
+                -0.98769
+            ],
+            "type": 35665
+        },
+        "accessor_76": {
+            "bufferView": "bufferView_79",
+            "byteOffset": 2327208,
+            "byteStride": 8,
+            "count": 9591,
+            "max": [
+                1,
+                1
+            ],
+            "min": [
+                0,
+                0
+            ],
+            "type": 35664
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+        "premultipliedAlpha": true,
+        "profile": "WebGL 1.0.2",
+        "version": 0.6
+    },
+    "bufferViews": {
+        "bufferView_78": {
+            "buffer": "50cal",
+            "byteLength": 150248,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_79": {
+            "buffer": "50cal",
+            "byteLength": 2403936,
+            "byteOffset": 150248,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "50cal": {
+            "byteLength": 2554184,
+            "path": "efa42df2",
+            "type": "arraybuffer"
+        }
+    },
+    "images": {
+        "file1-image": {
+            "path": "/VWS/Sandbox/public/adl/sandbox/textures/50_Caliber_DeckGun_Color.jpg"
+        }
+    },
+    "materials": {
+        "_Cal_Gun_Color-fx": {
+            "instanceTechnique": {
+                "technique": "technique0",
+                "values": {
+                    "ambient": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ]
+                }
+            },
+            "name": "_Cal_Gun_Color"
+        },
+        "lambert1-fx": {
+            "instanceTechnique": {
+                "technique": "technique1",
+                "values": {
+                    "ambient": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "diffuse": [
+                        0.4,
+                        0.4,
+                        0.4,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ]
+                }
+            },
+            "name": "lambert1"
+        }
+    },
+    "meshes": {
+        "pCylinder5-lib": {
+            "name": "pCylinder5Mesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_55",
+                        "POSITION": "accessor_53",
+                        "TEXCOORD_0": "accessor_57"
+                    },
+                    "indices": "accessor_51",
+                    "material": "_Cal_Gun_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "pCylinder5-libsplit_0": {
+            "name": "pCylinder5Mesh1",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_74",
+                        "POSITION": "accessor_72",
+                        "TEXCOORD_0": "accessor_76"
+                    },
+                    "indices": "accessor_61",
+                    "material": "_Cal_Gun_Color-fx",
+                    "primitive": 4
+                },
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_74",
+                        "POSITION": "accessor_72",
+                        "TEXCOORD_0": "accessor_76"
+                    },
+                    "indices": "accessor_70",
+                    "material": "lambert1-fx",
+                    "primitive": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "pCylinder5": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "pCylinder5-lib",
+                "pCylinder5-libsplit_0"
+            ],
+            "name": "pCylinder5"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "50cal0FS",
+            "vertexShader": "50cal0VS"
+        },
+        "program_1": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "50cal1FS",
+            "vertexShader": "50cal1VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "pCylinder5"
+            ]
+        }
+    },
+    "shaders": {
+        "50cal0FS": {
+            "path": "50cal0FS.glsl",
+            "type": 35632
+        },
+        "50cal0VS": {
+            "path": "50cal0VS.glsl",
+            "type": 35633
+        },
+        "50cal1FS": {
+            "path": "50cal1FS.glsl",
+            "type": 35632
+        },
+        "50cal1VS": {
+            "path": "50cal1VS.glsl",
+            "type": 35633
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Lambert",
+                            "parameters": [
+                                "ambient",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_0",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 0,
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        },
+        "technique1": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "diffuse": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Lambert",
+                            "parameters": [
+                                "ambient",
+                                "diffuse",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_1",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_diffuse": "diffuse",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 0,
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        }
+    }
+}

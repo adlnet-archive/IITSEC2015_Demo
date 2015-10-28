@@ -1,0 +1,358 @@
+{
+    "accessors": {
+        "accessor_21": {
+            "bufferView": "bufferView_56",
+            "byteOffset": 0,
+            "byteStride": 0,
+            "count": 16920,
+            "type": 5123
+        },
+        "accessor_23": {
+            "bufferView": "bufferView_57",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "count": 16920,
+            "max": [
+                147.856,
+                145.625,
+                61.4075
+            ],
+            "min": [
+                -147.822,
+                -146.822,
+                -4.81345
+            ],
+            "type": 35665
+        },
+        "accessor_25": {
+            "bufferView": "bufferView_57",
+            "byteOffset": 203040,
+            "byteStride": 12,
+            "count": 16920,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_27": {
+            "bufferView": "bufferView_57",
+            "byteOffset": 406080,
+            "byteStride": 8,
+            "count": 16920,
+            "max": [
+                0.658961,
+                0.448635
+            ],
+            "min": [
+                0.006053,
+                0.00300199
+            ],
+            "type": 35664
+        },
+        "accessor_48": {
+            "bufferView": "bufferView_56",
+            "byteOffset": 33840,
+            "byteStride": 0,
+            "count": 42534,
+            "type": 5123
+        },
+        "accessor_50": {
+            "bufferView": "bufferView_57",
+            "byteOffset": 541440,
+            "byteStride": 12,
+            "count": 42534,
+            "max": [
+                284.9,
+                150.453,
+                390.756
+            ],
+            "min": [
+                -146.456,
+                -150.098,
+                48.778
+            ],
+            "type": 35665
+        },
+        "accessor_52": {
+            "bufferView": "bufferView_57",
+            "byteOffset": 1051848,
+            "byteStride": 12,
+            "count": 42534,
+            "max": [
+                0.999544,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_54": {
+            "bufferView": "bufferView_57",
+            "byteOffset": 1562256,
+            "byteStride": 8,
+            "count": 42534,
+            "max": [
+                0.953626,
+                0.975696
+            ],
+            "min": [
+                0.030332,
+                0.525273
+            ],
+            "type": 35664
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+        "premultipliedAlpha": true,
+        "profile": "WebGL 1.0.2",
+        "version": 0.6
+    },
+    "bufferViews": {
+        "bufferView_56": {
+            "buffer": "5in-gun",
+            "byteLength": 118908,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_57": {
+            "buffer": "5in-gun",
+            "byteLength": 1902528,
+            "byteOffset": 118908,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "5in-gun": {
+            "byteLength": 2021436,
+            "path": "c62e8c16",
+            "type": "arraybuffer"
+        }
+    },
+    "images": {
+        "file1-image": {
+            "path": "/VWS/Sandbox/public/adl/sandbox/textures/5-inch-gun-color.jpg"
+        }
+    },
+    "materials": {
+        "lambert2-fx": {
+            "instanceTechnique": {
+                "technique": "technique0",
+                "values": {
+                    "ambient": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ]
+                }
+            },
+            "name": "lambert2"
+        }
+    },
+    "meshes": {
+        "Gun_Base-lib": {
+            "name": "Gun_BaseMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_25",
+                        "POSITION": "accessor_23",
+                        "TEXCOORD_0": "accessor_27"
+                    },
+                    "indices": "accessor_21",
+                    "material": "lambert2-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Gun_Body-lib": {
+            "name": "Gun_BodyMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_52",
+                        "POSITION": "accessor_50",
+                        "TEXCOORD_0": "accessor_54"
+                    },
+                    "indices": "accessor_48",
+                    "material": "lambert2-fx",
+                    "primitive": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "Gun_Base": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Gun_Base-lib"
+            ],
+            "name": "Gun_Base"
+        },
+        "Gun_Body": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Gun_Body-lib"
+            ],
+            "name": "Gun_Body"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "5in-gun0FS",
+            "vertexShader": "5in-gun0VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "Gun_Base",
+                "Gun_Body"
+            ]
+        }
+    },
+    "shaders": {
+        "5in-gun0FS": {
+            "path": "5in-gun0FS.glsl",
+            "type": 35632
+        },
+        "5in-gun0VS": {
+            "path": "5in-gun0VS.glsl",
+            "type": 35633
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Lambert",
+                            "parameters": [
+                                "ambient",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_0",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 0,
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        }
+    }
+}

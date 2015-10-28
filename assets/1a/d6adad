@@ -341,9 +341,9 @@
 			0,
 			0.9963926672935486,
 			0,
-			1.4071892499923706,
-			-3.407458543777466,
-			0.018955938518047333,
+			-2.867999315261841,
+			-0.8545903563499451,
+			20.009235382080078,
 			1
 		],
 		"type": "Primitive",
@@ -363,9 +363,9 @@
 			0,
 			0.9963926672935486,
 			0,
-			1.4071892499923706,
-			-3.407458543777466,
-			0.018955938518047333,
+			-2.867999315261841,
+			-0.8545903563499451,
+			20.009235382080078,
 			1
 		],
 		"smokeDef": {
@@ -392,13 +392,13 @@
 				]
 			}
 		},
-		"___sourceAssetTimestamp": "Thu Oct 22 2015 17:42:56 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Oct 27 2015 14:36:33 GMT-0400 (Eastern Daylight Time)",
 		"tickCount": 0,
 		"radarTracked": true,
 		"worldPosition": [
-			1.4071892499923706,
-			-3.407458543777466,
-			0.018955938518047333
+			-2.867999315261841,
+			-0.8545903563499451,
+			20.009235382080078
 		],
 		"destroyedFACDef": {
 			"extends": "SandboxParticleSystem.vwf",
@@ -647,12 +647,6 @@
 			"body": "console.log(\"playMissileLaunch\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/744acf2e\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/4334801b\", false, 100);\n    // #3:\n    //this.audioAPI.playSound(\"/sas/assets/10b027bd\", false, 100);\n    // #4:\n    //this.audioAPI.playSound(\"/sas/assets/94d508e3\", false, 100);\n    // #5:\n    this.audioAPI.playSound(\"/sas/assets/263beb86\", false, 100);",
 			"parameters": []
 		},
-		"xAPISend": {
-			"body": "console.log(\"FAC Master xAPI Send\");\n\n    //1 - Registration for the run of this game\n    if (!this.Scene.attempt)\n    {\n        this.Scene.attempt = ADL.ruuid();\n    }\n\n    //2 - Wrapper setup\n    var conf = {\n        \"endpoint\": \"https://lrs.adlnet.gov/xapi/\",\n        \"auth\": \"Basic \" + toBase64('iitsecDemo:1234'),\n    };\n    this.Scene.___xAPI.configure(conf);\n    // this.Scene.xAPI.configure(conf);\n\n    //3 - Who is playing\n    var actor = {\n        account:\n        {\n            name: _UserManager.GetCurrentUserName(),\n            homePage: \"https://sandbox.adlnet.gov\",\n        },\n        name: _UserManager.GetCurrentUserName(),\n    };\n\n    //4 - Verb = did\n    var verb = {\n        id: \"http://vws.adlnet.gov/verbs/fired\",\n        display:\n        {\n            \"en-US\": \"fired\",\n        }\n    };\n\n    //5 What happened and where\n    //title and description of world along with name of object\n    //Change definition.name string of action to be recorded\n    var object = {\n        id: window.location.toString() + \"#\" + this.id + \"/\" + this.DisplayName,\n        // definition:\n        // {\n        //     name:\n        //     {\n        //         \"en-US\": _DataManager.getInstanceData().title + \"/\" + this.DisplayName + \"/\" + this.Scene.attempt,\n        //     },\n        //     description:\n        //     {\n        //         \"en-US\": _DataManager.getInstanceData().description,\n        //     }\n        // }\n    };\n\n    //6 - Additional context\n    var contextActivities = {\n        \"grouping\": [\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/\" + this.Scene.attempt\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/gametime/\" + this.Scene.time\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/positionFired/\" + pos\n            }\n        ],\n        \"category\": [\n            {\n                \"id\": \"http://adlnet.gov/event/2015/iitsecdemo\"\n            },\n            {\n                \"id\": \"http://localhost:3000/adl/sandbox/role/FAC_Master\"\n            },\n        ],\n        \"other\": [\n            {\n                \"id\": _DataManager.getCurrentApplication(),\n                definition:\n                {\n                    type: \"https://sandbox.adlnet.gov/world\"\n                }\n            }\n        ],\n    };\n\n    //7 - Result of the goals\n    var result = {\n        duration: \"PT\" + Math.floor(this.Scene.time) + \"S\"\n    };\n\n    //8 - Roll it all into one statement\n\n    var stmt = new ADL.XAPIStatement(actor, verb, object);\n    stmt.addParentActivity(new ADL.XAPIStatement.Activity(window.location.toString(), _DataManager.getInstanceData().title, _DataManager.getInstanceData.description));\n\n    stmt.context.contextActivities = contextActivities;\n    stmt.context.registration = this.Scene.attempt;\n    stmt.result = result;\n\n    this.Scene.___xAPI.sendStatement(null, stmt);\n    // this.Scene.xAPI.sendStatement(null, stmt);",
-			"parameters": [
-				"pos"
-			]
-		},
 		"launchMissile": {
 			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", pos);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
@@ -865,104 +859,9 @@
 					-0.9645858407020569,
 					-0.24237382411956787,
 					0,
-					1.268156886100769,
-					-4.400664806365967,
-					1.5105117559432983,
-					1
-				]
-			}
-		},
-		"N958e2662": {
-			"extends": "asset.vwf",
-			"source": "/sas/assets/c1064312",
-			"type": "subDriver/threejs/asset/vnd.collada+xml",
-			"sequence": 0,
-			"random": {
-				"s0": 0.375302,
-				"s1": 0.872168,
-				"s2": 0.110384,
-				"c": 1
-			},
-			"properties": {
-				"___physics_activation_state": 1,
-				"___physics_deactivation_time": 0,
-				"___physics_velocity_linear": [
-					0,
-					0,
-					0
-				],
-				"___physics_velocity_angular": [
-					0,
-					0,
-					0
-				],
-				"materialDef": {
-					"alpha": 1,
-					"ambient": {
-						"b": 0.584,
-						"g": 0.584,
-						"r": 0.584
-					},
-					"blendMode": 1,
-					"color": {
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"depthtest": true,
-					"depthwrite": true,
-					"emit": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"fog": true,
-					"layers": [
-						{
-							"alpha": 1,
-							"mapInput": 0,
-							"mapTo": 1,
-							"offsetx": 0,
-							"offsety": 0,
-							"scalex": 1,
-							"scaley": 1,
-							"src": "/sas/assets/7e6084c4"
-						}
-					],
-					"metal": false,
-					"reflect": 0.001,
-					"shading": true,
-					"shininess": 0.004002,
-					"side": 0,
-					"specularColor": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"specularLevel": 1,
-					"type": "phong",
-					"vertexColors": false,
-					"wireframe": false
-				},
-				"DisplayName": "3D_model",
-				"___assetServerOriginalID": "N958e2662",
-				"owner": "ADLteam",
-				"transform": [
-					-3.525620628774817e-10,
-					0.9829999804496765,
-					0,
-					0,
-					-0.9800000190734863,
-					-3.5148609023316624e-10,
-					0,
-					0,
-					0,
-					0,
-					0.9950000047683716,
-					0,
-					0.5,
-					0,
-					-0.5,
+					-3.0070316791534424,
+					-1.8477967977523804,
+					21.500791549682617,
 					1
 				]
 			}
@@ -1019,9 +918,9 @@
 					9.932061857398367e-7,
 					0.9963926672935486,
 					0,
-					1.17276132106781,
-					-6.3870768547058105,
-					-0.7374362349510193,
+					-3.1024272441864014,
+					-3.8342087268829346,
+					19.252843856811523,
 					1
 				]
 			}
@@ -1117,6 +1016,102 @@
 				],
 				"type": "Primitive",
 				"width": 2.18
+			}
+		},
+		"Ned0c4c0a": {
+			"extends": "asset.vwf",
+			"source": "http://54.175.234.78:3030/assets/a31ba113",
+			"type": "subDriver/threejs/asset/vnd.gltf+json",
+			"sequence": 0,
+			"random": {
+				"s0": 0.434828226920217,
+				"s1": 0.189991779392585,
+				"s2": 0.484111914644018,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"materialDef": {
+					"alpha": 1,
+					"ambient": {
+						"b": 0.584,
+						"g": 0.584,
+						"r": 0.584
+					},
+					"blendMode": 1,
+					"color": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [
+						{
+							"alpha": 1,
+							"mapInput": 0,
+							"mapTo": 1,
+							"offsetx": 0,
+							"offsety": 0,
+							"scalex": 1,
+							"scaley": 1,
+							"src": "/sas/assets/7e6084c4"
+						}
+					],
+					"metal": false,
+					"reflect": 0.001,
+					"shading": true,
+					"shininess": 0.004002,
+					"side": 0,
+					"specularColor": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"___sourceAssetTimestamp": "Tue Oct 27 2015 13:10:22 GMT-0400 (EDT)",
+				"owner": "ADLteam",
+				"transform": [
+					-3.600903042411119e-8,
+					100.39900207519531,
+					0,
+					0,
+					-100.3010025024414,
+					-3.5973883427686815e-8,
+					0,
+					0,
+					0,
+					0,
+					100.29499816894531,
+					0,
+					0.5,
+					0,
+					-0.5,
+					1
+				],
+				"DisplayName": "3D_model",
+				"___assetServerOriginalID": "Ned0c4c0a"
 			}
 		}
 	}

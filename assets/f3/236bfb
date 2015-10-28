@@ -1,7 +1,7 @@
 {
 	"extends": "asset.vwf",
-	"source": "/sas/assets/062eff30",
-	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"source": "/sas/assets/9732e259",
+	"type": "subDriver/threejs/asset/vnd.gltf+json",
 	"sequence": 0,
 	"random": {
 		"s0": 0.6329236263409257,

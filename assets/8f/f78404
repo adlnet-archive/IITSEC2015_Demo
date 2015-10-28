@@ -1,0 +1,552 @@
+{
+    "accessors": {
+        "accessor_102": {
+            "bufferView": "bufferView_110",
+            "byteOffset": 41028,
+            "byteStride": 0,
+            "count": 25584,
+            "type": 5123
+        },
+        "accessor_104": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 656448,
+            "byteStride": 12,
+            "count": 25584,
+            "max": [
+                292.757,
+                -156.521,
+                992.829
+            ],
+            "min": [
+                -326.425,
+                -582.041,
+                81.8984
+            ],
+            "type": 35665
+        },
+        "accessor_106": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 963456,
+            "byteStride": 12,
+            "count": 25584,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_108": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 1270464,
+            "byteStride": 8,
+            "count": 25584,
+            "max": [
+                0.970722,
+                0.971367
+            ],
+            "min": [
+                0.002532,
+                0.00971401
+            ],
+            "type": 35664
+        },
+        "accessor_21": {
+            "bufferView": "bufferView_110",
+            "byteOffset": 153588,
+            "byteStride": 0,
+            "count": 16440,
+            "type": 5123
+        },
+        "accessor_23": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 2457408,
+            "byteStride": 12,
+            "count": 16440,
+            "max": [
+                241.44,
+                -26.1602,
+                148.675
+            ],
+            "min": [
+                -275.649,
+                -328.426,
+                21.1563
+            ],
+            "type": 35665
+        },
+        "accessor_25": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 2654688,
+            "byteStride": 12,
+            "count": 16440,
+            "max": [
+                0.999739,
+                1,
+                0.994393
+            ],
+            "min": [
+                -0.999732,
+                -1,
+                -0.999521
+            ],
+            "type": 35665
+        },
+        "accessor_27": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 2851968,
+            "byteStride": 8,
+            "count": 16440,
+            "max": [
+                0.989209,
+                0.959715
+            ],
+            "min": [
+                0.742348,
+                0.370404
+            ],
+            "type": 35664
+        },
+        "accessor_48": {
+            "bufferView": "bufferView_110",
+            "byteOffset": 92196,
+            "byteStride": 0,
+            "count": 30696,
+            "type": 5123
+        },
+        "accessor_50": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 1475136,
+            "byteStride": 12,
+            "count": 30696,
+            "max": [
+                212.588,
+                836.53,
+                322.982
+            ],
+            "min": [
+                -246.636,
+                -875.949,
+                -167.353
+            ],
+            "type": 35665
+        },
+        "accessor_52": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 1843488,
+            "byteStride": 12,
+            "count": 30696,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_54": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 2211840,
+            "byteStride": 8,
+            "count": 30696,
+            "max": [
+                0.94303,
+                0.990703
+            ],
+            "min": [
+                0.048187,
+                0.123968
+            ],
+            "type": 35664
+        },
+        "accessor_75": {
+            "bufferView": "bufferView_110",
+            "byteOffset": 0,
+            "byteStride": 0,
+            "count": 20514,
+            "type": 5123
+        },
+        "accessor_77": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "count": 20514,
+            "max": [
+                275.804,
+                801.57,
+                823.107
+            ],
+            "min": [
+                -307.761,
+                -689.328,
+                81.2982
+            ],
+            "type": 35665
+        },
+        "accessor_79": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 246168,
+            "byteStride": 12,
+            "count": 20514,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_81": {
+            "bufferView": "bufferView_111",
+            "byteOffset": 492336,
+            "byteStride": 8,
+            "count": 20514,
+            "max": [
+                0.977208,
+                1
+            ],
+            "min": [
+                0,
+                0.098168
+            ],
+            "type": 35664
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+        "premultipliedAlpha": true,
+        "profile": "WebGL 1.0.2",
+        "version": 0.6
+    },
+    "bufferViews": {
+        "bufferView_110": {
+            "buffer": "fishing-boat",
+            "byteLength": 186468,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_111": {
+            "buffer": "fishing-boat",
+            "byteLength": 2983488,
+            "byteOffset": 186468,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "fishing-boat": {
+            "byteLength": 3169956,
+            "path": "bb71be99",
+            "type": "arraybuffer"
+        }
+    },
+    "images": {
+        "file1-image": {
+            "path": "/Archive_Database/July2015/Navy"
+        }
+    },
+    "materials": {
+        "Shrimp_Boat_Color-fx": {
+            "instanceTechnique": {
+                "technique": "technique0",
+                "values": {
+                    "ambient": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ]
+                }
+            },
+            "name": "Shrimp_Boat_Color"
+        }
+    },
+    "meshes": {
+        "Boat_Cabin-lib": {
+            "name": "Boat_CabinMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_79",
+                        "POSITION": "accessor_77",
+                        "TEXCOORD_0": "accessor_81"
+                    },
+                    "indices": "accessor_75",
+                    "material": "Shrimp_Boat_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Boat_Mast-lib": {
+            "name": "Boat_MastMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_106",
+                        "POSITION": "accessor_104",
+                        "TEXCOORD_0": "accessor_108"
+                    },
+                    "indices": "accessor_102",
+                    "material": "Shrimp_Boat_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Fishing_Boat_Hull-lib": {
+            "name": "Fishing_Boat_HullMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_52",
+                        "POSITION": "accessor_50",
+                        "TEXCOORD_0": "accessor_54"
+                    },
+                    "indices": "accessor_48",
+                    "material": "Shrimp_Boat_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Tires-lib": {
+            "name": "TiresMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_25",
+                        "POSITION": "accessor_23",
+                        "TEXCOORD_0": "accessor_27"
+                    },
+                    "indices": "accessor_21",
+                    "material": "Shrimp_Boat_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "Boat_Cabin": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Boat_Cabin-lib"
+            ],
+            "name": "Boat_Cabin"
+        },
+        "Boat_Mast": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Boat_Mast-lib"
+            ],
+            "name": "Boat_Mast"
+        },
+        "Fishing_Boat_Hull": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Fishing_Boat_Hull-lib"
+            ],
+            "name": "Fishing_Boat_Hull"
+        },
+        "Tires": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Tires-lib"
+            ],
+            "name": "Tires"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "fishing-boat0FS",
+            "vertexShader": "fishing-boat0VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "Tires",
+                "Fishing_Boat_Hull",
+                "Boat_Cabin",
+                "Boat_Mast"
+            ]
+        }
+    },
+    "shaders": {
+        "fishing-boat0FS": {
+            "path": "fishing-boat0FS.glsl",
+            "type": 35632
+        },
+        "fishing-boat0VS": {
+            "path": "fishing-boat0VS.glsl",
+            "type": 35633
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Lambert",
+                            "parameters": [
+                                "ambient",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_0",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 0,
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        }
+    }
+}

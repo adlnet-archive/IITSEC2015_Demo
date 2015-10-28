@@ -1,0 +1,430 @@
+{
+    "accessors": {
+        "accessor_48": {
+            "bufferView": "bufferView_76",
+            "byteOffset": 241452,
+            "byteStride": 0,
+            "count": 2706,
+            "type": 5123
+        },
+        "accessor_50": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 3863232,
+            "byteStride": 12,
+            "count": 2706,
+            "max": [
+                71.7227,
+                11.2006,
+                27.5835
+            ],
+            "min": [
+                -71.2064,
+                -9.02726,
+                2.48889
+            ],
+            "type": 35665
+        },
+        "accessor_52": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 3895704,
+            "byteStride": 12,
+            "count": 2706,
+            "max": [
+                1,
+                1,
+                0.991026
+            ],
+            "min": [
+                -1,
+                -1,
+                -0.190384
+            ],
+            "type": 35665
+        },
+        "accessor_54": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 3928176,
+            "byteStride": 8,
+            "count": 2706,
+            "max": [
+                0.730621,
+                0.913687
+            ],
+            "min": [
+                0.250438,
+                0.000437975
+            ],
+            "type": 35664
+        },
+        "accessor_58": {
+            "bufferView": "bufferView_76",
+            "byteOffset": 0,
+            "byteStride": 0,
+            "count": 65532,
+            "type": 5123
+        },
+        "accessor_60": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "count": 65532,
+            "max": [
+                71.7227,
+                11.8426,
+                37.551
+            ],
+            "min": [
+                -71.7227,
+                -9.66922,
+                -9.6095
+            ],
+            "type": 35665
+        },
+        "accessor_62": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 786384,
+            "byteStride": 12,
+            "count": 65532,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_64": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 1572768,
+            "byteStride": 8,
+            "count": 65532,
+            "max": [
+                34.3388,
+                0.995839
+            ],
+            "min": [
+                0.049076,
+                -8.18187
+            ],
+            "type": 35664
+        },
+        "accessor_68": {
+            "bufferView": "bufferView_76",
+            "byteOffset": 131064,
+            "byteStride": 0,
+            "count": 55194,
+            "type": 5123
+        },
+        "accessor_70": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 2097024,
+            "byteStride": 12,
+            "count": 55194,
+            "max": [
+                35.2698,
+                11.3872,
+                34.4124
+            ],
+            "min": [
+                6.26283,
+                -9.21389,
+                8.44228
+            ],
+            "type": 35665
+        },
+        "accessor_72": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 2759352,
+            "byteStride": 12,
+            "count": 55194,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_74": {
+            "bufferView": "bufferView_77",
+            "byteOffset": 3421680,
+            "byteStride": 8,
+            "count": 55194,
+            "max": [
+                0.999023,
+                0.874034
+            ],
+            "min": [
+                0,
+                0
+            ],
+            "type": 35664
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+        "premultipliedAlpha": true,
+        "profile": "WebGL 1.0.2",
+        "version": 0.6
+    },
+    "bufferViews": {
+        "bufferView_76": {
+            "buffer": "ddg",
+            "byteLength": 246864,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_77": {
+            "buffer": "ddg",
+            "byteLength": 3949824,
+            "byteOffset": 246864,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "ddg": {
+            "byteLength": 4196688,
+            "path": "518f81af",
+            "type": "arraybuffer"
+        }
+    },
+    "images": {
+        "file4-image": {
+            "path": "/VWS/Sandbox/public/adl/sandbox/textures/barryatlas.png"
+        }
+    },
+    "materials": {
+        "Arliegh_Burke_Color-fx": {
+            "instanceTechnique": {
+                "technique": "technique0",
+                "values": {
+                    "ambient": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ]
+                }
+            },
+            "name": "Arliegh_Burke_Color"
+        }
+    },
+    "meshes": {
+        "Arleigh_Burke_Destoyer-lib": {
+            "name": "Arleigh_Burke_DestoyerMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_62",
+                        "POSITION": "accessor_60",
+                        "TEXCOORD_0": "accessor_64"
+                    },
+                    "indices": "accessor_58",
+                    "material": "Arliegh_Burke_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Arleigh_Burke_Destoyer-libsplit_0": {
+            "name": "Arleigh_Burke_DestoyerMesh1",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_72",
+                        "POSITION": "accessor_70",
+                        "TEXCOORD_0": "accessor_74"
+                    },
+                    "indices": "accessor_68",
+                    "material": "Arliegh_Burke_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Arleigh_Burke_Railings-lib": {
+            "name": "Arleigh_Burke_RailingsMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_52",
+                        "POSITION": "accessor_50",
+                        "TEXCOORD_0": "accessor_54"
+                    },
+                    "indices": "accessor_48",
+                    "material": "Arliegh_Burke_Color-fx",
+                    "primitive": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "Arleigh_Burke_Destoyer": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Arleigh_Burke_Destoyer-lib",
+                "Arleigh_Burke_Destoyer-libsplit_0"
+            ],
+            "name": "Arleigh_Burke_Destoyer"
+        },
+        "Arleigh_Burke_Railings": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Arleigh_Burke_Railings-lib"
+            ],
+            "name": "Arleigh_Burke_Railings"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "ddg0FS",
+            "vertexShader": "ddg0VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "Arleigh_Burke_Destoyer",
+                "Arleigh_Burke_Railings"
+            ]
+        }
+    },
+    "shaders": {
+        "ddg0FS": {
+            "path": "ddg0FS.glsl",
+            "type": 35632
+        },
+        "ddg0VS": {
+            "path": "ddg0VS.glsl",
+            "type": 35633
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Lambert",
+                            "parameters": [
+                                "ambient",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_0",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 0,
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        }
+    }
+}

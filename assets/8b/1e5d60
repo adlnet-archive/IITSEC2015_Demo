@@ -1,0 +1,1288 @@
+{
+    "accessors": {
+        "accessor_114": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 0,
+            "byteStride": 0,
+            "count": 7446,
+            "type": 5123
+        },
+        "accessor_116": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "count": 7446,
+            "max": [
+                360.244,
+                2850.13,
+                740.979
+            ],
+            "min": [
+                -362.763,
+                -2758.02,
+                495.183
+            ],
+            "type": 35665
+        },
+        "accessor_118": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 89352,
+            "byteStride": 12,
+            "count": 7446,
+            "max": [
+                0.999746,
+                0.999746,
+                1
+            ],
+            "min": [
+                -0.999746,
+                -0.999746,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_120": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 178704,
+            "byteStride": 8,
+            "count": 7446,
+            "max": [
+                0.686236,
+                0.04923
+            ],
+            "min": [
+                0.638024,
+                0.00637501
+            ],
+            "type": 35664
+        },
+        "accessor_122": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 238272,
+            "byteStride": 16,
+            "count": 7446,
+            "max": [
+                1,
+                1,
+                1,
+                1
+            ],
+            "min": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": 35666
+        },
+        "accessor_143": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 89256,
+            "byteStride": 0,
+            "count": 3012,
+            "type": 5123
+        },
+        "accessor_145": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1760544,
+            "byteStride": 12,
+            "count": 3012,
+            "max": [
+                70.9183,
+                2251.37,
+                1023.58
+            ],
+            "min": [
+                -68.8112,
+                2124.5,
+                727.423
+            ],
+            "type": 35665
+        },
+        "accessor_147": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1796688,
+            "byteStride": 12,
+            "count": 3012,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_149": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1832832,
+            "byteStride": 8,
+            "count": 3012,
+            "max": [
+                0.993596,
+                0.438109
+            ],
+            "min": [
+                0.005892,
+                0.00454599
+            ],
+            "type": 35664
+        },
+        "accessor_170": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 14892,
+            "byteStride": 0,
+            "count": 16500,
+            "type": 5123
+        },
+        "accessor_172": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 357408,
+            "byteStride": 12,
+            "count": 16500,
+            "max": [
+                342.181,
+                2586.2,
+                794.539
+            ],
+            "min": [
+                -350.19,
+                -2487.61,
+                507.551
+            ],
+            "type": 35665
+        },
+        "accessor_174": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 555408,
+            "byteStride": 12,
+            "count": 16500,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_176": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 753408,
+            "byteStride": 8,
+            "count": 16500,
+            "max": [
+                0.995883,
+                0.766888
+            ],
+            "min": [
+                0.182855,
+                0.45793
+            ],
+            "type": 35664
+        },
+        "accessor_197": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 95280,
+            "byteStride": 0,
+            "count": 13968,
+            "type": 5123
+        },
+        "accessor_199": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1856928,
+            "byteStride": 12,
+            "count": 13968,
+            "max": [
+                333.163,
+                2098.42,
+                995.935
+            ],
+            "min": [
+                -343.655,
+                2024.6,
+                527.225
+            ],
+            "type": 35665
+        },
+        "accessor_201": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2024544,
+            "byteStride": 12,
+            "count": 13968,
+            "max": [
+                1,
+                0.999967,
+                0.989016
+            ],
+            "min": [
+                -1,
+                -0.999967,
+                -0.989016
+            ],
+            "type": 35665
+        },
+        "accessor_203": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2192160,
+            "byteStride": 8,
+            "count": 13968,
+            "max": [
+                0.985785,
+                0.683174
+            ],
+            "min": [
+                0.733298,
+                0.479785
+            ],
+            "type": 35664
+        },
+        "accessor_21": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 136350,
+            "byteStride": 0,
+            "count": 12687,
+            "type": 5123
+        },
+        "accessor_224": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 53916,
+            "byteStride": 0,
+            "count": 2403,
+            "type": 5123
+        },
+        "accessor_226": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 981792,
+            "byteStride": 12,
+            "count": 2403,
+            "max": [
+                345.635,
+                1803.82,
+                861.101
+            ],
+            "min": [
+                -302.634,
+                -1558.51,
+                523.318
+            ],
+            "type": 35665
+        },
+        "accessor_228": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1010628,
+            "byteStride": 12,
+            "count": 2403,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -0.00562
+            ],
+            "type": 35665
+        },
+        "accessor_23": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2514048,
+            "byteStride": 12,
+            "count": 12687,
+            "max": [
+                280.55,
+                2107.22,
+                976.449
+            ],
+            "min": [
+                -278.641,
+                1938.87,
+                601.682
+            ],
+            "type": 35665
+        },
+        "accessor_230": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1039464,
+            "byteStride": 8,
+            "count": 2403,
+            "max": [
+                0.985195,
+                0.475785
+            ],
+            "min": [
+                0.573246,
+                0.060044
+            ],
+            "type": 35664
+        },
+        "accessor_25": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2666292,
+            "byteStride": 12,
+            "count": 12687,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_251": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 47892,
+            "byteStride": 0,
+            "count": 3012,
+            "type": 5123
+        },
+        "accessor_253": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 885408,
+            "byteStride": 12,
+            "count": 3012,
+            "max": [
+                55.1807,
+                -1970.78,
+                1069.65
+            ],
+            "min": [
+                -56.2145,
+                -2047.83,
+                640.496
+            ],
+            "type": 35665
+        },
+        "accessor_255": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 921552,
+            "byteStride": 12,
+            "count": 3012,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_257": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 957696,
+            "byteStride": 8,
+            "count": 3012,
+            "max": [
+                0.739899,
+                0.619759
+            ],
+            "min": [
+                0.394737,
+                0.478639
+            ],
+            "type": 35664
+        },
+        "accessor_27": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2818536,
+            "byteStride": 8,
+            "count": 12687,
+            "max": [
+                0.107136,
+                0.443257
+            ],
+            "min": [
+                0.000754,
+                0.390522
+            ],
+            "type": 35664
+        },
+        "accessor_278": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 86346,
+            "byteStride": 0,
+            "count": 1455,
+            "type": 5123
+        },
+        "accessor_280": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1713984,
+            "byteStride": 12,
+            "count": 1455,
+            "max": [
+                88.7209,
+                2091.9,
+                1115.45
+            ],
+            "min": [
+                -70.7694,
+                2044.22,
+                975.579
+            ],
+            "type": 35665
+        },
+        "accessor_282": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1731444,
+            "byteStride": 12,
+            "count": 1455,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_284": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1748904,
+            "byteStride": 8,
+            "count": 1455,
+            "max": [
+                0.980103,
+                0.580028
+            ],
+            "min": [
+                0.800414,
+                0.48516
+            ],
+            "type": 35664
+        },
+        "accessor_305": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 123216,
+            "byteStride": 0,
+            "count": 6567,
+            "type": 5123
+        },
+        "accessor_307": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2303904,
+            "byteStride": 12,
+            "count": 6567,
+            "max": [
+                408.164,
+                2258.47,
+                979.323
+            ],
+            "min": [
+                -406.151,
+                1932.28,
+                451.65
+            ],
+            "type": 35665
+        },
+        "accessor_309": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2382708,
+            "byteStride": 12,
+            "count": 6567,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_311": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 2461512,
+            "byteStride": 8,
+            "count": 6567,
+            "max": [
+                1,
+                1
+            ],
+            "min": [
+                0.001276,
+                -0.00114501
+            ],
+            "type": 35664
+        },
+        "accessor_53": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 59682,
+            "byteStride": 0,
+            "count": 13332,
+            "type": 5123
+        },
+        "accessor_55": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1074048,
+            "byteStride": 12,
+            "count": 13332,
+            "max": [
+                418.764,
+                2887.27,
+                757.988
+            ],
+            "min": [
+                -412.713,
+                -2881.61,
+                6.48554
+            ],
+            "type": 35665
+        },
+        "accessor_57": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1234032,
+            "byteStride": 12,
+            "count": 13332,
+            "max": [
+                1,
+                1,
+                1
+            ],
+            "min": [
+                -1,
+                -1,
+                -1
+            ],
+            "type": 35665
+        },
+        "accessor_59": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1394016,
+            "byteStride": 8,
+            "count": 13332,
+            "max": [
+                0.992658,
+                1.00004
+            ],
+            "min": [
+                0.054839,
+                0.641894
+            ],
+            "type": 35664
+        },
+        "accessor_61": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1500672,
+            "byteStride": 16,
+            "count": 13332,
+            "max": [
+                1,
+                1,
+                1,
+                1
+            ],
+            "min": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": 35666
+        },
+        "accessor_82": {
+            "bufferView": "bufferView_313",
+            "byteOffset": 58722,
+            "byteStride": 0,
+            "count": 480,
+            "type": 5123
+        },
+        "accessor_84": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1058688,
+            "byteStride": 12,
+            "count": 480,
+            "max": [
+                244.853,
+                -2485.28,
+                609.287
+            ],
+            "min": [
+                -244.853,
+                -2550.27,
+                523.639
+            ],
+            "type": 35665
+        },
+        "accessor_86": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1064448,
+            "byteStride": 12,
+            "count": 480,
+            "max": [
+                0.872651,
+                0.916653,
+                0.971738
+            ],
+            "min": [
+                -0.872651,
+                -0.911998,
+                -0.923077
+            ],
+            "type": 35665
+        },
+        "accessor_88": {
+            "bufferView": "bufferView_314",
+            "byteOffset": 1070208,
+            "byteStride": 8,
+            "count": 480,
+            "max": [
+                0.319387,
+                0.447128
+            ],
+            "min": [
+                0.253561,
+                0.398595
+            ],
+            "type": 35664
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+        "premultipliedAlpha": true,
+        "profile": "WebGL 1.0.2",
+        "version": 0.6
+    },
+    "bufferViews": {
+        "bufferView_313": {
+            "buffer": "container-ship",
+            "byteLength": 161724,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_314": {
+            "buffer": "container-ship",
+            "byteLength": 2920032,
+            "byteOffset": 161724,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "container-ship": {
+            "byteLength": 3081756,
+            "path": "206d6e63",
+            "type": "arraybuffer"
+        }
+    },
+    "images": {
+        "RENA_tex_jpg-image": {
+            "path": "/VWS/Sandbox/public/adl/sandbox/textures/RENA"
+        }
+    },
+    "materials": {
+        "RENA-fx": {
+            "instanceTechnique": {
+                "technique": "technique0",
+                "values": {
+                    "ambient": [
+                        0.421057,
+                        0.421057,
+                        0.421057,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "shininess": 2,
+                    "specular": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ]
+                }
+            },
+            "name": "RENA"
+        }
+    },
+    "meshes": {
+        "Deck_Cleats-lib": {
+            "name": "Deck_CleatsMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "COLOR_0": "accessor_122",
+                        "NORMAL": "accessor_118",
+                        "POSITION": "accessor_116",
+                        "TEXCOORD_0": "accessor_120"
+                    },
+                    "indices": "accessor_114",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Deck_Wenches-lib": {
+            "name": "Deck_WenchesMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_174",
+                        "POSITION": "accessor_172",
+                        "TEXCOORD_0": "accessor_176"
+                    },
+                    "indices": "accessor_170",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Foremast-lib": {
+            "name": "ForemastMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_255",
+                        "POSITION": "accessor_253",
+                        "TEXCOORD_0": "accessor_257"
+                    },
+                    "indices": "accessor_251",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Line39__ncl1_78-lib": {
+            "name": "Line39__ncl1_78Mesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_228",
+                        "POSITION": "accessor_226",
+                        "TEXCOORD_0": "accessor_230"
+                    },
+                    "indices": "accessor_224",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Line499__ncl1_3-lib": {
+            "name": "Line499__ncl1_3Mesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_86",
+                        "POSITION": "accessor_84",
+                        "TEXCOORD_0": "accessor_88"
+                    },
+                    "indices": "accessor_82",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "RENA_Ship_Hull-lib": {
+            "name": "RENA_Ship_HullMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "COLOR_0": "accessor_61",
+                        "NORMAL": "accessor_57",
+                        "POSITION": "accessor_55",
+                        "TEXCOORD_0": "accessor_59"
+                    },
+                    "indices": "accessor_53",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Rear_Tower-lib": {
+            "name": "Rear_TowerMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_282",
+                        "POSITION": "accessor_280",
+                        "TEXCOORD_0": "accessor_284"
+                    },
+                    "indices": "accessor_278",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Smokestack-lib": {
+            "name": "SmokestackMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_147",
+                        "POSITION": "accessor_145",
+                        "TEXCOORD_0": "accessor_149"
+                    },
+                    "indices": "accessor_143",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Stairs-lib": {
+            "name": "StairsMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_201",
+                        "POSITION": "accessor_199",
+                        "TEXCOORD_0": "accessor_203"
+                    },
+                    "indices": "accessor_197",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Superstructure-lib": {
+            "name": "SuperstructureMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_309",
+                        "POSITION": "accessor_307",
+                        "TEXCOORD_0": "accessor_311"
+                    },
+                    "indices": "accessor_305",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        },
+        "Windows-lib": {
+            "name": "WindowsMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_25",
+                        "POSITION": "accessor_23",
+                        "TEXCOORD_0": "accessor_27"
+                    },
+                    "indices": "accessor_21",
+                    "material": "RENA-fx",
+                    "primitive": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "Deck_Cleats": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Deck_Cleats-lib"
+            ],
+            "name": "Deck_Cleats"
+        },
+        "Deck_Wenches": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Deck_Wenches-lib"
+            ],
+            "name": "Deck_Wenches"
+        },
+        "Foremast": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Foremast-lib"
+            ],
+            "name": "Foremast"
+        },
+        "Line39__ncl1_78": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Line39__ncl1_78-lib"
+            ],
+            "name": "Line39__ncl1_78"
+        },
+        "Line499__ncl1_3": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Line499__ncl1_3-lib"
+            ],
+            "name": "Line499__ncl1_3"
+        },
+        "RENA_Ship_Hull": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "RENA_Ship_Hull-lib"
+            ],
+            "name": "RENA_Ship_Hull"
+        },
+        "Rear_Tower": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Rear_Tower-lib"
+            ],
+            "name": "Rear_Tower"
+        },
+        "Smokestack": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Smokestack-lib"
+            ],
+            "name": "Smokestack"
+        },
+        "Stairs": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0.0001,
+                1
+            ],
+            "meshes": [
+                "Stairs-lib"
+            ],
+            "name": "Stairs"
+        },
+        "Superstructure": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Superstructure-lib"
+            ],
+            "name": "Superstructure"
+        },
+        "Windows": {
+            "children": [],
+            "matrix": [
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                0.01,
+                0,
+                0,
+                0,
+                0,
+                1
+            ],
+            "meshes": [
+                "Windows-lib"
+            ],
+            "name": "Windows"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "container-ship0FS",
+            "vertexShader": "container-ship0VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "Windows",
+                "RENA_Ship_Hull",
+                "Line499__ncl1_3",
+                "Deck_Cleats",
+                "Smokestack",
+                "Deck_Wenches",
+                "Stairs",
+                "Line39__ncl1_78",
+                "Foremast",
+                "Rear_Tower",
+                "Superstructure"
+            ]
+        }
+    },
+    "shaders": {
+        "container-ship0FS": {
+            "path": "container-ship0FS.glsl",
+            "type": 35632
+        },
+        "container-ship0VS": {
+            "path": "container-ship0VS.glsl",
+            "type": 35633
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                },
+                "shininess": {
+                    "type": 5126
+                },
+                "specular": {
+                    "type": 35666
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Phong",
+                            "parameters": [
+                                "ambient",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix",
+                                "shininess",
+                                "specular"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_0",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix",
+                            "u_shininess": "shininess",
+                            "u_specular": "specular"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 0,
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        }
+    }
+}

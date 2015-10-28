@@ -1,0 +1,261 @@
+{
+    "accessors": {
+        "accessor_21": {
+            "bufferView": "bufferView_29",
+            "byteOffset": 0,
+            "byteStride": 0,
+            "count": 3564,
+            "type": 5123
+        },
+        "accessor_23": {
+            "bufferView": "bufferView_30",
+            "byteOffset": 0,
+            "byteStride": 12,
+            "count": 3564,
+            "max": [
+                109.665,
+                28.3044,
+                108.502
+            ],
+            "min": [
+                -680.616,
+                -27.3784,
+                -109.922
+            ],
+            "type": 35665
+        },
+        "accessor_25": {
+            "bufferView": "bufferView_30",
+            "byteOffset": 42768,
+            "byteStride": 12,
+            "count": 3564,
+            "max": [
+                0.999541,
+                1,
+                0.999782
+            ],
+            "min": [
+                -0.999541,
+                -1,
+                -0.999951
+            ],
+            "type": 35665
+        },
+        "accessor_27": {
+            "bufferView": "bufferView_30",
+            "byteOffset": 85536,
+            "byteStride": 8,
+            "count": 3564,
+            "max": [
+                1,
+                0.60731
+            ],
+            "min": [
+                0.006097,
+                0.00484598
+            ],
+            "type": 35664
+        }
+    },
+    "animations": {},
+    "asset": {
+        "generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+        "premultipliedAlpha": true,
+        "profile": "WebGL 1.0.2",
+        "version": 0.6
+    },
+    "bufferViews": {
+        "bufferView_29": {
+            "buffer": "5in-gun-barrel",
+            "byteLength": 7128,
+            "byteOffset": 0,
+            "target": 34963
+        },
+        "bufferView_30": {
+            "buffer": "5in-gun-barrel",
+            "byteLength": 114048,
+            "byteOffset": 7128,
+            "target": 34962
+        }
+    },
+    "buffers": {
+        "5in-gun-barrel": {
+            "byteLength": 121176,
+            "path": "e2c67a84",
+            "type": "arraybuffer"
+        }
+    },
+    "images": {
+        "file1-image": {
+            "path": "/VWS/Sandbox/public/adl/sandbox/textures/5-inch-gun-color.jpg"
+        }
+    },
+    "materials": {
+        "lambert2-fx": {
+            "instanceTechnique": {
+                "technique": "technique0",
+                "values": {
+                    "ambient": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ],
+                    "emission": [
+                        0,
+                        0,
+                        0,
+                        1
+                    ]
+                }
+            },
+            "name": "lambert2"
+        }
+    },
+    "meshes": {
+        "Gun_Berrel-lib": {
+            "name": "Gun_BerrelMesh",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": "accessor_25",
+                        "POSITION": "accessor_23",
+                        "TEXCOORD_0": "accessor_27"
+                    },
+                    "indices": "accessor_21",
+                    "material": "lambert2-fx",
+                    "primitive": 4
+                }
+            ]
+        }
+    },
+    "nodes": {
+        "Gun_Berrel": {
+            "children": [],
+            "matrix": [
+                0.010873,
+                0,
+                0,
+                0,
+                0,
+                0.010873,
+                0,
+                0,
+                0,
+                0,
+                0.010873,
+                0,
+                0.000206,
+                -6.6e-05,
+                0.000636,
+                1
+            ],
+            "meshes": [
+                "Gun_Berrel-lib"
+            ],
+            "name": "Gun_Berrel"
+        }
+    },
+    "programs": {
+        "program_0": {
+            "attributes": [
+                "a_normal",
+                "a_position"
+            ],
+            "fragmentShader": "5in-gun-barrel0FS",
+            "vertexShader": "5in-gun-barrel0VS"
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "Gun_Berrel"
+            ]
+        }
+    },
+    "shaders": {
+        "5in-gun-barrel0FS": {
+            "path": "5in-gun-barrel0FS.glsl",
+            "type": 35632
+        },
+        "5in-gun-barrel0VS": {
+            "path": "5in-gun-barrel0VS.glsl",
+            "type": 35633
+        }
+    },
+    "skins": {},
+    "techniques": {
+        "technique0": {
+            "parameters": {
+                "ambient": {
+                    "type": 35666
+                },
+                "emission": {
+                    "type": 35666
+                },
+                "modelViewMatrix": {
+                    "semantic": "MODELVIEW",
+                    "type": 35676
+                },
+                "normal": {
+                    "semantic": "NORMAL",
+                    "type": 35665
+                },
+                "normalMatrix": {
+                    "semantic": "MODELVIEWINVERSETRANSPOSE",
+                    "type": 35675
+                },
+                "position": {
+                    "semantic": "POSITION",
+                    "type": 35665
+                },
+                "projectionMatrix": {
+                    "semantic": "PROJECTION",
+                    "type": 35676
+                }
+            },
+            "pass": "defaultPass",
+            "passes": {
+                "defaultPass": {
+                    "details": {
+                        "commonProfile": {
+                            "extras": {
+                                "doubleSided": false
+                            },
+                            "lightingModel": "Lambert",
+                            "parameters": [
+                                "ambient",
+                                "emission",
+                                "modelViewMatrix",
+                                "normalMatrix",
+                                "projectionMatrix"
+                            ]
+                        },
+                        "type": "COLLADA-1.4.1/commonProfile"
+                    },
+                    "instanceProgram": {
+                        "attributes": {
+                            "a_normal": "normal",
+                            "a_position": "position"
+                        },
+                        "program": "program_0",
+                        "uniforms": {
+                            "u_ambient": "ambient",
+                            "u_emission": "emission",
+                            "u_modelViewMatrix": "modelViewMatrix",
+                            "u_normalMatrix": "normalMatrix",
+                            "u_projectionMatrix": "projectionMatrix"
+                        }
+                    },
+                    "states": {
+                        "blendEnable": 0,
+                        "cullFaceEnable": 1,
+                        "depthMask": 1,
+                        "depthTestEnable": 1
+                    }
+                }
+            }
+        }
+    }
+}
