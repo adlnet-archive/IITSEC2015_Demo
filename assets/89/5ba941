@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.368669152026996,
-		"s1": 0.45272528869099915,
-		"s2": 0.6638715527951717,
-		"c": 1914133
+		"s0": 0.5660108330193907,
+		"s1": 0.35940794786438346,
+		"s2": 0.7665230755228549,
+		"c": 45522
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -48,9 +48,10 @@
 			}
 		},
 		"EditorDate": "",
+		"___sourceAssetTimestamp": "Wed Oct 28 2015 22:21:14 GMT-0400 (Eastern Daylight Time)",
 		"_length": 1.78,
 		"accuracy": 200,
-		"activeState": "idle",
+		"activeState": "targeting",
 		"controllingCamera": "SandboxCamera-vwf-N37c91fa8",
 		"explosionDef": {
 			"continues": "/sas/assets/d3402bc3",
@@ -79,10 +80,12 @@
 		"firecounter": 0,
 		"fuse": 100,
 		"height": 1.25,
+		"isUserControlled": false,
 		"keysDown": [],
 		"lastTargetPos": null,
 		"lastx": 0.0126315789473684,
 		"lasty": 0.486051905717151,
+		"manualFiring": false,
 		"materialDef": {
 			"alpha": 1,
 			"ambient": {
@@ -271,31 +274,49 @@
 			"type": "subDriver/threejs"
 		},
 		"transform": [
-			0.9860000014305115,
+			0.009129629470407963,
 			0,
 			0,
 			0,
 			0,
-			0.9860000014305115,
+			0.009137377142906189,
+			0.00015949351654853672,
 			0,
 			0,
+			-0.00015949351654853672,
+			0.009137377142906189,
 			0,
-			0,
-			0.9860000014305115,
-			0,
-			-4.5,
-			-1.75,
-			21.25,
+			0.5032697319984436,
+			0.01217309758067131,
+			0.07935362309217453,
 			1
 		],
 		"type": "Primitive",
-		"width": 1.31,
 		"visible": true,
-		"___sourceAssetTimestamp": "Tue Oct 27 2015 16:49:37 GMT-0400 (Eastern Daylight Time)",
-		"manualFiring": false,
-		"isUserControlled": false
+		"width": 1.31
 	},
 	"methods": {
+		"": {
+			"parameters": "console.log(\"got here\");"
+		},
+		"TAOCommand5In": {
+			"body": "//\", [\"5 Inch Engage\"], 0);\n    var command = args[0];\n\n    if (command == \"5 Inch Engage\")\n        this.activateState(\"targeting\");\n\n    if (command == \"5 Inch Disengage\")\n        this.activateState(\"idle\");\n\n    else if (command === \"toggleControl\")\n    {\n        this.toggleControl();\n    }",
+			"parameters": [
+				"args"
+			]
+		},
+		"_keyDown": {
+			"body": "if (!this.verifyCamera()) return;\n    if (e.key.char == ' ') this.manualFiring = true;",
+			"parameters": [
+				"e"
+			]
+		},
+		"_keyUp": {
+			"body": "if (!this.verifyCamera()) return;\n    if (e.key.char == ' ') this.manualFiring = false;\n    if (e.key.char == 'T') this.activateState(\"targeting\");",
+			"parameters": [
+				"e"
+			]
+		},
 		"_pointerDown": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                           if (!this.verifyCamera()) return;\n                    if (e.button == \"left\")\n                    {\n                        this.lastx = e.position[0];\n                        this.lasty = e.position[1];\n                        this.mouseDown = true;\n                    }\n                    if (e.button == \"right\")\n                    {\n                        this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].fovGoal = 10;\n                    }           \n\n\n\n\n\n\n\n\n",
 			"parameters": [
@@ -329,55 +350,25 @@
 				"newState"
 			]
 		},
-		"explode": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                       var def = this.explosionDef;\n                    if (def.internal_val)\n                        def = def.internal_val;\n                    def = JSON.parse(JSON.stringify(def));\n                    def.properties.transform[12] = pos[0];\n                    def.properties.transform[13] = pos[1];\n                    def.properties.transform[14] = pos[2];\n                    def.properties.fuse = dist / 10;\n                    // console.profile(\"launch\");\n                    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);       \n\n\n\n\n\n\n\n\n",
-			"parameters": [
-				"pos",
-				"dist"
-			]
-		},
-		"fire": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                       var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n                    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n                    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n                    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n                    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n                    {\n                        ignore: [findviewnode(this.id)]\n                    });\n                    this.audioAPI.playSound(this.fireSound, false, 300.0);\n                    var dist = this.fuse;\n                    if (hit && hit.distance < dist)\n                    {\n                       dist = hit.distance;\n                    }\n\n                    var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n                    this.explode(point, dist);\n                    this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n                    var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n                    this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n                    shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n                    this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);       \n\n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
 		"firing": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                        if (this.Ammo > 0 && this.activeState == \"firing\")\n                    {\n                        var target = this.Scene.findNodeByID(this.targetID);\n                    if (!target)\n                    {\n                        this.activateState(\"targeting\");\n                        return;\n                    }\n                    \n                        if (this.firecounter < 0)\n                        {\n                            this.firecounter = 30;\n                            this.Ammo -= 1;\n                            this.fire();\n                            this.activateState(\"targeting\");\n                            return;\n                        }\n\n                        if (this.Ammo == 0)\n                        {\n                            this.activeState = \"reloading\";\n                            this.firecounter = 170;\n                            this.playSound(this.reloadSound, false, 10);\n                        }\n                    }\n                    this.firecounter--;        \n\n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
-		"ready": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       this.Scene.unbind(\"pointerMove\", this._pv);\n                    this.Scene.unbind(\"pointerDown\", this._pd);\n                    this.Scene.unbind(\"pointerUp\", this._pu);\n                    this.Scene.unbind(\"pointerWheel\", this._pw);\n\n                    this.Scene.unbind(\"keyDown\", this._kd);\n                    this.Scene.unbind(\"keyUp\", this._ku);\n                    var self = this;\n                    this._pv = function(e, d)\n                    {\n                        self._pointerMove(e, d);\n                    }\n                    this._pd = function(e, d)\n                    {\n                        self._pointerDown(e, d);\n                    }\n                    this._pu = function(e, d)\n                    {\n                        self._pointerUp(e, d);\n                    }\n                    this._kd = function(e, d)\n                    {\n                        self._keyDown(e, d);\n                    }\n                    this._ku = function(e, d)\n                    {\n                        self._keyUp(e, d);\n                    }\n                    this._pw = function(e, d)\n                    {\n                        self._pointerWheel(e, d);\n                    }\n                    this.Scene.bind(\"pointerMove\", this._pv);\n                    this.Scene.bind(\"pointerDown\", this._pd);\n                    this.Scene.bind(\"pointerUp\", this._pu);\n                    this.Scene.bind(\"pointerWheel\", this._pw);\n                    this.Scene.bind(\"keyDown\", this._kd);\n                    this.Scene.bind(\"keyUp\", this._ku);                       \n\n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
-		"verifyCamera": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                           var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n                    var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].id;\n                    if (!cam || cam.id != thisCam) return false;\n                    return true;           \n\n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
 		"manuelFire": {
 			"body": "if (this.Ammo > 0 )\n    {\n       \n\n        if (this.firecounter < 0)\n        {\n            this.firecounter = 30;\n            this.Ammo -= 1;\n            this.fire();\n           \n            return;\n        }\n\n        if (this.Ammo == 0)\n        {\n            this.activeState = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    this.firecounter--;",
 			"parameters": []
 		},
+		"ready": {
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       this.Scene.unbind(\"pointerMove\", this._pv);\n                    this.Scene.unbind(\"pointerDown\", this._pd);\n                    this.Scene.unbind(\"pointerUp\", this._pu);\n                    this.Scene.unbind(\"pointerWheel\", this._pw);\n\n                    this.Scene.unbind(\"keyDown\", this._kd);\n                    this.Scene.unbind(\"keyUp\", this._ku);\n                    var self = this;\n                    this._pv = function(e, d)\n                    {\n                        self._pointerMove(e, d);\n                    }\n                    this._pd = function(e, d)\n                    {\n                        self._pointerDown(e, d);\n                    }\n                    this._pu = function(e, d)\n                    {\n                        self._pointerUp(e, d);\n                    }\n                    this._kd = function(e, d)\n                    {\n                        self._keyDown(e, d);\n                    }\n                    this._ku = function(e, d)\n                    {\n                        self._keyUp(e, d);\n                    }\n                    this._pw = function(e, d)\n                    {\n                        self._pointerWheel(e, d);\n                    }\n                    this.Scene.bind(\"pointerMove\", this._pv);\n                    this.Scene.bind(\"pointerDown\", this._pd);\n                    this.Scene.bind(\"pointerUp\", this._pu);\n                    this.Scene.bind(\"pointerWheel\", this._pw);\n                    this.Scene.bind(\"keyDown\", this._kd);\n                    this.Scene.bind(\"keyUp\", this._ku);                       \n\n\n\n\n\n\n\n\n",
+			"parameters": []
+		},
 		"reloading": {
 			"body": "if (this.activeState == 'reloading')\n    {\n        this.firecounter--;\n        if (this.firecounter == 0)\n        {\n            this.Ammo = 30;\n            if(!this.userControlled())\n                this.activeState = 'firing';\n        }\n\n    }",
 			"parameters": []
 		},
-		"_keyDown": {
-			"body": "if (!this.verifyCamera()) return;\n    if (e.key.char == ' ') this.manualFiring = true;",
-			"parameters": [
-				"e"
-			]
-		},
-		"_keyUp": {
-			"body": "if (!this.verifyCamera()) return;\n    if (e.key.char == ' ') this.manualFiring = false;\n    if (e.key.char == 'T') this.activateState(\"targeting\");",
-			"parameters": [
-				"e"
-			]
-		},
 		"tick": {
 			"body": "this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.getPosition();\n    var goal = [2, 0, 0];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    var pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    var goal = [.0, 0, .75];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    if (this.userControlled())\n    {\n        if(this.manualFiring)\n            this.manuelFire();\n        return;\n    }\n\n    var state = this.states[this.activeState];\n    if (state)\n    {\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]();\n\n    }",
 			"parameters": []
-		},
-		"": {
-			"parameters": "console.log(\"got here\");"
 		},
 		"toggleControl": {
 			"body": "if (disable) this.isUserControlled = false;\n    else this.isUserControlled = !this.isUserControlled;\n\n    var button = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Button1\"];\n    button.text = this.isUserControlled ? \"Enable AI\" : \"Take Control\";",
@@ -389,22 +380,128 @@
 			"body": "var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].id;\n    return this.isUserControlled && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
 		},
-		"tracking": {
-			"body": "this.firecounter--;\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    \n    var thispos = this.transformAPI.getPosition();\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    vec = MATH.subVec3(thispos, MATH.addVec3(targetpos, MATH.scaleVec3(targetSpeed, (dist / 10) + 1)));\n    this.fuse = MATH.lengthVec3(vec);\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * .7);\n\n    var upvec = this.children_by_name[\"50CalPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.min(-0.2, -dot));\n    }\n    if (dot < -.01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.max(0.2, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02 && this.firecounter < 1)\n    {\n        this.activateState(\"firing\");\n    }\n    this.lastTargetPos = targetpos;",
+		"verifyCamera": {
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                           var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n                    var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].id;\n                    if (!cam || cam.id != thisCam) return false;\n                    return true;           \n\n\n\n\n\n\n\n\n",
 			"parameters": []
+		},
+		"explode": {
+			"body": "debugger;\n    var def = this.explosionDef;\n    if (def.internal_val)\n        def = def.internal_val;\n    def = JSON.parse(JSON.stringify(def));\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = dist / 10;\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);",
+			"parameters": [
+				"pos",
+				"dist"
+			]
 		},
 		"targeting": {
-			"body": "var near = Infinity;\n    var target = null;\n    var thispos = this.transformAPI.getPosition();\n\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var child = this.Scene.children[i];\n        if (child.id == this.id) continue;\n        if (child.parent.id == this.id) continue;\n        if(!child.transformAPI) continue;\n        \n        var childpos = child.transformAPI.getPosition();\n        var dist = MATH.distanceVec3(thispos, childpos);\n        if (dist < near && child.hostile && child.activeState !== 'disabled')\n        {\n            near = dist;\n            target = child;\n        }\n    }\n    if (target && near < (this.maxRange || 15000))\n    {\n        this.targetID = target.id;\n        this.activateState(\"tracking\");\n    }",
+			"body": "var near = Infinity;\n    var target = null;\n    var thispos = this.transformAPI.getPosition();\n   \n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var child = this.Scene.children[i];\n        if (child.id == this.id) continue;\n        if (child.parent.id == this.id) continue;\n        if (!child.transformAPI) continue;\n\n        var childpos = child.transformAPI.getPosition();\n        var dist = MATH.distanceVec3(thispos, childpos);\n        if (dist > 75 && dist < near && child.hostile && child.activeState !== 'defeated')\n        {\n            near = dist;\n            target = child;\n        }\n    }\n    if (target && near < (this.maxRange || 15000))\n    {\n        this.targetID = target.id;\n        this.activateState(\"tracking\");\n    }",
 			"parameters": []
 		},
-		"TAOCommand5In": {
-			"body": "//\", [\"5 Inch Engage\"], 0);\n    var command = args[0];\n\n    if (command == \"5 Inch Engage\")\n        this.activateState(\"targeting\");\n\n    if (command == \"5 Inch Disengage\")\n        this.activateState(\"idle\");\n\n    else if (command === \"toggleControl\")\n    {\n        this.toggleControl();\n    }",
-			"parameters": [
-				"args"
-			]
+		"tracking": {
+			"body": "this.firecounter--;\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target || target.activeState == 'defeated')\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n\n    var thispos = this.transformAPI.getPosition();\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    if (dist < .075)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    vec = MATH.subVec3(thispos, MATH.addVec3(targetpos, MATH.scaleVec3(targetSpeed, (dist / 10) + 1)));\n    this.fuse = MATH.lengthVec3(vec);\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * .7);\n\n    var upvec = this.children_by_name[\"50CalPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.min(-0.2, -dot));\n    }\n    if (dot < -.01)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.max(0.2, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02 && this.firecounter < 1)\n    {\n        this.activateState(\"firing\");\n    }\n    this.lastTargetPos = targetpos;",
+			"parameters": []
+		},
+		"fire": {
+			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n    this.audioAPI.playSound(this.fireSound, false, 300.0);\n    var dist = this.fuse * 100;\n    if (hit && hit.distance < dist)\n    {\n        dist = hit.distance;\n    }\n\n    var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n    this.explode(point, dist);\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n    var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n    shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);",
+			"parameters": []
 		}
 	},
 	"children": {
+		"N36272026": {
+			"extends": "asset.vwf",
+			"source": "/sas/assets/eaa55fce",
+			"type": "subDriver/threejs/asset/vnd.gltf+json",
+			"sequence": 0,
+			"random": {
+				"s0": 0.258053090190515,
+				"s1": 0.996120839146897,
+				"s2": 0.230874886736274,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"materialDef": {
+					"alpha": 1,
+					"ambient": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"blendMode": 1,
+					"color": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [
+						{
+							"alpha": 1,
+							"blendMode": 0,
+							"mapInput": 0,
+							"mapTo": 1,
+							"offsetx": 0,
+							"offsety": 0,
+							"scalex": 1,
+							"scaley": 1,
+							"src": "http://54.175.234.78:3030/assets/26a3ceb7"
+						}
+					],
+					"metal": false,
+					"reflect": 0.8,
+					"shadeless": false,
+					"shading": true,
+					"shadow": true,
+					"shininess": 15,
+					"side": 2,
+					"specularColor": {
+						"b": 0.57,
+						"g": 0.57,
+						"r": 0.57
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"___assetServerOriginalID": "N36272026",
+				"owner": "ADLteam",
+				"transform": [
+					0.9950000047683716,
+					0,
+					0,
+					0,
+					0,
+					0.9950000047683716,
+					0,
+					0,
+					0,
+					0,
+					0.9950000047683716,
+					0,
+					0,
+					0,
+					-0.75,
+					1
+				]
+			}
+		},
 		"Naa7829c8": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
@@ -493,8 +590,8 @@
 					1
 				],
 				"type": "Primitive",
-				"width": 1,
-				"visible": false
+				"visible": false,
+				"width": 1
 			},
 			"children": {
 				"N67ae5f4f": {
@@ -585,8 +682,8 @@
 							1
 						],
 						"type": "Primitive",
-						"width": 0.28,
-						"visible": false
+						"visible": false,
+						"width": 0.28
 					},
 					"children": {
 						"Ne6302cad": {
@@ -802,6 +899,7 @@
 									"vertexColors": false,
 									"wireframe": false
 								},
+								"___assetServerOriginalID": "N151b9a87",
 								"owner": "ADLteam",
 								"transform": [
 									0.017400048673152924,
@@ -820,8 +918,7 @@
 									0,
 									-2,
 									1
-								],
-								"___assetServerOriginalID": "N151b9a87"
+								]
 							}
 						}
 					}
@@ -844,27 +941,27 @@
 						"fovGoal": 60,
 						"owner": "Anonymous_srrHyERdWKafkXchAAAA",
 						"transform": [
-							1.2850783313530616e-19,
+							2.2182256317884247e-16,
 							0.9990000128746033,
 							-1.0749018342082195e-9,
 							0,
-							-3.5830061140273983e-10,
-							1.0749018342082195e-9,
+							-3.583007224250423e-10,
+							1.074901945230522e-9,
 							0.9990000128746033,
 							0,
 							0.9990000128746033,
-							2.570156662706123e-19,
-							3.5830061140273983e-10,
+							-1.1091128158942124e-16,
+							3.5830077793619353e-10,
 							0,
-							2,
-							0,
-							0,
+							2.0000009536743164,
+							-9.858970884124574e-8,
+							-8.185136124438941e-8,
 							1
 						]
 					},
 					"methods": {
 						"TAOCommand5In": {
-							"body": "\n\n\n   this.children_by_name.CommandDisplayLabel.visible = true;\n      this.children_by_name.CommandDisplayLabel.text = data; \n\n",
+							"body": "this.children_by_name.CommandDisplayLabel.visible = true;\n    if(data != \"toggleControl\") this.children_by_name.CommandDisplayLabel.text = data;",
 							"parameters": [
 								"data"
 							]
@@ -886,6 +983,7 @@
 							},
 							"properties": {
 								"DisplayName": "CommandDisplayLabel",
+								"___assetServerOriginalID": "N96169b33",
 								"font_size": 24,
 								"height": 51,
 								"left": 0,
@@ -918,48 +1016,7 @@
 									1
 								],
 								"visible": false,
-								"width": 294,
-								"___assetServerOriginalID": "N96169b33"
-							}
-						},
-						"N3766c21c": {
-							"extends": "http://vwf.example.com/label.vwf",
-							"sequence": 0,
-							"random": {
-								"s0": 0.136464140377939,
-								"s1": 0.743883366230875,
-								"s2": 0.724490934750065,
-								"c": 1
-							},
-							"properties": {
-								"DisplayName": "Label2",
-								"___assetServerOriginalID": "N3766c21c",
-								"font_size": 68,
-								"height": 100,
-								"left": 0,
-								"owner": "Anonymous_wS9HWx6DN-wlBP2rAAAG",
-								"text": 1000,
-								"top": 0,
-								"transform": [
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									3.625,
-									28.787878036499,
-									0,
-									1
-								],
-								"width": 100,
-								"visibleToAncestor": true
+								"width": 294
 							}
 						},
 						"Nc2f33b2e": {
@@ -998,24 +1055,66 @@
 									0,
 									1
 								],
-								"width": 100,
-								"visibleToAncestor": true
+								"visibleToAncestor": true,
+								"width": 100
+							}
+						},
+						"N3766c21c": {
+							"extends": "http://vwf.example.com/label.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.136464140377939,
+								"s1": 0.743883366230875,
+								"s2": 0.724490934750065,
+								"c": 1
+							},
+							"properties": {
+								"DisplayName": "Label2",
+								"___assetServerOriginalID": "N3766c21c",
+								"font_size": 68,
+								"height": 100,
+								"left": 0,
+								"owner": "Anonymous_wS9HWx6DN-wlBP2rAAAG",
+								"text": 1000,
+								"top": 0,
+								"transform": [
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									3.625,
+									28.787878036499,
+									0,
+									1
+								],
+								"visibleToAncestor": true,
+								"width": 100
 							}
 						},
 						"N31655ab": {
 							"extends": "http://vwf.example.com/button.vwf",
 							"sequence": 0,
 							"random": {
-								"s0": 0.6521164474543184,
-								"s1": 0.7992132639046758,
-								"s2": 0.8319053207524121,
+								"s0": 0.652116447454318,
+								"s1": 0.799213263904676,
+								"s2": 0.831905320752412,
 								"c": 1
 							},
 							"properties": {
-								"width": 100,
+								"DisplayName": "Button1",
+								"___assetServerOriginalID": "N31655ab",
 								"height": 38,
-								"text": "Take Control",
 								"left": 0,
+								"owner": "ADLteam",
+								"text": "Take Control",
 								"top": 0,
 								"transform": [
 									1,
@@ -1035,11 +1134,9 @@
 									0,
 									1
 								],
-								"owner": "ADLteam",
-								"DisplayName": "Button1",
 								"visible": true,
 								"visibleToAncestor": true,
-								"___assetServerOriginalID": "N31655ab"
+								"width": 100
 							},
 							"events": {
 								"pointerClick": {
@@ -1053,103 +1150,6 @@
 						}
 					}
 				}
-			}
-		},
-		"N36272026": {
-			"extends": "asset.vwf",
-			"source": "/sas/assets/eaa55fce",
-			"type": "subDriver/threejs/asset/vnd.gltf+json",
-			"sequence": 0,
-			"random": {
-				"s0": 0.258053090190515,
-				"s1": 0.996120839146897,
-				"s2": 0.230874886736274,
-				"c": 1
-			},
-			"properties": {
-				"___physics_activation_state": 1,
-				"___physics_deactivation_time": 0,
-				"___physics_velocity_linear": [
-					0,
-					0,
-					0
-				],
-				"___physics_velocity_angular": [
-					0,
-					0,
-					0
-				],
-				"materialDef": {
-					"alpha": 1,
-					"ambient": {
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"blendMode": 1,
-					"color": {
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"depthtest": true,
-					"depthwrite": true,
-					"emit": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"fog": true,
-					"layers": [
-						{
-							"alpha": 1,
-							"blendMode": 0,
-							"mapInput": 0,
-							"mapTo": 1,
-							"offsetx": 0,
-							"offsety": 0,
-							"scalex": 1,
-							"scaley": 1,
-							"src": "http://54.175.234.78:3030/assets/26a3ceb7"
-						}
-					],
-					"metal": false,
-					"reflect": 0.8,
-					"shadeless": false,
-					"shading": true,
-					"shadow": true,
-					"shininess": 15,
-					"side": 2,
-					"specularColor": {
-						"b": 0.57,
-						"g": 0.57,
-						"r": 0.57
-					},
-					"specularLevel": 1,
-					"type": "phong",
-					"vertexColors": false,
-					"wireframe": false
-				},
-				"owner": "ADLteam",
-				"transform": [
-					0.9950000047683716,
-					0,
-					0,
-					0,
-					0,
-					0.9950000047683716,
-					0,
-					0,
-					0,
-					0,
-					0.9950000047683716,
-					0,
-					0,
-					0,
-					-0.75,
-					1
-				],
-				"___assetServerOriginalID": "N36272026"
 			}
 		}
 	}
