@@ -104,7 +104,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Wed Oct 28 2015 18:14:20 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Thu Oct 29 2015 15:18:35 GMT-0400 (Eastern Daylight Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -343,21 +343,21 @@
 				"hostile": true,
 				"launchedBy": "",
 				"transform": [
-					-0.0762954279780388,
-					-0.237075522542,
-					0.96539044380188,
+					-0.07629542797803879,
+					-0.23707535862922668,
+					0.9653905034065247,
 					0,
-					-0.99064576625824,
-					0.0857895314693451,
-					-0.0572697296738625,
+					-0.9906457662582397,
+					0.0857895240187645,
+					-0.05726974457502365,
 					0,
-					-0.0695339739322662,
-					-0.964585840702057,
-					-0.242373824119568,
+					-0.06953397393226624,
+					-0.9645858407020569,
+					-0.24237366020679474,
 					0,
-					1.06952214241028,
-					-0.581038653850555,
-					1.50930154323578,
+					3.5973565578460693,
+					-5.498581886291504,
+					1.509301781654358,
 					1
 				]
 			}
@@ -370,7 +370,7 @@
 		"smokeDef": {
 			"continues": "/sas/assets/aeb3d1dd",
 			"properties": {
-				"targetEntity": "-sas-assets-73e8a4a3-Nc6b62eb5",
+				"targetEntity": "-sas-assets-73e8a4a3-N4527da8",
 				"transform": [
 					1,
 					0,
@@ -493,9 +493,9 @@
 			1.679644583418849e-7,
 			0.9963926672935486,
 			0,
-			-131.75,
-			-533,
-			24.5,
+			3.736388921737671,
+			-4.505375862121582,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
@@ -503,9 +503,9 @@
 		"warningsReceived": 0,
 		"width": 2.5,
 		"worldPosition": [
-			-131.75,
-			-533,
-			24.5
+			3.736388921737671,
+			-4.505375862121582,
+			0.01774579845368862
 		],
 		"worldTransform": [
 			-0.08684134483337402,
@@ -520,9 +520,9 @@
 			1.679644583418849e-7,
 			0.9963926672935486,
 			0,
-			-131.75,
-			-533,
-			24.5,
+			3.736388921737671,
+			-4.505375862121582,
+			0.01774579845368862,
 			1
 		]
 	},
@@ -677,10 +677,6 @@
 			"body": "var thisCam = this.controllingCamera;\n    if(!thisCam)\n        return true;\n    return this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
 		},
-		"launchMissile": {
-			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", pos);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
-			"parameters": []
-		},
 		"moving_awayTransition": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"moving_awayTransition\");\n                                this.moving_awayUpdate(this.currentState);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -755,6 +751,10 @@
 		},
 		"verifyCamera": {
 			"body": "if(!this.controllingCamera)\n        return true;\n    var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.controllingCamera) return false;\n    return true;",
+			"parameters": []
+		},
+		"launchMissile": {
+			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        // var postion = sender.baseURL + \"position/\";\n        // var result = {\n        //     extensions:\n        //     {\n        //         position:\n        //         {\n        //             pos\n        //         },\n        //     }\n        // };\n        sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", null);    //result);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
 		}
 	},
@@ -874,9 +874,9 @@
 					-0.9645858407020569,
 					-0.24237366020679474,
 					0,
-					-131.8890380859375,
-					-533.9932250976562,
-					25.99155616760254,
+					3.5973565578460693,
+					-5.498581886291504,
+					1.509301781654358,
 					1
 				]
 			}
@@ -933,9 +933,9 @@
 					0.0000011611706440817215,
 					0.9963926672935486,
 					0,
-					-131.9844207763672,
-					-535.9796142578125,
-					23.743608474731445,
+					3.5019609928131104,
+					-7.484994411468506,
+					-0.7386459112167358,
 					1
 				]
 			}
@@ -1035,9 +1035,9 @@
 					1
 				],
 				"worldPosition": [
-					-131.77601623535156,
-					-533.49658203125,
-					24.000288009643555
+					3.7103655338287354,
+					-5.001978874206543,
+					-0.4819667339324951
 				]
 			},
 			"methods": {

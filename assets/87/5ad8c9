@@ -44,15 +44,15 @@
 			0,
 			1,
 			0,
-			1.61932429699834,
-			1.13987561126762,
+			1.40126952534082,
+			-0.871416334165438,
 			0.0177457988262171,
 			1
 		],
 		"visible": true,
 		"width": 319,
 		"sourceAssetId": "875ad8c9",
-		"___sourceAssetTimestamp": "Mon Oct 19 2015 10:52:10 GMT-0400 (Eastern Daylight Time)"
+		"___sourceAssetTimestamp": "Thu Oct 29 2015 10:34:23 GMT-0400 (Eastern Daylight Time)"
 	},
 	"children": {
 		"N8fb168d3": {
@@ -202,7 +202,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5InchGun\", \"TacticalActionOfficer\", null);\n    }"
+							"body": "//this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
 				},
@@ -255,7 +255,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"5InchGun\", \"TacticalActionOfficer\", null);\n    }"
+							"body": "//this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
 				}
@@ -511,7 +511,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"SCAT/OOD\", \"TacticalActionOfficer\", null);\n    }"
+							"body": "//this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"SCAT/OOD\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
 				},
@@ -564,7 +564,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "// this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5InchGun\", \"TacticalActionOfficer\", null);\n    }"
+							"body": "// this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
 				}
@@ -717,7 +717,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "//this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"SeahawkHelicopter\", \"TacticalActionOfficer\", null);\n    }"
+							"body": "//this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
 				},
@@ -770,7 +770,7 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "// this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"SeahawkHelicopter\", \"TacticalActionOfficer\", null);\n    }"
+							"body": "// this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
 				}
@@ -826,7 +826,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "//this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"SeahawkHelicopter\", \"TacticalActionOfficer\", null);\n    }"
+					"body": "//this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
 				}
 			}
 		},
@@ -880,7 +880,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "//this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"SCAT/OOD\", \"TacticalActionOfficer\", null);\n    }"
+					"body": "//this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"SCAT/OOD\", \"Tactical Action Officer\", null);\n    }"
 				}
 			}
 		}

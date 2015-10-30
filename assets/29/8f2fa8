@@ -9,7 +9,7 @@
 	},
 	"properties": {
 		"DisplayName": "IntroScreen",
-		"___sourceAssetTimestamp": "Fri Oct 23 2015 14:38:18 GMT-0400 (EDT)",
+		"___sourceAssetTimestamp": "Thu Oct 29 2015 09:43:23 GMT-0400 (Eastern Daylight Time)",
 		"background_color": [
 			1,
 			0,
@@ -76,9 +76,9 @@
 			0,
 			1,
 			0,
-			5.52834035521336,
-			-0.66119739582066,
-			0.0177457988262173,
+			-0.536555603615887,
+			0.855636667599102,
+			0.017745798826218,
 			1
 		],
 		"visible": true,
@@ -97,7 +97,7 @@
 			]
 		},
 		"startSimulation": {
-			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (!this.simulationStarted && sender)\n    {\n        this.simulationStarted = true;\n        sender.xAPISend(\"started\", \"object\", \"role\", null);\n    }\n\n    if (sender)\n    {\n        sender.xAPISend(\"selected\", choice.replace(/\\s/g, ''), choice.replace(/\\s/g, ''), null)\n    }",
+			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (!this.simulationStarted && sender)\n    {\n        this.simulationStarted = true;\n        sender.xAPISend(\"started\", null, \"Start Screen\", null);\n    }\n\n    if (sender)\n    {\n        sender.xAPISend(\"selected\", choice, choice, null);\n    }",
 			"parameters": []
 		}
 	},
@@ -134,11 +134,11 @@
 					"display": "flex",
 					"flex-direction": "column",
 					"height": "auto",
+					"max-width": "600px",
 					"order": 1,
 					"padding": "20px",
 					"position": "relative",
-					"width": "45%",
-					"max-width": "600px"
+					"width": "45%"
 				},
 				"top": 0,
 				"transform": [
@@ -344,11 +344,11 @@
 					"align-items": "center",
 					"display": "flex",
 					"flex-direction": "column",
+					"max-width": "500px",
 					"order": 0,
 					"padding": "10px",
 					"position": "relative",
-					"width": "37%",
-					"max-width": "500px"
+					"width": "37%"
 				},
 				"top": 0,
 				"transform": [
