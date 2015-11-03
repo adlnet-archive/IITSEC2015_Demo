@@ -22,8 +22,8 @@
 			0,
 			1,
 			0,
-			-0.7549859881401062,
-			1.325257420539856,
+			-0.22411637008190155,
+			0.41509953141212463,
 			0.01774579845368862,
 			1
 		],
@@ -37,12 +37,39 @@
 				"type": "text"
 			}
 		},
-		"___sourceAssetTimestamp": "Fri Oct 30 2015 13:23:15 GMT-0400 (Eastern Daylight Time)",
-		"sourceAssetId": "6acb0557"
+		"___sourceAssetTimestamp": "Mon Nov 02 2015 14:54:03 GMT-0500 (Eastern Standard Time)",
+		"sourceAssetId": "6acb0557",
+		"worldTransform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			-0.22411637008190155,
+			0.41509953141212463,
+			0.01774579845368862,
+			1
+		],
+		"stmtId": ""
 	},
 	"methods": {
 		"senderSnippet": {
 			"body": "/*Generic code for sending xAPI statements from demo*/\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"verb\", \"object\", \"role\",\n                        null /*optional - see result object*/,\n                        null /*optional - see context.extesions object*/ );\n    }\n\n    /*\n    result object - object to be appended as result\n    {\n     \"score\": { \"scaled\": float, \"raw\": int, \"min\": int, \"max\": int },\n     \"success\": boolean,\n     \"completion\": boolean,\n     \"response\": string,\n     \"duration\": ISO 8601 duration\n     \"extensions\": { \"key must be valid URI\": value (any JSON type)}\n    }\n    */\n    \n    /*\n    conExt - object to be appended to context.extensions\n    {\n     \"key must be valid URI\": value (any JSON type),\n     include:\n       \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": this.Scene.time,\n    }\n    */",
+			"parameters": []
+		},
+		"send50Cal": {
+			"body": "/*\n    Code for sending xAPI statements from 50 Cal in demo\n    The 50 Cal fires bullets, simulated by raycast,\n    so in the instant it is fired, we know what it has hit.\n    We don't want to send a statement every bullet, we'd like\n    to send a statement every burst. Am using a boolean variable\n    to do this.  Want to also collect info from every bullet and\n    send the collective info in the burst statement.  So let's \n    pin down what the statement should look like, and what we\n    want to collect from the bullets and send with the burst.\n    Seems simple enough.\n    */\n\n    //vars to make it work, but to be ignored when pasting into place\n    var origin, dir, hit, started, ended;\n\n    //1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n\n        // sender.xAPISend(\"fired\", \"object\", \"Small Craft Action Team\",\n        //     result /*optional - see result object*/ ,\n        //     conExt /*optional - see context.extesions object*/ );\n\n        //2 - Info from bullets - still inside the if sender\n        var startT, dur, roundsFired, numHits, hits;\n        if (!started)\n        {\n            startT = this.Scene.time;\n            hits = [];\n            ended = false;\n            started = true;\n            roundsFired = 0;\n            this.burstCount++; //make this a property\n        }\n        roundsFired++;\n        if (hit /*we have hit something significant*/ )\n        {\n            numHits++;\n            var newObj = true;\n            for (var i in hits)\n            {\n                if (hits[i] === hit)\n                    newObj = false;\n            }\n            if (newObj)\n                hits.push(hit); //or hit.node, or hit.node.DisplayName\n        }\n        // if (ended) //there might be a better word/way to accomplish\n        {\n            started = false;\n            dur = this.Scene.time - startT;\n\n            //3 - build objects for statment\n            var result = {\n                score:\n                {\n                    max: 1,\n                    min: 0,\n                    scaled: numHits / roundsFired || 0.321 //remove or 0.321 when in place\n                },\n                success: (hits.length > 0),\n                duration: \"PT\" + Math.floor(dur) + \"S\", //a real end - start number of the burst\n                response: \"scaled is the hit/fired ratio\"\n            };\n            var conExt = {\n                \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time*1000)/1000,\n                // \"https://sandbox.adlnet.gov/context/extensions/position/origin\": origin || \"3.5\",    //not needed for collection scenario\n                // \"https://sandbox.adlnet.gov/context/extensions/position/direction\": dir || \"12 degrees\",\n                \"https://sandbox.adlnet.gov/context/extensions/objectHit\": JSON.stringify(hits) || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n                \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n                \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n                \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n            };\n\n            //4 - Send it - inside if(ended),  inside if(sender)\n            sender.xAPISend(\"fired\", \"burst\" + (this.burstCount || 0), \"Small Craft Action Team\",\n                result /*optional - see result object*/ ,\n                conExt /*optional - see context.extesions object*/ );\n        } //if(ended)\n\n    } //if(sender)\n\n    /*\n    result object - object to be appended as result\n    {\n     \"score\": { \"scaled\": float, \"raw\": int, \"min\": int, \"max\": int },\n     \"success\": boolean,\n     \"completion\": boolean,\n     \"response\": string,\n     \"duration\": ISO 8601 duration\n     \"extensions\": { \"key must be valid URI\": value (any JSON type)}\n    }\n    */\n\n    /*\n    conExt - object to be appended to context.extensions\n    {\n     \"key must be valid URI\": value (any JSON type),\n     include:\n       \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": this.Scene.time,\n    }\n    */",
+			"parameters": []
+		},
+		"sendMissileLaunch": {
+			"body": "console.log(\"send Missile Launch\");",
 			"parameters": []
 		},
 		"xAPISend": {
@@ -55,8 +82,8 @@
 				"conExt"
 			]
 		},
-		"send50Cal": {
-			"body": "/*\n    Code for sending xAPI statements from 50 Cal in demo\n    The 50 Cal fires bullets, simulated by raycast,\n    so in the instant it is fired, we know what it has hit.\n    We don't want to send a statement every bullet, we'd like\n    to send a statement every burst. Am using a boolean variable\n    to do this.  Want to also collect info from every bullet and\n    send the collective info in the burst statement.  So let's \n    pin down what the statement should look like, and what we\n    want to collect from the bullets and send with the burst.\n    Seems simple enough.\n    */\n\n    //1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var result = {\n            score:\n            {\n                max: 1,\n                min: 0,\n                scaled: 0.22,\n                duration: \"PT13S\", //a real end - start number of the burst\n                response: \"scaled is the hit/fired ratio\"\n            }\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": this.Scene.time,\n        };\n\n        sender.xAPISend(\"verb\", \"object\", \"role\",\n            result /*optional - see result object*/ ,\n            conExt /*optional - see context.extesions object*/ );\n    }\n\n    //2 - Info from bullets\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"verb\", \"object\", \"role\",\n            null /*optional - see result object*/ ,\n            null /*optional - see context.extesions object*/ );\n    }\n\n    /*\n    result object - object to be appended as result\n    {\n     \"score\": { \"scaled\": float, \"raw\": int, \"min\": int, \"max\": int },\n     \"success\": boolean,\n     \"completion\": boolean,\n     \"response\": string,\n     \"duration\": ISO 8601 duration\n     \"extensions\": { \"key must be valid URI\": value (any JSON type)}\n    }\n    */\n\n    /*\n    conExt - object to be appended to context.extensions\n    {\n     \"key must be valid URI\": value (any JSON type),\n     include:\n       \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": this.Scene.time,\n    }\n    */",
+		"sendMissileHit": {
+			"body": "console.log(\"send Missile Hit\");\n    //vars to make it work outside of where it belongs\n    var obstacle;\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var result = {\n            success: true,\n            // response: \"You betchya\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.target_data,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": \"obstacle\", //(obstacle.id + obstacle.DisplayName) || \"obstacle\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": \"Missile#2\", //(this.id + this.DisplayName) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/statementRef\": this.stmtId || \"stmtId\",\n            \"https://sandbox.adlnet.gov/context/extensions/position\": this.worldTransform.slice(),\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"hit\", 'What the missile hit' /*obstacle.DisplayName*/ , (this.DisplayName + this.ID), result, conExt);\n    }",
 			"parameters": []
 		}
 	}

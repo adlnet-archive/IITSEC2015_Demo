@@ -104,7 +104,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Thu Oct 29 2015 15:18:35 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Mon Nov 02 2015 16:20:29 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -493,9 +493,9 @@
 			1.679644583418849e-7,
 			0.9963926672935486,
 			0,
-			3.736388921737671,
-			-4.505375862121582,
-			0.01774579845368862,
+			11.25,
+			-4,
+			0.5,
 			1
 		],
 		"type": "Primitive",
@@ -503,9 +503,9 @@
 		"warningsReceived": 0,
 		"width": 2.5,
 		"worldPosition": [
-			3.736388921737671,
-			-4.505375862121582,
-			0.01774579845368862
+			11.25,
+			-4,
+			0.5
 		],
 		"worldTransform": [
 			-0.08684134483337402,
@@ -520,9 +520,9 @@
 			1.679644583418849e-7,
 			0.9963926672935486,
 			0,
-			3.736388921737671,
-			-4.505375862121582,
-			0.01774579845368862,
+			11.25,
+			-4,
+			0.5,
 			1
 		]
 	},
@@ -657,12 +657,6 @@
 				"statename"
 			]
 		},
-		"hit": {
-			"body": "console.log(\"hit state: \" + this.currentState.name);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n        console.log(\"(hit) \" + this.health);\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
-			"parameters": [
-				"args"
-			]
-		},
 		"idleTransition": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"idleTransition\");\n                                this.currentState = this.states[\"idle\"];   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -756,6 +750,12 @@
 		"launchMissile": {
 			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        // var postion = sender.baseURL + \"position/\";\n        // var result = {\n        //     extensions:\n        //     {\n        //         position:\n        //         {\n        //             pos\n        //         },\n        //     }\n        // };\n        sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", null);    //result);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
+		},
+		"hit": {
+			"body": "console.log(\"hit state: \" + this.currentState.name);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n        console.log(\"(hit) \" + this.health);\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is destroyed\", this.DisplayName + this.id, \"Fast Attack Craft\",\n            null /*optional - see result object*/ ,\n            null /*optional - see context.extesions object*/ );\n    }\n    }",
+			"parameters": [
+				"args"
+			]
 		}
 	},
 	"children": {
@@ -874,9 +874,9 @@
 					-0.9645858407020569,
 					-0.24237366020679474,
 					0,
-					3.5973565578460693,
-					-5.498581886291504,
-					1.509301781654358,
+					11.110967636108398,
+					-4.993206024169922,
+					1.99155592918396,
 					1
 				]
 			}
@@ -933,9 +933,9 @@
 					0.0000011611706440817215,
 					0.9963926672935486,
 					0,
-					3.5019609928131104,
-					-7.484994411468506,
-					-0.7386459112167358,
+					11.015571594238281,
+					-6.979618549346924,
+					-0.256391704082489,
 					1
 				]
 			}
@@ -1035,9 +1035,9 @@
 					1
 				],
 				"worldPosition": [
-					3.7103655338287354,
-					-5.001978874206543,
-					-0.4819667339324951
+					11.223977088928223,
+					-4.496603012084961,
+					0.0002874666824936867
 				]
 			},
 			"methods": {
