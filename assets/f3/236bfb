@@ -87,12 +87,13 @@
 			-0.9999992847442627,
 			-0.0011766692623496056,
 			0,
-			-101.32054901123047,
-			-56.128761291503906,
-			0.009999999776482582,
+			10.161662101745605,
+			-0.3247891664505005,
+			0.7581397294998169,
 			1
 		],
-		"___sourceAssetTimestamp": "Mon Oct 26 2015 09:38:23 GMT-0400 (Eastern Daylight Time)",
-		"sourceAssetId": "f3236bfb"
+		"___sourceAssetTimestamp": "Tue Nov 03 2015 09:07:44 GMT-0500 (Eastern Standard Time)",
+		"sourceAssetId": "f3236bfb",
+		"DisplayName": "Supply Ship"
 	}
 }
