@@ -4,9 +4,9 @@
 	"type": "subDriver/threejs/asset/vnd.gltf+json",
 	"sequence": 0,
 	"random": {
-		"s0": 0.9439447079785168,
-		"s1": 0.7924379715695977,
-		"s2": 0.33443279354833066,
+		"s0": 0.943944707978517,
+		"s1": 0.792437971569598,
+		"s2": 0.334432793548331,
 		"c": 1
 	},
 	"properties": {
@@ -23,75 +23,77 @@
 			0
 		],
 		"materialDef": {
-			"color": {
-				"r": 1,
-				"g": 1,
-				"b": 1
-			},
-			"ambient": {
-				"r": 0,
-				"g": 0,
-				"b": 0
-			},
-			"emit": {
-				"r": 0,
-				"g": 0,
-				"b": 0
-			},
-			"specularColor": {
-				"r": 0,
-				"g": 0,
-				"b": 0
-			},
-			"specularLevel": 1,
 			"alpha": 1,
-			"shininess": 0.000002,
-			"side": 0,
-			"reflect": 0.01,
-			"layers": [
-				{
-					"mapTo": 1,
-					"scalex": 1,
-					"scaley": 1,
-					"offsetx": 0,
-					"offsety": 0,
-					"alpha": 1,
-					"src": "http://54.175.234.78:3030/assets/d91d1b6a.jpg",
-					"mapInput": 0
-				}
-			],
-			"type": "phong",
-			"wireframe": false,
-			"metal": false,
+			"ambient": {
+				"b": 0.584415584415584,
+				"g": 0.584415584415584,
+				"r": 0.584415584415584
+			},
+			"blendMode": 1,
+			"color": {
+				"a": 1,
+				"b": 0.584415584415584,
+				"g": 0.584415584415584,
+				"r": 0.584415584415584
+			},
 			"combine": 0,
 			"depthtest": true,
 			"depthwrite": true,
-			"blendMode": 1,
+			"emit": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
 			"fog": true,
+			"layers": [
+				{
+					"alpha": 1,
+					"mapInput": 0,
+					"mapTo": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"scalex": 1,
+					"scaley": 1,
+					"src": "http://54.175.234.78:3030/assets/d91d1b6a.jpg"
+				}
+			],
+			"metal": false,
+			"reflect": 0.01,
 			"shading": true,
-			"vertexColors": false
+			"shininess": 0.000002,
+			"side": 0,
+			"specularColor": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
+			"specularLevel": 1,
+			"type": "phong",
+			"vertexColors": false,
+			"wireframe": false
 		},
+		"DisplayName": "Fishing Boat",
+		"___sourceAssetTimestamp": "Wed Nov 04 2015 14:16:14 GMT-0500 (Eastern Standard Time)",
 		"owner": "ADLteam",
+		"sourceAssetId": "6b09f81c",
 		"transform": [
-			-0.9079856872558594,
-			-1.0445181131362915,
-			3.8087120124430385e-9,
+			-0.0035032937303185463,
+			-1.3851690292358398,
+			-0.02417823113501072,
 			0,
-			1.0438125133514404,
-			-0.9073723554611206,
-			0.07318461686372757,
+			1.3830606937408447,
+			-0.004782464355230331,
+			0.07318555563688278,
 			0,
-			-0.05563192442059517,
-			0.04836009442806244,
-			1.393051028251648,
+			-0.0737127959728241,
+			-0.024149693548679352,
+			1.3942363262176514,
 			0,
-			7.257575035095215,
-			54.02721405029297,
-			0.6139530539512634,
+			0.5429153442382812,
+			-0.07830678671598434,
+			-0.22145918011665344,
 			1
 		],
-		"___sourceAssetTimestamp": "Mon Oct 26 2015 10:10:48 GMT-0400 (Eastern Daylight Time)",
-		"DisplayName": "Fishing Boat",
-		"sourceAssetId": "6b09f81c"
+		"___assetServerOriginalID": "N8d83b3ad"
 	}
 }
