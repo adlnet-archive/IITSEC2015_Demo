@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.5852771960198879,
-		"s1": 0.2525658621452749,
-		"s2": 0.20400348212569952,
-		"c": 449553
+		"s0": 0.2284619042184204,
+		"s1": 0.4899958779569715,
+		"s2": 0.6839226768352091,
+		"c": 342267
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -22,8 +22,8 @@
 			0,
 			0
 		],
-		"Ammo": 1000,
-		"DisplayName": "50CalBase6g",
+		"Ammo": 357,
+		"DisplayName": "50CalBase6g2",
 		"EditorData": {
 			"accuracy": {
 				"displayname": "Accuracy",
@@ -54,7 +54,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Wed Nov 04 2015 16:38:26 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Thu Nov 05 2015 16:20:24 GMT-0500 (Eastern Standard Time)",
 		"_length": 0.23,
 		"accuracy": 24,
 		"activeState": "targeting",
@@ -114,6 +114,7 @@
 		"owner": "ADLteam",
 		"reloadSound": "/sas/assets/ee04dc80",
 		"sourceAssetId": "06f4f9c2",
+		"started": false,
 		"state": "ready",
 		"states": {
 			"engaging": {
@@ -130,6 +131,14 @@
 					"idle"
 				],
 				"updateFunc": null
+			},
+			"reloading": {
+				"transitions": [
+					"engaging",
+					"idle",
+					"targeting"
+				],
+				"updateFunc": "reloading"
 			},
 			"targeting": {
 				"transitions": [
@@ -262,15 +271,15 @@
 			-0.01746985875070095,
 			1.000847578048706,
 			0,
-			-13.5,
-			4.75,
-			20,
+			0.75,
+			3,
+			0,
 			1
 		],
 		"type": "Primitive",
+		"userControlCounter": 0,
 		"visible": true,
-		"width": 0.14,
-		"userControlCounter": 0
+		"width": 0.14
 	},
 	"methods": {
 		"TAOCommand50Cal": {
@@ -279,36 +288,20 @@
 				"args"
 			]
 		},
-		"activateState": {
-			"body": "if (this.states[newState] && this.states[newState].transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        console.log(\"transition to \" + newState);\n    }\n    else\n    {\n        console.log(\"invalid transition\");\n    }",
+		"_keyDown": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.keysDown.push(e.key.char);\n    if (e.key.char == ' ')\n    {\n        //do xapi\n    }",
 			"parameters": [
-				"newState"
+				"e"
 			]
 		},
-		"firing": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       return (this.keysDown.indexOf(' ') !== -1)                         \n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
-		"ready": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       this.Scene.unbind(\"pointerMove\", this._pv);\n                  this.Scene.unbind(\"pointerDown\", this._pd);\n                  this.Scene.unbind(\"pointerUp\", this._pu);\n                  \n                  this.Scene.unbind(\"keyDown\", this._kd);\n                  this.Scene.unbind(\"keyUp\", this._ku);\n                  var self = this;\n                  this._pv = function(e, d)\n                  {\n                      self._pointerMove(e, d);\n                  }\n                  this._pd = function(e, d)\n                  {\n                      self._pointerDown(e, d);\n                  }\n                  this._pu = function(e, d)\n                  {\n                      self._pointerUp(e, d);\n                  }\n                  this._kd = function(e, d)\n                  {\n                      self._keyDown(e, d);\n                  }\n                  this._ku = function(e, d)\n                  {\n                      self._keyUp(e, d);\n                  }\n                  this.Scene.bind(\"pointerMove\", this._pv);\n                  this.Scene.bind(\"pointerDown\", this._pd);\n                  this.Scene.bind(\"pointerUp\", this._pu);\n                  this.Scene.bind(\"keyDown\", this._kd);\n                  this.Scene.bind(\"keyUp\", this._ku);                         \n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
-		"reloading": {
-			"body": "",
-			"parameters": []
-		},
-		"toggleControl": {
-			"body": "if (disable) this.isUserControlled = false;\n    else this.isUserControlled = !this.isUserControlled;\n\n    var button = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name[\"Button1\"];\n    button.text = this.isUserControlled ? \"Enable AI\" : \"Take Control\";",
+		"_keyUp": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.keysDown.splice(this.keysDown.indexOf(' '), 1)\n    if (e.key.char == ' ')\n    {\n        this.playSound(\"/sas/assets/8eb34370\", false, 10);\n        this.xAPISend();\n    }",
 			"parameters": [
-				"disable"
+				"e"
 			]
 		},
-		"verifyCamera": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n                  var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n                  if (!cam || cam.id != thisCam) return false;\n                  return true;  \n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
-		"_pointerUp": {
-			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (e.button == \"left\")\n    {\n        this.lastx = e.position[0];\n        this.lasty = e.position[1];\n        this.mouseDown = false;\n    }\n    if (e.button == \"right\")\n    {\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].fovGoal = 60;\n    }",
+		"_pointerDown": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (e.button == \"left\")\n    {\n        this.lastx = e.position[0];\n        this.lasty = e.position[1];\n        this.mouseDown = true;\n    }\n    if (e.button == \"right\")\n    {\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].fovGoal = 10;\n    }",
 			"parameters": [
 				"e",
 				"d"
@@ -321,51 +314,83 @@
 				"d"
 			]
 		},
-		"_pointerDown": {
-			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (e.button == \"left\")\n    {\n        this.lastx = e.position[0];\n        this.lasty = e.position[1];\n        this.mouseDown = true;\n    }\n    if (e.button == \"right\")\n    {\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].fovGoal = 10;\n    }",
+		"_pointerUp": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (e.button == \"left\")\n    {\n        this.lastx = e.position[0];\n        this.lasty = e.position[1];\n        this.mouseDown = false;\n    }\n    if (e.button == \"right\")\n    {\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].fovGoal = 60;\n    }",
 			"parameters": [
 				"e",
 				"d"
 			]
 		},
-		"_keyUp": {
-			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.keysDown.splice(this.keysDown.indexOf(' '), 1)\n    this.playSound(\"/sas/assets/8eb34370\", false, 10);",
+		"activateState": {
+			"body": "if (this.states[newState] && this.states[newState].transitions.indexOf(newState))\n    {\n        this.activeState = newState;\n        console.log(\"transition to \" + newState);\n    }\n    else\n    {\n        console.log(\"invalid transition\");\n    }",
 			"parameters": [
-				"e"
+				"newState"
 			]
 		},
-		"_keyDown": {
-			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.keysDown.push(e.key.char);",
-			"parameters": [
-				"e"
-			]
-		},
-		"tracking": {
-			"body": "console.log(\"tracking\");\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n\n    var thispos = this.transformAPI.getPosition();\n\n    var thisPivotpos = this.children[0].transformAPI.getWorldPosition();\n    thisPivotpos = this.transformAPI.globalToLocal(thisPivotpos);\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    //vec = MATH.subVec3(thispos, [0, 0, 0]);\n    this.fuse = MATH.lengthVec3(vec) / 1000; //the 50 cal does not need to lead the target nearly so much\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * 1.7);\n\n    var upvec = this.children_by_name[\"50CalPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .001)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.min(-0.5, -dot));\n    }\n    if (dot < -.001)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.max(0.5, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02)\n    {\n        this.activateState(\"engaging\");\n    }\n    this.lastTargetPos = targetpos;",
+		"collectXAPIData": {
+			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.isUserControlled())\n    {\n        //2 - Info from bullets - still inside the if sender\n        // var startT, dur, roundsFired, numHits, hits;\n        if (!this.started)\n        {\n            console.log(\"Starting Burst\");\n            startT = this.Scene.time;\n            hits = [];\n            ended = false;\n            this.started = true;\n            roundsFired = 0;\n            numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        roundsFired++;\n        if (hit /*we have hit something significant*/ )\n        {\n            numHits++;\n            var newObj = true;\n            for (var i in hits)\n            {\n                if (hits[i] === hit)\n                    newObj = false;\n            }\n            if (newObj)\n                hits.push(hit); //or hit.node, or hit.node.DisplayName\n        }\n        console.log(roundsFired, numHits);\n    }",
 			"parameters": []
 		},
-		"tick": {
-			"body": "this.userControlCounter--;\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.getPosition();\n    var goal = [0.1, -0.01, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    goal = [0.0, 0, 0.75];\n    move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    if ((this.firing() || this.activeState == \"engaging\") && this.Ammo > 0 && this.state == \"ready\")\n    {\n    }else\n    {\n         this.audioAPI.stopSound(this.fireSound);\n    }\n    \n    if (!this.userControlled())\n    {\n        var state = this.states[this.activeState];\n        if (state)\n        {\n            if (state.updateFunc && this[state.updateFunc])\n                this[state.updateFunc]();\n\n        }\n        this.engaging();\n        return;\n    }",
+		"engaging": {
+			"body": "this.tracking();\n\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target || target.activeState == \"defeated\")\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.activateState(\"targeting\");\n        return;\n    }\n\n    if (this.Ammo > 0)\n    {\n        this.shake();\n      \n        if (this.firecounter >= 2)\n        {\n            this.firecounter = 0;\n            this.fire();\n        }\n    }",
 			"parameters": []
 		},
-		"userControlled": {
-			"body": "var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n    var isUserControlled = (this.userControlCounter > 0) && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;\n\n    if (isUserControlled && this.activeState != \"idle\") this.activeState = \"targeting\";\n\n    return isUserControlled;",
+		"fire": {
+			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit && hit.node)\n    {\n        if (Engine.ancestors(hit.node.id).indexOf(this.targetID) != -1)\n        {\n\n            if (hit.node.hit)\n                hit.node.hit([hit.point, 5]);\n\n        }\n        else if (!this.userControlled())\n        {\n            this.audioAPI.stopSound(this.fireSound);\n            this.activateState(\"targeting\");\n        }\n    }\n\n    this.collectXAPIData();\n    this.Ammo -= 2;\n    console.log(this.Ammo);\n    if (this.Ammo <= 0)\n    {\n        this.startReloading();\n    }",
+			"parameters": []
+		},
+		"firing": {
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       return (this.keysDown.indexOf(' ') !== -1)                         \n\n\n\n\n\n\n\n",
+			"parameters": []
+		},
+		"ready": {
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       this.Scene.unbind(\"pointerMove\", this._pv);\n                  this.Scene.unbind(\"pointerDown\", this._pd);\n                  this.Scene.unbind(\"pointerUp\", this._pu);\n                  \n                  this.Scene.unbind(\"keyDown\", this._kd);\n                  this.Scene.unbind(\"keyUp\", this._ku);\n                  var self = this;\n                  this._pv = function(e, d)\n                  {\n                      self._pointerMove(e, d);\n                  }\n                  this._pd = function(e, d)\n                  {\n                      self._pointerDown(e, d);\n                  }\n                  this._pu = function(e, d)\n                  {\n                      self._pointerUp(e, d);\n                  }\n                  this._kd = function(e, d)\n                  {\n                      self._keyDown(e, d);\n                  }\n                  this._ku = function(e, d)\n                  {\n                      self._keyUp(e, d);\n                  }\n                  this.Scene.bind(\"pointerMove\", this._pv);\n                  this.Scene.bind(\"pointerDown\", this._pd);\n                  this.Scene.bind(\"pointerUp\", this._pu);\n                  this.Scene.bind(\"keyDown\", this._kd);\n                  this.Scene.bind(\"keyUp\", this._ku);                         \n\n\n\n\n\n\n\n",
+			"parameters": []
+		},
+		"reloading": {
+			"body": "if (this.firecounter == 0)\n    {\n        \n        console.log('reloading, so stopping sound and sending xapi statement');\n        this.Ammo = 1000;\n        this.xAPISend();\n        this.state = 'ready';\n\n        this.activateState('targeting');\n    }",
+			"parameters": []
+		},
+		"returnFromShakeOffsets": {
+			"body": "this.userControlCounter--;\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.getPosition();\n    var goal = [0.1, -0.01, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    goal = [0.0, 0, 0.75];\n    move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);",
+			"parameters": []
+		},
+		"shake": {
+			"body": "var shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(shake);\n        shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);",
 			"parameters": []
 		},
 		"targeting": {
 			"body": "var near = Infinity;\n    var target = null;\n    var thispos = this.transformAPI.getPosition();\n    var list = [];\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var child = this.Scene.children[i];\n        if (child.id == this.id) continue;\n        if (child.parent.id == this.id) continue;\n        if (!child.transformAPI) continue;\n\n        var childpos = child.transformAPI.getPosition();\n        var dist = MATH.distanceVec3(thispos, childpos);\n        if (dist < (this.maxRange || 100) && child.hostile && child.activeState !== 'disabled')\n        {\n            list.push(\n            {\n                near: dist,\n                target: child,\n            });\n        }\n    }\n\n    list.sort(function(a, b)\n    {\n        return a.near - b.near;\n    });\n\n    for (var i = 0; i < list.length; i++)\n    {\n        target = list[i].target;\n        if (target)\n        {\n            var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n            var b = Vec3.subtract(target.transformAPI.getWorldPosition(), origin, []);\n            var dir = Vec3.normalize(b, []);\n\n            var hit = this.Scene.traceAPI.rayCast(origin, dir,\n            {\n                ignore: [findviewnode(this.id), findviewnode(target.id)]\n            });\n            if (hit && hit.distance < Vec3.distance(target.transformAPI.getWorldPosition(), origin))\n                target = null; //something is between us and the target\n        }\n\n        if (target)\n        {\n            this.targetID = target.id;\n            this.activateState(\"tracking\");\n            return;\n        }\n    }",
 			"parameters": []
 		},
+		"toggleControl": {
+			"body": "if (disable) this.isUserControlled = false;\n    else this.isUserControlled = !this.isUserControlled;\n\n    var button = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].children_by_name[\"Button1\"];\n    button.text = this.isUserControlled ? \"Enable AI\" : \"Take Control\";",
+			"parameters": [
+				"disable"
+			]
+		},
+		"userControlled": {
+			"body": "var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n    var isUserControlled = (this.userControlCounter > 0) && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;\n\n   \n\n    return isUserControlled;",
+			"parameters": []
+		},
+		"verifyCamera": {
+			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n                  var thisCam = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].id;\n                  if (!cam || cam.id != thisCam) return false;\n                  return true;  \n\n\n\n\n\n\n\n",
+			"parameters": []
+		},
 		"xAPISend": {
-			"body": "console.log(\"got here\");\n    // if (ended) //there might be a better word/way to accomplish\n    // {\n        this.started = false;\n        dur = this.Scene.time - this.startT;\n\n        //3 - build objects for statement\n        var result = {\n            score:\n            {\n                max: this.roundsFired || 140,\n                raw: this.numHits || 45,\n                min: 0,\n                scaled: this.numHits / this.roundsFired || 0.321 //remove or 0.321 when in place\n            },\n            success: (hits.length > 0),\n            duration: \"PT\" + Math.floor(dur) + \"S\", //a real end - start number of the burst\n            response: \"scaled is the hit/fired ratio\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": JSON.stringify(this.hits) || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n        };\n\n        //4 - Send it - inside if(ended),  inside if(sender)\n        sender.xAPISend(\"fired\", \"burst\" + (this.burstCount || 0), \"Small Craft Action Team\",\n            result,\n            conExt);\n    // } //if(ended)",
+			"body": "console.log(\"Ending burst and sending xapi statement\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        this.started = false;\n        var dur = this.Scene.time - this.startT;\n\n        //3 - build objects for statement\n        var result = {\n            score:\n            {\n                max: this.roundsFired || 140,\n                raw: this.numHits || 45,\n                min: 0,\n                scaled: this.numHits / this.roundsFired || 0.321 //remove or 0.321 when in place\n            },\n            success: (hits.length > 0),\n            duration: \"PT\" + Math.floor(dur) + \"S\", //a real end - start number of the burst\n            response: \"scaled is the hit/fired ratio\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": this.hits || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n        };\n\n        //4 - Send it - inside if(ended),  inside if(sender)\n        sender.xAPISend(\"fired\", \"burst\" + (this.burstCount || 0), \"Small Craft Action Team\",\n            result,\n            conExt);\n    } //if(sender)",
 			"parameters": []
 		},
-		"engaging": {
-			"body": "this.tracking();\n\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target || target.activeState == \"defeated\")\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.activateState(\"targeting\");\n        return;\n    }\n\n    if ((this.firing() || this.activeState == \"engaging\") && this.Ammo > 0 && this.state == \"ready\")\n    {\n\n        var shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(shake);\n        shake = [this.random() / 10 - .05, this.random() / 10 - .05, this.random() / 10 - .05]\n        this.children_by_name[\"50CalPivot\"].transformAPI.move(shake);\n        this.firecounter++;\n\n        var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n        if (!sound || !sound.playing)\n            this.audioAPI.playSound(this.fireSound, true, 300.0);\n        if (this.firecounter >= 2)\n        {\n            this.firecounter = 0;\n            this.fire();\n\n        }\n\n        this.Ammo -= 2;\n\n        if (this.Ammo == 0)\n        {\n            this.state = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n\n    }\n    else\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.xAPISend();\n    }\n    if (this.state == 'reloading')\n    {\n        this.audioAPI.stopSound(this.fireSound);\n        this.firecounter--;\n        if (this.firecounter < 0)\n        {\n            this.firecounter = 0;\n            this.Ammo = 1000;\n            this.xAPISend();\n            this.state = 'ready';\n            if (!this.userControlled())\n                this.activateState('targeting');\n        }\n    }",
+		"startReloading": {
+			"body": "this.activateState(\"reloading\");\n    this.firecounter = -170;\n    this.playSound(this.reloadSound, false, 10);",
 			"parameters": []
 		},
-		"fire": {
-			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit)\n    {\n\n        //  this.tracerDef.properties.transform[12] = hit.point[0];\n        //    this.tracerDef.properties.transform[13] = hit.point[1];\n        //    this.tracerDef.properties.transform[14] = hit.point[2];\n        // this.Scene.children.create(GUID(), this.tracerDef.internal_val);\n\n        if (Engine.ancestors(hit.node.id).indexOf(this.targetID) != -1)\n        {\n\n            if (hit.node.hit)\n                hit.node.hit([hit.point, 5]);\n\n        }\n        else\n        {\n            this.audioAPI.stopSound(this.fireSound);\n            this.activateState(\"targeting\");\n        }\n    }\n    else\n    {}\n\n    //1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        //2 - Info from bullets - still inside the if sender\n        var startT, dur, roundsFired, numHits, hits;\n        if (!started)\n        {\n            startT = this.Scene.time;\n            hits = [];\n            ended = false;\n            started = true;\n            roundsFired = 0;\n            numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        roundsFired++;\n        if (hit /*we have hit something significant*/ )\n        {\n            numHits++;\n            var newObj = true;\n            for (var i in hits)\n            {\n                if (hits[i] === hit)\n                    newObj = false;\n            }\n            if (newObj)\n                hits.push(hit); //or hit.node, or hit.node.DisplayName\n        }\n        \n\n    } //if(sender)",
+		"tracking": {
+			"body": "console.log(\"tracking\");\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n\n    var thispos = this.transformAPI.getPosition();\n\n    var thisPivotpos = this.children[0].transformAPI.getWorldPosition();\n    thisPivotpos = this.transformAPI.globalToLocal(thisPivotpos);\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    //vec = MATH.subVec3(thispos, [0, 0, 0]);\n    this.fuse = MATH.lengthVec3(vec) / 1000; //the 50 cal does not need to lead the target nearly so much\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * 1.7);\n\n    var upvec = this.children_by_name[\"50CalPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .001)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.min(-0.5, -dot));\n    }\n    if (dot < -.001)\n    {\n        this.children_by_name[\"50CalPivot\"].transformAPI.rotateY(Math.max(0.5, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02)\n    {\n        this.activateState(\"engaging\");\n    }\n    this.lastTargetPos = targetpos;",
+			"parameters": []
+		},
+		"tick": {
+			"body": "this.returnFromShakeOffsets();\n    this.firecounter++;\n    \n    if (!this.userControlled())\n    {\n        var state = this.states[this.activeState];\n        if (state)\n        {\n            if (state.updateFunc && this[state.updateFunc])\n                this[state.updateFunc]();\n        }\n\n    }\n    else\n    {\n\n        if (this.firing() && this.Ammo > 0)\n        {\n            this.shake();\n\n            if (this.firecounter >= 2)\n            {\n                this.firecounter = 0;\n                this.fire();\n\n            }\n\n        }\n    }",
 			"parameters": []
 		}
 	},
@@ -586,9 +611,9 @@
 							0.8161420226097107,
 							0.03166591376066208,
 							0,
-							-13.93382453918457,
-							5.353845119476318,
-							20.783477783203125,
+							0.3161733150482178,
+							3.6038458347320557,
+							0.7834801077842712,
 							0.9999998807907104
 						]
 					}
@@ -734,54 +759,6 @@
 						}
 					},
 					"children": {
-						"Na1019187": {
-							"extends": "http://vwf.example.com/label.vwf",
-							"sequence": 0,
-							"random": {
-								"s0": 0.215450823074207,
-								"s1": 0.82824445120059,
-								"s2": 0.371171684004366,
-								"c": 1
-							},
-							"properties": {
-								"DisplayName": "CommandDisplayLabel",
-								"___assetServerOriginalID": "Na1019187",
-								"font_size": 24,
-								"height": 51,
-								"left": 0,
-								"owner": "ADLteam",
-								"style": {
-									"background-color": "red",
-									"border": "outset white 3px",
-									"font-weight": "bold",
-									"vertical-align": "middle"
-								},
-								"text": "Command",
-								"text_align": "center",
-								"top": 0,
-								"transform": [
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									70,
-									12,
-									0,
-									1
-								],
-								"visible": false,
-								"visibleToAncestor": true,
-								"width": 294
-							}
-						},
 						"N1c1b0e9": {
 							"extends": "http://vwf.example.com/button.vwf",
 							"sequence": 0,
@@ -829,6 +806,54 @@
 									],
 									"body": "this.broadcast(\"TAOCommand50Cal\", [\"toggleControl\"], 0);"
 								}
+							}
+						},
+						"Na1019187": {
+							"extends": "http://vwf.example.com/label.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.215450823074207,
+								"s1": 0.82824445120059,
+								"s2": 0.371171684004366,
+								"c": 1
+							},
+							"properties": {
+								"DisplayName": "CommandDisplayLabel",
+								"___assetServerOriginalID": "Na1019187",
+								"font_size": 24,
+								"height": 51,
+								"left": 0,
+								"owner": "ADLteam",
+								"style": {
+									"background-color": "red",
+									"border": "outset white 3px",
+									"font-weight": "bold",
+									"vertical-align": "middle"
+								},
+								"text": "Command",
+								"text_align": "center",
+								"top": 0,
+								"transform": [
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									0,
+									0,
+									0,
+									1,
+									0,
+									70,
+									12,
+									0,
+									1
+								],
+								"visible": false,
+								"visibleToAncestor": true,
+								"width": 294
 							}
 						}
 					}

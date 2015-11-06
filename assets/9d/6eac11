@@ -1,0 +1,96 @@
+{
+	"extends": "asset.vwf",
+	"source": "http://54.175.234.78:3030/assets/f6275aca",
+	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"sequence": 0,
+	"random": {
+		"s0": 0.9979658462107182,
+		"s1": 0.23896879120729864,
+		"s2": 0.17271470138803124,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": {
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"ambient": {
+				"r": 0.07039812535599088,
+				"g": 0.07142857142857142,
+				"b": 0.07097234055101607,
+				"a": 1
+			},
+			"emit": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularColor": {
+				"r": 0.812,
+				"g": 0.655,
+				"b": 0.557
+			},
+			"specularLevel": 1,
+			"alpha": 1,
+			"shininess": 0.004002,
+			"side": 0,
+			"reflect": 0.01,
+			"layers": [
+				{
+					"mapTo": 1,
+					"scalex": 1,
+					"scaley": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"alpha": 1,
+					"src": "http://54.175.234.78:3030/assets/bbba638b.jpg",
+					"mapInput": 0
+				}
+			],
+			"type": "phong",
+			"wireframe": false,
+			"metal": false,
+			"combine": 0,
+			"depthtest": true,
+			"depthwrite": true,
+			"blendMode": 1,
+			"fog": true,
+			"shading": true,
+			"vertexColors": false
+		},
+		"owner": "ADLteam",
+		"transform": [
+			-2.940000057220459,
+			-2.1089163748655437e-9,
+			0,
+			0,
+			2.1089163748655437e-9,
+			-2.940000057220459,
+			0,
+			0,
+			0,
+			0,
+			2.5390000343322754,
+			0,
+			-146.5,
+			5.5,
+			1,
+			1
+		],
+		"___sourceAssetTimestamp": "Thu Nov 05 2015 15:25:45 GMT-0500 (Eastern Standard Time)"
+	}
+}

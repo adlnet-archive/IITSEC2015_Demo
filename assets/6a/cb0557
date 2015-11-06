@@ -16,7 +16,7 @@
 				"type": "text"
 			}
 		},
-		"___sourceAssetTimestamp": "Tue Nov 03 2015 16:25:20 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Thu Nov 05 2015 15:24:52 GMT-0500 (Eastern Standard Time)",
 		"baseURL": "https://sandbox.adlnet.gov/",
 		"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
 		"owner": "ADLteam",
@@ -35,9 +35,9 @@
 			0,
 			1,
 			0,
-			0.4123850166797638,
-			-0.68361896276474,
-			0.01774579845368862,
+			-73.90245819091797,
+			14.370853424072266,
+			0.20895880460739136,
 			1
 		],
 		"worldTransform": [
@@ -53,9 +53,9 @@
 			0,
 			1,
 			0,
-			0.4123850166797638,
-			-0.68361896276474,
-			0.01774579845368862,
+			-73.90245819091797,
+			14.370853424072266,
+			0.20895880460739136,
 			1
 		]
 	},
@@ -68,16 +68,8 @@
 			"body": "console.log(\"send 5 Inch statement\");\n    //vars to make it work until it goes where it belongs\n    var hit, pos;\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var result = {\n            success: (hit) || true,\n            response: \"success = hit - t, or miss - f\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/position/\": pos || \"this is where the position goes\",\n            \"https://sandbox.adlnet.gov/context/extensions/target/\": this.targetID || \"this is where the targetID goes\",\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit/\": pos || \"broadside of barn\",\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled/\": this.isUserControlled,\n            \"https://sandbox.adlnet.gov/context/extensions/shipstatus/\": this.Scene.children_by_name['DDG51'].engine || 'status error',\n        };\n        sender.xAPISend('fired', 'shell', this.DisplayName || \"TAO 5 Inch Gun\", result, conExt, null);\n    }",
 			"parameters": []
 		},
-		"sendMissileHit": {
-			"body": "console.log(\"send Missile Hit\");\n    //vars to make it work outside of where it belongs\n    var obstacle;\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var result = {\n            success: true, //hit = t, miss = f\n            // response: \"You betchya\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.target_data,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": \"obstacle\", //(obstacle.id + obstacle.DisplayName) || \"obstacle\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": \"Missile#2\", //(this.id + this.DisplayName) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/position\": this.worldTransform.slice(),\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"hit\", 'What the missile hit' /*obstacle.DisplayName*/ , (this.DisplayName + this.ID), result, conExt, ADL.ruuid() /*this.stmtId*/ );\n    }",
-			"parameters": []
-		},
 		"sendMissileLaunch": {
 			"body": "console.log(\"send Missile Launch\");\n    //vars to make it work outside of where it belongs\n    var obstacle, pos;\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        // def.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.target_data || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": \"Missile#2\", //(this.id + this.DisplayName) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": pos || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"launched\", (this.DisplayName + this.ID) /*missile.DisplayName*/ , 'Seahawk or FAC', null, conExt, missId);\n    }",
-			"parameters": []
-		},
-		"senderSnippet": {
-			"body": "/*Generic code for sending xAPI statements from demo*/\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"verb\", \"object\", \"role\",\n                        null /*optional - see result object*/,\n                        null /*optional - see context.extesions object*/ );\n    }\n\n    /*\n    result object - object to be appended as result\n    {\n     \"score\": { \"scaled\": float, \"raw\": int, \"min\": int, \"max\": int },\n     \"success\": boolean,\n     \"completion\": boolean,\n     \"response\": string,\n     \"duration\": ISO 8601 duration\n     \"extensions\": { \"key must be valid URI\": value (any JSON type)}\n    }\n    */\n    \n    /*\n    conExt - object to be appended to context.extensions\n    {\n     \"key must be valid URI\": value (any JSON type),\n     include:\n       \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": this.Scene.time,\n    }\n    */",
 			"parameters": []
 		},
 		"xAPISend": {
@@ -90,6 +82,16 @@
 				"conExt",
 				"stmtId"
 			]
+		},
+		"sendMissileHit": {
+			"body": "console.log(\"send Missile Hit\");\n    //vars to make it work outside of where it belongs\n    var obstacle;\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var result = {\n            success: (objHit === this.target_data) || false, //hit = t, miss = f\n            // response: \"You betchya\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.target_data,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": objHit || \"obstacle\", //(obstacle.id + obstacle.DisplayName) || \"obstacle\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": \"Missile#2\", //(this.id + this.DisplayName) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/position\": this.transformAPI.getWorldPosition(),\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"hit\", 'What the missile hit' /*obstacle.DisplayName*/ , (this.DisplayName + this.ID), result, conExt, this.stmtId /*this.stmtId*/ );\n    }",
+			"parameters": [
+				"objHit"
+			]
+		},
+		"senderSnippet": {
+			"body": "/*Generic code for sending xAPI statements from demo*/\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"verb\", \"object\", \"role\",\n            null /*optional - see result object*/ ,\n            null /*optional - see context.extesions object*/ ,\n            null /*optional - statement Id for grouping statements like missile launch and hit*/ );\n    }\n\n    /*\n    result object - object to be appended as result\n    {\n     \"score\": { \"scaled\": float, \"raw\": int, \"min\": int, \"max\": int },\n     \"success\": boolean,\n     \"completion\": boolean,\n     \"response\": string,\n     \"duration\": ISO 8601 duration\n     \"extensions\": { \"key must be valid URI\": value (any JSON type)}\n    }\n    */\n\n    /*\n    conExt - object to be appended to context.extensions\n    {\n     \"key must be valid URI\": value (any JSON type),\n     include:\n       \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": this.Scene.time,\n    }\n    */",
+			"parameters": []
 		}
 	}
 }

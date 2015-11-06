@@ -1,0 +1,97 @@
+{
+	"extends": "asset.vwf",
+	"source": "http://54.175.234.78:3030/assets/6da526e8",
+	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"sequence": 0,
+	"random": {
+		"s0": 0.39756302372552454,
+		"s1": 0.05450992286205292,
+		"s2": 0.79541818308644,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": {
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"ambient": {
+				"r": 0.7402597402597403,
+				"g": 0.7402597402597403,
+				"b": 0.7402597402597403,
+				"a": 1
+			},
+			"emit": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularLevel": 1,
+			"alpha": 1,
+			"shininess": 0.000002,
+			"side": 0,
+			"reflect": 0.01,
+			"layers": [
+				{
+					"mapTo": 1,
+					"scalex": 1,
+					"scaley": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"alpha": 1,
+					"src": "http://54.175.234.78:3030/assets/23659e9a.jpg",
+					"mapInput": 0
+				}
+			],
+			"type": "phong",
+			"wireframe": false,
+			"metal": false,
+			"combine": 0,
+			"depthtest": true,
+			"depthwrite": true,
+			"blendMode": 1,
+			"fog": true,
+			"shading": true,
+			"vertexColors": false
+		},
+		"owner": "ADLteam",
+		"transform": [
+			-1,
+			7.1731853790169e-10,
+			0,
+			0,
+			-7.1731853790169e-10,
+			-1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			-112.5,
+			5.5,
+			-8,
+			1
+		],
+		"___sourceAssetTimestamp": "Thu Nov 05 2015 14:29:25 GMT-0500 (Eastern Standard Time)",
+		"DisplayName": "RENA Carrier Ship"
+	}
+}

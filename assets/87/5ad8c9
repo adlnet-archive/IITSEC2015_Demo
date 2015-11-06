@@ -10,6 +10,7 @@
 	"properties": {
 		"DisplayName": "MainPanel",
 		"___assetServerOriginalID": "N3bbe75e",
+		"___sourceAssetTimestamp": "Thu Nov 05 2015 11:50:35 GMT-0500 (Eastern Standard Time)",
 		"background_color": [
 			0.52156862745098,
 			0.470588235294118,
@@ -26,6 +27,7 @@
 		"height": 311,
 		"left": 0,
 		"owner": "ADLteam",
+		"sourceAssetId": "875ad8c9",
 		"style": {
 			"background": "linear-gradient(to bottom, rgba(171,189,115,1) 0%,rgba(228,239,192,1) 100%,rgba(228,239,192,1) 100%);",
 			"border": "outset grey 3px"
@@ -44,321 +46,15 @@
 			0,
 			1,
 			0,
-			1.40126952534082,
-			-0.871416334165438,
-			0.0177457988262171,
+			64.8888888888889,
+			11.8894867549669,
+			0.0177457988262175,
 			1
 		],
 		"visible": true,
-		"width": 319,
-		"sourceAssetId": "875ad8c9",
-		"___sourceAssetTimestamp": "Thu Oct 29 2015 10:34:23 GMT-0400 (Eastern Daylight Time)"
+		"width": 319
 	},
 	"children": {
-		"N8fb168d3": {
-			"extends": "http://vwf.example.com/label.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.766992454882711,
-				"s1": 0.114075613208115,
-				"s2": 0.676234684884548,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "SeaHawkLabel",
-				"___assetServerOriginalID": "N8fb168d3",
-				"font_size": 14,
-				"height": 18,
-				"left": 0,
-				"owner": "ADLteam",
-				"style": {
-					"font-weight": "bold"
-				},
-				"text": "SeaHawk",
-				"text_align": "center",
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					13,
-					6,
-					1,
-					1
-				],
-				"visible": true,
-				"width": 100
-			}
-		},
-		"N3cbf8024": {
-			"extends": "http://vwf.example.com/panel.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.0814544074237347,
-				"s1": 0.249610329279676,
-				"s2": 0.434570122743025,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "ScatOodTopPanel",
-				"___assetServerOriginalID": "N3cbf8024",
-				"background_color": [
-					0,
-					0,
-					0
-				],
-				"background_visible": true,
-				"border_color": [
-					1,
-					1,
-					1
-				],
-				"height": 100,
-				"left": 0,
-				"owner": "ADLteam",
-				"style": {
-					"background": "linear-gradient(to bottom, rgba(255,255,255,0) -1%,rgba(255,255,255,0) 0%,rgba(255,255,255,0.99) 90%,rgba(255,255,255,0.99) 100%)",
-					"border": "inset gray 3px",
-					"border-style": "inset"
-				},
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					50.8522758483887,
-					26.110330581665,
-					0,
-					1
-				],
-				"visible": true,
-				"width": 135
-			},
-			"children": {
-				"N4b915f22": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.132235644385219,
-						"s1": 0.382819511694834,
-						"s2": 0.841407321160659,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "5InDisengageButton",
-						"___assetServerOriginalID": "N4b915f22",
-						"height": 35,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, #cb60b3 0%,#ad1283 50%,#de47ac 100%)",
-							"border": "outset grey 3px",
-							"border-style": "outset"
-						},
-						"text": "5 In Disengage",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							13,
-							52,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 100
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								"eventData",
-								"nodeData"
-							],
-							"body": "//this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
-						}
-					}
-				},
-				"Nb4da5997": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.0376269714906812,
-						"s1": 0.436847920762375,
-						"s2": 0.2044218624942,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "5InEngageButton",
-						"___assetServerOriginalID": "Nb4da5997",
-						"height": 35,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
-							"border": "outset grey 3px",
-							"border-style": "outset"
-						},
-						"text": "5 In Engage",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							13,
-							7,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 100
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								"eventData",
-								"nodeData"
-							],
-							"body": "//this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
-						}
-					}
-				}
-			}
-		},
-		"N7befa27b": {
-			"extends": "http://vwf.example.com/label.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.0526214626152068,
-				"s1": 0.871348941931501,
-				"s2": 0.569057182176039,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "OodWarnLight",
-				"___assetServerOriginalID": "N7befa27b",
-				"height": 20,
-				"left": 0,
-				"owner": "ADLteam",
-				"style": {
-					"background": "linear-gradient(to bottom, yellow, white)",
-					"border": "outset gray 3px",
-					"border-style": "outset"
-				},
-				"text": "",
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					55,
-					16,
-					1,
-					1
-				],
-				"visible": true,
-				"width": 30
-			}
-		},
-		"N962cabf7": {
-			"extends": "http://vwf.example.com/panel.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.136150605743751,
-				"s1": 0.721612263238057,
-				"s2": 0.672958408715203,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "SeaHawkTopPanel",
-				"___assetServerOriginalID": "N962cabf7",
-				"background_color": [
-					0.8,
-					0.749019607843137,
-					0
-				],
-				"background_visible": true,
-				"border_color": [
-					0,
-					0,
-					0
-				],
-				"height": 100,
-				"left": 0,
-				"owner": "ADLteam",
-				"style": {
-					"background": "linear-gradient(to bottom, rgba(255,255,255,0) -1%,rgba(255,255,255,0) 0%,rgba(255,255,255,0.99) 90%,rgba(255,255,255,0.99) 100%)",
-					"border": "inset gray 3px",
-					"border-style": "inset"
-				},
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					3.20337009429932,
-					26.7534160614014,
-					0,
-					1
-				],
-				"visible": true,
-				"width": 135
-			}
-		},
 		"Nfe32e6f7": {
 			"extends": "http://vwf.example.com/label.vwf",
 			"sequence": 0,
@@ -462,59 +158,6 @@
 				"width": 135
 			},
 			"children": {
-				"N31c0e583": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.0115671833045781,
-						"s1": 0.978064217371866,
-						"s2": 0.543363055679947,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "ScatEngageButton",
-						"___assetServerOriginalID": "N31c0e583",
-						"height": 35,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
-							"border": "outset grey 3px",
-							"border-style": "outset"
-						},
-						"text": "Engage",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							12,
-							10,
-							0,
-							1
-						],
-						"visible": true,
-						"width": 100
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								"eventData",
-								"nodeData"
-							],
-							"body": "//this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"SCAT/OOD\", \"Tactical Action Officer\", null);\n    }"
-						}
-					}
-				},
 				"N1debf91": {
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
@@ -564,10 +207,421 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "// this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
+							"body": "// Play the SCAT 50 Cal Disengage script\n    this.Scene.audioAPI.playSound(\"/sas/assets/239efe2b\", false, 100);\n    \n    // this.broadcast(\"command\", [\"SCAT disengage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
+						}
+					}
+				},
+				"N31c0e583": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.0115671833045781,
+						"s1": 0.978064217371866,
+						"s2": 0.543363055679947,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "ScatEngageButton",
+						"___assetServerOriginalID": "N31c0e583",
+						"height": 35,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
+							"border": "outset grey 3px",
+							"border-style": "outset"
+						},
+						"text": "Engage",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							12,
+							10,
+							0,
+							1
+						],
+						"visible": true,
+						"width": 100
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "// Play the SCAT 50 Cal engage script\n    this.Scene.audioAPI.playSound(\"/sas/assets/e40d4b80\", false, 100);\n    \n    //this.broadcast(\"command\", [\"SCAT engage\"], 0);\n    this.broadcast(\"TAOCommand50Cal\", [\"50 Cal Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"SCAT/OOD\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
 				}
+			}
+		},
+		"N3cbf8024": {
+			"extends": "http://vwf.example.com/panel.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.0814544074237347,
+				"s1": 0.249610329279676,
+				"s2": 0.434570122743025,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "ScatOodTopPanel",
+				"___assetServerOriginalID": "N3cbf8024",
+				"background_color": [
+					0,
+					0,
+					0
+				],
+				"background_visible": true,
+				"border_color": [
+					1,
+					1,
+					1
+				],
+				"height": 100,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"background": "linear-gradient(to bottom, rgba(255,255,255,0) -1%,rgba(255,255,255,0) 0%,rgba(255,255,255,0.99) 90%,rgba(255,255,255,0.99) 100%)",
+					"border": "inset gray 3px",
+					"border-style": "inset"
+				},
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					50.8522758483887,
+					26.110330581665,
+					0,
+					1
+				],
+				"visible": true,
+				"width": 135
+			},
+			"children": {
+				"Nb4da5997": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.0376269714906812,
+						"s1": 0.436847920762375,
+						"s2": 0.2044218624942,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "5InEngageButton",
+						"___assetServerOriginalID": "Nb4da5997",
+						"height": 35,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
+							"border": "outset grey 3px",
+							"border-style": "outset"
+						},
+						"text": "5 In Engage",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							13,
+							7,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 100
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "// Play the SCAT 5 In engage script\n    this.Scene.audioAPI.playSound(\"/sas/assets/90749a39\", false, 100);\n    \n    //this.broadcast(\"command\", [\"5 inch engage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
+						}
+					}
+				},
+				"N4b915f22": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.132235644385219,
+						"s1": 0.382819511694834,
+						"s2": 0.841407321160659,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "5InDisengageButton",
+						"___assetServerOriginalID": "N4b915f22",
+						"height": 35,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, #cb60b3 0%,#ad1283 50%,#de47ac 100%)",
+							"border": "outset grey 3px",
+							"border-style": "outset"
+						},
+						"text": "5 In Disengage",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							13,
+							52,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 100
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "// Play the SCAT 5 In Disengage script\n    this.Scene.audioAPI.playSound(\"/sas/assets/f1e2e0c1\", false, 100);\n    \n    //this.broadcast(\"command\", [\"5 inch Disengage\"], 0);\n    this.broadcast(\"TAOCommand5In\", [\"5 Inch Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"5 Inch Gun\", \"Tactical Action Officer\", null);\n    }"
+						}
+					}
+				}
+			}
+		},
+		"N7cd7975c": {
+			"extends": "http://vwf.example.com/button.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.177814689232036,
+				"s1": 0.631648205220699,
+				"s2": 0.215841572964564,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "SeaHawkWarnButton",
+				"___assetServerOriginalID": "N7cd7975c",
+				"height": 20,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"background": "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)",
+					"border": "outset gray 3px",
+					"border-style": "outset",
+					"foreground": "blue"
+				},
+				"text": "Warning",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					19,
+					16,
+					1,
+					1
+				],
+				"visible": true,
+				"width": 75
+			},
+			"events": {
+				"pointerClick": {
+					"parameters": [
+						"eventData",
+						"nodeData"
+					],
+					"body": "// Play the helo warning script\n    this.Scene.audioAPI.playSound(\"/sas/assets/1dbce9a7\", false, 100);\n    \n    //this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
+				}
+			}
+		},
+		"N962cabf7": {
+			"extends": "http://vwf.example.com/panel.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.136150605743751,
+				"s1": 0.721612263238057,
+				"s2": 0.672958408715203,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "SeaHawkTopPanel",
+				"___assetServerOriginalID": "N962cabf7",
+				"background_color": [
+					0.8,
+					0.749019607843137,
+					0
+				],
+				"background_visible": true,
+				"border_color": [
+					0,
+					0,
+					0
+				],
+				"height": 100,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"background": "linear-gradient(to bottom, rgba(255,255,255,0) -1%,rgba(255,255,255,0) 0%,rgba(255,255,255,0.99) 90%,rgba(255,255,255,0.99) 100%)",
+					"border": "inset gray 3px",
+					"border-style": "inset"
+				},
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					3.20337009429932,
+					26.7534160614014,
+					0,
+					1
+				],
+				"visible": true,
+				"width": 135
+			}
+		},
+		"N7befa27b": {
+			"extends": "http://vwf.example.com/label.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.0526214626152068,
+				"s1": 0.871348941931501,
+				"s2": 0.569057182176039,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "OodWarnLight",
+				"___assetServerOriginalID": "N7befa27b",
+				"height": 20,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"background": "linear-gradient(to bottom, yellow, white)",
+					"border": "outset gray 3px",
+					"border-style": "outset"
+				},
+				"text": "",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					55,
+					16,
+					1,
+					1
+				],
+				"visible": true,
+				"width": 30
+			}
+		},
+		"N8fb168d3": {
+			"extends": "http://vwf.example.com/label.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.766992454882711,
+				"s1": 0.114075613208115,
+				"s2": 0.676234684884548,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "SeaHawkLabel",
+				"___assetServerOriginalID": "N8fb168d3",
+				"font_size": 14,
+				"height": 18,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"font-weight": "bold"
+				},
+				"text": "SeaHawk",
+				"text_align": "center",
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					13,
+					6,
+					1,
+					1
+				],
+				"visible": true,
+				"width": 100
 			}
 		},
 		"N7a9c83ba": {
@@ -668,59 +722,6 @@
 				"width": 135
 			},
 			"children": {
-				"N175c6665": {
-					"extends": "http://vwf.example.com/button.vwf",
-					"sequence": 0,
-					"random": {
-						"s0": 0.350135607877746,
-						"s1": 0.308428186457604,
-						"s2": 0.0027310096193105,
-						"c": 1
-					},
-					"properties": {
-						"DisplayName": "SeaHawkEngageButton",
-						"___assetServerOriginalID": "N175c6665",
-						"height": 35,
-						"left": 0,
-						"owner": "ADLteam",
-						"style": {
-							"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
-							"border": "outset grey 3px",
-							"border-style": "outset"
-						},
-						"text": "Engage",
-						"top": 0,
-						"transform": [
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							0,
-							0,
-							0,
-							1,
-							0,
-							12,
-							8,
-							1,
-							1
-						],
-						"visible": true,
-						"width": 100
-					},
-					"events": {
-						"pointerClick": {
-							"parameters": [
-								"eventData",
-								"nodeData"
-							],
-							"body": "//this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
-						}
-					}
-				},
 				"N266d5cc4": {
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
@@ -770,63 +771,62 @@
 								"eventData",
 								"nodeData"
 							],
-							"body": "// this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
+							"body": "// Play the helo disengage script\n    this.Scene.audioAPI.playSound(\"/sas/assets/6b2a9203\", false, 100);\n    \n    // this.broadcast(\"command\", [\"Seahawk disengage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Disengage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"disengaged\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
 						}
 					}
-				}
-			}
-		},
-		"N7cd7975c": {
-			"extends": "http://vwf.example.com/button.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.177814689232036,
-				"s1": 0.631648205220699,
-				"s2": 0.215841572964564,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "SeaHawkWarnButton",
-				"___assetServerOriginalID": "N7cd7975c",
-				"height": 20,
-				"left": 0,
-				"owner": "ADLteam",
-				"style": {
-					"background": "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%)",
-					"border": "outset gray 3px",
-					"border-style": "outset",
-					"foreground": "blue"
 				},
-				"text": "Warning",
-				"top": 0,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					19,
-					16,
-					1,
-					1
-				],
-				"visible": true,
-				"width": 75
-			},
-			"events": {
-				"pointerClick": {
-					"parameters": [
-						"eventData",
-						"nodeData"
-					],
-					"body": "//this.broadcast(\"command\", [\"Seahawk warn\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Warning\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
+				"N175c6665": {
+					"extends": "http://vwf.example.com/button.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.350135607877746,
+						"s1": 0.308428186457604,
+						"s2": 0.0027310096193105,
+						"c": 1
+					},
+					"properties": {
+						"DisplayName": "SeaHawkEngageButton",
+						"___assetServerOriginalID": "N175c6665",
+						"height": 35,
+						"left": 0,
+						"owner": "ADLteam",
+						"style": {
+							"background": "linear-gradient(to bottom, #b4e391 0%,#61c419 50%,#b4e391 100%)",
+							"border": "outset grey 3px",
+							"border-style": "outset"
+						},
+						"text": "Engage",
+						"top": 0,
+						"transform": [
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							12,
+							8,
+							1,
+							1
+						],
+						"visible": true,
+						"width": 100
+					},
+					"events": {
+						"pointerClick": {
+							"parameters": [
+								"eventData",
+								"nodeData"
+							],
+							"body": "// Play the helo engage script\n    this.Scene.audioAPI.playSound(\"/sas/assets/aee0d5c6\", false, 100);\n\n    //this.broadcast(\"command\", [\"Seahawk engage\"], 0);\n    this.broadcast(\"TAOCommand\", [\"Seahawk Engage\"], 0);\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"engaged\", \"Seahawk Helicopter\", \"Tactical Action Officer\", null);\n    }"
+						}
+					}
 				}
 			}
 		},
@@ -880,7 +880,7 @@
 						"eventData",
 						"nodeData"
 					],
-					"body": "//this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"SCAT/OOD\", \"Tactical Action Officer\", null);\n    }"
+					"body": "// Play the OOD warning script\n    this.Scene.audioAPI.playSound(\"/sas/assets/71ac0bd2\", false, 100);\n    \n    //this.broadcast(\"command\", [\"Radio Warn\"], 0);\n    this.broadcast(\"TAOCommandRadioWarn\", [\"Issue Radio Warning\"], 0);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", \"SCAT/OOD\", \"Tactical Action Officer\", null);\n    }"
 				}
 			}
 		}
