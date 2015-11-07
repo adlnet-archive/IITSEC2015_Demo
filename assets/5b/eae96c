@@ -1,0 +1,121 @@
+{
+	"extends": "sphere2.vwf",
+	"source": "vwf/model/threejs/sphere.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.0653194168116897,
+		"s1": 0.00557353836484253,
+		"s2": 0.870037150802091,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"DisplayName": "AvoidRadius",
+		"materialDef": {
+			"alpha": 1,
+			"ambient": {
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"blendMode": 1,
+			"color": {
+				"a": 1,
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"depthtest": true,
+			"depthwrite": true,
+			"emit": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
+			"fog": true,
+			"layers": [
+				{
+					"alpha": 1,
+					"blendMode": 0,
+					"mapInput": 0,
+					"mapTo": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"rot": 0,
+					"scalex": 1,
+					"scaley": 1,
+					"src": "checker.jpg"
+				}
+			],
+			"metal": false,
+			"reflect": 0.8,
+			"shadeless": false,
+			"shading": true,
+			"shadow": true,
+			"shininess": 15,
+			"side": 0,
+			"specularColor": {
+				"b": 0.577350269189626,
+				"g": 0.577350269189626,
+				"r": 0.577350269189626
+			},
+			"specularLevel": 1,
+			"type": "phong",
+			"vertexColors": false,
+			"wireframe": false
+		},
+		"owner": "ADLteam",
+		"tickCount": 0,
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			-66.25,
+			-264,
+			17.75,
+			1
+		],
+		"type": "Primitive",
+		"avoidDist": 498,
+		"EditorData": {
+			"avoid": {
+				"displayname": "avoid radius",
+				"max": 1000,
+				"min": 1,
+				"property": "avoidDist",
+				"type": "slider"
+			}
+		}
+	},
+	"methods": {
+		"tick": {
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n   \n        this.notifyPeers();",
+			"parameters": []
+		},
+		"notifyPeers": {
+			"body": "this.tickCount++;\n    if (this.tickCount == 10)\n    {\n\n        this.tickCount = 0;\n        var my_position = this.transformAPI.getWorldPosition();\n\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward, this.avoidDist ], this.avoidDist);\n    }",
+			"parameters": []
+		}
+	}
+}

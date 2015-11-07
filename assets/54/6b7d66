@@ -42,14 +42,14 @@
 			0,
 			1,
 			0,
-			-0.192223767637646,
-			1.21663722296016,
-			0.0177457988262182,
+			-7.220363978306917,
+			-45.65126130050649,
+			0.5745969772338881,
 			1
 		],
 		"visible": true,
 		"width": 500,
-		"___sourceAssetTimestamp": "Thu Oct 29 2015 10:51:13 GMT-0400 (Eastern Daylight Time)"
+		"___sourceAssetTimestamp": "Fri Nov 06 2015 12:54:10 GMT-0500 (Eastern Standard Time)"
 	},
 	"children": {
 		"N5111c16a": {
@@ -176,7 +176,7 @@
 						"height": 271,
 						"left": 0,
 						"owner": "ADLteam",
-						"src": "../vwfDataManager.svc/texture?UID=NavigationSeteeringWheelImage.jpg",
+						"src": "/sas/assets/26a16a9e",
 						"top": 0,
 						"transform": [
 							1,

@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.8254582043737173,
-		"s1": 0.8001551332417876,
-		"s2": 0.2012007157318294,
-		"c": 227344
+		"s0": 0.9041244068648666,
+		"s1": 0.26753772771917284,
+		"s2": 0.8329820621293038,
+		"c": 1175602
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -61,7 +61,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Wed Nov 04 2015 16:07:15 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Fri Nov 06 2015 13:48:29 GMT-0500 (Eastern Standard Time)",
 		"_length": 1.78,
 		"accuracy": 8,
 		"activeState": "targeting",
@@ -299,9 +299,9 @@
 			-0.017452405765652657,
 			0.9998477101325989,
 			0,
-			-8.102520942687988,
-			4.924850940704346,
-			0.02783678099513054,
+			2.8060085773468018,
+			0.3903951942920685,
+			0.01115351915359497,
 			1
 		],
 		"type": "Primitive",
@@ -363,10 +363,6 @@
 			"body": "if (this.Ammo > 0 && this.activeState == \"firing\")\n    {\n        var target = this.Scene.findNodeByID(this.targetID);\n        if (!target)\n        {\n            this.activateState(\"targeting\");\n            return;\n        }\n\n        if (this.firecounter < 0)\n        {\n            this.firecounter = 120;\n            this.Ammo -= 1;\n            this.fire();\n            this.activateState(\"targeting\");\n            return;\n        }\n\n        if (this.Ammo == 0)\n        {\n            this.activeState = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    this.firecounter--;",
 			"parameters": []
 		},
-		"tick": {
-			"body": "this.userControlCounter--;\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Label1\"].text = Math.floor(this.Ammo);\n\n    var pos = this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.getPosition();\n    var goal = [2, 0, 0];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    var pos = this.children_by_name[\"5InPivot\"].transformAPI.getPosition();\n    var goal = [.0, 0, .75];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"5InPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    if (this.userControlled())\n    {\n        if (this.manualFiring)\n            this.manuelFire();\n        return;\n    }\n\n    var state = this.states[this.activeState];\n    if (state)\n    {\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]();\n\n    }",
-			"parameters": []
-		},
 		"_keyDown": {
 			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (e.key.char == ' ') this.manualFiring = true;",
 			"parameters": [
@@ -400,18 +396,22 @@
 				"d"
 			]
 		},
-		"_pointerWheel": {
-			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.fuse += e.wheelDelta;\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Label2\"].text = this.fuse;",
-			"parameters": [
-				"e"
-			]
-		},
 		"userControlled": {
 			"body": "var thisCam = this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].id;\n    return (this.userControlCounter > 0) && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
 		},
 		"fire": {
 			"body": "var origin = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [(this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n    this.audioAPI.playSound(this.fireSound, false, 300.0);\n    var dist = this.fuse + ((this.random() - .5) / this.accuracy);\n    if (hit && hit.distance < dist)\n    {\n        dist = hit.distance;\n    }\n\n    console.log(hit || \"miss\");\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var boom, objHit;\n        if (hit)\n        {\n            boom = true;\n            objHit = hit.node.DisplayName;\n        }\n        else\n        {\n            boom = false;\n            objHit = \"miss\";\n        }\n        var result = {\n            success: boom,\n            response: \"success = hit - t, or miss - f\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/position/\": origin || \"this is where the position goes\",\n            \"https://sandbox.adlnet.gov/context/extensions/target/\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit/\": objHit,\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled/\": this.isUserControlled,\n            \"https://sandbox.adlnet.gov/context/extensions/shipstatus/\": this.Scene.children_by_name['DDG51'].engine || 'status error',\n            \"https://sandbox.adlnet.gov/context/extensions/maxRounds/\": this.Ammo || 'one of these',\n            \"https://sandbox.adlnet.gov/context/extensions/roundNum/\": this.Ammo || 'will be right',\n        };\n        sender.xAPISend('fired', 'shell', this.DisplayName || \"TAO 5 Inch Gun\", result, conExt, null);\n    }\n\n    var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n    this.explode(point, dist);\n    this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n    var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n    shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].transformAPI.move(shake);",
+			"parameters": []
+		},
+		"_pointerWheel": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.fuse += e.wheelDelta;",
+			"parameters": [
+				"e"
+			]
+		},
+		"tick": {
+			"body": "this.userControlCounter--;\n    \n    var pos = this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.getPosition();\n    var goal = [2, 0, 0];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    var pos = this.children_by_name[\"5InPivot\"].transformAPI.getPosition();\n    var goal = [.0, 0, .75];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"5InPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    if (this.userControlled())\n    {\n        if (this.manualFiring)\n            this.manuelFire();\n        return;\n    }\n\n    var state = this.states[this.activeState];\n    if (state)\n    {\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]();\n\n    }",
 			"parameters": []
 		}
 	},
@@ -931,135 +931,6 @@
 								],
 								"visible": false,
 								"width": 294
-							}
-						},
-						"Nc2f33b2e": {
-							"extends": "http://vwf.example.com/label.vwf",
-							"sequence": 0,
-							"random": {
-								"s0": 0.136464140377939,
-								"s1": 0.743883366230875,
-								"s2": 0.724490934750065,
-								"c": 1
-							},
-							"properties": {
-								"DisplayName": "Label1",
-								"___assetServerOriginalID": "Nc2f33b2e",
-								"font_size": 68,
-								"height": 100,
-								"left": 0,
-								"owner": "Anonymous_wS9HWx6DN-wlBP2rAAAG",
-								"text": 1000,
-								"top": 0,
-								"transform": [
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									3.625,
-									15.7196969985962,
-									0,
-									1
-								],
-								"visibleToAncestor": true,
-								"width": 100
-							}
-						},
-						"N3766c21c": {
-							"extends": "http://vwf.example.com/label.vwf",
-							"sequence": 0,
-							"random": {
-								"s0": 0.136464140377939,
-								"s1": 0.743883366230875,
-								"s2": 0.724490934750065,
-								"c": 1
-							},
-							"properties": {
-								"DisplayName": "Label2",
-								"___assetServerOriginalID": "N3766c21c",
-								"font_size": 68,
-								"height": 100,
-								"left": 0,
-								"owner": "Anonymous_wS9HWx6DN-wlBP2rAAAG",
-								"text": 1000,
-								"top": 0,
-								"transform": [
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									3.625,
-									28.787878036499,
-									0,
-									1
-								],
-								"visibleToAncestor": true,
-								"width": 100
-							}
-						},
-						"N31655ab": {
-							"extends": "http://vwf.example.com/button.vwf",
-							"sequence": 0,
-							"random": {
-								"s0": 0.652116447454318,
-								"s1": 0.799213263904676,
-								"s2": 0.831905320752412,
-								"c": 1
-							},
-							"properties": {
-								"DisplayName": "Button1",
-								"___assetServerOriginalID": "N31655ab",
-								"height": 38,
-								"left": 0,
-								"owner": "ADLteam",
-								"text": "Take Control",
-								"top": 0,
-								"transform": [
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									0,
-									0,
-									0,
-									1,
-									0,
-									3,
-									90,
-									0,
-									1
-								],
-								"visible": true,
-								"visibleToAncestor": true,
-								"width": 100
-							},
-							"events": {
-								"pointerClick": {
-									"parameters": [
-										"eventData",
-										"nodeData"
-									],
-									"body": "console.log(\"got here\");\n    this.broadcast(\"TAOCommand5In\", [\"toggleControl\"], 0);"
-								}
 							}
 						}
 					}
