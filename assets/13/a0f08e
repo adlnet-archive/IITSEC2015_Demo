@@ -41,9 +41,9 @@
 			-0.22189253568649292,
 			0.975071132183075,
 			0,
-			1.242106556892395,
-			4.544918060302734,
-			0.029490264132618904,
+			32.18869400024414,
+			23.471525192260742,
+			0.9503275156021118,
 			1
 		],
 		"worldTransform": [
@@ -59,9 +59,9 @@
 			-0.22189253568649292,
 			0.975071132183075,
 			0,
-			1.242106556892395,
-			4.544918060302734,
-			0.029490264132618904,
+			32.18869400024414,
+			23.471525192260742,
+			0.9503275156021118,
 			1
 		],
 		"zoom": "",
@@ -78,7 +78,25 @@
 				"type": "vector"
 			}
 		},
-		"___sourceAssetTimestamp": "Mon Oct 19 2015 13:23:34 GMT-0400 (Eastern Daylight Time)"
+		"___sourceAssetTimestamp": "Sun Nov 08 2015 20:44:21 GMT-0500 (Eastern Standard Time)",
+		"activeState": "idle",
+		"states": {
+			"idle": {
+				"inFunc": null,
+				"outFunc": null,
+				"updateFunc": "idle"
+			},
+			"outRun": {
+				"inFunc": null,
+				"outFunc": null,
+				"updateFunc": "outRun"
+			},
+			"targeting": {
+				"inFunc": null,
+				"outFunc": null,
+				"updateFunc": "targeting"
+			}
+		}
 	},
 	"methods": {
 		"TAOCommandRadioWarn": {
@@ -98,10 +116,6 @@
 				"rel_y"
 			]
 		},
-		"tick": {
-			"body": "\n\n\n\n\n\n\n\n\n         var pos = Vec3.add(this.transformAPI.getPosition(), this.offset, []);\n\n            //this.transformAPI.setPosition(MATH.addVec3(pos, offset));\n            this.transformAPI.lookat(pos, '', '-Y', 'Z');\n            var movement = this.movement;\n            movement = this.transformAPI.localToGlobalRotation(movement);\n            movement[2] = 0;\n            if(MATH.lengthVec3(movement) == 0) return;\n            movement = Vec3.normalize(movement, []);\n            this.transformAPI.move(movement[0] / 10, movement[1] / 10, 0); \n\n\n\n\n",
-			"parameters": []
-		},
 		"verifyCamera": {
 			"body": "var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.id) return false;\n    return true;",
 			"parameters": []
@@ -109,60 +123,229 @@
 		"ready": {
 			"body": "this.Scene.unbind('pointerMove', this.mousemove);\n    this.Scene.unbind('pointerDown', this.mousepress);\n    this.Scene.unbind('pointerUp', this.mouseup);\n    this.Scene.unbind('pointerWheel', this.mousewheel);\n    this.Scene.unbind('keyDown', this.keydown);\n    this.Scene.unbind('keyUp', this.keyup);\n    var self = this;\n    this.mousemove = function(e, d)\n    {\n        if(!self.verifyCamera()) return;\n        var rel_x = self.last_x - e.position[0];\n        var rel_y = self.last_y - e.position[1];\n        self.rotateCam(rel_x * 3, rel_y * 3);\n        self.last_x = e.position[0];\n        self.last_y = e.position[1];\n    }\n    this.mousewheel = function(e, d)\n    {\n        if(!self.verifyCamera()) return;\n        self.zoom += e.wheelDelta;\n    }\n    this.mousepress = function(e, d)\n    {\n    if(!self.verifyCamera()) return;\n        self.mousedown = true;\n        self.last_x = e.position[0];\n        self.last_y = e.position[1];\n    }\n    this.mouseup = function(e, d)\n    {\n        if(!self.verifyCamera()) return;\n        self.mousedown = false;\n    }\n    this.keydown = function(e, d)\n    {\n        return;\n        if (e.key.key == 'W')\n            self.movement = Vec3.add(self.movement, [0, 1, 0], []);\n        if (e.key.key == 'S')\n            self.movement = Vec3.add(self.movement, [0, -1, 0], []);\n        if (e.key.key == 'A')\n            self.movement = Vec3.add(self.movement, [1, 0, 0], []);\n        if (e.key.key == 'D')\n            self.movement = Vec3.add(self.movement, [-1, 0, 0], []);\n    }\n    this.keyup = function(e, d)\n    {\n        return;\n        if (e.key.key == 'W')\n            self.movement = Vec3.add(self.movement, [0, -1, 0], []);\n        if (e.key.key == 'S')\n            self.movement = Vec3.add(self.movement, [0, 1, 0], []);\n        if (e.key.key == 'A')\n            self.movement = Vec3.add(self.movement, [-1, 0, 0], []);\n        if (e.key.key == 'D')\n            self.movement = Vec3.add(self.movement, [1, 0, 0], []);\n    }\n\n    this.Scene.bind('pointerMove', this.mousemove);\n    this.Scene.bind('pointerDown', this.mousepress);\n    this.Scene.bind('pointerUp', this.mouseup);\n    this.Scene.bind('pointerWheel', this.mousewheel);\n    this.Scene.bind('keyDown', this.keydown);\n    this.Scene.bind('keyUp', this.keyup);",
 			"parameters": []
+		},
+		"tick": {
+			"body": "if (this.userControlled())\n    {\n\n   \n    \n    var pos = Vec3.add(this.transformAPI.getPosition(), this.offset, []);\n\n    //this.transformAPI.setPosition(MATH.addVec3(pos, offset));\n    this.transformAPI.lookat(pos, '', '-Y', 'Z');\n    var movement = this.movement;\n    movement = this.transformAPI.localToGlobalRotation(movement);\n    movement[2] = 0;\n    if (MATH.lengthVec3(movement) == 0) return;\n    movement = Vec3.normalize(movement, []);\n    this.transformAPI.move(movement[0] / 10, movement[1] / 10, 0);\n         return;\n    }\n    else\n    {\n    var state = this.states[this.activeState];\n     if (state)\n    {\n        if (this[state.updateFunc])\n            this[state.updateFunc]();\n    }\n    }",
+			"parameters": []
+		},
+		"userControlled": {
+			"body": "if (this.Scene.clientAPI.getClientForCamera(this.id).length > 0)\n        return true;\n    return false;",
+			"parameters": []
+		},
+		"activateState": {
+			"body": "var oldState = this.states[this.activeState];\n    if (oldState)\n    {\n        if (oldState.outFunc && this[oldState.outFunc])\n            this[oldState.outFunc]();\n    }\n    var newState = this.states[state];\n    if (newState && this[newState.inFunc])\n        this[newState.inFunc]()\n    this.activeState = state;",
+			"parameters": [
+				"state"
+			]
+		},
+		"hostileWithin": {
+			"body": "for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node.hostile)\n        {\n            var pos = this.parent.transformAPI.getWorldPosition();\n            var hostilePos = node.transformAPI.getWorldPosition();\n            if (Vec3.distance(pos, hostilePos) < meters)\n                return true;\n        }\n    }\n    return false;",
+			"parameters": [
+				"meters"
+			]
+		},
+		"idle": {
+			"body": "if (this.hostileWithin(1000))\n    {\n        \n        this.activateState(\"outRun\");\n    }",
+			"parameters": []
+		},
+		"outRun": {
+			"body": "this.broadcast(\"command\", [\"aheadFull\"], 0);\n    this.broadcast(\"command\", [\"rudderCenter\"], 0);\n    if (this.hostileWithin(500))\n    {\n\n        this.activateState(\"targeting\");\n    }",
+			"parameters": []
+		},
+		"targeting": {
+			"body": "this.broadcast(\"command\", [\"aheadHalf\"], 0);\n    this.broadcast(\"command\", [\"hardRight\"], 0);",
+			"parameters": []
 		}
 	},
 	"children": {
 		"N70033554": {
 			"continues": "/sas/assets/546b7d66",
 			"properties": {
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					2.148148148148148,
+					3.3195754716981134,
+					0.5745969772338881,
+					1
+				],
 				"___assetServerOriginalID": "N70033554",
 				"visibleToCamera": "",
 				"visibleToAncestor": true
 			},
 			"children": {
+				"-sas-assets-546b7d66-Nfd8b27fN5111c16a": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN5111c16a"
+					}
+				},
+				"-sas-assets-546b7d66-Nfd8b27fN58f296e0": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN58f296e0"
+					},
+					"children": {
+						"-sas-assets-546b7d66-Nfd8b27fN35c0d585": {
+							"properties": {
+								"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN35c0d585"
+							}
+						}
+					}
+				},
+				"-sas-assets-546b7d66-Nfd8b27fN6444e6eb": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN6444e6eb"
+					}
+				},
+				"-sas-assets-546b7d66-Nfd8b27fN762225da": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN762225da"
+					}
+				},
+				"-sas-assets-546b7d66-Nfd8b27fN7dbb5d5b": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN7dbb5d5b"
+					}
+				},
+				"-sas-assets-546b7d66-Nfd8b27fNe63ee92c": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fNe63ee92c"
+					}
+				},
+				"-sas-assets-546b7d66-Nfd8b27fNe73b9040": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fNe73b9040"
+					}
+				},
+				"-sas-assets-546b7d66-Nfd8b27fNef06867c": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fNef06867c"
+					}
+				},
 				"-sas-assets-546b7d66-N67ebf2abN5111c16a": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.7733508495148271,
+						"s1": 0.952972054714337,
+						"s2": 0.701530929422006,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN5111c16a"
 					}
 				},
 				"-sas-assets-546b7d66-N67ebf2abN58f296e0": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.4527047455776483,
+						"s1": 0.3002314812038094,
+						"s2": 0.61590382643044,
+						"c": 1
+					},
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN58f296e0"
+					},
 					"children": {
 						"-sas-assets-546b7d66-N67ebf2abN35c0d585": {
+							"extends": "http://vwf.example.com/node.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.13420215342193842,
+								"s1": 0.46322323591448367,
+								"s2": 0.7914107022807002,
+								"c": 1
+							},
 							"properties": {
 								"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN35c0d585"
 							}
 						}
-					},
-					"properties": {
-						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN58f296e0"
 					}
 				},
 				"-sas-assets-546b7d66-N67ebf2abN6444e6eb": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.4242646316997707,
+						"s1": 0.9661531143356115,
+						"s2": 0.5133851564023644,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN6444e6eb"
 					}
 				},
 				"-sas-assets-546b7d66-N67ebf2abN762225da": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.9727844870649278,
+						"s1": 0.2698080646805465,
+						"s2": 0.8669726415537298,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN762225da"
 					}
 				},
 				"-sas-assets-546b7d66-N67ebf2abN7dbb5d5b": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.3330840908456594,
+						"s1": 0.7261872009839863,
+						"s2": 0.8660622211173177,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abN7dbb5d5b"
 					}
 				},
 				"-sas-assets-546b7d66-N67ebf2abNe63ee92c": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.6978195018600672,
+						"s1": 0.3365029573906213,
+						"s2": 0.3091819058172405,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abNe63ee92c"
 					}
 				},
 				"-sas-assets-546b7d66-N67ebf2abNe73b9040": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.4057589170988649,
+						"s1": 0.6920720203779638,
+						"s2": 0.1671456575859338,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abNe73b9040"
 					}
 				},
 				"-sas-assets-546b7d66-N67ebf2abNef06867c": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.9995313859544694,
+						"s1": 0.27490639267489314,
+						"s2": 0.001286528306081891,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-N67ebf2abNef06867c"
 					}
