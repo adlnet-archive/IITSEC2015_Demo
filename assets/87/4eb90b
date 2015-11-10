@@ -186,20 +186,20 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			3.7358787059783936,
-			9.543497085571289,
-			0.027032706886529922,
+			0.3863880932331085,
+			-0.8885782957077026,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 20,
-		"___sourceAssetTimestamp": "Wed Nov 04 2015 10:42:24 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:02:45 GMT-0500 (Eastern Standard Time)",
 		"damageTexture": "/sas/assets/dde67e10",
 		"worldPosition": [
-			3.7358787059783936,
-			9.543497085571289,
-			0.027032706886529922
+			0.3863880932331085,
+			-0.8885782957077026,
+			0.01774579845368862
 		]
 	},
 	"methods": {
@@ -219,10 +219,6 @@
 				"args"
 			]
 		},
-		"tick": {
-			"body": "\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if(state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n        \n        \n    }    \n",
-			"parameters": []
-		},
 		"movement": {
 			"body": "var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 12 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -12 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);",
 			"parameters": []
@@ -233,6 +229,10 @@
 				"pos",
 				"force"
 			]
+		},
+		"tick": {
+			"body": "this.audioAPI.playSound(\"/sas/assets/c46fb970\", true, 200, false);\n    this.audioAPI.playSound(\"/sas/assets/50af929c\", true, 200, false);\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n\n    }",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -331,9 +331,9 @@
 				],
 				"type": "3DR Object",
 				"worldPosition": [
-					3.7358787059783936,
-					9.543497085571289,
-					0.027032706886529922
+					0.3863880932331085,
+					-0.8885782957077026,
+					0.01774579845368862
 				]
 			},
 			"methods": {
@@ -378,7 +378,8 @@
 							-0.05801611766219139,
 							0.1564117968082428,
 							1
-						]
+						],
+						"far": 10000
 					}
 				},
 				"Ndd622fe7": {

@@ -9,7 +9,7 @@
 	},
 	"properties": {
 		"DisplayName": "IntroScreen",
-		"___sourceAssetTimestamp": "Thu Oct 29 2015 09:43:23 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 17:22:43 GMT-0500 (EST)",
 		"background_color": [
 			1,
 			0,
@@ -76,9 +76,9 @@
 			0,
 			1,
 			0,
-			-0.536555603615887,
-			0.855636667599102,
-			0.017745798826218,
+			0.10872735948622769,
+			0.3086528333931744,
+			0.017745798826217962,
 			1
 		],
 		"visible": true,
@@ -849,6 +849,141 @@
 						}
 					}
 				}
+			}
+		},
+		"N1649a98a": {
+			"extends": "http://vwf.example.com/image.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.880096745910123,
+				"s1": 0.55490582739003,
+				"s2": 0.18280574935488403,
+				"c": 1
+			},
+			"properties": {
+				"width": 252,
+				"height": 156,
+				"left": 0,
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					2,
+					4,
+					0,
+					1
+				],
+				"owner": "ADLteam",
+				"DisplayName": "Image1",
+				"visible": true,
+				"src": "/sas/assets/9f1586ee",
+				"___assetServerOriginalID": "N1649a98a"
+			}
+		},
+		"N449ff23": {
+			"extends": "http://vwf.example.com/label.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.07276622718200088,
+				"s1": 0.8093430860899389,
+				"s2": 0.6135764389764518,
+				"c": 1
+			},
+			"properties": {
+				"width": 429,
+				"height": 210,
+				"text": "The Fast Attack Craft Simulation is a distributed interactive environment that works directly with any compatible WebGL browser without the need for plugin downloads. The scenario is reconfigurable collaboratively, in real time. This simulation utilizes the ADL Initiative's work inside of the Virtual World Sandbox platform.",
+				"left": 0,
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					2,
+					62,
+					0,
+					1
+				],
+				"owner": "ADLteam",
+				"DisplayName": "Label1",
+				"visible": true,
+				"font_color": [
+					0,
+					0,
+					0.34509803921568627
+				],
+				"font_size": 19,
+				"style": {
+					"font-style": "italic"
+				},
+				"___assetServerOriginalID": "N449ff23"
+			}
+		},
+		"N8439a913": {
+			"extends": "http://vwf.example.com/label.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.36539049027487636,
+				"s1": 0.8817124550696462,
+				"s2": 0.25483252736739814,
+				"c": 1
+			},
+			"properties": {
+				"width": 445,
+				"height": 54,
+				"text": "Fast Attack Craft Simulation",
+				"left": 0,
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					2,
+					24,
+					0,
+					1
+				],
+				"owner": "ADLteam",
+				"DisplayName": "Label2",
+				"visible": true,
+				"font_color": [
+					0,
+					0,
+					0.34509803921568627
+				],
+				"font_size": 33,
+				"style": {
+					"font-style": "italic"
+				},
+				"___assetServerOriginalID": "N8439a913"
 			}
 		}
 	}

@@ -41,9 +41,9 @@
 			-0.22189253568649292,
 			0.975071132183075,
 			0,
-			32.18869400024414,
-			23.471525192260742,
-			0.9503275156021118,
+			1.8017891645431519,
+			1.0041371583938599,
+			0.01774579845368862,
 			1
 		],
 		"worldTransform": [
@@ -59,9 +59,9 @@
 			-0.22189253568649292,
 			0.975071132183075,
 			0,
-			32.18869400024414,
-			23.471525192260742,
-			0.9503275156021118,
+			1.8017891645431519,
+			1.0041371583938599,
+			0.01774579845368862,
 			1
 		],
 		"zoom": "",
@@ -78,7 +78,7 @@
 				"type": "vector"
 			}
 		},
-		"___sourceAssetTimestamp": "Sun Nov 08 2015 20:44:21 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:10:23 GMT-0500 (Eastern Standard Time)",
 		"activeState": "idle",
 		"states": {
 			"idle": {
@@ -96,7 +96,8 @@
 				"outFunc": null,
 				"updateFunc": "targeting"
 			}
-		}
+		},
+		"far": 10000
 	},
 	"methods": {
 		"TAOCommandRadioWarn": {
@@ -184,17 +185,88 @@
 				"visibleToAncestor": true
 			},
 			"children": {
+				"-sas-assets-546b7d66-N3212a770N5111c16a": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770N5111c16a"
+					}
+				},
+				"-sas-assets-546b7d66-N3212a770N58f296e0": {
+					"children": {
+						"-sas-assets-546b7d66-N3212a770N35c0d585": {
+							"properties": {
+								"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770N35c0d585"
+							}
+						}
+					},
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770N58f296e0"
+					}
+				},
+				"-sas-assets-546b7d66-N3212a770N6444e6eb": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770N6444e6eb"
+					}
+				},
+				"-sas-assets-546b7d66-N3212a770N762225da": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770N762225da"
+					}
+				},
+				"-sas-assets-546b7d66-N3212a770N7dbb5d5b": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770N7dbb5d5b"
+					}
+				},
+				"-sas-assets-546b7d66-N3212a770Ne63ee92c": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770Ne63ee92c"
+					}
+				},
+				"-sas-assets-546b7d66-N3212a770Ne73b9040": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770Ne73b9040"
+					}
+				},
+				"-sas-assets-546b7d66-N3212a770Nef06867c": {
+					"properties": {
+						"___assetServerOriginalID": "-sas-assets-546b7d66-N3212a770Nef06867c"
+					}
+				},
 				"-sas-assets-546b7d66-Nfd8b27fN5111c16a": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.5025857016444206,
+						"s1": 0.6059397850185633,
+						"s2": 0.9046013241168112,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN5111c16a"
 					}
 				},
 				"-sas-assets-546b7d66-Nfd8b27fN58f296e0": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.596515073440969,
+						"s1": 0.25045120739378035,
+						"s2": 0.39183925767429173,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN58f296e0"
 					},
 					"children": {
 						"-sas-assets-546b7d66-Nfd8b27fN35c0d585": {
+							"extends": "http://vwf.example.com/node.vwf",
+							"sequence": 0,
+							"random": {
+								"s0": 0.8866807937156409,
+								"s1": 0.1360437471885234,
+								"s2": 0.5268054872285575,
+								"c": 1
+							},
 							"properties": {
 								"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN35c0d585"
 							}
@@ -202,31 +274,79 @@
 					}
 				},
 				"-sas-assets-546b7d66-Nfd8b27fN6444e6eb": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.39292467501945794,
+						"s1": 0.7241323534399271,
+						"s2": 0.9425878026522696,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN6444e6eb"
 					}
 				},
 				"-sas-assets-546b7d66-Nfd8b27fN762225da": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.10998162743635476,
+						"s1": 0.891147977206856,
+						"s2": 0.5755619760602713,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN762225da"
 					}
 				},
 				"-sas-assets-546b7d66-Nfd8b27fN7dbb5d5b": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.5107062675524503,
+						"s1": 0.9164639895316213,
+						"s2": 0.42887889593839645,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fN7dbb5d5b"
 					}
 				},
 				"-sas-assets-546b7d66-Nfd8b27fNe63ee92c": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.21936095925047994,
+						"s1": 0.8852107613347471,
+						"s2": 0.26864782092161477,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fNe63ee92c"
 					}
 				},
 				"-sas-assets-546b7d66-Nfd8b27fNe73b9040": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.0018435381352901459,
+						"s1": 0.6075843058060855,
+						"s2": 0.5814036903902888,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fNe73b9040"
 					}
 				},
 				"-sas-assets-546b7d66-Nfd8b27fNef06867c": {
+					"extends": "http://vwf.example.com/node.vwf",
+					"sequence": 0,
+					"random": {
+						"s0": 0.6636473955586553,
+						"s1": 0.5709342246409506,
+						"s2": 0.10599985742010176,
+						"c": 1
+					},
 					"properties": {
 						"___assetServerOriginalID": "-sas-assets-546b7d66-Nfd8b27fNef06867c"
 					}

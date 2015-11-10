@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.7932513956911862,
-		"s1": 0.9755527530796826,
-		"s2": 0.12137411441653967,
-		"c": 1384486
+		"s0": 0.11761978664435446,
+		"s1": 0.727830869378522,
+		"s2": 0.1694343239068985,
+		"c": 1192018
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -30,7 +30,7 @@
 				"type": "nodeid"
 			}
 		},
-		"Missiles": 12,
+		"Missiles": 8,
 		"___physics_angular_velocity": [
 			0,
 			0,
@@ -48,9 +48,9 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Thu Oct 22 2015 17:21:44 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 15:56:21 GMT-0500 (Eastern Standard Time)",
 		"_length": 2.98,
-		"controllingCamera": "SandboxCamera-vwf-N467014b3",
+		"controllingCamera": "SandboxCamera-vwf-N79164421",
 		"counter": 2063.24999999994,
 		"elevation": 25,
 		"height": 2.53,
@@ -163,19 +163,19 @@
 		"transform": [
 			0.929704487323761,
 			0.35693448781967163,
-			0.016228051856160164,
+			0.016228625550866127,
 			0,
 			-0.35795506834983826,
 			0.9326468706130981,
-			-0.006248128600418568,
+			-0.006246628705412149,
 			0,
 			-0.017452405765652657,
-			0,
+			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			-2.7192864418029785,
-			-7.7433390617370605,
-			0.023714400827884674,
+			0.75,
+			1,
+			4.25,
 			1
 		],
 		"type": "Primitive",
@@ -183,9 +183,9 @@
 		"weaponsTarget": "ocean-ocean-vwf-N4bab7165",
 		"width": 8.49,
 		"worldPosition": [
-			-2.7192864418029785,
-			-7.7433390617370605,
-			0.023714400827884674
+			0.75,
+			1,
+			4.25
 		],
 		"": null,
 		"maxHeight": 500,
@@ -193,41 +193,53 @@
 		"worldTransform": [
 			0.929704487323761,
 			0.35693448781967163,
-			0.016228051856160164,
+			0.016228625550866127,
 			0,
 			-0.35795506834983826,
 			0.9326468706130981,
-			-0.006248128600418568,
+			-0.006246628705412149,
 			0,
 			-0.017452405765652657,
-			0,
+			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			-2.7192864418029785,
-			-7.7433390617370605,
-			0.023714400827884674,
+			0.75,
+			1,
+			4.25,
 			1
+		],
+		"userControlCounter": 0,
+		"activeState": "idle",
+		"states": {
+			"engage": {
+				"transitionFunc": "inEngage",
+				"updateFunc": "engage"
+			},
+			"hit": {},
+			"idle": {
+				"updateFunc": null
+			},
+			"reload": {
+				"transitionFunc": "inReload",
+				"updateFunc": "reload"
+			},
+			"scram": {
+				"updateFunc": "scram"
+			},
+			"warn": {
+				"transitionFunc": "inWarn",
+				"updateFunc": "warn"
+			}
+		},
+		"targetID": "box2-vwf-N305bab2d",
+		"fireCounter": 0,
+		"scramPos": [
+			500,
+			500,
+			250
 		]
 	},
 	"methods": {
-		"_kd": {
-			"body": "if (!this.verifyCamera()) return;\n    if (this.keysDown.indexOf(e.key.key) == -1)\n    {\n        this.keysDown.push(e.key.key);\n    }",
-			"parameters": [
-				"e",
-				"d"
-			]
-		},
-		"_ku": {
-			"body": "if (!this.verifyCamera()) return;\n    if (this.keysDown.indexOf(e.key.key) != -1)\n    {\n        this.keysDown.splice(this.keysDown.indexOf(e.key.key), 1);\n    }\n\n    if (e.key.key == 'space')\n    {\n        this.launchMissile();\n    }",
-			"parameters": [
-				"e",
-				"d"
-			]
-		},
-		"hit": {
-			"body": "this.children_by_name.art.materialDef.layers[0].src = \"/sas/assets/d2f274ee\";\n    this.children_by_name.smoke.visible = true;\n    this.isHit = true;\n    this.___physics_constant_force[2] = 0;\n    this.___physics_damping = .1;",
-			"parameters": []
-		},
 		"keyIsDown": {
 			"body": "if (this.keysDown.indexOf(char) == -1) return false;\n    return true;",
 			"parameters": [
@@ -238,16 +250,115 @@
 			"body": "this.Scene.unbind(\"keyDown\",this.__kd);\n            this.Scene.unbind(\"keyUp\",this.__ku);\n            \n            var self = this;\n            this.__ku = function(e,d)\n            {\n                self._ku(e,d);\n            }\n            \n            this.__kd = function(e,d)\n            {\n                self._kd(e,d);\n            }\n            \n            this.Scene.bind(\"keyDown\",this.__kd);\n            this.Scene.bind(\"keyUp\",this.__ku);",
 			"parameters": []
 		},
-		"verifyCamera": {
-			"body": "var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.controllingCamera) return false;\n    return true;",
-			"parameters": []
-		},
 		"launchMissile": {
 			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = _DataManager.getCleanNodePrototype(this.missileDef);\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    if (this.weaponsTarget)\n    {\n        def.properties.target_data = {\n            id: this.weaponsTarget\n        };\n    }\n\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    var context = {\n        // firePosition: pos,\n        // missileNum: maximum num of missile - this.Missiles,\n        target: this.weaponsTarget,\n    };\n    if (sender)\n    {\n        sender.xAPISend(\"fired\", \"SeahawkMissile\", this.DisplayName, null);\n    }\n    var smokeDef = this.smokeDef;\n    console.log(def.properties.target_data);\n    vwf.createChild(vwf.application(), GUID(), def, null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
 		},
+		"": {
+			"parameters": "console.log(\"got here\");"
+		},
+		"_ku": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 200;\n    if (this.keysDown.indexOf(e.key.key) != -1)\n    {\n        this.keysDown.splice(this.keysDown.indexOf(e.key.key), 1);\n    }\n\n    if (e.key.key == 'space')\n    {\n        this.launchMissile();\n    }",
+			"parameters": [
+				"e",
+				"d"
+			]
+		},
+		"doUserTargeting": {
+			"body": "/********************************************\n     * Update weapons target\n     *******************************************/\n\n    var worldToCamera = new THREE.Matrix4().fromArray(this.children_by_name.art.children_by_name.UH60Pilot.worldTransform);\n    worldToCamera.getInverse(worldToCamera);\n    var target = {\n        range: 4,\n        id: ''\n    };\n\n    // get location of all scene children in view space\n    for (i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node === this) continue;\n\n        var targetCoord = new THREE.Vector4().fromArray(node.transformAPI.getWorldPosition().concat([1]));\n        targetCoord.applyMatrix4(worldToCamera);\n\n        // calculate distance to center iff target is in front of the camera\n        if (targetCoord.y > 0)\n        {\n            var range = Math.sqrt(targetCoord.x * targetCoord.x + targetCoord.z * targetCoord.z);\n            if (range < target.range)\n            {\n                target.id = node.id;\n                target.range = range;\n            }\n        }\n    }\n\n    this.weaponsTarget = target.id;\n\n    if (this.weaponsTarget)\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [1, 0, 0];\n    else\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [0.5, 0.5, 0.5];",
+			"parameters": []
+		},
+		"_kd": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 200;\n   \n    if (this.keysDown.indexOf(e.key.key) == -1)\n    {\n        this.keysDown.push(e.key.key);\n    }",
+			"parameters": [
+				"e",
+				"d"
+			]
+		},
+		"doUserInput": {
+			"body": "var mass = 20 * this.physicsAPI.getMass();\n    var topKey = this.keysDown[this.keysDown.length - 1];\n    if (topKey)\n    {\n\n        var thispos = this.transformAPI.getPosition();\n        if (this.keyIsDown('W'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('S'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('Q'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, -mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('E'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('A'))\n        {\n            this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n        if (this.keyIsDown('D'))\n        {\n            this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n\n    }",
+			"parameters": []
+		},
+		"doHover": {
+			"body": "if (this.isHit)\n    {\n        this.elevation = 20;\n        this.children_by_name.art.children_by_name.Mrotor.children_by_name.rotator1.Amount *= .8;\n       \n       /* var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            sender.xAPISend(\"is-damaged\", this.DisplayName, \"Seahawk\", null);\n        } */\n        return;\n    }\n    if (!this.isHit)\n    {\n        var elTemp = this.transformAPI.getPosition()[2];\n        if (elTemp < this.minHeight)\n            this.elevation = this.minHeight;\n        else if (elTemp > this.maxHeight)\n            this.elevation = this.maxHeight;\n        else this.elevation = elTemp;\n    }\n    var waterDepth = this.elevation;\n    var hullThick = 0;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 10;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    this.counter += .05;\n    var mass = this.physicsAPI.getMass() * 10;\n    var amt1 = Math.cos(this.counter) / 10;\n    var amt2 = Math.cos(this.counter / 3) / 10;\n    var amt3 = Math.cos(this.counter / 1) / 3;\n    this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);",
+			"parameters": []
+		},
+		"doFlightModel": {
+			"body": "var t = this.physicsAPI.getLinearVelocity();\n    t = this.transformAPI.globalToLocalRotation(t)\n    var z = t[2];\n    t[2] = 0;\n    var len = MATH.lengthVec3(t) * Math.sign(t[1]);\n    t[0] = 0;\n    t[1] = len;\n    t[2] = z;\n    t = this.transformAPI.localToGlobalRotation(t);\n    this.physicsAPI.setLinearVelocity(t);",
+			"parameters": []
+		},
+		"doAIBehaviors": {
+			"body": "var state = this.states[this.activeState];\n    \n    if (state)\n    {\n        if (this[state.updateFunc])\n            this[state.updateFunc]();\n    }",
+			"parameters": []
+		},
+		"inWarn": {
+			"body": "this.targetID = this.getClosestHostile();",
+			"parameters": []
+		},
+		"warn": {
+			"body": "this.seekTarget();\n    if(this.distToTarget() < 200)\n    {\n        //playWarnSound\n        this.activateState(\"idle\");\n    }",
+			"parameters": []
+		},
+		"inEngage": {
+			"body": "this.targetID = this.getClosestHostile();",
+			"parameters": []
+		},
+		"distToTarget": {
+			"body": "if (!this.targetID)\n        return 0\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target)\n        return 0;\n        \n       \n       \n            var pos = this.transformAPI.getWorldPosition();\n            var hostilePos = target.transformAPI.getWorldPosition();\n            return Vec3.distance(pos, hostilePos);",
+			"parameters": []
+		},
+		"reload": {
+			"body": "this.fireCounter--;\n    if (this.fireCounter < 0)\n    {\n        this.activateState('engage');\n    }",
+			"parameters": []
+		},
+		"activateState": {
+			"body": "//console.log(\"activateState\");\n    var state = this.states[statename];\n\n    if (state.transitionFunc)\n        this[state.transitionFunc](this.activeState);\n    this.activeState = statename;\n    for (var i in state.properties)\n    {\n        this[i] = state.properties[i];\n    }",
+			"parameters": [
+				"statename"
+			]
+		},
+		"inReload": {
+			"body": "this.fireCounter = 200;",
+			"parameters": []
+		},
+		"engage": {
+			"body": "this.seekTarget();\n    if (this.distToTarget() < 200)\n    {\n        this.weaponsTarget = this.targetID;\n        this.launchMissile();\n        if(this.Missiles === 0)\n            this.activateState(\"scram\");\n        else\n            this.activateState(\"reload\");\n    }",
+			"parameters": []
+		},
+		"scram": {
+			"body": "this.seekTarget(this.scramPos);",
+			"parameters": []
+		},
+		"getClosestHostile": {
+			"body": "var dist = Infinity;\n    var hostile = null;\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node.hostile && node.state !== \"defeated\")\n        {\n            var pos = this.transformAPI.getWorldPosition();\n            var hostilePos = node.transformAPI.getWorldPosition();\n            if (Vec3.distance(pos, hostilePos) < dist)\n            {\n                dist = Vec3.distance(pos, hostilePos);\n                hostile = node.id;\n            }\n        }\n    }\n    return hostile;",
+			"parameters": []
+		},
+		"userControlled": {
+			"body": "var thisCam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n\n    return this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
+			"parameters": []
+		},
+		"hit": {
+			"body": "this.children_by_name.art.materialDef.layers[0].src = \"/sas/assets/d2f274ee\";\n    this.children_by_name.smoke.visible = true;\n    this.isHit = true;\n    this.___physics_constant_force[2] = 0;\n    this.___physics_damping = .1;\n    this.activateState(\"hit\");",
+			"parameters": []
+		},
 		"tick": {
-			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (!this.isHit)\n    {\n        var elTemp = this.transformAPI.getPosition()[2];\n        if (elTemp < this.minHeight)\n            this.elevation = this.minHeight;\n        else if (elTemp > this.maxHeight)\n            this.elevation = this.maxHeight;\n        else this.elevation = elTemp;\n    }\n    var waterDepth = this.elevation;\n    var hullThick = 0;\n    var depthFloor = waterDepth + hullThick;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.physicsAPI.addForceAtCenter(0, 0, 9.8);\n    this.physicsAPI.wake();\n    var mass = this.physicsAPI.getMass();\n    var corners = [\n        [this._length / 2, this.width / 2, 0],\n        [this._length / 2, -this.width / 2, 0],\n        [-this._length / 2, this.width / 2, 0],\n        [-this._length / 2, -this.width / 2, 0],\n    ];\n\n    this.counter++;\n    var rocking = -mass / 10;\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.sin(this.counter / 30) * this._length, Math.cos(this.counter / 15) * this.width, 0]);\n    this.physicsAPI.addForceOffset([0, 0, rocking], [Math.cos(this.counter / 10) * this._length, Math.sin(this.counter / 10) * this.width, 0]);\n\n    for (var i = 0; i < corners.length; i++)\n    {\n        var corner = corners[i];\n        var worldCorner = this.transformAPI.localToGlobal(corner);\n        var depth = depthFloor - worldCorner[2];\n        depth = Math.min(depth, 5);\n        if (depth > 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, depth * mass * 9.8 / 3], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n            //    vel[0] *= .6;\n            // vel[1] *= .6;\n            vel[2] *= 1 - depth / 50;\n\n            torque[0] *= 1 - depth / 100;\n            torque[1] *= 1 - depth / 100;\n            torque[2] *= 1 - depth / 100;\n            this.physicsAPI.setAngularVelocity(torque);\n            this.physicsAPI.setLinearVelocity(vel);\n        }\n        //  if (depth < 0)\n        {\n\n            this.physicsAPI.addForceOffset([0, 0, -mass * 9.8 / 4], Vec3.subtract(worldCorner, this.transformAPI.getPosition(), []));\n            var vel = this.physicsAPI.getLinearVelocity();\n            var torque = this.physicsAPI.getAngularVelocity();\n        }\n\n    }\n\n    var depth = depthFloor - this.transformAPI.getPosition()[2]\n    depth = Math.min(depth, 5);\n    if (depth > 0)\n    {\n\n        var vel = this.physicsAPI.getLinearVelocity();\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] *= 1.0 - depth / 100;\n        vel[1] *= 1.0 - depth / 30;\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n\n    }\n\n    if (this.isHit)\n    {\n        this.elevation = 20;\n        this.children_by_name.art.children_by_name.Mrotor.children_by_name.rotator1.Amount *= .8;\n        var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            sender.xAPISend(\"is-damaged\", this.DisplayName, \"Seahawk\", null /*context*/ );\n        }\n        return;\n    }\n    this.counter += .05;\n    var mass = this.physicsAPI.getMass() * 10;\n    var amt1 = Math.cos(this.counter) / 10;\n    var amt2 = Math.cos(this.counter / 3) / 10;\n    var amt3 = Math.cos(this.counter / 1) / 3;\n    this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);\n\n    var topKey = this.keysDown[this.keysDown.length - 1];\n    if (topKey)\n    {\n\n        var thispos = this.transformAPI.getPosition();\n        if (this.keyIsDown('W'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('S'))\n        {\n            var force = this.transformAPI.localToGlobalRotation(0, mass, 0);\n            this.physicsAPI.addForceAtCenter(force);\n        }\n        if (this.keyIsDown('Q'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, -mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('E'))\n        {\n            this.physicsAPI.addForceAtCenter(0, 0, mass)\n            this.elevation = this.transformAPI.getPosition()[2];\n        }\n        if (this.keyIsDown('A'))\n        {\n            this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n        if (this.keyIsDown('D'))\n        {\n            this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n        }\n\n    }\n    var t = this.physicsAPI.getLinearVelocity();\n    t = this.transformAPI.globalToLocalRotation(t)\n    var z = t[2];\n    t[2] = 0;\n    var len = MATH.lengthVec3(t) * Math.sign(t[1]);\n    t[0] = 0;\n    t[1] = len;\n    t[2] = z;\n    t = this.transformAPI.localToGlobalRotation(t);\n    this.physicsAPI.setLinearVelocity(t);\n\n    /********************************************\n     * Update weapons target\n     *******************************************/\n\n    var worldToCamera = new THREE.Matrix4().fromArray(this.children_by_name.art.children_by_name.UH60Pilot.worldTransform);\n    worldToCamera.getInverse(worldToCamera);\n    var target = {\n        range: 4,\n        id: ''\n    };\n\n    // get location of all scene children in view space\n    for (i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node === this) continue;\n\n        var targetCoord = new THREE.Vector4().fromArray(node.transformAPI.getWorldPosition().concat([1]));\n        targetCoord.applyMatrix4(worldToCamera);\n\n        // calculate distance to center iff target is in front of the camera\n        if (targetCoord.y > 0)\n        {\n            var range = Math.sqrt(targetCoord.x * targetCoord.x + targetCoord.z * targetCoord.z);\n            if (range < target.range)\n            {\n                target.id = node.id;\n                target.range = range;\n            }\n        }\n    }\n\n    this.weaponsTarget = target.id;\n\n    if (this.weaponsTarget)\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [1, 0, 0];\n    else\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [0.5, 0.5, 0.5];",
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    this.audioAPI.playSound(\"/sas/assets/dc81768a\", true, 300, false);\n    this.userControlCounter--;\n    this.doHover();\n    if (this.userControlled())\n    {\n        this.doUserInput();\n        this.doUserTargeting();\n    }\n    else\n    {\n        this.doAIBehaviors();\n    }\n\n    this.doFlightModel();",
+			"parameters": []
+		},
+		"TAOCommand": {
+			"body": "if( args[0] == \"Seahawk Warning\")\n   {\n        this.activateState(\"warn\");   \n   }\n    if( args[0] == \"Seahawk Engage\")\n   {\n        this.activateState(\"engage\");   \n   }\n   if( args[0] == \"Seahawk Disengage\")\n   {\n        this.activateState(\"scram\");   \n   }",
+			"parameters": [
+				"args"
+			]
+		},
+		"seekTarget": {
+			"body": "if (!target)\n    {\n        var node = this.Scene.findNodeByID(this.targetID);\n        if (!node)\n            return;\n        target = node.transformAPI.getWorldPosition();\n    }\n    var mass = 20 * this.physicsAPI.getMass();\n    target = this.transformAPI.globalToLocal(target);\n    \n    if(Vec3.distance(target,this.transformAPI.getWorldPosition()) < 20)\n        return;\n    if (target[1] < 0)\n    {\n        var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n        this.physicsAPI.addForceAtCenter(force);\n    }\n    if (target[0] > 0)\n    {\n        this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n    }\n    else\n    {\n        this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n    }\n    if (target[2] > -100)\n    {\n        this.physicsAPI.addForceAtCenter(0, 0, mass)\n        this.elevation = this.transformAPI.getPosition()[2];\n    }\n    else\n    {\n        this.physicsAPI.addForceAtCenter(0, 0, -mass)\n        this.elevation = this.transformAPI.getPosition()[2];\n    }",
+			"parameters": [
+				"target"
+			]
+		},
+		"verifyCamera": {
+			"body": "var cam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n    var camt = this.Scene.clientAPI.getCameraForClient(vwf.client());\n    if (!camt || camt.id != cam) return false;\n    return true;",
 			"parameters": []
 		}
 	},
@@ -357,19 +468,19 @@
 				"worldTransform": [
 					0.929704487323761,
 					0.35693448781967163,
-					0.016228051856160164,
+					0.016228625550866127,
 					0,
 					0.05101827159523964,
-					-0.08765667676925659,
-					-0.9948345422744751,
+					-0.08765507489442825,
+					-0.9948346614837646,
 					0,
 					-0.3547302484512329,
-					0.9285184144973755,
-					-0.10019315034151077,
+					0.9285185933113098,
+					-0.10019166022539139,
 					0,
-					-3.47902774810791,
-					-10.444852828979492,
-					-0.9516933560371399,
+					-0.009741358458995819,
+					-1.7015119791030884,
+					3.274587869644165,
 					1
 				]
 			}
@@ -578,19 +689,19 @@
 				"worldTransform": [
 					0.929704487323761,
 					0.35693448781967163,
-					0.016228051856160164,
+					0.016228625550866127,
 					0,
 					0.04416991397738457,
-					-0.06973939388990402,
-					-0.9965813755989075,
+					-0.06973779201507568,
+					-0.996581494808197,
 					0,
 					-0.3556479215621948,
-					0.9300358891487122,
-					-0.08099502325057983,
+					0.9300360083580017,
+					-0.08099353313446045,
 					0,
-					-0.5919371843338013,
-					-9.337503433227539,
-					-0.901298999786377,
+					2.8773491382598877,
+					-0.5941629409790039,
+					3.324984073638916,
 					1
 				]
 			}
@@ -699,7 +810,7 @@
 			},
 			"methods": {
 				"tick": {
-					"body": "this.counter += .05;\n    var amt1 = Math.cos(this.counter) / 10;\n    var amt2 = Math.cos(this.counter / 3) / 10;\n    var amt3 = Math.cos(this.counter / 1) / 3;\n    this.physicsAPI.addForceAtCenter([amt1, amt2, amt3]);\n    if (this.transformAPI.getPosition()[2] < 30)\n        this.physicsAPI.addForceAtCenter(0, 0, .1);\n    if (this.transformAPI.getPosition()[2] > 35)\n        this.physicsAPI.addForceAtCenter(0, 0, -.1);\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time",
+					"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time",
 					"parameters": []
 				}
 			},
@@ -752,7 +863,7 @@
 					},
 					"methods": {
 						"tick": {
-							"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    //var parent_y = this.parent.transformAPI.localToGlobalRotation([1, 0, 0]);\n    //parent_y = this.transformAPI.globalToLocalRotation(parent_y);\n    //this.transformAPI.rotateAroundAxis(80, parent_y, this.transformAPI.COORDINATES.LOCAL);\n    this.transformAPI.rotateAroundAxis(80, [1, 0, 0], this.transformAPI.COORDINATES.LOCAL);",
+							"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    //var parent_y = this.parent.transformAPI.localToGlobalRotation([1, 0, 0]);\n    //parent_y = this.transformAPI.globalToLocalRotation(parent_y);\n    //this.transformAPI.rotateAroundAxis(80, parent_y, this.transformAPI.COORDINATES.LOCAL);\n   // this.transformAPI.rotateAroundAxis(80, [1, 0, 0], this.transformAPI.COORDINATES.LOCAL);",
 							"parameters": []
 						}
 					}
@@ -771,7 +882,7 @@
 					"properties": {
 						"DisplayName": "UH60Pilot",
 						"___assetServerOriginalID": "N912c6b53",
-						"far": 1000,
+						"far": 10000,
 						"fov": 70,
 						"lastPos": [
 							0.213684210526316,
@@ -801,25 +912,25 @@
 						"worldTransform": [
 							-0.9028685688972473,
 							-0.42023536562919617,
-							-0.01659872755408287,
+							-0.01659940369427204,
 							0,
 							0.4209156632423401,
-							-0.9019122123718262,
-							-0.08587884902954102,
+							-0.9019120931625366,
+							-0.08588029444217682,
 							0,
 							0.02111581340432167,
-							-0.08479064702987671,
-							0.996165931224823,
+							-0.08479224890470505,
+							0.9961658120155334,
 							0,
-							-1.1811412572860718,
-							-10.818081855773926,
-							0.010556756518781185,
+							2.288145065307617,
+							-2.074742317199707,
+							4.236837387084961,
 							1
 						]
 					},
 					"methods": {
 						"ready": {
-							"body": "\n  //This function was created for you by the system. \n      //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n\n      this.Scene.unbind('pointerMove', this._mouseMoved);\n      this.Scene.unbind('pointerDown', this._mouseDown);\n      this.Scene.unbind('pointerUp', this._mouseup);\n      var self = this;\n      this._mouseMoved = function(eventData)\n      {\n          if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) ||self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n          if (self.pointerState == 'down')\n          {\n              console.log(eventData);\n              var relX = self.lastPos[0] - eventData.position[0];\n              var relY = self.lastPos[1] - eventData.position[1];\n              self.lastPos = [eventData.position[0], eventData.position[1]];\n              console.log(relX, relY);\n\n              self.transformAPI.rotate(relY * 100, 0, 0, self.transformAPI.COORDINATES.LOCAL);\n              self.transformAPI.rotate(0, 0, relX * 100, self.transformAPI.COORDINATES.GLOBAL);\n\n          }\n      }\n      this._mouseDown = function(eventData)\n      {\n          if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) ||self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n          if (eventData.button == 'left')\n          {\n              self.pointerState = \"down\";\n              console.log('pointer is down');\n              self.lastPos = [eventData.position[0], eventData.position[1]];\n          }\n      }\n      this._mouseup = function(eventData)\n      {\n          if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n          self.pointerState = \"none\";\n      }\n\n      this.Scene.bind('pointerMove', this._mouseMoved);\n      this.Scene.bind('pointerDown', this._mouseDown);\n      this.Scene.bind('pointerUp', this._mouseup);\n",
+							"body": "//This function was created for you by the system. \n    //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n\n    this.Scene.unbind('pointerMove', this._mouseMoved);\n    this.Scene.unbind('pointerDown', this._mouseDown);\n    this.Scene.unbind('pointerUp', this._mouseup);\n    var self = this;\n    this._mouseMoved = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (self.pointerState == 'down')\n        {\n            console.log(eventData);\n            self.parent.parent.userControlCounter = 200;\n            var relX = self.lastPos[0] - eventData.position[0];\n            var relY = self.lastPos[1] - eventData.position[1];\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n            console.log(relX, relY);\n\n            self.transformAPI.rotate(relY * 100, 0, 0, self.transformAPI.COORDINATES.LOCAL);\n            self.transformAPI.rotate(0, 0, relX * 100, self.transformAPI.COORDINATES.GLOBAL);\n\n        }\n    }\n    this._mouseDown = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (eventData.button == 'left')\n        {\n            self.pointerState = \"down\";\n            console.log('pointer is down');\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n        }\n    }\n    this._mouseup = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        self.pointerState = \"none\";\n    }\n\n    this.Scene.bind('pointerMove', this._mouseMoved);\n    this.Scene.bind('pointerDown', this._mouseDown);\n    this.Scene.bind('pointerUp', this._mouseup);",
 							"parameters": []
 						}
 					},

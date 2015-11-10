@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.815363418776542,
-		"s1": 0.48942626756615937,
-		"s2": 0.4145956754218787,
-		"c": 1136277
+		"s0": 0.5981814204715192,
+		"s1": 0.6183063094504178,
+		"s2": 0.1355630902107805,
+		"c": 1247397
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -54,7 +54,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Sun Nov 08 2015 20:52:42 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:21:15 GMT-0500 (Eastern Standard Time)",
 		"_length": 0.23,
 		"accuracy": 24,
 		"activeState": "targeting",
@@ -271,9 +271,9 @@
 			-0.01746985875070095,
 			1.000847578048706,
 			0,
-			32.51301193237305,
-			20.908615112304688,
-			0.009999999776482582,
+			15.5,
+			-4.25,
+			25.5,
 			1
 		],
 		"type": "Primitive",
@@ -372,20 +372,8 @@
 			"body": "this.audioAPI.stopSound(this.fireSound);",
 			"parameters": []
 		},
-		"playBurst": {
-			"body": "var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n    if (sound && !sound.isPlaying())\n    {\n        sound.play();\n    }\n    else if (!sound)\n    {\n        this.audioAPI.playSound(this.fireSound, true, 20);\n    }",
-			"parameters": []
-		},
 		"tick": {
 			"body": "this.returnFromShakeOffsets();\n    this.firecounter++;\n\n    if (!this.userControlled())\n    {\n        var state = this.states[this.activeState];\n        if (state)\n        {\n            if (state.updateFunc && this[state.updateFunc])\n                this[state.updateFunc]();\n        }\n\n    }\n    else\n    {\n\n        if (this.firing() && this.Ammo > 0)\n        {\n            this.playBurst();\n            this.shake();\n\n            if (this.firecounter >= 2)\n            {\n                this.firecounter = 0;\n                this.fire();\n            }\n\n        }\n        else\n        {\n            this.stopBurst();\n            if (this.Ammo <= 0)\n                this.reloading();\n        }\n    }",
-			"parameters": []
-		},
-		"startReloading": {
-			"body": "this.stopBurst();\n    this.audioAPI.playSound(this.reloadSound, false, 10);\n    this.activateState(\"reloading\");\n    this.firecounter = -130;",
-			"parameters": []
-		},
-		"fire": {
-			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit && hit.node)\n    {\n        if (Engine.ancestors(hit.node.id).indexOf(this.targetID) != -1)\n        {\n\n            if (hit.node.hit)\n                hit.node.hit([hit.point, 5]);\n\n        }\n        else if (!this.userControlled())\n        {\n           // this.stopBurst();\n\n        //    this.activateState(\"targeting\");\n        }\n    }\n\n    this.collectXAPIData();\n    this.Ammo -= 2;\n    console.log(this.Ammo);\n    if (this.Ammo <= 0)\n    {\n        this.startReloading();\n    }",
 			"parameters": []
 		},
 		"xAPISend": {
@@ -402,6 +390,18 @@
 		},
 		"collectXAPIData": {
 			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.userControlled())\n    {\n        //2 - Info from bullets - still inside the if sender\n        // var startT, dur, roundsFired, numHits, hits;\n        if (!this.started)\n        {\n            console.log(\"Starting Burst\");\n            startT = this.Scene.time;\n            hits = [];\n            ended = false;\n            this.started = true;\n            roundsFired = 0;\n            numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        roundsFired++;\n        if (hit /*we have hit something significant*/ )\n        {\n            numHits++;\n            var newObj = true;\n            for (var i in hits)\n            {\n                if (hits[i] === hit)\n                    newObj = false;\n            }\n            if (newObj)\n                hits.push(hit); //or hit.node, or hit.node.DisplayName\n        }\n        console.log(roundsFired, numHits);\n    }",
+			"parameters": []
+		},
+		"playBurst": {
+			"body": "var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n    if (sound && !sound.isPlaying())\n    {\n        sound.play();\n    }\n    else if (!sound)\n    {\n        this.audioAPI.playSound(this.fireSound, true, 200);\n    }",
+			"parameters": []
+		},
+		"startReloading": {
+			"body": "this.stopBurst();\n    this.audioAPI.playSound(this.reloadSound, false, 100);\n    this.activateState(\"reloading\");\n    this.firecounter = -130;",
+			"parameters": []
+		},
+		"fire": {
+			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit && hit.node)\n    {\n       // if (Engine.ancestors(hit.node.id).indexOf(this.targetID) != -1)\n        {\n\n            if (hit.node.hit)\n                hit.node.hit([hit.point, 5]);\n\n        }\n         if (!this.userControlled())\n        {\n            // this.stopBurst();\n\n            //    this.activateState(\"targeting\");\n        }\n    }\n\n    this.collectXAPIData();\n    this.Ammo -= 2;\n    console.log(this.Ammo);\n    if (this.Ammo <= 0)\n    {\n        this.startReloading();\n    }",
 			"parameters": []
 		}
 	},
@@ -487,22 +487,22 @@
 				},
 				"owner": "Anonymous_srrHyERdWKafkXchAAAA",
 				"transform": [
-					0.017400048673152924,
-					-1.075627586999417e-9,
-					0.9968480467796326,
+					0.0174000486731529,
+					-1.07562758699942e-9,
+					0.996848046779633,
 					0,
-					4.107491946570008e-8,
+					4.10749194657001e-8,
 					0.996999979019165,
 					0,
 					0,
-					-0.9968481659889221,
-					2.4803838982734305e-8,
-					0.017400044947862625,
+					-0.996848165988922,
+					2.48038389827343e-8,
+					0.0174000449478626,
 					0,
-					-0.006963640917092562,
-					-0.0012279483489692211,
-					0.7590001225471497,
-					0.9999998807907104
+					-0.00696364091709256,
+					-0.00122794834896922,
+					0.75900012254715,
+					0.99999988079071
 				],
 				"type": "Primitive",
 				"visible": false,
@@ -622,9 +622,9 @@
 							0.8161420226097107,
 							0.03166591376066208,
 							0,
-							32.07918167114258,
-							21.51245880126953,
-							0.7934800982475281,
+							15.066171646118164,
+							-3.646153211593628,
+							26.283477783203125,
 							0.9999998807907104
 						]
 					}

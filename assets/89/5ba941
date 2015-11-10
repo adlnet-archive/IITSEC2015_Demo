@@ -61,7 +61,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Fri Nov 06 2015 13:48:29 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:03:49 GMT-0500 (Eastern Standard Time)",
 		"_length": 1.78,
 		"accuracy": 8,
 		"activeState": "targeting",
@@ -299,9 +299,9 @@
 			-0.017452405765652657,
 			0.9998477101325989,
 			0,
-			2.8060085773468018,
-			0.3903951942920685,
-			0.01115351915359497,
+			-1.2148535251617432,
+			-0.24912568926811218,
+			0.03119475580751896,
 			1
 		],
 		"type": "Primitive",
@@ -400,10 +400,6 @@
 			"body": "var thisCam = this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].id;\n    return (this.userControlCounter > 0) && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
 		},
-		"fire": {
-			"body": "var origin = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [(this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n    this.audioAPI.playSound(this.fireSound, false, 300.0);\n    var dist = this.fuse + ((this.random() - .5) / this.accuracy);\n    if (hit && hit.distance < dist)\n    {\n        dist = hit.distance;\n    }\n\n    console.log(hit || \"miss\");\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var boom, objHit;\n        if (hit)\n        {\n            boom = true;\n            objHit = hit.node.DisplayName;\n        }\n        else\n        {\n            boom = false;\n            objHit = \"miss\";\n        }\n        var result = {\n            success: boom,\n            response: \"success = hit - t, or miss - f\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/position/\": origin || \"this is where the position goes\",\n            \"https://sandbox.adlnet.gov/context/extensions/target/\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit/\": objHit,\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled/\": this.isUserControlled,\n            \"https://sandbox.adlnet.gov/context/extensions/shipstatus/\": this.Scene.children_by_name['DDG51'].engine || 'status error',\n            \"https://sandbox.adlnet.gov/context/extensions/maxRounds/\": this.Ammo || 'one of these',\n            \"https://sandbox.adlnet.gov/context/extensions/roundNum/\": this.Ammo || 'will be right',\n        };\n        sender.xAPISend('fired', 'shell', this.DisplayName || \"TAO 5 Inch Gun\", result, conExt, null);\n    }\n\n    var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n    this.explode(point, dist);\n    this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n    var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n    shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].transformAPI.move(shake);",
-			"parameters": []
-		},
 		"_pointerWheel": {
 			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.fuse += e.wheelDelta;",
 			"parameters": [
@@ -412,6 +408,10 @@
 		},
 		"tick": {
 			"body": "this.userControlCounter--;\n    \n    var pos = this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.getPosition();\n    var goal = [2, 0, 0];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    var pos = this.children_by_name[\"5InPivot\"].transformAPI.getPosition();\n    var goal = [.0, 0, .75];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"5InPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    if (this.userControlled())\n    {\n        if (this.manualFiring)\n            this.manuelFire();\n        return;\n    }\n\n    var state = this.states[this.activeState];\n    if (state)\n    {\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]();\n\n    }",
+			"parameters": []
+		},
+		"fire": {
+			"body": "var origin = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [(this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n    this.audioAPI.playSound(this.fireSound, false, 700.0);\n    var dist = this.fuse + ((this.random() - .5) / this.accuracy);\n    if (hit && hit.distance < dist)\n    {\n        dist = hit.distance;\n    }\n\n    console.log(hit || \"miss\");\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var boom, objHit;\n        if (hit)\n        {\n            boom = true;\n            objHit = hit.node.DisplayName;\n        }\n        else\n        {\n            boom = false;\n            objHit = \"miss\";\n        }\n        var result = {\n            success: boom,\n            response: \"success = hit - t, or miss - f\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/position/\": origin || \"this is where the position goes\",\n            \"https://sandbox.adlnet.gov/context/extensions/target/\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit/\": objHit,\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled/\": this.isUserControlled,\n            \"https://sandbox.adlnet.gov/context/extensions/shipstatus/\": this.Scene.children_by_name['DDG51'].engine || 'status error',\n            \"https://sandbox.adlnet.gov/context/extensions/maxRounds/\": this.Ammo || 'one of these',\n            \"https://sandbox.adlnet.gov/context/extensions/roundNum/\": this.Ammo || 'will be right',\n        };\n        sender.xAPISend('fired', 'shell', this.DisplayName || \"TAO 5 Inch Gun\", result, conExt, null);\n    }\n\n    var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n    this.explode(point, dist);\n    this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n    var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n    shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].transformAPI.move(shake);",
 			"parameters": []
 		}
 	},
@@ -871,7 +871,8 @@
 							-0.000001527716904092813,
 							-0.0000014700135579914786,
 							1
-						]
+						],
+						"far": 10000
 					},
 					"methods": {
 						"TAOCommand5In": {

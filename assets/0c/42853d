@@ -26,7 +26,7 @@
 		"DisplayName": "Ocean",
 		"_length": 10000,
 		"materialDef": {
-			"alpha": 0.9935064935064936,
+			"alpha": 0.993506493506494,
 			"ambient": {
 				"b": 0.658823529411765,
 				"g": 0.541176470588235,
@@ -34,7 +34,7 @@
 			},
 			"blendMode": 1,
 			"color": {
-				"a": 0.9935064935064936,
+				"a": 0.993506493506494,
 				"b": 0.658823529411765,
 				"g": 0.541176470588235,
 				"r": 0.490196078431373
@@ -93,9 +93,9 @@
 			0,
 			1,
 			0,
-			27.9060001373291,
-			-16.020999908447266,
-			20,
+			1,
+			-0.75,
+			6.25,
 			1
 		],
 		"type": "Primitive",
@@ -103,7 +103,7 @@
 		"sourceAssetId": "0c42853d",
 		"lsegs": 30,
 		"wsegs": 30,
-		"___sourceAssetTimestamp": "Mon Oct 26 2015 09:50:31 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:21:03 GMT-0500 (Eastern Standard Time)",
 		"visible": false
 	},
 	"methods": {
@@ -114,7 +114,7 @@
 			]
 		},
 		"hit": {
-			"body": "\n  var pos = args[0];\n    if(!pos) return;\n    pos = this.transformAPI.globalToLocal(pos);\n    //this.children[this.splashCount].transformAPI.setPosition(pos);\n    this.children[this.splashCount].start(pos);\n\n    this.splashCount++;\n    console.log(this.children.length);\n    if (this.splashCount > this.children.length - 1)\n    {\n\n        this.splashCount = 0;\n    }  \n",
+			"body": "var pos = args[0];\n    if (!pos) return;\n    pos = this.transformAPI.globalToLocal(pos);\n    //this.children[this.splashCount].transformAPI.setPosition(pos);\n    this.children[this.splashCount].start(pos);\n    this.children[this.splashCount].audioAPI.playSound(\"/sas/assets/52144a97\",false,100,true);\n    this.splashCount++;\n\n    if (this.splashCount > this.children.length - 1)\n    {\n        \n        this.splashCount = 0;\n    }",
 			"parameters": [
 				"args"
 			]
@@ -851,7 +851,8 @@
 				"c": 414635
 			},
 			"properties": {
-				"DisplayName": "ParticleSystem10",
+				"DisplayName": "ParticleSystem18",
+				"___assetServerOriginalID": "Nd132a72c",
 				"additive": false,
 				"alphaTest": 0.5,
 				"colorRange": [
@@ -945,8 +946,7 @@
 				],
 				"type": "ParticleSystem",
 				"velocityMode": "cartesian",
-				"visible": false,
-				"___assetServerOriginalID": "Nd132a72c"
+				"visible": false
 			},
 			"methods": {
 				"start": {

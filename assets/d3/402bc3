@@ -39,9 +39,9 @@
 			0,
 			1,
 			0,
-			-1.0153048038482666,
-			1.1514904499053955,
-			0.036111533641815186,
+			13.850886344909668,
+			-17.383155822753906,
+			0.2784443795681,
 			1
 		],
 		"type": "Group",
@@ -54,7 +54,8 @@
 				"property": "fuse",
 				"type": "slider"
 			}
-		}
+		},
+		"___sourceAssetTimestamp": "Mon Nov 09 2015 11:48:19 GMT-0500 (Eastern Standard Time)"
 	},
 	"methods": {
 		"tick": {
@@ -62,7 +63,7 @@
 			"parameters": []
 		},
 		"explode": {
-			"body": "   this.broadcast('hit', [null,50], 5);\n    this.children_by_name.ParticleSystem1.explode();\n    this.children_by_name.ParticleSystem2.explode();\n    if (this.random() > .5)\n        this.audioAPI.playSound(this.explodeSound, false, 600);\n    else\n        this.audioAPI.playSound(this.explodeSound2, false, 600);   ",
+			"body": "this.broadcast('hit', [null, 50], 5);\n    this.children_by_name.ParticleSystem1.explode();\n    this.children_by_name.ParticleSystem2.explode();\n    if (this.random() > .5)\n        this.audioAPI.playSound(this.explodeSound, false, 1200);\n    else\n        this.audioAPI.playSound(this.explodeSound2, false, 1200);",
 			"parameters": []
 		}
 	},
