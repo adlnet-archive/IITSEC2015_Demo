@@ -809,7 +809,7 @@
 	"children": {
 		"Ned0c4c0a": {
 			"extends": "asset.vwf",
-			"source": "http://54.175.234.78:3030/assets/a31ba113",
+			"source": "/sas/assets/a31ba113",
 			"type": "subDriver/threejs/asset/vnd.gltf+json",
 			"sequence": 0,
 			"random": {

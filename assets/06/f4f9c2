@@ -465,7 +465,7 @@
 							"offsety": 0,
 							"scalex": 1,
 							"scaley": 1,
-							"src": "http://54.175.234.78:3030/assets/96493a7c"
+							"src": "/sas/assets/96493a7c"
 						}
 					],
 					"metal": false,
@@ -567,7 +567,7 @@
 									"offsety": 0,
 									"scalex": 1,
 									"scaley": 1,
-									"src": "http://54.175.234.78:3030/assets/96493a7c"
+									"src": "/sas/assets/96493a7c"
 								}
 							],
 							"metal": false,
@@ -631,7 +631,7 @@
 				},
 				"Nf113456": {
 					"extends": "asset.vwf",
-					"source": "http://54.175.234.78:3030/assets/744f77e3",
+					"source": "/sas/assets/744f77e3",
 					"type": "subDriver/threejs/asset/vnd.gltf+json",
 					"sequence": 0,
 					"random": {
@@ -684,7 +684,7 @@
 									"offsety": 0,
 									"scalex": 1,
 									"scaley": 1,
-									"src": "http://54.175.234.78:3030/assets/96493a7c"
+									"src": "/sas/assets/96493a7c"
 								}
 							],
 							"metal": false,

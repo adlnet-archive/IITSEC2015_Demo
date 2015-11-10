@@ -1,6 +1,6 @@
 {
 	"extends": "asset.vwf",
-	"source": "http://54.175.234.78:3030/assets/6da526e8",
+	"source": "/sas/assets/6da526e8",
 	"type": "subDriver/threejs/asset/vnd.collada+xml",
 	"sequence": 0,
 	"random": {
@@ -57,7 +57,7 @@
 					"offsetx": 0,
 					"offsety": 0,
 					"alpha": 1,
-					"src": "http://54.175.234.78:3030/assets/23659e9a.jpg",
+					"src": "/sas/assets/23659e9a.jpg",
 					"mapInput": 0
 				}
 			],

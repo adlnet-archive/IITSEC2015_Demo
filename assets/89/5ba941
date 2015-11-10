@@ -793,7 +793,7 @@
 											"offsety": 0,
 											"scalex": 1,
 											"scaley": 1,
-											"src": "http://54.175.234.78:3030/assets/26a3ceb7"
+											"src": "/sas/assets/26a3ceb7"
 										}
 									],
 									"metal": false,
@@ -940,7 +940,7 @@
 		},
 		"N965930da": {
 			"extends": "asset.vwf",
-			"source": "http://54.175.234.78:3030/assets/eaa55fce",
+			"source": "/sas/assets/eaa55fce",
 			"type": "subDriver/threejs/asset/vnd.gltf+json",
 			"sequence": 0,
 			"random": {
@@ -993,7 +993,7 @@
 							"offsety": 0,
 							"scalex": 1,
 							"scaley": 1,
-							"src": "http://54.175.234.78:3030/assets/26a3ceb7"
+							"src": "/sas/assets/26a3ceb7"
 						}
 					],
 					"metal": false,

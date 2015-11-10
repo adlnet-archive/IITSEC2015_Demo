@@ -708,7 +708,7 @@
 		},
 		"Nf79a9db2": {
 			"extends": "asset.vwf",
-			"source": "http://54.175.234.78:3030/assets/5bc62bd9",
+			"source": "/sas/assets/5bc62bd9",
 			"type": "subDriver/threejs/asset/vnd.collada+xml",
 			"sequence": 0,
 			"random": {
