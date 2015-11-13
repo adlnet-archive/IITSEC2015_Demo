@@ -1,0 +1,20 @@
+{
+	"extends": "ocean/ocean.vwf",
+	"source": "ocean/ocean.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.535330560291186,
+		"s1": 0.471671089995652,
+		"s2": 0.120087655028328,
+		"c": 1
+	},
+	"properties": {
+		"DisplayName": "OceanShader",
+		"gA": 0.092,
+		"uChop": 0.733,
+		"uNormalPower": 0.184,
+		"uOceanDepth": 0.037,
+		"uReflectPow": 3
+	}
+}

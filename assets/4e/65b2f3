@@ -89,17 +89,20 @@
 			0,
 			1,
 			0,
-			0,
-			0,
-			0.0010000000474974513,
+			2.3567652702331543,
+			-0.5038482546806335,
+			0.01774579845368862,
 			1
 		],
 		"owner": "ADLteam",
-		"DisplayName": "sphere1"
+		"DisplayName": "sphere1",
+		"___sourceAssetTimestamp": "Thu Nov 12 2015 16:48:54 GMT-0500 (Eastern Standard Time)",
+		"sourceAssetId": "4e65b2f3",
+		"visible": false
 	},
 	"methods": {
 		"ready": {
-			"body": "Engine.emit.setProperty(Engine.application(), \"playMode\", 'paused');\n    $(document.body).append(\"<div id='PlayPauseBtn'>Play</div>\");\n    $(\"#PlayPauseBtn\").css(\n    {\n        \"z-index\": 100000,\n        \"position\": \"absolute\",\n        \"top\": \"0px\"\n    });\n    $(\"#PlayPauseBtn\").button();\n    $(\"#PlayPauseBtn\").click(function()\n    {\n        var playMode = Engine.getProperty(Engine.application(), \"playMode\");\n        if (playMode === \"play\")\n        {\n            Engine.setProperty(Engine.application(), \"playMode\", 'paused');\n        }\n        else\n            Engine.setProperty(Engine.application(), \"playMode\", 'play');\n\n    });",
+			"body": "Engine.emit.setProperty(Engine.application(), \"playMode\", 'paused');\n    $(document.body).append(\"<div id='PlayPauseBtn'>Play</div>\");\n    $(\"#PlayPauseBtn\").css(\n    {\n        \"z-index\": 100000,\n        \"position\": \"absolute\",\n        \"top\": \"0px\"\n    });\n    $(\"#PlayPauseBtn\").button();\n    $(\"#PlayPauseBtn\").click(function()\n    {\n        var playMode = Engine.getProperty(Engine.application(), \"playMode\");\n        if (playMode === \"play\")\n        {\n            Engine.emit.setProperty(Engine.application(), \"playMode\", 'paused');\n        }\n        else\n            Engine.emit.setProperty(Engine.application(), \"playMode\", 'play');\n\n    });",
 			"parameters": []
 		}
 	}
