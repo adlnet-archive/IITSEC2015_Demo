@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.9966327382717282,
-		"s1": 0.5326775677967817,
-		"s2": 0.08504860056564212,
-		"c": 2057714
+		"s0": 0.19127895985729992,
+		"s1": 0.9837807025760412,
+		"s2": 0.9966327382717282,
+		"c": 1548786
 	},
 	"properties": {
 		"___physics_activation_state": 4,
@@ -22,7 +22,7 @@
 			-0.1445750892162323,
 			0.00038580354885198176
 		],
-		"DisplayName": "Fishing Boat",
+		"DisplayName": "FAC_MASTER2",
 		"EditorData": {
 			"_controllingCamera": {
 				"displayname": "Controlling Camera",
@@ -121,9 +121,9 @@
 		"___physics_mass": 8051.2,
 		"___sourceAssetTimestamp": "Fri Nov 13 2015 11:08:55 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
-		"_length": 20,
+		"_length": 7,
 		"activeState": "active",
-		"aiActiveState": "wait",
+		"aiActiveState": "flee",
 		"aiStates": {
 			"attack": {
 				"updateFunc": "aiAttack"
@@ -153,7 +153,7 @@
 				"updateFunc": "aiWait"
 			}
 		},
-		"aiTargetID": "box2-vwf-N2d8c1694",
+		"aiTargetID": "asset-vwf-N31c4287d",
 		"bullets_50_cal": 987,
 		"controllingCamera": "sphere2-vwf-N4e81436",
 		"counter": 14602,
@@ -527,20 +527,20 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-344.5,
-			-1016.25,
-			49.25,
+			23.75,
+			-278,
+			20.75,
 			1
 		],
 		"type": "Primitive",
 		"userControlCounter": 0,
 		"visible": false,
 		"warningsReceived": 0,
-		"width": 8.93,
+		"width": 2.5,
 		"worldPosition": [
-			-344.5,
-			-1016.25,
-			49.25
+			23.75,
+			-278,
+			20.75
 		],
 		"worldTransform": [
 			-0.6870899796485901,
@@ -555,9 +555,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-344.5,
-			-1016.25,
-			49.25,
+			23.75,
+			-278,
+			20.75,
 			1
 		]
 	},
@@ -585,6 +585,10 @@
 			"parameters": [
 				"statename"
 			]
+		},
+		"aiAttack": {
+			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > 100)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
+			"parameters": []
 		},
 		"aiCircle": {
 			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] > 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circlecc\";\n\n        if (this.random() > .996)\n            this.aiActiveState = \"fire\";\n    }",
@@ -805,21 +809,17 @@
 				"args"
 			]
 		},
+		"warning": {
+			"body": "",
+			"parameters": []
+		},
 		"aiFlee": {
 			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n     //   if (MATH.lengthVec3(targetPos) > 100)\n        {\n            if (targetPos[1] < 10)\n                this.doTurn('right')\n            else if (targetPos[1] > -10)\n                this.doTurn('left');\n        }\n       \n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
-			"parameters": []
-		},
-		"aiAttack": {
-			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > 100)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
-			"parameters": []
-		},
-		"warning": {
-			"body": "if(this.random() > .5)\n    this.aiActiveState = \"flee\"",
 			"parameters": []
 		}
 	},
 	"children": {
-		"N8c4837dd": {
+		"Ne2f9c44e": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -934,14 +934,14 @@
 					-0.7100855708122253,
 					-0.20620471239089966,
 					0,
-					-345.14642333984375,
-					-1016.9389038085938,
-					50.77907943725586,
+					23.10356903076172,
+					-278.68890380859375,
+					22.27907943725586,
 					1
 				]
 			}
 		},
-		"N83e3ec00": {
+		"Nebf59747": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -1034,7 +1034,7 @@
 				"width": 2.18
 			}
 		},
-		"N8cf5a8e2": {
+		"Nab6c5a06": {
 			"extends": "http://vwf.example.com/node3.vwf",
 			"sequence": 0,
 			"random": {
@@ -1086,14 +1086,14 @@
 					0.021817011758685112,
 					0.9963926672935486,
 					0,
-					-346.58160400390625,
-					-1018.4312133789062,
-					48.606178283691406,
+					21.668399810791016,
+					-280.18121337890625,
+					20.10618019104004,
 					1
 				]
 			}
 		},
-		"N8d83b3ad": {
+		"N81bd85fa": {
 			"extends": "asset.vwf",
 			"source": "/sas/assets/8ff78404",
 			"type": "subDriver/threejs/asset/vnd.gltf+json",
