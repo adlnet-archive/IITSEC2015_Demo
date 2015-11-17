@@ -9,7 +9,7 @@
 	},
 	"properties": {
 		"DisplayName": "IntroScreen",
-		"___sourceAssetTimestamp": "Mon Nov 09 2015 17:22:43 GMT-0500 (EST)",
+		"___sourceAssetTimestamp": "Mon Nov 16 2015 09:40:39 GMT-0500 (Eastern Standard Time)",
 		"background_color": [
 			1,
 			0,
@@ -76,9 +76,9 @@
 			0,
 			1,
 			0,
-			0.10872735948622769,
-			0.3086528333931744,
-			0.017745798826217962,
+			16.253166120232038,
+			11.501807525940478,
+			0.8255747222900425,
 			1
 		],
 		"visible": true,

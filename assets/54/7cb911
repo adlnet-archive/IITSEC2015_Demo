@@ -152,7 +152,7 @@
 		"owner": "ADLteam",
 		"physicsAPI": {},
 		"rudder": "back",
-		"sourceAssetId": "874eb90b",
+		"sourceAssetId": "547cb911",
 		"states": {
 			"idle": {
 				"buoyancy": true,
@@ -186,20 +186,20 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			-20.01413917541504,
-			24.949810028076172,
-			0.22571831941604614,
+			-40.5,
+			29.25,
+			18.5,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 20,
-		"___sourceAssetTimestamp": "Thu Nov 05 2015 15:22:32 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 16 2015 12:10:28 GMT-0500 (Eastern Standard Time)",
 		"damageTexture": "/sas/assets/dde67e10",
 		"worldPosition": [
-			-20.01413917541504,
-			24.949810028076172,
-			0.22571831941604614
+			-40.5,
+			29.25,
+			18.5
 		]
 	},
 	"methods": {
@@ -231,12 +231,12 @@
 			]
 		},
 		"movement": {
-			"body": "var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 250 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 12 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -12 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);",
+			"body": "var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 12 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -12 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);",
 			"parameters": []
 		}
 	},
 	"children": {
-		"N5b848830": {
+		"N7711dbf9": {
 			"extends": "asset.vwf",
 			"source": "/sas/assets/b318ad31",
 			"type": "subDriver/threejs/asset/vnd.gltf+json",
@@ -331,9 +331,9 @@
 				],
 				"type": "3DR Object",
 				"worldPosition": [
-					-20.01413917541504,
-					24.949810028076172,
-					0.22571831941604614
+					-40.5,
+					29.25,
+					18.5
 				]
 			},
 			"methods": {
@@ -346,7 +346,7 @@
 				}
 			},
 			"children": {
-				"N821ca0ca": {
+				"Necdbc16e": {
 					"extends": "SandboxCamera.vwf",
 					"source": "vwf/model/threejs/camera.js",
 					"type": "subDriver/threejs",
@@ -381,7 +381,7 @@
 						]
 					}
 				},
-				"N76976b1e": {
+				"Ndd622fe7": {
 					"extends": "asset.vwf",
 					"source": "Arleigh_Burke_Railings",
 					"type": "link_existing/threejs",
