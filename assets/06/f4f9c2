@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.5981814204715192,
-		"s1": 0.6183063094504178,
-		"s2": 0.1355630902107805,
-		"c": 1247397
+		"s0": 0.8462561718188226,
+		"s1": 0.29639959428459406,
+		"s2": 0.7704716501757503,
+		"c": 1833067
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -54,7 +54,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:21:15 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 17 2015 15:42:27 GMT-0500 (Eastern Standard Time)",
 		"_length": 0.23,
 		"accuracy": 24,
 		"activeState": "targeting",
@@ -271,16 +271,17 @@
 			-0.01746985875070095,
 			1.000847578048706,
 			0,
-			15.5,
-			-4.25,
-			25.5,
+			-0.09672527015209198,
+			1.2322324514389038,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
 		"userControlCounter": 0,
 		"visible": true,
 		"width": 0.14,
-		"playFireSound": ""
+		"playFireSound": "",
+		"burstCount": 0
 	},
 	"methods": {
 		"TAOCommand50Cal": {
@@ -376,21 +377,11 @@
 			"body": "this.returnFromShakeOffsets();\n    this.firecounter++;\n\n    if (!this.userControlled())\n    {\n        var state = this.states[this.activeState];\n        if (state)\n        {\n            if (state.updateFunc && this[state.updateFunc])\n                this[state.updateFunc]();\n        }\n\n    }\n    else\n    {\n\n        if (this.firing() && this.Ammo > 0)\n        {\n            this.playBurst();\n            this.shake();\n\n            if (this.firecounter >= 2)\n            {\n                this.firecounter = 0;\n                this.fire();\n            }\n\n        }\n        else\n        {\n            this.stopBurst();\n            if (this.Ammo <= 0)\n                this.reloading();\n        }\n    }",
 			"parameters": []
 		},
-		"xAPISend": {
-			"body": "console.log(\"Ending burst and sending xapi statement\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        this.started = false;\n        var dur = this.Scene.time - this.startT;\n\n        //3 - build objects for statement\n        var result = {\n            score:\n            {\n                max: this.roundsFired || 140,\n                raw: this.numHits || 45,\n                min: 0,\n                scaled: this.numHits / this.roundsFired || 0.321 //remove or 0.321 when in place\n            },\n            success: (hits.length > 0),\n            duration: \"PT\" + Math.floor(dur) + \"S\", //a real end - start number of the burst\n            response: \"scaled is the hit/fired ratio\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": this.hits || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n        };\n\n        //4 - Send it - inside if(ended),  inside if(sender)\n        sender.xAPISend(\"fired\", \"burst\" + (this.burstCount || 0), \"Small Craft Action Team\",\n            result,\n            conExt);\n    } //if(sender)",
-			"parameters": [
-				"hits"
-			]
-		},
 		"_keyUp": {
 			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.keysDown.splice(this.keysDown.indexOf(' '), 1)\n    if (e.key.char == ' ')\n    {\n        this.playSound(\"/sas/assets/8eb34370\", false, 10);\n        this.xAPISend([]);\n    }",
 			"parameters": [
 				"e"
 			]
-		},
-		"collectXAPIData": {
-			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.userControlled())\n    {\n        //2 - Info from bullets - still inside the if sender\n        // var startT, dur, roundsFired, numHits, hits;\n        if (!this.started)\n        {\n            console.log(\"Starting Burst\");\n            startT = this.Scene.time;\n            hits = [];\n            ended = false;\n            this.started = true;\n            roundsFired = 0;\n            numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        roundsFired++;\n        if (hit /*we have hit something significant*/ )\n        {\n            numHits++;\n            var newObj = true;\n            for (var i in hits)\n            {\n                if (hits[i] === hit)\n                    newObj = false;\n            }\n            if (newObj)\n                hits.push(hit); //or hit.node, or hit.node.DisplayName\n        }\n        console.log(roundsFired, numHits);\n    }",
-			"parameters": []
 		},
 		"playBurst": {
 			"body": "var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n    if (sound && !sound.isPlaying())\n    {\n        sound.play();\n    }\n    else if (!sound)\n    {\n        this.audioAPI.playSound(this.fireSound, true, 200);\n    }",
@@ -401,8 +392,20 @@
 			"parameters": []
 		},
 		"fire": {
-			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit && hit.node)\n    {\n       // if (Engine.ancestors(hit.node.id).indexOf(this.targetID) != -1)\n        {\n\n            if (hit.node.hit)\n                hit.node.hit([hit.point, 5]);\n\n        }\n         if (!this.userControlled())\n        {\n            // this.stopBurst();\n\n            //    this.activateState(\"targeting\");\n        }\n    }\n\n    this.collectXAPIData();\n    this.Ammo -= 2;\n    console.log(this.Ammo);\n    if (this.Ammo <= 0)\n    {\n        this.startReloading();\n    }",
+			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    if (!this.userControlled())\n    {\n        shake = MATH.scaleVec3(shake, 1.5);\n    }\n\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit && hit.node)\n    {\n        // if (Engine.ancestors(hit.node.id).indexOf(this.targetID) != -1)\n        {\n\n            if (hit.node.hit)\n                hit.node.hit([hit.point, 5]);\n\n        }\n        if (!this.userControlled())\n        {\n            // this.stopBurst();\n\n            //    this.activateState(\"targeting\");\n        }\n    }\n\n    this.collectXAPIData(hit);\n    this.Ammo -= 2;\n    console.log(this.Ammo);\n    if (this.Ammo <= 0)\n    {\n        this.startReloading();\n    }",
 			"parameters": []
+		},
+		"collectXAPIData": {
+			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.userControlled())\n    {\n        //2 - Info from bullets - still inside the if sender\n        // var startT, dur, roundsFired, numHits, hits;\n        if (!this.started)\n        {\n            console.log(\"Starting Burst\");\n            this.startT = this.Scene.time;\n            this.hits = [];\n            this.started = true;\n            this.roundsFired = 0;\n            this.numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        this.roundsFired++;\n        console.error(hit);\n        if (hit && hit.node && hit.node.DisplayName /*we have hit something significant*/ )\n        {\n            console.error('We have hit', hit);\n            this.numHits++;\n            var newObj = true;\n            for (var i in this.hits)\n            {\n                if (this.hits[i] === hit.node.DisplayName)\n                    newObj = false;\n            }\n            if (newObj)\n                this.hits.push(hit.node.DisplayName); //or hit.node, or hit.node.DisplayName\n        }\n        console.error(this.hits);\n        console.log(this.roundsFired, this.numHits);\n    }",
+			"parameters": [
+				"hit"
+			]
+		},
+		"xAPISend": {
+			"body": "console.log(\"Ending burst and sending xapi statement\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        this.started = false;\n        var dur = this.Scene.time - this.startT;\n\n        //3 - build objects for statement\n        var result = {\n            score:\n            {\n                max: this.roundsFired, // || 140,\n                raw: this.numHits, // || 45,\n                min: 0,\n                scaled: this.numHits / this.roundsFired, // || 0.321 //remove or 0.321 when in place\n            },\n            success: (this.hits.length > 0),\n            duration: \"PT\" + Math.floor(dur * 1000) / 1000 + \"S\", //a real end - start number of the burst\n            response: \"scaled is the hit/fired ratio\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": this.hits.toString() || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n        };\n        console.error(result);\n        var burstObject = {\n            id: sender.baseURL + \"objects/\" + (encodeURI(\"burst\" + (this.burstCount || 0))),\n            definition:\n            {\n                name:\n                {\n                    \"en-US\": encodeURI(\"burst\" + (this.burstCount || 0)),\n                },\n                type: sender.baseURL + \"activity/types/50CalBurst\",\n            },\n        };\n\n        //4 - Send it - inside if(ended),  inside if(sender)\n        sender.xAPISend(\"fired\", burstObject, \"Small Craft Action Team\", result, conExt);\n    } //if(sender)",
+			"parameters": [
+				"hits"
+			]
 		}
 	},
 	"children": {
@@ -487,22 +490,22 @@
 				},
 				"owner": "Anonymous_srrHyERdWKafkXchAAAA",
 				"transform": [
-					0.0174000486731529,
-					-1.07562758699942e-9,
-					0.996848046779633,
+					0.017400048673152924,
+					-1.075627586999417e-9,
+					0.9968480467796326,
 					0,
-					4.10749194657001e-8,
+					4.107491946570008e-8,
 					0.996999979019165,
 					0,
 					0,
-					-0.996848165988922,
-					2.48038389827343e-8,
-					0.0174000449478626,
+					-0.9968481659889221,
+					2.4803838982734305e-8,
+					0.017400044947862625,
 					0,
-					-0.00696364091709256,
-					-0.00122794834896922,
-					0.75900012254715,
-					0.99999988079071
+					-0.006963640917092562,
+					-0.0012279483489692211,
+					0.7590001225471497,
+					0.9999998807907104
 				],
 				"type": "Primitive",
 				"visible": false,
@@ -622,9 +625,9 @@
 							0.8161420226097107,
 							0.03166591376066208,
 							0,
-							15.066171646118164,
-							-3.646153211593628,
-							26.283477783203125,
+							-0.5305518507957458,
+							1.8360782861709595,
+							0.8012259006500244,
 							0.9999998807907104
 						]
 					}

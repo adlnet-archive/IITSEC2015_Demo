@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.9966327382717282,
-		"s1": 0.5326775677967817,
-		"s2": 0.08504860056564212,
-		"c": 2057714
+		"s0": 0.28930082777515054,
+		"s1": 0.5610666950233281,
+		"s2": 0.49587170244194567,
+		"c": 1849677
 	},
 	"properties": {
 		"___physics_activation_state": 4,
@@ -22,7 +22,7 @@
 			-0.1445750892162323,
 			0.00038580354885198176
 		],
-		"DisplayName": "Fishing Boat",
+		"DisplayName": "FAC_MASTER2",
 		"EditorData": {
 			"_controllingCamera": {
 				"displayname": "Controlling Camera",
@@ -119,11 +119,11 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Fri Nov 13 2015 11:08:55 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 17 2015 11:50:19 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
-		"_length": 20,
+		"_length": 7,
 		"activeState": "active",
-		"aiActiveState": "wait",
+		"aiActiveState": "attack",
 		"aiStates": {
 			"attack": {
 				"updateFunc": "aiAttack"
@@ -153,7 +153,7 @@
 				"updateFunc": "aiWait"
 			}
 		},
-		"aiTargetID": "box2-vwf-N2d8c1694",
+		"aiTargetID": "sphere2-vwf-N5b994f25",
 		"bullets_50_cal": 987,
 		"controllingCamera": "sphere2-vwf-N4e81436",
 		"counter": 14602,
@@ -467,14 +467,6 @@
 				],
 				"updateFunction": "fire_rocketUpdate"
 			},
-			"flee": {
-				"name": "flee",
-				"properties": {},
-				"transitions": [
-					"defeated"
-				],
-				"updateFunction": "aiFlee"
-			},
 			"idle": {
 				"name": "idle",
 				"properties": {},
@@ -527,20 +519,20 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-344.5,
-			-1016.25,
-			49.25,
+			2.060162305831909,
+			-0.032277531921863556,
+			0.03360140696167946,
 			1
 		],
 		"type": "Primitive",
 		"userControlCounter": 0,
 		"visible": false,
 		"warningsReceived": 0,
-		"width": 8.93,
+		"width": 2.5,
 		"worldPosition": [
-			-344.5,
-			-1016.25,
-			49.25
+			2.060162305831909,
+			-0.032277531921863556,
+			0.03360140696167946
 		],
 		"worldTransform": [
 			-0.6870899796485901,
@@ -555,9 +547,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-344.5,
-			-1016.25,
-			49.25,
+			2.060162305831909,
+			-0.032277531921863556,
+			0.03360140696167946,
 			1
 		]
 	},
@@ -586,16 +578,12 @@
 				"statename"
 			]
 		},
-		"aiCircle": {
-			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] > 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circlecc\";\n\n        if (this.random() > .996)\n            this.aiActiveState = \"fire\";\n    }",
-			"parameters": []
-		},
-		"aiCirclecc": {
-			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] < 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circle\";\n\n        if (this.random() > .996)\n            this.aiActiveState = \"fire\";\n\n    }",
-			"parameters": []
-		},
 		"aiDefeated": {
 			"body": "console.log(\"aiDefeated\");",
+			"parameters": []
+		},
+		"aiFlee": {
+			"body": "console.log(\"aiFlee\");",
 			"parameters": []
 		},
 		"aiMoveAway": {
@@ -805,20 +793,129 @@
 				"args"
 			]
 		},
-		"aiFlee": {
-			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n     //   if (MATH.lengthVec3(targetPos) > 100)\n        {\n            if (targetPos[1] < 10)\n                this.doTurn('right')\n            else if (targetPos[1] > -10)\n                this.doTurn('left');\n        }\n       \n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
-			"parameters": []
-		},
 		"aiAttack": {
-			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > 100)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > attackRange)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
 			"parameters": []
 		},
-		"warning": {
-			"body": "if(this.random() > .5)\n    this.aiActiveState = \"flee\"",
+		"aiCirclecc": {
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] < 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circle\";\n\n        if (this.random() > .99575)\n            this.aiActiveState = \"fire\";\n\n    }",
+			"parameters": []
+		},
+		"aiCircle": {
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] > 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circlecc\";\n\n        if (this.random() > .99575)\n            this.aiActiveState = \"fire\";\n    }",
 			"parameters": []
 		}
 	},
 	"children": {
+		"Ned0c4c0a": {
+			"extends": "asset.vwf",
+			"source": "/sas/assets/a31ba113",
+			"type": "subDriver/threejs/asset/vnd.gltf+json",
+			"sequence": 0,
+			"random": {
+				"s0": 0.434828226920217,
+				"s1": 0.189991779392585,
+				"s2": 0.484111914644018,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"materialDef": {
+					"alpha": 1,
+					"ambient": {
+						"b": 0.584,
+						"g": 0.584,
+						"r": 0.584
+					},
+					"blendMode": 1,
+					"color": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [
+						{
+							"alpha": 1,
+							"mapInput": 0,
+							"mapTo": 1,
+							"offsetx": 0,
+							"offsety": 0,
+							"scalex": 1,
+							"scaley": 1,
+							"src": "/sas/assets/7e6084c4"
+						}
+					],
+					"metal": false,
+					"reflect": 0.001,
+					"shading": true,
+					"shininess": 0.004002,
+					"side": 0,
+					"specularColor": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"DisplayName": "3D_model",
+				"___assetServerOriginalID": "Ned0c4c0a",
+				"___sourceAssetTimestamp": "Tue Oct 27 2015 13:10:22 GMT-0400 (EDT)",
+				"owner": "ADLteam",
+				"transform": [
+					-3.600903042411119e-8,
+					100.39900207519531,
+					0,
+					0,
+					-100.3010025024414,
+					-3.5973883427686815e-8,
+					0,
+					0,
+					0,
+					0,
+					100.29499816894531,
+					0,
+					0.5,
+					0,
+					-0.5,
+					1
+				],
+				"worldPosition": [
+					1.7030644416809082,
+					-0.4039926826953888,
+					-0.4473491907119751
+				]
+			},
+			"methods": {
+				"hit": {
+					"body": "this.parent.hit(args);",
+					"parameters": [
+						"args"
+					]
+				}
+			}
+		},
 		"N8c4837dd": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
@@ -934,9 +1031,9 @@
 					-0.7100855708122253,
 					-0.20620471239089966,
 					0,
-					-345.14642333984375,
-					-1016.9389038085938,
-					50.77907943725586,
+					1.4137318134307861,
+					-0.7211681008338928,
+					1.5626813173294067,
 					1
 				]
 			}
@@ -1086,108 +1183,9 @@
 					0.021817011758685112,
 					0.9963926672935486,
 					0,
-					-346.58160400390625,
-					-1018.4312133789062,
-					48.606178283691406,
-					1
-				]
-			}
-		},
-		"N8d83b3ad": {
-			"extends": "asset.vwf",
-			"source": "/sas/assets/8ff78404",
-			"type": "subDriver/threejs/asset/vnd.gltf+json",
-			"sequence": 0,
-			"random": {
-				"s0": 0.943944707978517,
-				"s1": 0.792437971569598,
-				"s2": 0.334432793548331,
-				"c": 1
-			},
-			"properties": {
-				"___physics_activation_state": 1,
-				"___physics_deactivation_time": 0,
-				"___physics_velocity_linear": [
-					0,
-					0,
-					0
-				],
-				"___physics_velocity_angular": [
-					0,
-					0,
-					0
-				],
-				"materialDef": {
-					"alpha": 1,
-					"ambient": {
-						"b": 0.584415584415584,
-						"g": 0.584415584415584,
-						"r": 0.584415584415584
-					},
-					"blendMode": 1,
-					"color": {
-						"a": 1,
-						"b": 0.584415584415584,
-						"g": 0.584415584415584,
-						"r": 0.584415584415584
-					},
-					"combine": 0,
-					"depthtest": true,
-					"depthwrite": true,
-					"emit": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"fog": true,
-					"layers": [
-						{
-							"alpha": 1,
-							"mapInput": 0,
-							"mapTo": 1,
-							"offsetx": 0,
-							"offsety": 0,
-							"scalex": 1,
-							"scaley": 1,
-							"src": "/sas/assets/d91d1b6a.jpg"
-						}
-					],
-					"metal": false,
-					"reflect": 0.01,
-					"shading": true,
-					"shininess": 0.000002,
-					"side": 0,
-					"specularColor": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"specularLevel": 1,
-					"type": "phong",
-					"vertexColors": false,
-					"wireframe": false
-				},
-				"DisplayName": "Fishing Boat",
-				"___assetServerOriginalID": "N8d83b3ad",
-				"___sourceAssetTimestamp": "Fri Nov 13 2015 11:10:28 GMT-0500 (Eastern Standard Time)",
-				"owner": "ADLteam",
-				"sourceAssetId": "6b09f81c",
-				"transform": [
-					-0.06430836766958237,
-					1.3893693685531616,
-					-0.015654169023036957,
-					0,
-					-1.382469654083252,
-					-0.06274429708719254,
-					0.12101823091506958,
-					0,
-					0.1210157722234726,
-					0.02136358805000782,
-					1.3951925039291382,
-					0,
-					-0.1988428384065628,
-					0.18523091077804565,
-					-0.7449818253517151,
+					-0.02143702656030655,
+					-2.2134816646575928,
+					-0.6102185845375061,
 					1
 				]
 			}

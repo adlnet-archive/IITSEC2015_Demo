@@ -186,21 +186,22 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			101.69172668457031,
-			-57.04780960083008,
-			0.009999999776482582,
+			-1.7628490924835205,
+			4.328969955444336,
+			0.03360140696167946,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 35,
-		"___sourceAssetTimestamp": "Wed Nov 04 2015 14:23:25 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 17 2015 12:24:11 GMT-0500 (Eastern Standard Time)",
 		"damageTexture": "/sas/assets/dde67e10",
 		"worldPosition": [
-			101.69172668457031,
-			-57.04780960083008,
-			0.009999999776482582
-		]
+			-1.7628490924835205,
+			4.328969955444336,
+			0.03360140696167946
+		],
+		"radarTracked": true
 	},
 	"methods": {
 		"activateState": {

@@ -90,7 +90,7 @@
 			-0.00000146451189718221
 		],
 		"___physics_mass": 80051.2,
-		"___sourceAssetTimestamp": "Mon Nov 16 2015 10:26:01 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 17 2015 12:25:16 GMT-0500 (Eastern Standard Time)",
 		"_length": 150,
 		"activeState": "navigating",
 		"counter": 14602,
@@ -188,19 +188,20 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			-339.5,
-			503.5,
-			21.5,
+			39.740013122558594,
+			0.7933138608932495,
+			0.7159388065338135,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 25,
 		"worldPosition": [
-			-339.5,
-			503.5,
-			21.5
-		]
+			39.740013122558594,
+			0.7933138608932495,
+			0.7159388065338135
+		],
+		"radarTracked": true
 	},
 	"methods": {
 		"activateState": {
