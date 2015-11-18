@@ -9,7 +9,7 @@
     "874eb90b":
     {
         "type": "asset",
-        "url": "/sas/assets/874eb90b",
+        "url": "/sas/assets/d537444e",
         "preview": "/sas/assets/874eb90b/meta/thumbnail",
         "name": "DDG-51 Destroyer"
     },
@@ -166,5 +166,11 @@
         "url": "/datafiles/vwf/environment.json",
         "preview": "./contentlibraries/environments/thumbs/desertsunset.PNG",
         "name": "Environment"
+    },
+    "0e71f3f7":
+    {
+        "type": "asset",
+        "url": "/sas/assets/0e71f3f7",
+        "name": "GameManager"
     }
 }
