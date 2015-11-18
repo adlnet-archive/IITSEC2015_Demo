@@ -159,5 +159,12 @@
         "url": "/sas/assets/e3a061c8",
         "preview": "/sas/assets/e3a061c8/meta/thumbnail",
         "name": "Ocean Shader"
+    },
+    "environment":
+    {
+        "type": "environment",
+        "url": "/datafiles/vwf/environment.json",
+        "preview": "./contentlibraries/environments/thumbs/desertsunset.PNG",
+        "name": "Environment"
     }
 }
