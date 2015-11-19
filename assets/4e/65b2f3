@@ -1,0 +1,109 @@
+{
+	"extends": "sphere2.vwf",
+	"source": "vwf/model/threejs/sphere.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.11885157180950046,
+		"s1": 0.37918048654682934,
+		"s2": 0.41705057048238814,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": {
+			"alpha": 1,
+			"ambient": {
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"blendMode": 1,
+			"color": {
+				"a": 1,
+				"b": 1,
+				"g": 1,
+				"r": 1
+			},
+			"depthtest": true,
+			"depthwrite": true,
+			"emit": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
+			"fog": true,
+			"layers": [
+				{
+					"alpha": 1,
+					"blendMode": 0,
+					"mapInput": 0,
+					"mapTo": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"rot": 0,
+					"scalex": 1,
+					"scaley": 1,
+					"src": "checker.jpg"
+				}
+			],
+			"metal": false,
+			"reflect": 0.8,
+			"shadeless": false,
+			"shading": true,
+			"shadow": true,
+			"shininess": 15,
+			"side": 0,
+			"specularColor": {
+				"b": 0.577350269189626,
+				"g": 0.577350269189626,
+				"r": 0.577350269189626
+			},
+			"specularLevel": 1,
+			"type": "phong",
+			"vertexColors": false,
+			"wireframe": false
+		},
+		"type": "Primitive",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			2.3567652702331543,
+			-0.5038482546806335,
+			0.01774579845368862,
+			1
+		],
+		"owner": "ADLteam",
+		"DisplayName": "sphere1",
+		"___sourceAssetTimestamp": "Thu Nov 12 2015 16:48:54 GMT-0500 (Eastern Standard Time)",
+		"sourceAssetId": "4e65b2f3",
+		"visible": false
+	},
+	"methods": {
+		"ready": {
+			"body": "Engine.emit.setProperty(Engine.application(), \"playMode\", 'paused');\n    $(document.body).append(\"<div id='PlayPauseBtn'>Play</div>\");\n    $(\"#PlayPauseBtn\").css(\n    {\n        \"z-index\": 100000,\n        \"position\": \"absolute\",\n        \"top\": \"0px\"\n    });\n    $(\"#PlayPauseBtn\").button();\n    $(\"#PlayPauseBtn\").click(function()\n    {\n        var playMode = Engine.getProperty(Engine.application(), \"playMode\");\n        if (playMode === \"play\")\n        {\n            Engine.emit.setProperty(Engine.application(), \"playMode\", 'paused');\n        }\n        else\n            Engine.emit.setProperty(Engine.application(), \"playMode\", 'play');\n\n    });",
+			"parameters": []
+		}
+	}
+}

@@ -186,20 +186,20 @@
 			0.01743495464324951,
 			0.9988478422164917,
 			0,
-			0.3863880932331085,
-			-0.8885782957077026,
-			0.01774579845368862,
+			-68.1631088256836,
+			66.80252838134766,
+			1.1078424453735352,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 20,
-		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:02:45 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Wed Nov 18 2015 11:58:33 GMT-0500 (Eastern Standard Time)",
 		"damageTexture": "/sas/assets/dde67e10",
 		"worldPosition": [
-			0.3863880932331085,
-			-0.8885782957077026,
-			0.01774579845368862
+			-68.1631088256836,
+			66.80252838134766,
+			1.1078424453735352
 		]
 	},
 	"methods": {
@@ -223,16 +223,16 @@
 			"body": "var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 12 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -12 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);",
 			"parameters": []
 		},
+		"tick": {
+			"body": "this.audioAPI.playSound(\"/sas/assets/c46fb970\", true, 200, false);\n    this.audioAPI.playSound(\"/sas/assets/50af929c\", true, 200, false);\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n\n    }",
+			"parameters": []
+		},
 		"hit": {
-			"body": "if (force > 5) //cannot be hurt by 50 cal\n    {\n\n    this.children_by_name.Barry1.materialDef.layers[0].src = this.damageTexture;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-damaged\", this.DisplayName, \"TacticalActionOfficer\", null);\n    }\n    }",
+			"body": "if (force > 5) //cannot be hurt by 50 cal\n    {\n\n        this.children_by_name.Barry1.materialDef.layers[0].src = this.damageTexture;\n        this.broadcast(\"shiphit\",[],0);\n        var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            sender.xAPISend(\"is-damaged\", this.DisplayName, \"TacticalActionOfficer\", null);\n        }\n    }",
 			"parameters": [
 				"pos",
 				"force"
 			]
-		},
-		"tick": {
-			"body": "this.audioAPI.playSound(\"/sas/assets/c46fb970\", true, 200, false);\n    this.audioAPI.playSound(\"/sas/assets/50af929c\", true, 200, false);\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n\n    }",
-			"parameters": []
 		}
 	},
 	"children": {
@@ -331,9 +331,9 @@
 				],
 				"type": "3DR Object",
 				"worldPosition": [
-					0.3863880932331085,
-					-0.8885782957077026,
-					0.01774579845368862
+					-68.1631088256836,
+					66.80252838134766,
+					1.1078424453735352
 				]
 			},
 			"methods": {

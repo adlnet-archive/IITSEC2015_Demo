@@ -1,0 +1,95 @@
+{
+	"extends": "asset.vwf",
+	"source": "http://54.175.234.78:3030/assets/103b7f49",
+	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"sequence": 0,
+	"random": {
+		"s0": 0.7124761412851512,
+		"s1": 0.6182365482673049,
+		"s2": 0.92861442361027,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": {
+			"color": {
+				"r": 1,
+				"g": 1,
+				"b": 1
+			},
+			"ambient": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"emit": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0
+			},
+			"specularLevel": 1,
+			"alpha": 1,
+			"shininess": 0.000002,
+			"side": 0,
+			"reflect": 0.01,
+			"layers": [
+				{
+					"mapTo": 1,
+					"scalex": 1,
+					"scaley": 1,
+					"offsetx": 0,
+					"offsety": 0,
+					"alpha": 1,
+					"src": "http://54.175.234.78:3030/assets/bc96930e.JPG",
+					"mapInput": 0
+				}
+			],
+			"type": "phong",
+			"wireframe": false,
+			"metal": false,
+			"combine": 0,
+			"depthtest": true,
+			"depthwrite": true,
+			"blendMode": 1,
+			"fog": true,
+			"shading": true,
+			"vertexColors": false
+		},
+		"owner": "ADLteam",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			-0.5008558630943298,
+			-10.001130104064941,
+			1.1056405305862427,
+			1
+		],
+		"___sourceAssetTimestamp": "Tue Nov 17 2015 17:08:29 GMT-0500 (Eastern Standard Time)"
+	}
+}

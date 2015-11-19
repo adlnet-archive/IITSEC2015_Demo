@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.11761978664435446,
-		"s1": 0.727830869378522,
-		"s2": 0.1694343239068985,
-		"c": 1192018
+		"s0": 0.13319454924203455,
+		"s1": 0.4318533029872924,
+		"s2": 0.44017675309441984,
+		"c": 354395
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -28,6 +28,21 @@
 				"displayname": "Controlling Camera",
 				"property": "controllingCamera",
 				"type": "nodeid"
+			},
+			"activeState": {
+				"displayname": "AI State",
+				"labels": [
+					"idle",
+					"warn",
+					"engage"
+				],
+				"property": "activeState",
+				"type": "choice",
+				"values": [
+					"idle",
+					"warn",
+					"engage"
+				]
 			}
 		},
 		"Missiles": 8,
@@ -48,7 +63,7 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Mon Nov 09 2015 15:56:21 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 17 2015 11:47:51 GMT-0500 (Eastern Standard Time)",
 		"_length": 2.98,
 		"controllingCamera": "SandboxCamera-vwf-N79164421",
 		"counter": 2063.24999999994,
@@ -173,9 +188,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			0.75,
-			1,
-			4.25,
+			1.2165405750274658,
+			-0.19466476142406464,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
@@ -183,9 +198,9 @@
 		"weaponsTarget": "ocean-ocean-vwf-N4bab7165",
 		"width": 8.49,
 		"worldPosition": [
-			0.75,
-			1,
-			4.25
+			1.2165405750274658,
+			-0.19466476142406464,
+			0.01774579845368862
 		],
 		"": null,
 		"maxHeight": 500,
@@ -203,9 +218,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			0.75,
-			1,
-			4.25,
+			1.2165405750274658,
+			-0.19466476142406464,
+			0.01774579845368862,
 			1
 		],
 		"userControlCounter": 0,
@@ -317,10 +332,6 @@
 				"statename"
 			]
 		},
-		"inReload": {
-			"body": "this.fireCounter = 200;",
-			"parameters": []
-		},
 		"engage": {
 			"body": "this.seekTarget();\n    if (this.distToTarget() < 200)\n    {\n        this.weaponsTarget = this.targetID;\n        this.launchMissile();\n        if(this.Missiles === 0)\n            this.activateState(\"scram\");\n        else\n            this.activateState(\"reload\");\n    }",
 			"parameters": []
@@ -351,14 +362,18 @@
 				"args"
 			]
 		},
+		"verifyCamera": {
+			"body": "var cam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n    var camt = this.Scene.clientAPI.getCameraForClient(vwf.client());\n    if (!camt || camt.id != cam) return false;\n    return true;",
+			"parameters": []
+		},
 		"seekTarget": {
-			"body": "if (!target)\n    {\n        var node = this.Scene.findNodeByID(this.targetID);\n        if (!node)\n            return;\n        target = node.transformAPI.getWorldPosition();\n    }\n    var mass = 20 * this.physicsAPI.getMass();\n    target = this.transformAPI.globalToLocal(target);\n    \n    if(Vec3.distance(target,this.transformAPI.getWorldPosition()) < 20)\n        return;\n    if (target[1] < 0)\n    {\n        var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n        this.physicsAPI.addForceAtCenter(force);\n    }\n    if (target[0] > 0)\n    {\n        this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n    }\n    else\n    {\n        this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n    }\n    if (target[2] > -100)\n    {\n        this.physicsAPI.addForceAtCenter(0, 0, mass)\n        this.elevation = this.transformAPI.getPosition()[2];\n    }\n    else\n    {\n        this.physicsAPI.addForceAtCenter(0, 0, -mass)\n        this.elevation = this.transformAPI.getPosition()[2];\n    }",
+			"body": "if (!target)\n    {\n        var node = this.Scene.findNodeByID(this.targetID);\n        if (!node)\n        {\n            this.targetID = this.getClosestHostile();\n            return;\n        }\n        target = node.transformAPI.getWorldPosition();\n    }\n    var mass = 20 * this.physicsAPI.getMass();\n    target = this.transformAPI.globalToLocal(target);\n\n    if (Vec3.distance(target, this.transformAPI.getWorldPosition()) < 20)\n        return;\n    if (target[1] < 0)\n    {\n        var force = this.transformAPI.localToGlobalRotation(0, -mass, 0);\n        this.physicsAPI.addForceAtCenter(force);\n    }\n    if (target[0] > 0)\n    {\n        this.physicsAPI.addTorque(0, 0, mass / 4, this.transformAPI.COORDINATES.LOCAL);\n    }\n    else\n    {\n        this.physicsAPI.addTorque(0, 0, -mass / 4, this.transformAPI.COORDINATES.LOCAL);\n    }\n    if (target[2] > -100)\n    {\n        this.physicsAPI.addForceAtCenter(0, 0, mass)\n        this.elevation = this.transformAPI.getPosition()[2];\n    }\n    else\n    {\n        this.physicsAPI.addForceAtCenter(0, 0, -mass)\n        this.elevation = this.transformAPI.getPosition()[2];\n    }",
 			"parameters": [
 				"target"
 			]
 		},
-		"verifyCamera": {
-			"body": "var cam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n    var camt = this.Scene.clientAPI.getCameraForClient(vwf.client());\n    if (!camt || camt.id != cam) return false;\n    return true;",
+		"inReload": {
+			"body": "this.fireCounter = 600;",
 			"parameters": []
 		}
 	},
@@ -478,9 +493,9 @@
 					0.9285185933113098,
 					-0.10019166022539139,
 					0,
-					-0.009741358458995819,
-					-1.7015119791030884,
-					3.274587869644165,
+					0.4567992091178894,
+					-2.896176815032959,
+					-0.9576663374900818,
 					1
 				]
 			}
@@ -699,9 +714,9 @@
 					0.9300360083580017,
 					-0.08099353313446045,
 					0,
-					2.8773491382598877,
-					-0.5941629409790039,
-					3.324984073638916,
+					3.3438897132873535,
+					-1.788827657699585,
+					-0.9072701930999756,
 					1
 				]
 			}
@@ -922,9 +937,9 @@
 							-0.08479224890470505,
 							0.9961658120155334,
 							0,
-							2.288145065307617,
-							-2.074742317199707,
-							4.236837387084961,
+							2.754685640335083,
+							-3.269407272338867,
+							0.004583160392940044,
 							1
 						]
 					},

@@ -1,0 +1,144 @@
+{
+	"extends": "http://vwf.example.com/node3.vwf",
+	"sequence": 0,
+	"random": {
+		"s0": 0.6964365341700613,
+		"s1": 0.5345828128047287,
+		"s2": 0.8418344454839826,
+		"c": 1
+	},
+	"properties": {
+		"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			1089.6929931640625,
+			320.4752197265625,
+			0.009999999776482582,
+			1
+		],
+		"owner": "ADLteam",
+		"DisplayName": "GameManager",
+		"checkcounter": 0,
+		"delaycounter": -1,
+		"success": true,
+		"___sourceAssetTimestamp": "Wed Nov 18 2015 15:12:39 GMT-0500 (Eastern Standard Time)",
+		"sourceAssetId": "0e71f3f7"
+	},
+	"methods": {
+		"shipHit": {
+			"body": "this.delaycounter = 0;\n    this.success = false;",
+			"parameters": []
+		},
+		"check": {
+			"body": "for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node.hostile && node.activeState !== 'defeated')\n        {\n            \n            return;\n        }\n    }\n\n    this.delaycounter = 0;\n    this.success = true;",
+			"parameters": []
+		},
+		"tick": {
+			"body": "this.checkcounter++;\n    if (this.checkcounter > 400 && this.delaycounter == -1)\n    {\n        this.check();\n        this.checkcounter = 0;\n    }\n    if (this.delaycounter > -1)\n    {\n        this.delaycounter++;\n    }\n    if (this.delaycounter > 400)\n    {\n        if (this.success)\n        {\n            this.children_by_name.success_screen.visible = true;\n        }\n        else\n            this.children_by_name.success_screen.visible = false;\n\n    }",
+			"parameters": []
+		}
+	},
+	"children": {
+		"Ne94d783d": {
+			"extends": "http://vwf.example.com/image.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.7883776947855949,
+				"s1": 0.13379073957912624,
+				"s2": 0.7876787493005395,
+				"c": 1
+			},
+			"properties": {
+				"width": 100,
+				"height": 100,
+				"left": 0,
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					50,
+					50,
+					0,
+					1
+				],
+				"owner": "ADLteam",
+				"DisplayName": "success_screen",
+				"visible": false,
+				"style": {
+					"height": "100%",
+					"left": "0px",
+					"top": "0px",
+					"width": "100%"
+				},
+				"___assetServerOriginalID": "Ne94d783d",
+				"src": "/sas/assets/531ddcb5"
+			}
+		},
+		"Nc3ac47d9": {
+			"extends": "http://vwf.example.com/image.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.788377694785595,
+				"s1": 0.133790739579126,
+				"s2": 0.787678749300539,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "fail_screen",
+				"height": 100,
+				"left": 0,
+				"owner": "ADLteam",
+				"style": {
+					"height": "100%",
+					"left": "0px",
+					"top": "0px",
+					"width": "100%"
+				},
+				"top": 0,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					50,
+					50,
+					0,
+					1
+				],
+				"visible": false,
+				"width": 100,
+				"___assetServerOriginalID": "Nc3ac47d9",
+				"src": "/sas/assets/1cddc73a"
+			}
+		}
+	}
+}

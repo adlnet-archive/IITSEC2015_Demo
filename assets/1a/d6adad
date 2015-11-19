@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.28930082777515054,
-		"s1": 0.5610666950233281,
-		"s2": 0.49587170244194567,
-		"c": 1849677
+		"s0": 0.19127895985729992,
+		"s1": 0.9837807025760412,
+		"s2": 0.9966327382717282,
+		"c": 1548786
 	},
 	"properties": {
 		"___physics_activation_state": 4,
@@ -119,7 +119,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:29:15 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Wed Nov 18 2015 10:11:07 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -153,7 +153,7 @@
 				"updateFunc": "aiWait"
 			}
 		},
-		"aiTargetID": "sphere2-vwf-N5b994f25",
+		"aiTargetID": "asset-vwf-Nc8f85604",
 		"bullets_50_cal": 987,
 		"controllingCamera": "sphere2-vwf-N4e81436",
 		"counter": 14602,
@@ -519,9 +519,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-46.3472785949707,
-			61.314945220947266,
-			0.26395881175994873,
+			1003.25,
+			-1381.75,
+			20.5,
 			1
 		],
 		"type": "Primitive",
@@ -530,9 +530,9 @@
 		"warningsReceived": 0,
 		"width": 2.5,
 		"worldPosition": [
-			-46.3472785949707,
-			61.314945220947266,
-			0.26395881175994873
+			1003.25,
+			-1381.75,
+			20.5
 		],
 		"worldTransform": [
 			-0.6870899796485901,
@@ -547,9 +547,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-46.3472785949707,
-			61.314945220947266,
-			0.26395881175994873,
+			1003.25,
+			-1381.75,
+			20.5,
 			1
 		]
 	},
@@ -578,24 +578,8 @@
 				"statename"
 			]
 		},
-		"aiAttack": {
-			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > 100)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
-			"parameters": []
-		},
-		"aiCircle": {
-			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] > 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circlecc\";\n\n        if (this.random() > .996)\n            this.aiActiveState = \"fire\";\n    }",
-			"parameters": []
-		},
-		"aiCirclecc": {
-			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] < 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circle\";\n\n        if (this.random() > .996)\n            this.aiActiveState = \"fire\";\n\n    }",
-			"parameters": []
-		},
 		"aiDefeated": {
 			"body": "console.log(\"aiDefeated\");",
-			"parameters": []
-		},
-		"aiFlee": {
-			"body": "console.log(\"aiFlee\");",
 			"parameters": []
 		},
 		"aiMoveAway": {
@@ -795,15 +779,31 @@
 			"body": "//console.log(\"playMotorRunning\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/2cb9fef9\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/994ee0c8\", false, 100);\n    // #3:\n    var sound = vwf.callMethod(this.id, \"getSound\", [\"/sas/assets/c253157d\"]);\n\n    // if (sound == null || !sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/c253157d\", true, 200, false);\n    }",
 			"parameters": []
 		},
-		"aiFire": {
-			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
-			"parameters": []
-		},
 		"hit": {
 			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\",false,200,true);\n    if (this.currentState.name == \"defeated\") return;\n    \n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n        var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            sender.xAPISend(\"is destroyed\", this.DisplayName + this.id, \"Fast Attack Craft\",\n                null /*optional - see result object*/ ,\n                null /*optional - see context.extesions object*/ );\n        }\n    }",
 			"parameters": [
 				"args"
 			]
+		},
+		"aiAttack": {
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > attackRange)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
+			"parameters": []
+		},
+		"aiCirclecc": {
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] < 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circle\";\n\n        if (this.random() > .99575)\n            this.aiActiveState = \"fire\";\n\n    }",
+			"parameters": []
+		},
+		"aiCircle": {
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] > 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circlecc\";\n\n        if (this.random() > .99575)\n            this.aiActiveState = \"fire\";\n    }",
+			"parameters": []
+		},
+		"aiFlee": {
+			"body": "var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n\n        if (targetPos[1] < 10)\n            this.doTurn('right')\n        else if (targetPos[1] > -10)\n            this.doTurn('left');\n\n        this.doMoveForward();\n\n    }",
+			"parameters": []
+		},
+		"aiFire": {
+			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            this.rockets = this.rockets - 1;\n            if(this.rockets <= 0)\n            {\n                this.aiActiveState = \"flee\";\n            }\n            else if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -902,9 +902,9 @@
 					1
 				],
 				"worldPosition": [
-					-46.704376220703125,
-					60.94322967529297,
-					-0.21699178218841553
+					1002.8928833007812,
+					-1382.1217041015625,
+					20.0190486907959
 				]
 			},
 			"methods": {
@@ -1031,9 +1031,9 @@
 					-0.7100855708122253,
 					-0.20620471239089966,
 					0,
-					-46.993709564208984,
-					60.62605285644531,
-					1.7930387258529663,
+					1002.6035766601562,
+					-1382.4388427734375,
+					22.02907943725586,
 					1
 				]
 			}
@@ -1183,9 +1183,9 @@
 					0.021817011758685112,
 					0.9963926672935486,
 					0,
-					-48.42887878417969,
-					59.13373947143555,
-					-0.37986117601394653,
+					1001.1683959960938,
+					-1383.93115234375,
+					19.85618019104004,
 					1
 				]
 			}
