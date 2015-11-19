@@ -9,7 +9,7 @@
     "874eb90b":
     {
         "type": "asset",
-        "url": "/sas/assets/874eb90b",
+        "url": "/sas/assets/d537444e",
         "preview": "/sas/assets/874eb90b/meta/thumbnail",
         "name": "DDG-51 Destroyer"
     },
@@ -153,11 +153,11 @@
         "preview": "/sas/assets/5beae96c/meta/thumbnail",
         "name": "Avoid Radius"
     },
-    "e3a061c8":
+    "environment":
     {
-        "type": "asset",
-        "url": "/sas/assets/e3a061c8",
-        "preview": "/sas/assets/e3a061c8/meta/thumbnail",
-        "name": "Ocean Shader"
+        "type": "environment",
+        "url": "/datafiles/vwf/environment.json",
+        "preview":"./contentlibraries/environments/thumbs/desertsunset.PNG",
+        "name": "Environment"
     }
 }
