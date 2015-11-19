@@ -119,9 +119,9 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Wed Nov 18 2015 10:11:07 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Wed Nov 18 2015 16:17:48 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
-		"_length": 7,
+		"_length": 22,
 		"activeState": "active",
 		"aiActiveState": "attack",
 		"aiStates": {
@@ -305,7 +305,7 @@
 		"fuel": 100,
 		"fuelConsumptionRate": 0.01,
 		"health": 100,
-		"height": 1.2,
+		"height": 3,
 		"hostile": true,
 		"hullStrength": 100,
 		"isSlave": false,
@@ -417,7 +417,6 @@
 				]
 			}
 		},
-		"sourceAssetId": "1ad6adad",
 		"states": {
 			"approaching": {
 				"name": "approaching",
@@ -507,49 +506,49 @@
 		},
 		"tickCount": 0,
 		"transform": [
-			-0.6870899796485901,
-			-0.7216140031814575,
+			-0.9963967204093933,
+			-0.003610003972426057,
 			0.03449152410030365,
 			0,
-			0.7212050557136536,
-			-0.6869194507598877,
+			0.003450007876381278,
+			-0.9959835410118103,
 			-0.0045793671160936356,
 			0,
-			0.02710585854947567,
-			0.02181629091501236,
+			0.03450755402445793,
+			-0.004461716860532761,
 			0.9963927268981934,
 			0,
-			1003.25,
-			-1381.75,
-			20.5,
+			5.25,
+			-7,
+			0,
 			1
 		],
 		"type": "Primitive",
 		"userControlCounter": 0,
 		"visible": false,
 		"warningsReceived": 0,
-		"width": 2.5,
+		"width": 7,
 		"worldPosition": [
-			1003.25,
-			-1381.75,
-			20.5
+			5.25,
+			-7,
+			0
 		],
 		"worldTransform": [
-			-0.6870899796485901,
-			-0.7216140031814575,
+			-0.9963967204093933,
+			-0.003610003972426057,
 			0.03449152410030365,
 			0,
-			0.7212050557136536,
-			-0.6869194507598877,
+			0.003450007876381278,
+			-0.9959835410118103,
 			-0.0045793671160936356,
 			0,
-			0.02710585854947567,
-			0.02181629091501236,
+			0.03450755402445793,
+			-0.004461716860532761,
 			0.9963927268981934,
 			0,
-			1003.25,
-			-1381.75,
-			20.5,
+			5.25,
+			-7,
+			0,
 			1
 		]
 	},
@@ -807,116 +806,7 @@
 		}
 	},
 	"children": {
-		"Ned0c4c0a": {
-			"extends": "asset.vwf",
-			"source": "/sas/assets/a31ba113",
-			"type": "subDriver/threejs/asset/vnd.gltf+json",
-			"sequence": 0,
-			"random": {
-				"s0": 0.434828226920217,
-				"s1": 0.189991779392585,
-				"s2": 0.484111914644018,
-				"c": 1
-			},
-			"properties": {
-				"___physics_activation_state": 1,
-				"___physics_deactivation_time": 0,
-				"___physics_velocity_linear": [
-					0,
-					0,
-					0
-				],
-				"___physics_velocity_angular": [
-					0,
-					0,
-					0
-				],
-				"materialDef": {
-					"alpha": 1,
-					"ambient": {
-						"b": 0.584,
-						"g": 0.584,
-						"r": 0.584
-					},
-					"blendMode": 1,
-					"color": {
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"depthtest": true,
-					"depthwrite": true,
-					"emit": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"fog": true,
-					"layers": [
-						{
-							"alpha": 1,
-							"mapInput": 0,
-							"mapTo": 1,
-							"offsetx": 0,
-							"offsety": 0,
-							"scalex": 1,
-							"scaley": 1,
-							"src": "/sas/assets/7e6084c4"
-						}
-					],
-					"metal": false,
-					"reflect": 0.001,
-					"shading": true,
-					"shininess": 0.004002,
-					"side": 0,
-					"specularColor": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"specularLevel": 1,
-					"type": "phong",
-					"vertexColors": false,
-					"wireframe": false
-				},
-				"DisplayName": "3D_model",
-				"___assetServerOriginalID": "Ned0c4c0a",
-				"___sourceAssetTimestamp": "Tue Oct 27 2015 13:10:22 GMT-0400 (EDT)",
-				"owner": "ADLteam",
-				"transform": [
-					-3.600903042411119e-8,
-					100.39900207519531,
-					0,
-					0,
-					-100.3010025024414,
-					-3.5973883427686815e-8,
-					0,
-					0,
-					0,
-					0,
-					100.29499816894531,
-					0,
-					0.5,
-					0,
-					-0.5,
-					1
-				],
-				"worldPosition": [
-					1002.8928833007812,
-					-1382.1217041015625,
-					20.0190486907959
-				]
-			},
-			"methods": {
-				"hit": {
-					"body": "this.parent.hit(args);",
-					"parameters": [
-						"args"
-					]
-				}
-			}
-		},
-		"N8c4837dd": {
+		"N342af410": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -1019,26 +909,26 @@
 				"visible": false,
 				"width": 1.36,
 				"worldTransform": [
-					-0.1547507345676422,
-					-0.1374647319316864,
+					-0.20632730424404144,
+					0.016534389927983284,
 					0.9752744436264038,
 					0,
-					-0.7223235368728638,
-					0.685523271560669,
+					-0.005231860559433699,
+					0.9958243370056152,
 					-0.01803525537252426,
 					0,
-					-0.6687780022621155,
-					-0.7100855708122253,
+					-0.9754011034965515,
+					-0.008846184238791466,
 					-0.20620471239089966,
 					0,
-					1002.6035766601562,
-					-1382.4388427734375,
-					22.02907943725586,
+					4.30536413192749,
+					-7.010303497314453,
+					1.5290799140930176,
 					1
 				]
 			}
 		},
-		"N83e3ec00": {
+		"N4d397a3": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -1131,7 +1021,7 @@
 				"width": 2.18
 			}
 		},
-		"N8cf5a8e2": {
+		"Nef49c977": {
 			"extends": "http://vwf.example.com/node3.vwf",
 			"sequence": 0,
 			"random": {
@@ -1171,21 +1061,119 @@
 					}
 				},
 				"worldTransform": [
-					-0.6870899796485901,
-					-0.7216140031814575,
+					-0.9963967204093933,
+					-0.003610003972426057,
 					0.03449152410030365,
 					0,
-					0.7212050557136536,
-					-0.6869194507598877,
+					0.003450007876381278,
+					-0.9959835410118103,
 					-0.0045793671160936356,
 					0,
-					0.027106545865535736,
-					0.021817011758685112,
+					0.03450854867696762,
+					-0.004461713135242462,
 					0.9963926672935486,
 					0,
-					1001.1683959960938,
-					-1383.93115234375,
-					19.85618019104004,
+					2.234929084777832,
+					-7.007483959197998,
+					-0.6438199877738953,
+					1
+				]
+			}
+		},
+		"N5cf66d21": {
+			"extends": "asset.vwf",
+			"source": "/sas/assets/8ff78404",
+			"type": "subDriver/threejs/asset/vnd.gltf+json",
+			"sequence": 0,
+			"random": {
+				"s0": 0.943944707978517,
+				"s1": 0.792437971569598,
+				"s2": 0.334432793548331,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"materialDef": {
+					"alpha": 1,
+					"ambient": {
+						"b": 0.584415584415584,
+						"g": 0.584415584415584,
+						"r": 0.584415584415584
+					},
+					"blendMode": 1,
+					"color": {
+						"a": 1,
+						"b": 0.584415584415584,
+						"g": 0.584415584415584,
+						"r": 0.584415584415584
+					},
+					"combine": 0,
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [
+						{
+							"alpha": 1,
+							"mapInput": 0,
+							"mapTo": 1,
+							"offsetx": 0,
+							"offsety": 0,
+							"scalex": 1,
+							"scaley": 1,
+							"src": "/sas/assets/d91d1b6a.jpg"
+						}
+					],
+					"metal": false,
+					"reflect": 0.01,
+					"shading": true,
+					"shininess": 0.000002,
+					"side": 0,
+					"specularColor": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"DisplayName": "Fishing Boat",
+				"___assetServerOriginalID": "N8d83b3ad",
+				"___sourceAssetTimestamp": "Wed Nov 18 2015 16:19:30 GMT-0500 (Eastern Standard Time)",
+				"owner": "ADLteam",
+				"transform": [
+					0.007703371811658144,
+					1.3908082246780396,
+					-0.01814034767448902,
+					0,
+					-1.3838258981704712,
+					0.009273692965507507,
+					0.12139619886875153,
+					0,
+					0.12235673516988754,
+					0.017553819343447685,
+					1.3951290845870972,
+					0,
+					-0.7036518454551697,
+					0.11879934370517731,
+					0.0532807782292366,
 					1
 				]
 			}

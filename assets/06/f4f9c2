@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.8462561718188226,
-		"s1": 0.29639959428459406,
-		"s2": 0.7704716501757503,
-		"c": 1833067
+		"s0": 0.6750922142527997,
+		"s1": 0.46568743931129575,
+		"s2": 0.14215276157483459,
+		"c": 1002617
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -54,7 +54,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Tue Nov 17 2015 15:42:27 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Wed Nov 18 2015 07:45:33 GMT-0500 (Eastern Standard Time)",
 		"_length": 0.23,
 		"accuracy": 24,
 		"activeState": "targeting",
@@ -396,13 +396,13 @@
 			"parameters": []
 		},
 		"collectXAPIData": {
-			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.userControlled())\n    {\n        //2 - Info from bullets - still inside the if sender\n        // var startT, dur, roundsFired, numHits, hits;\n        if (!this.started)\n        {\n            console.log(\"Starting Burst\");\n            this.startT = this.Scene.time;\n            this.hits = [];\n            this.started = true;\n            this.roundsFired = 0;\n            this.numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        this.roundsFired++;\n        console.error(hit);\n        if (hit && hit.node && hit.node.DisplayName /*we have hit something significant*/ )\n        {\n            console.error('We have hit', hit);\n            this.numHits++;\n            var newObj = true;\n            for (var i in this.hits)\n            {\n                if (this.hits[i] === hit.node.DisplayName)\n                    newObj = false;\n            }\n            if (newObj)\n                this.hits.push(hit.node.DisplayName); //or hit.node, or hit.node.DisplayName\n        }\n        console.error(this.hits);\n        console.log(this.roundsFired, this.numHits);\n    }",
+			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.userControlled())\n    {\n        //2 - Info from bullets - still inside the if sender and user control\n        if (!this.started)\n        {\n            // console.log(\"Starting Burst\");\n            this.startT = this.Scene.time;\n            this.hits = [];\n            this.started = true;\n            this.roundsFired = 0;\n            this.numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        this.roundsFired++;\n        // console.error(hit);\n        if (hit && hit.node && hit.node.DisplayName /*we have hit something significant*/ )\n        {\n            // console.error('We have hit', hit);\n            this.numHits++;\n            var newObj = true;\n            for (var i in this.hits)\n            {\n                if (this.hits[i] === hit.node.DisplayName)\n                    newObj = false;\n            }\n            if (newObj)\n                this.hits.push(hit.node.DisplayName); //or hit.node, or hit.node.DisplayName\n        }\n        // console.error(this.hits);\n        // console.log(this.roundsFired, this.numHits);\n    }",
 			"parameters": [
 				"hit"
 			]
 		},
 		"xAPISend": {
-			"body": "console.log(\"Ending burst and sending xapi statement\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        this.started = false;\n        var dur = this.Scene.time - this.startT;\n\n        //3 - build objects for statement\n        var result = {\n            score:\n            {\n                max: this.roundsFired, // || 140,\n                raw: this.numHits, // || 45,\n                min: 0,\n                scaled: this.numHits / this.roundsFired, // || 0.321 //remove or 0.321 when in place\n            },\n            success: (this.hits.length > 0),\n            duration: \"PT\" + Math.floor(dur * 1000) / 1000 + \"S\", //a real end - start number of the burst\n            response: \"scaled is the hit/fired ratio\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": this.hits.toString() || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n        };\n        console.error(result);\n        var burstObject = {\n            id: sender.baseURL + \"objects/\" + (encodeURI(\"burst\" + (this.burstCount || 0))),\n            definition:\n            {\n                name:\n                {\n                    \"en-US\": encodeURI(\"burst\" + (this.burstCount || 0)),\n                },\n                type: sender.baseURL + \"activity/types/50CalBurst\",\n            },\n        };\n\n        //4 - Send it - inside if(ended),  inside if(sender)\n        sender.xAPISend(\"fired\", burstObject, \"Small Craft Action Team\", result, conExt);\n    } //if(sender)",
+			"body": "// console.log(\"Ending burst and sending xapi statement\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        this.started = false;\n        var dur = this.Scene.time - this.startT;\n\n        //3 - build objects for statement\n        var result = {\n            score:\n            {\n                max: this.roundsFired, // || 140,\n                raw: this.numHits, // || 45,\n                min: 0,\n                scaled: this.numHits / this.roundsFired, // || 0.321 //remove or 0.321 when in place\n            },\n            success: (this.hits.length > 0),\n            duration: \"PT\" + Math.floor(dur * 1000) / 1000 + \"S\", //a real end - start number of the burst\n            response: \"scaled is the hit/fired ratio\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": this.hits.toString() || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n        };\n        // console.error(result);\n        var burstObject = {\n            id: sender.baseURL + \"objects/\" + (encodeURI(\"burst\" + (this.burstCount || 0))),\n            definition:\n            {\n                name:\n                {\n                    \"en-US\": encodeURI(\"burst\" + (this.burstCount || 0)),\n                },\n                type: sender.baseURL + \"activity/types/50CalBurst\",\n            },\n        };\n\n        //4 - Send it - inside if(ended),  inside if(sender)\n        sender.xAPISend(\"fired\", burstObject, \"Small Craft Action Team\", result, conExt);\n    } //if(sender)",
 			"parameters": [
 				"hits"
 			]
