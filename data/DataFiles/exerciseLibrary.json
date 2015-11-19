@@ -160,17 +160,17 @@
         "preview":"./contentlibraries/environments/thumbs/desertsunset.PNG",
         "name": "Environment"
     },
-    "environment":
-    {
-        "type": "environment",
-        "url": "/datafiles/vwf/environment.json",
-        "preview": "./contentlibraries/environments/thumbs/desertsunset.PNG",
-        "name": "Environment"
-    },
     "0e71f3f7":
     {
         "type": "asset",
         "url": "/sas/assets/0e71f3f7",
         "name": "GameManager"
+    },
+    "e842aa0f":
+    {
+        "type": "asset",
+        "url": "/sas/assets/e842aa0f",
+        "name": "Ocean (Compatibility Mode)"
     }
+    
 }
