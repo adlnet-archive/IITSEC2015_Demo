@@ -119,7 +119,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Wed Nov 18 2015 10:11:07 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Thu Nov 19 2015 16:28:09 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -155,7 +155,7 @@
 		},
 		"aiTargetID": "asset-vwf-Nc8f85604",
 		"bullets_50_cal": 987,
-		"controllingCamera": "sphere2-vwf-N4e81436",
+		"controllingCamera": "SandboxCamera-vwf-Nb5daff57",
 		"counter": 14602,
 		"currentState": {
 			"name": "idle",
@@ -519,9 +519,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			1003.25,
-			-1381.75,
-			20.5,
+			0.2876308560371399,
+			-0.11608154326677322,
+			0.01774579845368862,
 			1
 		],
 		"type": "Primitive",
@@ -530,9 +530,9 @@
 		"warningsReceived": 0,
 		"width": 2.5,
 		"worldPosition": [
-			1003.25,
-			-1381.75,
-			20.5
+			0.2876308560371399,
+			-0.11608154326677322,
+			0.01774579845368862
 		],
 		"worldTransform": [
 			-0.6870899796485901,
@@ -547,9 +547,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			1003.25,
-			-1381.75,
-			20.5,
+			0.2876308560371399,
+			-0.11608154326677322,
+			0.01774579845368862,
 			1
 		]
 	},
@@ -618,14 +618,6 @@
 			"body": "console.log(\"explosion!!\");\n    var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = 1;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);",
 			"parameters": []
 		},
-		"defeatedTransition": {
-			"body": "console.log(\"defeatedTransition\");\n    this.currentState = this.states[\"defeated\"];\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName, \"FastAttackCraft\", null);\n    }",
-			"parameters": []
-		},
-		"destroyFAC": {
-			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName, \"FastAttackCraft\", null);\n    }",
-			"parameters": []
-		},
 		"doAIBehaviors": {
 			"body": "var pos = this.transformAPI.getWorldPosition();\n    //dont' do the AI code if it's not at the water surface\n    if (Math.abs(pos[2] - 20) > 2)\n        return;\n    var state = this.aiStates[this.aiActiveState];\n    console.log(this.aiActiveState);\n    if (state)\n    {\n        if (this[state.updateFunc])\n            this[state.updateFunc]();\n    }",
 			"parameters": []
@@ -682,10 +674,6 @@
 			"body": "var thisCam = this.controllingCamera;\n\n    return this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
 		},
-		"launchMissile": {
-			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        // var postion = sender.baseURL + \"position/\";\n        // var result = {\n        //     extensions:\n        //     {\n        //         position:\n        //         {\n        //             pos\n        //         },\n        //     }\n        // };\n        sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", null);    //result);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
-			"parameters": []
-		},
 		"moving_awayTransition": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"moving_awayTransition\");\n                                this.moving_awayUpdate(this.currentState);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -698,10 +686,6 @@
 		},
 		"notifyPeers": {
 			"body": "var my_position = this.transformAPI.getPosition();\n    this.tickCount++;\n    if (this.tickCount == 4 || this.tickCount == 8)\n    {\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward], 50);\n    }\n\n    if (this.tickCount > 10)\n    {\n        var leader_projection = this.transformAPI.localToGlobal(-150, 0, 0);\n\n        this.broadcast(\"facLeaderInput\", [leader_projection], 500);\n        this.tickCount = 0;\n    }",
-			"parameters": []
-		},
-		"out_of_gasTransition": {
-			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    }",
 			"parameters": []
 		},
 		"out_of_gasUpdate": {
@@ -779,12 +763,6 @@
 			"body": "//console.log(\"playMotorRunning\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/2cb9fef9\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/994ee0c8\", false, 100);\n    // #3:\n    var sound = vwf.callMethod(this.id, \"getSound\", [\"/sas/assets/c253157d\"]);\n\n    // if (sound == null || !sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/c253157d\", true, 200, false);\n    }",
 			"parameters": []
 		},
-		"hit": {
-			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\",false,200,true);\n    if (this.currentState.name == \"defeated\") return;\n    \n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n        var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            sender.xAPISend(\"is destroyed\", this.DisplayName + this.id, \"Fast Attack Craft\",\n                null /*optional - see result object*/ ,\n                null /*optional - see context.extesions object*/ );\n        }\n    }",
-			"parameters": [
-				"args"
-			]
-		},
 		"aiAttack": {
 			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > attackRange)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
 			"parameters": []
@@ -803,6 +781,28 @@
 		},
 		"aiFire": {
 			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            this.rockets = this.rockets - 1;\n            if(this.rockets <= 0)\n            {\n                this.aiActiveState = \"flee\";\n            }\n            else if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
+			"parameters": []
+		},
+		"destroyFAC": {
+			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName + this.id, \"FastAttackCraft\", null);\n    }",
+			"parameters": []
+		},
+		"hit": {
+			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
+			"parameters": [
+				"args"
+			]
+		},
+		"defeatedTransition": {
+			"body": "console.log(\"defeatedTransition\");\n    this.currentState = this.states[\"defeated\"];",
+			"parameters": []
+		},
+		"out_of_gasTransition": {
+			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    // var sender = this.Scene.children_by_name.xAPISender;\n    // if (sender)\n    // {\n    //     sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    // }",
+			"parameters": []
+		},
+		"launchMissile": {
+			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        // def.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.target_data || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (this.id + this.DisplayName) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": pos || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"launched\", (this.DisplayName + this.ID), 'Seahawk or FAC', null, conExt, missId);\n        // sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", null); //result);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });\n\n\n// function sendMissileLaunch()\n// {\n//     console.log(\"send Missile Launch\");\n//     //vars to make it work outside of where it belongs\n//     var obstacle, pos;\n\n//     var sender = this.Scene.children_by_name.xAPISender;\n//     if (sender)\n//     {\n//         var missId = ADL.ruuid();\n//         // def.stmtId = missId; //make sure to include this once added to fac and seahawk\n//         var conExt = {\n//             \"https://sandbox.adlnet.gov/context/extensions/target\": this.target_data || \"no target\",\n//             \"https://sandbox.adlnet.gov/context/extensions/missileId\": \"Missile#2\", //(this.id + this.DisplayName) || \"Missile#2\",\n//             \"https://sandbox.adlnet.gov/context/extensions/firePosition\": pos || \"this is where the missile began\",\n//             \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n//         };\n//         sender.xAPISend(\"launched\", (this.DisplayName + this.ID) /*missile.DisplayName*/ , 'Seahawk or FAC', null, conExt, missId);\n//     }\n// }\n\n/* Current code nov 19 2015\n\n//Seahawk Missile Launch\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    var context = {\n        // firePosition: pos,\n        // missileNum: maximum num of missile - this.Missiles,\n        target: this.weaponsTarget,\n    };\n    if (sender)\n    {\n        sender.xAPISend(\"fired\", \"SeahawkMissile\", this.DisplayName, null);\n}*/",
 			"parameters": []
 		}
 	},
@@ -902,9 +902,9 @@
 					1
 				],
 				"worldPosition": [
-					1002.8928833007812,
-					-1382.1217041015625,
-					20.0190486907959
+					-0.06946706026792526,
+					-0.48779669404029846,
+					-0.4632048010826111
 				]
 			},
 			"methods": {
@@ -1031,9 +1031,9 @@
 					-0.7100855708122253,
 					-0.20620471239089966,
 					0,
-					1002.6035766601562,
-					-1382.4388427734375,
-					22.02907943725586,
+					-0.35879969596862793,
+					-0.8049721121788025,
+					1.546825647354126,
 					1
 				]
 			}
@@ -1183,9 +1183,9 @@
 					0.021817011758685112,
 					0.9963926672935486,
 					0,
-					1001.1683959960938,
-					-1383.93115234375,
-					19.85618019104004,
+					-1.7939684391021729,
+					-2.297285795211792,
+					-0.6260741949081421,
 					1
 				]
 			}

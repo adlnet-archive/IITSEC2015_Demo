@@ -1,0 +1,124 @@
+{
+	"extends": "plane2.vwf",
+	"source": "vwf/model/threejs/plane.js",
+	"type": "subDriver/threejs",
+	"sequence": 0,
+	"random": {
+		"s0": 0.703975566895679,
+		"s1": 0.197294719750062,
+		"s2": 0.396665057167411,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"": null,
+		"DisplayName": "OceanShader",
+		"_length": 10000,
+		"materialDef": {
+			"alpha": 0.993506493506494,
+			"ambient": {
+				"b": 0.658823529411765,
+				"g": 0.541176470588235,
+				"r": 0.490196078431373
+			},
+			"blendMode": 1,
+			"color": {
+				"a": 0.993506493506494,
+				"b": 0.658823529411765,
+				"g": 0.541176470588235,
+				"r": 0.490196078431373
+			},
+			"depthtest": true,
+			"depthwrite": true,
+			"emit": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
+			"fog": true,
+			"layers": [
+				{
+					"alpha": 0.15,
+					"mapInput": 0,
+					"mapTo": 4,
+					"offsetx": 0,
+					"offsety": 0,
+					"rot": 0,
+					"scalex": 100,
+					"scaley": 100,
+					"src": "../vwfDataManager.svc/texture?UID=waternormal.jpg"
+				}
+			],
+			"metal": false,
+			"reflect": 1,
+			"shadeless": false,
+			"shading": true,
+			"shadow": true,
+			"shininess": 1,
+			"side": 0,
+			"specularColor": {
+				"b": 30.5773502691896,
+				"g": 30.5773502691896,
+				"r": 30.5773502691896
+			},
+			"specularLevel": 10,
+			"type": "phong",
+			"vertexColors": false,
+			"wireframe": false
+		},
+		"owner": "ADLteam",
+		"renderDepth": 1,
+		"splashCount": 2,
+		"transform": [
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			0,
+			0,
+			0,
+			1,
+			0,
+			-35.635250091552734,
+			27.736064910888672,
+			0.23446792364120483,
+			1
+		],
+		"type": "Primitive",
+		"width": 10000,
+		"sourceAssetId": "e842aa0f",
+		"lsegs": 30,
+		"wsegs": 30,
+		"___sourceAssetTimestamp": "Thu Nov 19 2015 15:44:28 GMT-0500 (Eastern Standard Time)",
+		"visible": true,
+		"isSelectable": false
+	},
+	"methods": {
+		"splash": {
+			"body": "\n\n",
+			"parameters": [
+				"pos"
+			]
+		},
+		"hit": {
+			"body": "var pos = args[0];\n    if (!pos) return;\n    pos = this.transformAPI.globalToLocal(pos);\n    //this.children[this.splashCount].transformAPI.setPosition(pos);\n    this.children[this.splashCount].start(pos);\n    this.children[this.splashCount].audioAPI.playSound(\"/sas/assets/52144a97\",false,100,true);\n    this.splashCount++;\n\n    if (this.splashCount > this.children.length - 1)\n    {\n        \n        this.splashCount = 0;\n    }",
+			"parameters": [
+				"args"
+			]
+		}
+	}
+}

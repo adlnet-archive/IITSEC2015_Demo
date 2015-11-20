@@ -22,7 +22,7 @@
 			-0.1445750892162323,
 			0.00038580354885198176
 		],
-		"DisplayName": "FAC_MASTER2",
+		"DisplayName": "Fishing Boat",
 		"EditorData": {
 			"_controllingCamera": {
 				"displayname": "Controlling Camera",
@@ -119,7 +119,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Thu Nov 19 2015 10:55:26 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Thu Nov 19 2015 15:02:38 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
 		"_length": 22,
 		"activeState": "active",
@@ -388,7 +388,7 @@
 				]
 			}
 		},
-		"owner": "ADLteam",
+		"owner": "Rufus",
 		"physicsAPI": {},
 		"radarTracked": true,
 		"rangeToTarget": 1000,
@@ -506,21 +506,21 @@
 		},
 		"tickCount": 0,
 		"transform": [
-			-0.9963967204093933,
-			-0.003610003972426057,
+			-0.9963589906692505,
+			-0.009397989138960838,
 			0.03449152410030365,
 			0,
-			0.003450007876381278,
-			-0.9959835410118103,
+			0.009235594421625137,
+			-0.9959467649459839,
 			-0.0045793671160936356,
 			0,
-			0.03450755402445793,
-			-0.004461716860532761,
+			0.03453288972377777,
+			-0.004261188209056854,
 			0.9963927268981934,
 			0,
-			1370.75,
-			900.25,
-			20.5,
+			7,
+			-5.75,
+			0,
 			1
 		],
 		"type": "Primitive",
@@ -529,29 +529,28 @@
 		"warningsReceived": 0,
 		"width": 7,
 		"worldPosition": [
-			1370.75,
-			900.25,
-			20.5
+			7,
+			-5.75,
+			0
 		],
 		"worldTransform": [
-			-0.9963967204093933,
-			-0.003610003972426057,
+			-0.9963589906692505,
+			-0.009397989138960838,
 			0.03449152410030365,
 			0,
-			0.003450007876381278,
-			-0.9959835410118103,
+			0.009235594421625137,
+			-0.9959467649459839,
 			-0.0045793671160936356,
 			0,
-			0.03450755402445793,
-			-0.004461716860532761,
+			0.03453288972377777,
+			-0.004261188209056854,
 			0.9963927268981934,
 			0,
-			1370.75,
-			900.25,
-			20.5,
+			7,
+			-5.75,
+			0,
 			1
-		],
-		"sourceAssetId": "5624e95d"
+		]
 	},
 	"methods": {
 		"FACMovementDirection": {
@@ -692,10 +691,6 @@
 			"body": "var my_position = this.transformAPI.getPosition();\n    this.tickCount++;\n    if (this.tickCount == 4 || this.tickCount == 8)\n    {\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward], 50);\n    }\n\n    if (this.tickCount > 10)\n    {\n        var leader_projection = this.transformAPI.localToGlobal(-150, 0, 0);\n\n        this.broadcast(\"facLeaderInput\", [leader_projection], 500);\n        this.tickCount = 0;\n    }",
 			"parameters": []
 		},
-		"out_of_gasTransition": {
-			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    }",
-			"parameters": []
-		},
 		"out_of_gasUpdate": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"out_of_gasUpdate\");\n                                console.log(statename);\n                                if (this.fuel <= 0)\n                                {\n                                    this.currentState = this.states[\"out_of_gas\"];\n                                    console.log(\"out_of_gasUpdate now out_of_gas state\");\n                                }\n                                else if (this.hullStrength <= 0)\n                                {\n                                    this.currentState = this.states[\"defeated\"];\n                                    console.log(\"out_of_gasUpdate now defaeted state\");\n                                }   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": [
@@ -791,12 +786,8 @@
 			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            this.rockets = this.rockets - 1;\n            if(this.rockets <= 0)\n            {\n                this.aiActiveState = \"flee\";\n            }\n            else if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
 			"parameters": []
 		},
-		"warn": {
-			"body": "this.aiActiveState = \"flee\";\n    this.hostile = false;\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISender('warned', this.DisplayName, \"Fishing Boat\");\n    }",
-			"parameters": []
-		},
 		"hit": {
-			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n       \n    }",
+			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
 			"parameters": [
 				"args"
 			]
@@ -805,13 +796,21 @@
 			"body": "console.log(\"defeatedTransition\");\n    this.currentState = this.states[\"defeated\"];",
 			"parameters": []
 		},
+		"out_of_gasTransition": {
+			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    // var sender = this.Scene.children_by_name.xAPISender;\n    // if (sender)\n    // {\n    //     sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    // }",
+			"parameters": []
+		},
 		"destroyFAC": {
-			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName, \"FishingBoat\", null);\n    }",
+			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName + this.id, \"Fishing Boat\", null);\n    }",
+			"parameters": []
+		},
+		"warn": {
+			"body": "this.aiActiveState = \"flee\";\n    this.hostile = false;\n    \n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"warned\", this.DisplayName, \"Fishing Boat\");\n    }",
 			"parameters": []
 		}
 	},
 	"children": {
-		"N8c4837dd": {
+		"N2b7e437b": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -914,26 +913,26 @@
 				"visible": false,
 				"width": 1.36,
 				"worldTransform": [
-					-0.20632730424404144,
-					0.016534389927983284,
+					-0.20641988515853882,
+					0.015335561707615852,
 					0.9752744436264038,
 					0,
-					-0.005231860559433699,
-					0.9958243370056152,
+					-0.01101649273186922,
+					0.9957772493362427,
 					-0.01803525537252426,
 					0,
-					-0.9754011034965515,
-					-0.008846184238791466,
+					-0.9753332734107971,
+					-0.014512117952108383,
 					-0.20620471239089966,
 					0,
-					1369.805419921875,
-					900.2396850585938,
-					22.02907943725586,
+					6.0554399490356445,
+					-5.765790939331055,
+					1.5290799140930176,
 					1
 				]
 			}
 		},
-		"N83e3ec00": {
+		"Nacd17a5e": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -1026,7 +1025,7 @@
 				"width": 2.18
 			}
 		},
-		"N8cf5a8e2": {
+		"N77ef45c": {
 			"extends": "http://vwf.example.com/node3.vwf",
 			"sequence": 0,
 			"random": {
@@ -1066,26 +1065,26 @@
 					}
 				},
 				"worldTransform": [
-					-0.9963967204093933,
-					-0.003610003972426057,
+					-0.9963589906692505,
+					-0.009397989138960838,
 					0.03449152410030365,
 					0,
-					0.003450007876381278,
-					-0.9959835410118103,
+					0.009235594421625137,
+					-0.9959467649459839,
 					-0.0045793671160936356,
 					0,
-					0.03450854867696762,
-					-0.004461713135242462,
+					0.03453388437628746,
+					-0.004261178895831108,
 					0.9963926672935486,
 					0,
-					1367.7349853515625,
-					900.2424926757812,
-					19.85618019104004,
+					3.985023260116577,
+					-5.774998188018799,
+					-0.6438199877738953,
 					1
 				]
 			}
 		},
-		"N8d83b3ad": {
+		"N28875535": {
 			"extends": "asset.vwf",
 			"source": "/sas/assets/8ff78404",
 			"type": "subDriver/threejs/asset/vnd.gltf+json",
@@ -1161,24 +1160,24 @@
 				},
 				"DisplayName": "Fishing Boat",
 				"___assetServerOriginalID": "N8d83b3ad",
-				"___sourceAssetTimestamp": "Wed Nov 18 2015 16:19:30 GMT-0500 (Eastern Standard Time)",
-				"owner": "ADLteam",
+				"___sourceAssetTimestamp": "Thu Nov 19 2015 15:05:13 GMT-0500 (Eastern Standard Time)",
+				"owner": "Rufus",
 				"transform": [
-					0.007703371811658144,
-					1.3908082246780396,
-					-0.01814034767448902,
+					0.01576889306306839,
+					1.3907363414764404,
+					-0.01841987855732441,
 					0,
-					-1.3838258981704712,
-					0.009273692965507507,
-					0.12139619886875153,
+					-1.3837454319000244,
+					0.017339732497930527,
+					0.12143047899007797,
 					0,
-					0.12235673516988754,
-					0.017553819343447685,
-					1.3951290845870972,
+					0.12249454855918884,
+					0.017123015597462654,
+					1.3951222896575928,
 					0,
-					-0.7036518454551697,
-					0.11879934370517731,
-					0.0532807782292366,
+					-0.8638454675674438,
+					0.22582830488681793,
+					0.20767465233802795,
 					1
 				]
 			}
