@@ -22,7 +22,7 @@
 			-0.1445750892162323,
 			0.00038580354885198176
 		],
-		"DisplayName": "FAC_MASTER2",
+		"DisplayName": "Fishies",
 		"EditorData": {
 			"_controllingCamera": {
 				"displayname": "Controlling Camera",
@@ -119,9 +119,9 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Fri Nov 20 2015 08:53:16 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Fri Nov 20 2015 13:49:20 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
-		"_length": 7,
+		"_length": 22,
 		"activeState": "active",
 		"aiActiveState": "attack",
 		"aiStates": {
@@ -388,11 +388,11 @@
 				]
 			}
 		},
-		"owner": "ADLteam",
+		"owner": "Andy",
 		"physicsAPI": {},
 		"radarTracked": true,
 		"rangeToTarget": 1000,
-		"rockets": 5,
+		"rockets": 0,
 		"smokeDef": {
 			"continues": "/sas/assets/aeb3d1dd",
 			"properties": {
@@ -417,7 +417,6 @@
 				]
 			}
 		},
-		"sourceAssetId": "1ad6adad",
 		"states": {
 			"approaching": {
 				"name": "approaching",
@@ -507,51 +506,52 @@
 		},
 		"tickCount": 0,
 		"transform": [
-			-0.6870899796485901,
-			-0.7216140031814575,
-			0.03449152410030365,
+			-0.999360203742981,
+			0.0006475538248196244,
+			0.03575974702835083,
 			0,
-			0.7212050557136536,
-			-0.6869194507598877,
-			-0.0045793671160936356,
+			-0.00008924291614675894,
+			-0.9958787560462952,
+			0.015539859421551228,
 			0,
-			0.02710585854947567,
-			0.02181629091501236,
-			0.9963927268981934,
+			0.035658203065395355,
+			0.015542315319180489,
+			0.9962409138679504,
 			0,
-			18.972984313964844,
-			-22.47017478942871,
-			0.01774579845368862,
+			1.25,
+			-31,
+			0,
 			1
 		],
 		"type": "Primitive",
 		"userControlCounter": 0,
 		"visible": false,
 		"warningsReceived": 0,
-		"width": 2.5,
+		"width": 7,
 		"worldPosition": [
-			18.972984313964844,
-			-22.47017478942871,
-			0.01774579845368862
+			1.25,
+			-31,
+			0
 		],
 		"worldTransform": [
-			-0.6870899796485901,
-			-0.7216140031814575,
-			0.03449152410030365,
+			-0.999360203742981,
+			0.0006475538248196244,
+			0.03575974702835083,
 			0,
-			0.7212050557136536,
-			-0.6869194507598877,
-			-0.0045793671160936356,
+			-0.00008924291614675894,
+			-0.9958787560462952,
+			0.015539859421551228,
 			0,
-			0.02710585854947567,
-			0.02181629091501236,
-			0.9963927268981934,
+			0.035658203065395355,
+			0.015542315319180489,
+			0.9962409138679504,
 			0,
-			18.972984313964844,
-			-22.47017478942871,
-			0.01774579845368862,
+			1.25,
+			-31,
+			0,
 			1
-		]
+		],
+		"hsegs": 3
 	},
 	"methods": {
 		"FACMovementDirection": {
@@ -783,10 +783,6 @@
 			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            this.rockets = this.rockets - 1;\n            if(this.rockets <= 0)\n            {\n                this.aiActiveState = \"flee\";\n            }\n            else if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
 			"parameters": []
 		},
-		"destroyFAC": {
-			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName + this.id, \"FastAttackCraft\", null);\n    }",
-			"parameters": []
-		},
 		"hit": {
 			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
 			"parameters": [
@@ -804,119 +800,18 @@
 		"launchMissile": {
 			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,            \n        };\n        sender.xAPISend(\"fired\", 'FAC Missile', 'Fast Attack Craft', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
+		},
+		"warn": {
+			"body": "this.aiActiveState = \"flee\";\n    this.hostile = false;\n    \n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISender('warned', this.DisplayName, 'Fishing Boat');\n    }",
+			"parameters": []
+		},
+		"destroyFAC": {
+			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName + this.id, \"Fishing Boat\", null);\n    }",
+			"parameters": []
 		}
 	},
 	"children": {
-		"Ned0c4c0a": {
-			"extends": "asset.vwf",
-			"source": "/sas/assets/a31ba113",
-			"type": "subDriver/threejs/asset/vnd.gltf+json",
-			"sequence": 0,
-			"random": {
-				"s0": 0.434828226920217,
-				"s1": 0.189991779392585,
-				"s2": 0.484111914644018,
-				"c": 1
-			},
-			"properties": {
-				"___physics_activation_state": 1,
-				"___physics_deactivation_time": 0,
-				"___physics_velocity_linear": [
-					0,
-					0,
-					0
-				],
-				"___physics_velocity_angular": [
-					0,
-					0,
-					0
-				],
-				"materialDef": {
-					"alpha": 1,
-					"ambient": {
-						"b": 0.584,
-						"g": 0.584,
-						"r": 0.584
-					},
-					"blendMode": 1,
-					"color": {
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"depthtest": true,
-					"depthwrite": true,
-					"emit": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"fog": true,
-					"layers": [
-						{
-							"alpha": 1,
-							"mapInput": 0,
-							"mapTo": 1,
-							"offsetx": 0,
-							"offsety": 0,
-							"scalex": 1,
-							"scaley": 1,
-							"src": "/sas/assets/7e6084c4"
-						}
-					],
-					"metal": false,
-					"reflect": 0.001,
-					"shading": true,
-					"shininess": 0.004002,
-					"side": 0,
-					"specularColor": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"specularLevel": 1,
-					"type": "phong",
-					"vertexColors": false,
-					"wireframe": false
-				},
-				"DisplayName": "3D_model",
-				"___assetServerOriginalID": "Ned0c4c0a",
-				"___sourceAssetTimestamp": "Tue Oct 27 2015 13:10:22 GMT-0400 (EDT)",
-				"owner": "ADLteam",
-				"transform": [
-					-3.600903042411119e-8,
-					100.39900207519531,
-					0,
-					0,
-					-100.3010025024414,
-					-3.5973883427686815e-8,
-					0,
-					0,
-					0,
-					0,
-					100.29499816894531,
-					0,
-					0.5,
-					0,
-					-0.5,
-					1
-				],
-				"worldPosition": [
-					18.615886688232422,
-					-22.841890335083008,
-					-0.4632048010826111
-				]
-			},
-			"methods": {
-				"hit": {
-					"body": "this.parent.hit(args);",
-					"parameters": [
-						"args"
-					]
-				}
-			}
-		},
-		"N8c4837dd": {
+		"Ne03bbd75": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -1019,26 +914,26 @@
 				"visible": false,
 				"width": 1.36,
 				"worldTransform": [
-					-0.1547507345676422,
-					-0.1374647319316864,
-					0.9752744436264038,
+					-0.20584654808044434,
+					0.0369679257273674,
+					0.9749932885169983,
 					0,
-					-0.7223235368728638,
-					0.685523271560669,
-					-0.01803525537252426,
+					-0.001722646877169609,
+					0.9952691793441772,
+					-0.03814456984400749,
 					0,
-					-0.6687780022621155,
-					-0.7100855708122253,
-					-0.20620471239089966,
+					-0.9785770773887634,
+					-0.009524424560368061,
+					-0.20480763912200928,
 					0,
-					18.326553344726562,
-					-23.15906524658203,
-					1.546825647354126,
+					0.3041268289089203,
+					-30.97603988647461,
+					1.5301203727722168,
 					1
 				]
 			}
 		},
-		"N83e3ec00": {
+		"Na3f6ebd3": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -1131,7 +1026,7 @@
 				"width": 2.18
 			}
 		},
-		"N8cf5a8e2": {
+		"N33c55d87": {
 			"extends": "http://vwf.example.com/node3.vwf",
 			"sequence": 0,
 			"random": {
@@ -1171,21 +1066,119 @@
 					}
 				},
 				"worldTransform": [
-					-0.6870899796485901,
-					-0.7216140031814575,
-					0.03449152410030365,
+					-0.999360203742981,
+					0.0006475538248196244,
+					0.03575974702835083,
 					0,
-					0.7212050557136536,
-					-0.6869194507598877,
-					-0.0045793671160936356,
+					-0.00008924291614675894,
+					-0.9958787560462952,
+					0.015539859421551228,
 					0,
-					0.027106545865535736,
-					0.021817011758685112,
-					0.9963926672935486,
+					0.03565920144319534,
+					0.015542314387857914,
+					0.9962408542633057,
 					0,
-					16.89138412475586,
-					-24.651378631591797,
-					-0.6260741949081421,
+					-1.7748242616653442,
+					-31.009714126586914,
+					-0.6399014592170715,
+					1
+				]
+			}
+		},
+		"N2840e53b": {
+			"extends": "asset.vwf",
+			"source": "/sas/assets/8ff78404",
+			"type": "subDriver/threejs/asset/vnd.gltf+json",
+			"sequence": 0,
+			"random": {
+				"s0": 0.943944707978517,
+				"s1": 0.792437971569598,
+				"s2": 0.334432793548331,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"materialDef": {
+					"alpha": 1,
+					"ambient": {
+						"b": 0.584415584415584,
+						"g": 0.584415584415584,
+						"r": 0.584415584415584
+					},
+					"blendMode": 1,
+					"color": {
+						"a": 1,
+						"b": 0.584415584415584,
+						"g": 0.584415584415584,
+						"r": 0.584415584415584
+					},
+					"combine": 0,
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [
+						{
+							"alpha": 1,
+							"mapInput": 0,
+							"mapTo": 1,
+							"offsetx": 0,
+							"offsety": 0,
+							"scalex": 1,
+							"scaley": 1,
+							"src": "/sas/assets/d91d1b6a.jpg"
+						}
+					],
+					"metal": false,
+					"reflect": 0.01,
+					"shading": true,
+					"shininess": 0.000002,
+					"side": 0,
+					"specularColor": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"DisplayName": "Fishing Boat",
+				"___assetServerOriginalID": "N8d83b3ad",
+				"___sourceAssetTimestamp": "Fri Nov 20 2015 13:53:45 GMT-0500 (Eastern Standard Time)",
+				"owner": "Andy",
+				"transform": [
+					0.001739470288157463,
+					1.3901842832565308,
+					-0.04601668193936348,
+					0,
+					-1.3795617818832397,
+					0.005823114421218634,
+					0.12288980185985565,
+					0,
+					0.1235075369477272,
+					0.04609097167849541,
+					1.3943449258804321,
+					0,
+					-0.2649044394493103,
+					0.20530147850513458,
+					0.2777685523033142,
 					1
 				]
 			}

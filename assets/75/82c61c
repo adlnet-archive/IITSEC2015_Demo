@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.13319454924203455,
-		"s1": 0.4318533029872924,
-		"s2": 0.44017675309441984,
-		"c": 354395
+		"s0": 0.6266132413875312,
+		"s1": 0.33040362363681197,
+		"s2": 0.5382230654358864,
+		"c": 1347328
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -63,7 +63,7 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Tue Nov 17 2015 11:47:51 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Fri Nov 20 2015 16:13:46 GMT-0500 (EST)",
 		"_length": 2.98,
 		"controllingCamera": "SandboxCamera-vwf-N79164421",
 		"counter": 2063.24999999994,
@@ -188,9 +188,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			1.2165405750274658,
-			-0.19466476142406464,
-			0.01774579845368862,
+			1.0085744857788086,
+			0.7039268016815186,
+			0.009999999776482582,
 			1
 		],
 		"type": "Primitive",
@@ -198,11 +198,10 @@
 		"weaponsTarget": "ocean-ocean-vwf-N4bab7165",
 		"width": 8.49,
 		"worldPosition": [
-			1.2165405750274658,
-			-0.19466476142406464,
-			0.01774579845368862
+			1.0085744857788086,
+			0.7039268016815186,
+			0.009999999776482582
 		],
-		"": null,
 		"maxHeight": 500,
 		"minHeight": 25,
 		"worldTransform": [
@@ -218,9 +217,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			1.2165405750274658,
-			-0.19466476142406464,
-			0.01774579845368862,
+			1.0085744857788086,
+			0.7039268016815186,
+			0.009999999776482582,
 			1
 		],
 		"userControlCounter": 0,
@@ -264,13 +263,6 @@
 		"ready": {
 			"body": "this.Scene.unbind(\"keyDown\",this.__kd);\n            this.Scene.unbind(\"keyUp\",this.__ku);\n            \n            var self = this;\n            this.__ku = function(e,d)\n            {\n                self._ku(e,d);\n            }\n            \n            this.__kd = function(e,d)\n            {\n                self._kd(e,d);\n            }\n            \n            this.Scene.bind(\"keyDown\",this.__kd);\n            this.Scene.bind(\"keyUp\",this.__ku);",
 			"parameters": []
-		},
-		"launchMissile": {
-			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = _DataManager.getCleanNodePrototype(this.missileDef);\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    if (this.weaponsTarget)\n    {\n        def.properties.target_data = {\n            id: this.weaponsTarget\n        };\n    }\n\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    var context = {\n        // firePosition: pos,\n        // missileNum: maximum num of missile - this.Missiles,\n        target: this.weaponsTarget,\n    };\n    if (sender)\n    {\n        sender.xAPISend(\"fired\", \"SeahawkMissile\", this.DisplayName, null);\n    }\n    var smokeDef = this.smokeDef;\n    console.log(def.properties.target_data);\n    vwf.createChild(vwf.application(), GUID(), def, null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
-			"parameters": []
-		},
-		"": {
-			"parameters": "console.log(\"got here\");"
 		},
 		"_ku": {
 			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 200;\n    if (this.keysDown.indexOf(e.key.key) != -1)\n    {\n        this.keysDown.splice(this.keysDown.indexOf(e.key.key), 1);\n    }\n\n    if (e.key.key == 'space')\n    {\n        this.launchMissile();\n    }",
@@ -374,6 +366,10 @@
 		},
 		"inReload": {
 			"body": "this.fireCounter = 600;",
+			"parameters": []
+		},
+		"launchMissile": {
+			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = _DataManager.getCleanNodePrototype(this.missileDef);\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    if (this.weaponsTarget)\n    {\n        def.properties.target_data = {\n            id: this.weaponsTarget\n        };\n    }\n\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'Seahawk Missile', 'Seahawk Pilot', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    console.log(def.properties.target_data);\n    vwf.createChild(vwf.application(), GUID(), def, null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
 		}
 	},
@@ -493,9 +489,9 @@
 					0.9285185933113098,
 					-0.10019166022539139,
 					0,
-					0.4567992091178894,
-					-2.896176815032959,
-					-0.9576663374900818,
+					0.24883313477039337,
+					-1.9975851774215698,
+					-0.9654121398925781,
 					1
 				]
 			}
@@ -714,9 +710,9 @@
 					0.9300360083580017,
 					-0.08099353313446045,
 					0,
-					3.3438897132873535,
-					-1.788827657699585,
-					-0.9072701930999756,
+					3.1359236240386963,
+					-0.8902361392974854,
+					-0.9150159955024719,
 					1
 				]
 			}
@@ -823,12 +819,6 @@
 					1
 				]
 			},
-			"methods": {
-				"tick": {
-					"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time",
-					"parameters": []
-				}
-			},
 			"children": {
 				"N6800ef37": {
 					"extends": "asset.vwf",
@@ -875,12 +865,6 @@
 							1
 						],
 						"type": "3DR Object"
-					},
-					"methods": {
-						"tick": {
-							"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    //var parent_y = this.parent.transformAPI.localToGlobalRotation([1, 0, 0]);\n    //parent_y = this.transformAPI.globalToLocalRotation(parent_y);\n    //this.transformAPI.rotateAroundAxis(80, parent_y, this.transformAPI.COORDINATES.LOCAL);\n   // this.transformAPI.rotateAroundAxis(80, [1, 0, 0], this.transformAPI.COORDINATES.LOCAL);",
-							"parameters": []
-						}
 					}
 				},
 				"N912c6b53": {
@@ -937,9 +921,9 @@
 							-0.08479224890470505,
 							0.9961658120155334,
 							0,
-							2.754685640335083,
-							-3.269407272338867,
-							0.004583160392940044,
+							2.546719551086426,
+							-2.3708155155181885,
+							-0.003162582404911518,
 							1
 						]
 					},
