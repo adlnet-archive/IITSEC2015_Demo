@@ -1,7 +1,7 @@
 {
 	"extends": "asset.vwf",
-	"source": "http://54.175.234.78:3030/assets/103b7f49",
-	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"source": "http://54.175.234.78:3030/assets/25f0ce05",
+	"type": "subDriver/threejs/asset/vnd.gltf+json",
 	"sequence": 0,
 	"random": {
 		"s0": 0.7124761412851512,
@@ -29,9 +29,9 @@
 				"b": 1
 			},
 			"ambient": {
-				"r": 0,
-				"g": 0,
-				"b": 0
+				"r": 1,
+				"g": 1,
+				"b": 1
 			},
 			"emit": {
 				"r": 0,
@@ -85,11 +85,12 @@
 			0,
 			1,
 			0,
-			-0.5008558630943298,
-			-10.001130104064941,
-			1.1056405305862427,
+			-11.516963005065918,
+			39.36640548706055,
+			0.10746093839406967,
 			1
 		],
-		"___sourceAssetTimestamp": "Tue Nov 17 2015 17:08:29 GMT-0500 (Eastern Standard Time)"
+		"___sourceAssetTimestamp": "Mon Nov 23 2015 11:39:06 GMT-0500 (EST)",
+		"sourceAssetId": "135c788b"
 	}
 }

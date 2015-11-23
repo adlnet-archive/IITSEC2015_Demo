@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.7783896480686963,
-		"s1": 0.18596333335153759,
-		"s2": 0.9032814893871546,
-		"c": 491674
+		"s0": 0.7150934163946658,
+		"s1": 0.943668078398332,
+		"s2": 0.9468559925444424,
+		"c": 2035423
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -54,7 +54,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Fri Nov 20 2015 11:12:00 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 23 2015 12:25:45 GMT-0500 (Eastern Standard Time)",
 		"_length": 0.23,
 		"accuracy": 24,
 		"activeState": "targeting",
@@ -259,20 +259,20 @@
 			"type": "subDriver/threejs"
 		},
 		"transform": [
-			0.5735764503479004,
-			-0.819027304649353,
+			0.13064205646514893,
+			0.9913265109062195,
 			-0.014296174049377441,
 			0,
-			0.8191520571708679,
-			0.5734890699386597,
+			-0.9913594722747803,
+			0.13079075515270233,
 			0.010010289028286934,
 			0,
-			0,
-			-0.01746985875070095,
+			0.011805065907537937,
+			0.012877748347818851,
 			1.000847578048706,
 			0,
-			4.331390857696533,
-			-2.4935526847839355,
+			-0.6584042906761169,
+			-0.08281058073043823,
 			0.01774579845368862,
 			1
 		],
@@ -331,10 +331,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       this.Scene.unbind(\"pointerMove\", this._pv);\n                  this.Scene.unbind(\"pointerDown\", this._pd);\n                  this.Scene.unbind(\"pointerUp\", this._pu);\n                  \n                  this.Scene.unbind(\"keyDown\", this._kd);\n                  this.Scene.unbind(\"keyUp\", this._ku);\n                  var self = this;\n                  this._pv = function(e, d)\n                  {\n                      self._pointerMove(e, d);\n                  }\n                  this._pd = function(e, d)\n                  {\n                      self._pointerDown(e, d);\n                  }\n                  this._pu = function(e, d)\n                  {\n                      self._pointerUp(e, d);\n                  }\n                  this._kd = function(e, d)\n                  {\n                      self._keyDown(e, d);\n                  }\n                  this._ku = function(e, d)\n                  {\n                      self._keyUp(e, d);\n                  }\n                  this.Scene.bind(\"pointerMove\", this._pv);\n                  this.Scene.bind(\"pointerDown\", this._pd);\n                  this.Scene.bind(\"pointerUp\", this._pu);\n                  this.Scene.bind(\"keyDown\", this._kd);\n                  this.Scene.bind(\"keyUp\", this._ku);                         \n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
-		"reloading": {
-			"body": "if (this.firecounter == 0)\n    {\n        \n        console.log('reloading, so stopping sound and sending xapi statement');\n        this.Ammo = 1000;\n        this.xAPISend();\n        this.state = 'ready';\n\n        this.activateState('targeting');\n    }",
-			"parameters": []
-		},
 		"returnFromShakeOffsets": {
 			"body": "this.userControlCounter--;\n    var pos = this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.getPosition();\n    var goal = [0.1, -0.01, -2];\n    var move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].children_by_name[\"50 Cal Camera\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);\n\n    pos = this.children_by_name[\"50CalPivot\"].transformAPI.getPosition();\n    goal = [0.0, 0, 0.75];\n    move = Vec3.subtract(goal, pos, []);\n\n    this.children_by_name[\"50CalPivot\"].transformAPI.move(move[0] / 2, move[1] / 2, move[2] / 2);",
 			"parameters": []
@@ -377,12 +373,6 @@
 			"body": "this.returnFromShakeOffsets();\n    this.firecounter++;\n\n    if (!this.userControlled())\n    {\n        var state = this.states[this.activeState];\n        if (state)\n        {\n            if (state.updateFunc && this[state.updateFunc])\n                this[state.updateFunc]();\n        }\n\n    }\n    else\n    {\n\n        if (this.firing() && this.Ammo > 0)\n        {\n            this.playBurst();\n            this.shake();\n\n            if (this.firecounter >= 2)\n            {\n                this.firecounter = 0;\n                this.fire();\n            }\n\n        }\n        else\n        {\n            this.stopBurst();\n            if (this.Ammo <= 0)\n                this.reloading();\n        }\n    }",
 			"parameters": []
 		},
-		"_keyUp": {
-			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.keysDown.splice(this.keysDown.indexOf(' '), 1)\n    if (e.key.char == ' ')\n    {\n        this.playSound(\"/sas/assets/8eb34370\", false, 10);\n        this.xAPISend([]);\n    }",
-			"parameters": [
-				"e"
-			]
-		},
 		"playBurst": {
 			"body": "var sound = vwf.callMethod(this.id, \"getSound\", [this.fireSound]);\n    if (sound && !sound.isPlaying())\n    {\n        sound.play();\n    }\n    else if (!sound)\n    {\n        this.audioAPI.playSound(this.fireSound, true, 200);\n    }",
 			"parameters": []
@@ -411,6 +401,16 @@
 			"body": "console.log(\"verifyHit method\");\n\n    // console.error('We have hit', hit);\n    if (name != \"Ocean-Collision\" && name != \"Terrain\")\n    {\n        this.numHits++;\n        var newObj = true;\n        for (var i in this.hits)\n        {\n            if (this.hits[i] === name)\n                newObj = false;\n        }\n        if (newObj)\n            this.hits.push(name); //or hit.node, or hit.node.DisplayName\n    }",
 			"parameters": [
 				"name"
+			]
+		},
+		"reloading": {
+			"body": "if (this.firecounter == 0)\n    {\n\n        console.log('reloading, so stopping sound and sending xapi statement');\n        this.Ammo = 1000;\n        // this.xAPISend();\n        this.state = 'ready';\n\n        this.activateState('targeting');\n    }",
+			"parameters": []
+		},
+		"_keyUp": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    this.keysDown.splice(this.keysDown.indexOf(' '), 1)\n    if (e.key.char == ' ' && (this.activeState != 'reloading'))\n    {\n        this.playSound(\"/sas/assets/8eb34370\", false, 10);\n        this.xAPISend([]);\n    }",
+			"parameters": [
+				"e"
 			]
 		}
 	},
@@ -619,20 +619,20 @@
 						"visible": false,
 						"width": 0.28,
 						"worldTransform": [
-							0.009980260394513607,
-							-0.03166591748595238,
+							0.014041038230061531,
+							0.030086293816566467,
 							0.9974443316459656,
 							0,
-							0.8166946172714233,
-							0.571768581867218,
+							-0.9883853793144226,
+							0.13039842247962952,
 							0.009980257600545883,
 							0,
-							-0.5717687010765076,
-							0.8161420226097107,
+							-0.13002492487430573,
+							-0.9879780411720276,
 							0.03166591376066208,
 							0,
-							3.8975636959075928,
-							-1.8897062540054321,
+							-0.7466552257537842,
+							-0.8210837244987488,
 							0.8012259006500244,
 							0.9999998807907104
 						]
