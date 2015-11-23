@@ -48,7 +48,7 @@
 			0
 		],
 		"___physics_mass": 100,
-		"___sourceAssetTimestamp": "Wed Nov 04 2015 14:26:31 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 23 2015 09:48:45 GMT-0500 (Eastern Standard Time)",
 		"counter": 0,
 		"explosionDef": {
 			"continues": "/sas/assets/d3402bc3",
@@ -137,9 +137,9 @@
 			0.9950271248817444,
 			-0.05214716121554375,
 			0,
-			-8.831530570983887,
-			-9.738909721374512,
-			0.32723790407180786,
+			10.84681224822998,
+			-4.1040358543396,
+			0.3141923248767853,
 			1
 		],
 		"turnRadius": 300,
@@ -157,13 +157,20 @@
 			0.9950271248817444,
 			-0.05214716121554375,
 			0,
-			-8.831530570983887,
-			-9.738909721374512,
-			0.32723790407180786,
+			10.84681224822998,
+			-4.1040358543396,
+			0.3141923248767853,
 			1
 		]
 	},
 	"methods": {
+		"collision": {
+			"body": "// The body has collided with another body. The ID of the node is param 1, collision data in param 2\n    if (this.counter > 20)\n    {\n        this.explode();\n        this.xAPISend(obstacle);\n        var node = this.Scene.findNodeByID(obstacle);\n        if (node && node.hit)\n            node.hit([0, 0, 0], 50);\n        vwf.deleteNode(this.id);\n        return;\n    }",
+			"parameters": [
+				"obstacle",
+				"data"
+			]
+		},
 		"explode": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                             var def = this.explosionDef;\n                                                                var pos = this.transformAPI.getWorldPosition();\n\n                                                                def.properties.transform[12] = pos[0];\n                                                                def.properties.transform[13] = pos[1];\n                                                                def.properties.transform[14] = pos[2];\n                                                                var now = performance.now();\n                                                                // console.profile(\"launch\");\n                                                                vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n                                                                {\n                                                                    vwf.callMethod(childID, 'explode');\n                                                                }); \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -178,16 +185,15 @@
 				"info"
 			]
 		},
-		"collision": {
-			"body": "// The body has collided with another body. The ID of the node is param 1, collision data in param 2\n    if (this.counter > 20)\n    {\n        this.explode();\n        var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            var context = {\n                \"target\": this.target_data,\n                \"objectHit\": obstacle,\n                \"data\": data,\n                \"position\": this.worldTransform.slice(),\n            }\n            sender.xAPISend(\"hit\", (this.DisplayName + this.ID), \"Seahawk Pilot\", context);\n        }\n        var node = this.Scene.findNodeByID(obstacle);\n        if (node && node.hit)\n            node.hit([0, 0, 0], 50);\n        vwf.deleteNode(this.id);\n        return;\n    }",
-			"parameters": [
-				"obstacle",
-				"data"
-			]
-		},
 		"tick": {
-			"body": "if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 80 && this.counter > 0)\n    {\n\n        var force = this.transformAPI.localToGlobal(0, 0, -60 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        // this.physicsAPI.addTorque([this.random() * 10, this.random() * 10, this.random() * 1]);\n\n    }\n\n    var targetNode = null;\n\n    if (!this.target_data.id)\n    {\n        var localUp = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var localSide = MATH.crossVec3(localUp, [0, 0, 1]);\n        var angle = MATH.dotVec3(localUp, [0, 0, 1]);\n        angle += -.02;\n        if (this.counter > 10)\n        {\n            if (angle < 0)\n            {\n                this.transformAPI.rotateAroundAxis(-10 * angle, localSide, this.transformAPI.COORDINATES.GLOBAL);\n            }\n            else\n            {\n                this.transformAPI.rotateAroundAxis(10 * angle, localSide, this.transformAPI.COORDINATES.GLOBAL);\n            }\n        }\n    }\n    else if (targetNode = this.Scene.findNodeByID(this.target_data.id)) // have target!\n    {\n\n        var targetPos = this.transformAPI.localToGlobal(0, 0, -1);\n        this.target_data.position = targetNode.transformAPI.getWorldPosition();\n\n        targetPos[0] = (targetPos[0] * this.turnRadius + this.target_data.position[0] * 1) / (this.turnRadius + 1);\n        targetPos[1] = (targetPos[1] * this.turnRadius + this.target_data.position[1] * 1) / (this.turnRadius + 1);\n        targetPos[2] = (targetPos[2] * this.turnRadius + this.target_data.position[2] * 1) / (this.turnRadius + 1);\n\n        var frontDir = this.transformAPI.localToGlobalRotation(0, 0, -1);\n        var targetDir = MATH.subVec3(targetPos, this.transformAPI.getWorldPosition());\n        if (MATH.distanceVec3(this.transformAPI.getWorldPosition(), this.target_data.position) < 5)\n        {\n            this.hit();\n            return;\n        }\n        targetDir = MATH.toUnitVec3(targetDir);\n\n        if (MATH.dotVec3(frontDir, targetDir) > .5)\n            this.transformAPI.lookat(targetPos, null, 'Z', 'Y');\n\n    }\n\n    if (this.counter > 20 && this.counter < 270)\n    {\n\n        var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var center = this.transformAPI.getPosition();\n        var hit = this.Scene.traceAPI.rayCast(center, offset,\n        {\n            ignore: [findviewnode(this.id)]\n        });\n        if (hit && hit.distance < 2)\n        {\n\n            if (hit.node && hit.node.hit)\n            {\n                hit.node.hit(hit.point, 50);\n            }\n            this.explode();\n            console.log(hit);\n            vwf.deleteNode(this.id);\n            return;\n        }\n    }\n    // if (this.counter > 60)\n    //        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 10 && this.counter < 270)\n    {\n        var vel = this.physicsAPI.getLinearVelocity();\n        var speed = MATH.lengthVec3(vel);\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] = 0;\n        vel[1] = 0;\n        vel = MATH.toUnitVec3(vel);\n        vel = MATH.scaleVec3(vel, speed);\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n    }\n    if (this.counter > 270)\n        vwf.deleteNode(this.id);",
+			"body": "if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 80 && this.counter > 0)\n    {\n\n        var force = this.transformAPI.localToGlobal(0, 0, -60 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        // this.physicsAPI.addTorque([this.random() * 10, this.random() * 10, this.random() * 1]);\n\n    }\n\n    var targetNode = null;\n\n    if (!this.target_data.id)\n    {\n        var localUp = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var localSide = MATH.crossVec3(localUp, [0, 0, 1]);\n        var angle = MATH.dotVec3(localUp, [0, 0, 1]);\n        angle += -.02;\n        if (this.counter > 10)\n        {\n            if (angle < 0)\n            {\n                this.transformAPI.rotateAroundAxis(-10 * angle, localSide, this.transformAPI.COORDINATES.GLOBAL);\n            }\n            else\n            {\n                this.transformAPI.rotateAroundAxis(10 * angle, localSide, this.transformAPI.COORDINATES.GLOBAL);\n            }\n        }\n    }\n    else if (targetNode = this.Scene.findNodeByID(this.target_data.id)) // have target!\n    {\n\n        var targetPos = this.transformAPI.localToGlobal(0, 0, -1);\n        this.target_data.position = targetNode.transformAPI.getWorldPosition();\n\n        targetPos[0] = (targetPos[0] * this.turnRadius + this.target_data.position[0] * 1) / (this.turnRadius + 1);\n        targetPos[1] = (targetPos[1] * this.turnRadius + this.target_data.position[1] * 1) / (this.turnRadius + 1);\n        targetPos[2] = (targetPos[2] * this.turnRadius + this.target_data.position[2] * 1) / (this.turnRadius + 1);\n\n        var frontDir = this.transformAPI.localToGlobalRotation(0, 0, -1);\n        var targetDir = MATH.subVec3(targetPos, this.transformAPI.getWorldPosition());\n        if (MATH.distanceVec3(this.transformAPI.getWorldPosition(), this.target_data.position) < 5)\n        {\n            this.hit();\n            return;\n        }\n        targetDir = MATH.toUnitVec3(targetDir);\n\n        if (MATH.dotVec3(frontDir, targetDir) > .5)\n            this.transformAPI.lookat(targetPos, null, 'Z', 'Y');\n\n    }\n\n    if (this.counter > 20 && this.counter < 270)\n    {\n\n        var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var center = this.transformAPI.getPosition();\n        var hit = this.Scene.traceAPI.rayCast(center, offset,\n        {\n            ignore: [findviewnode(this.id)]\n        });\n        if (hit && hit.distance < 2)\n        {\n\n            if (hit.node && hit.node.hit)\n            {\n                hit.node.hit(hit.point, 50);\n            }\n            this.explode();\n            console.log(hit);\n            this.xAPISend(hit);\n            vwf.deleteNode(this.id);\n            return;\n        }\n    }\n    // if (this.counter > 60)\n    //        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 10 && this.counter < 270)\n    {\n        var vel = this.physicsAPI.getLinearVelocity();\n        var speed = MATH.lengthVec3(vel);\n        vel = this.transformAPI.globalToLocalRotation(vel);\n        vel[0] = 0;\n        vel[1] = 0;\n        vel = MATH.toUnitVec3(vel);\n        vel = MATH.scaleVec3(vel, speed);\n        vel = this.transformAPI.localToGlobalRotation(vel);\n        this.physicsAPI.setLinearVelocity(vel);\n    }\n    if (this.counter > 270)\n    {\n        xAPISend(null);\n        vwf.deleteNode(this.id);\n    }",
 			"parameters": []
+		},
+		"xAPISend": {
+			"body": "console.log(\"Missile xAPI Send\");\n    var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            var context = {\n                \"target\": this.target_data,\n                \"objectHit\": obstacle,\n                \"data\": data,\n                \"position\": this.worldTransform.slice(),\n            }\n            sender.xAPISend(\"hit\", (this.DisplayName + this.ID), \"Seahawk Pilot\", context);\n        }",
+			"parameters": [
+				"objName"
+			]
 		}
 	},
 	"children": {
