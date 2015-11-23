@@ -1,0 +1,1575 @@
+{
+	"accessors": {
+		"accessor_102": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 236070,
+			"byteStride": 0,
+			"count": 1848,
+			"type": 5123
+		},
+		"accessor_104": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 3777120,
+			"byteStride": 12,
+			"count": 1848,
+			"max": [
+				1075.72,
+				3280.33,
+				1195.07
+			],
+			"min": [
+				-1085.81,
+				-4397.5,
+				973.077
+			],
+			"type": 35665
+		},
+		"accessor_106": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 3799296,
+			"byteStride": 12,
+			"count": 1848,
+			"max": [
+				1,
+				1,
+				0.99986
+			],
+			"min": [
+				-0.984808,
+				-1,
+				-0.99986
+			],
+			"type": 35665
+		},
+		"accessor_108": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 3821472,
+			"byteStride": 8,
+			"count": 1848,
+			"max": [
+				0.489413,
+				0.270183
+			],
+			"min": [
+				0.425656,
+				0.207707
+			],
+			"type": 35664
+		},
+		"accessor_129": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 0,
+			"byteStride": 0,
+			"count": 480,
+			"type": 5123
+		},
+		"accessor_131": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 0,
+			"byteStride": 12,
+			"count": 480,
+			"max": [
+				487.391,
+				-7518.47,
+				1186.33
+			],
+			"min": [
+				-492.899,
+				-7757.85,
+				867.402
+			],
+			"type": 35665
+		},
+		"accessor_133": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 5760,
+			"byteStride": 12,
+			"count": 480,
+			"max": [
+				0.898011,
+				0.93675,
+				0.971737
+			],
+			"min": [
+				-0.872652,
+				-0.934354,
+				-0.971737
+			],
+			"type": 35665
+		},
+		"accessor_135": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 11520,
+			"byteStride": 8,
+			"count": 480,
+			"max": [
+				0.488326,
+				0.269468
+			],
+			"min": [
+				0.426195,
+				0.207338
+			],
+			"type": 35664
+		},
+		"accessor_156": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 267802,
+			"byteStride": 0,
+			"count": 13968,
+			"type": 5123
+		},
+		"accessor_158": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4284832,
+			"byteStride": 12,
+			"count": 13968,
+			"max": [
+				942.158,
+				5673.42,
+				2609.42
+			],
+			"min": [
+				-957.708,
+				5466.19,
+				1293.72
+			],
+			"type": 35665
+		},
+		"accessor_160": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4452448,
+			"byteStride": 12,
+			"count": 13968,
+			"max": [
+				1,
+				0.999967,
+				0.989016
+			],
+			"min": [
+				-1,
+				-0.999967,
+				-0.989016
+			],
+			"type": 35665
+		},
+		"accessor_162": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4620064,
+			"byteStride": 8,
+			"count": 13968,
+			"max": [
+				0.985785,
+				0.683174
+			],
+			"min": [
+				0.733298,
+				0.479785
+			],
+			"type": 35664
+		},
+		"accessor_184": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 72924,
+			"byteStride": 0,
+			"count": 16893,
+			"type": 5123
+		},
+		"accessor_186": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 1166784,
+			"byteStride": 12,
+			"count": 16893,
+			"max": [
+				1030.55,
+				4665.33,
+				2026.97
+			],
+			"min": [
+				-1044.35,
+				-6476.87,
+				795.632
+			],
+			"type": 35665
+		},
+		"accessor_188": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 1369500,
+			"byteStride": 12,
+			"count": 16893,
+			"max": [
+				1,
+				0.999966,
+				1
+			],
+			"min": [
+				-1,
+				-0.999966,
+				-0.993502
+			],
+			"type": 35665
+		},
+		"accessor_190": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 1572216,
+			"byteStride": 8,
+			"count": 16893,
+			"max": [
+				0.999989,
+				0.36724
+			],
+			"min": [
+				0.43003,
+				0.00229102
+			],
+			"type": 35664
+		},
+		"accessor_21": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 8904,
+			"byteStride": 0,
+			"count": 32010,
+			"type": 5123
+		},
+		"accessor_211": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 960,
+			"byteStride": 0,
+			"count": 3972,
+			"type": 5123
+		},
+		"accessor_213": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 15360,
+			"byteStride": 12,
+			"count": 3972,
+			"max": [
+				161.847,
+				-6633.24,
+				2456.67
+			],
+			"min": [
+				-150.846,
+				-6849.52,
+				1237.58
+			],
+			"type": 35665
+		},
+		"accessor_215": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 63024,
+			"byteStride": 12,
+			"count": 3972,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_217": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 110688,
+			"byteStride": 8,
+			"count": 3972,
+			"max": [
+				0.422694,
+				0.374701
+			],
+			"min": [
+				0.237572,
+				0.248653
+			],
+			"type": 35664
+		},
+		"accessor_23": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 142464,
+			"byteStride": 12,
+			"count": 32010,
+			"max": [
+				1186.53,
+				7369.99,
+				1422.15
+			],
+			"min": [
+				-1194.22,
+				-8526.74,
+				-148.004
+			],
+			"type": 35665
+		},
+		"accessor_238": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 308872,
+			"byteStride": 0,
+			"count": 25344,
+			"type": 5123
+		},
+		"accessor_240": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4941952,
+			"byteStride": 12,
+			"count": 25344,
+			"max": [
+				921.489,
+				6943.26,
+				1536.78
+			],
+			"min": [
+				-969.936,
+				-7889.22,
+				1059.71
+			],
+			"type": 35665
+		},
+		"accessor_242": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 5246080,
+			"byteStride": 12,
+			"count": 25344,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_244": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 5550208,
+			"byteStride": 8,
+			"count": 25344,
+			"max": [
+				0.730556,
+				0.274421
+			],
+			"min": [
+				0.42439,
+				0.084538
+			],
+			"type": 35664
+		},
+		"accessor_25": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 526584,
+			"byteStride": 12,
+			"count": 32010,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_265": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 295738,
+			"byteStride": 0,
+			"count": 6567,
+			"type": 5123
+		},
+		"accessor_267": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4731808,
+			"byteStride": 12,
+			"count": 6567,
+			"max": [
+				1152.69,
+				6122.94,
+				2561.89
+			],
+			"min": [
+				-1133.14,
+				5207.32,
+				1080.68
+			],
+			"type": 35665
+		},
+		"accessor_269": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4810612,
+			"byteStride": 12,
+			"count": 6567,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_27": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 910704,
+			"byteStride": 8,
+			"count": 32010,
+			"max": [
+				1.00168,
+				0.960003
+			],
+			"min": [
+				-0.001019,
+				0.278931
+			],
+			"type": 35664
+		},
+		"accessor_271": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4889416,
+			"byteStride": 8,
+			"count": 6567,
+			"max": [
+				0.415465,
+				0.375083
+			],
+			"min": [
+				0.000527,
+				0.000145018
+			],
+			"type": 35664
+		},
+		"accessor_292": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 261778,
+			"byteStride": 0,
+			"count": 3012,
+			"type": 5123
+		},
+		"accessor_294": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4188448,
+			"byteStride": 12,
+			"count": 3012,
+			"max": [
+				206.023,
+				6104.37,
+				2687.34
+			],
+			"min": [
+				-186.205,
+				5748.25,
+				1856.02
+			],
+			"type": 35665
+		},
+		"accessor_296": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4224592,
+			"byteStride": 12,
+			"count": 3012,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_298": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4260736,
+			"byteStride": 8,
+			"count": 3012,
+			"max": [
+				0.549225,
+				0.260297
+			],
+			"min": [
+				0.433373,
+				0.134796
+			],
+			"type": 35664
+		},
+		"accessor_319": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 258846,
+			"byteStride": 0,
+			"count": 1466,
+			"type": 5123
+		},
+		"accessor_321": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4141536,
+			"byteStride": 12,
+			"count": 1466,
+			"max": [
+				255.996,
+				5654.84,
+				2944.8
+			],
+			"min": [
+				-191.702,
+				5521,
+				2552.17
+			],
+			"type": 35665
+		},
+		"accessor_323": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4159128,
+			"byteStride": 12,
+			"count": 1466,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_325": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4176720,
+			"byteStride": 8,
+			"count": 1466,
+			"max": [
+				0.419831,
+				0.369615
+			],
+			"min": [
+				0.265216,
+				0.283421
+			],
+			"type": 35664
+		},
+		"accessor_346": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 359560,
+			"byteStride": 0,
+			"count": 12687,
+			"type": 5123
+		},
+		"accessor_348": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 5752960,
+			"byteStride": 12,
+			"count": 12687,
+			"max": [
+				794.47,
+				5697.65,
+				2554.39
+			],
+			"min": [
+				-775.21,
+				5225.11,
+				1502.4
+			],
+			"type": 35665
+		},
+		"accessor_350": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 5905204,
+			"byteStride": 12,
+			"count": 12687,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_352": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 6057448,
+			"byteStride": 8,
+			"count": 12687,
+			"max": [
+				0.052247,
+				0.220811
+			],
+			"min": [
+				0.001388,
+				0.195599
+			],
+			"type": 35664
+		},
+		"accessor_48": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 106710,
+			"byteStride": 0,
+			"count": 64680,
+			"type": 5123
+		},
+		"accessor_50": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 1707360,
+			"byteStride": 12,
+			"count": 64680,
+			"max": [
+				1061.35,
+				3801.03,
+				2404.57
+			],
+			"min": [
+				-1051.18,
+				-4944.4,
+				782.675
+			],
+			"type": 35665
+		},
+		"accessor_52": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 2483520,
+			"byteStride": 12,
+			"count": 64680,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_54": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 3259680,
+			"byteStride": 8,
+			"count": 64680,
+			"max": [
+				0.549008,
+				0.325743
+			],
+			"min": [
+				0.447224,
+				0.249388
+			],
+			"type": 35664
+		},
+		"accessor_75": {
+			"bufferView": "bufferView_354",
+			"byteOffset": 239766,
+			"byteStride": 0,
+			"count": 9540,
+			"type": 5123
+		},
+		"accessor_77": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 3836256,
+			"byteStride": 12,
+			"count": 9540,
+			"max": [
+				1131.15,
+				7324.52,
+				1447.43
+			],
+			"min": [
+				-1127.41,
+				-5739.08,
+				981.659
+			],
+			"type": 35665
+		},
+		"accessor_79": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 3950736,
+			"byteStride": 12,
+			"count": 9540,
+			"max": [
+				1,
+				1,
+				1
+			],
+			"min": [
+				-1,
+				-1,
+				-1
+			],
+			"type": 35665
+		},
+		"accessor_81": {
+			"bufferView": "bufferView_355",
+			"byteOffset": 4065216,
+			"byteStride": 8,
+			"count": 9540,
+			"max": [
+				0.548143,
+				0.374577
+			],
+			"min": [
+				0.448367,
+				0.283381
+			],
+			"type": 35664
+		}
+	},
+	"animations": {},
+	"asset": {
+		"generator": "collada2gltf@63e932907e3f0c834c8668d04f03ddb6eabf78d1",
+		"premultipliedAlpha": true,
+		"profile": "WebGL 1.0.2",
+		"version": 0.6
+	},
+	"bufferViews": {
+		"bufferView_354": {
+			"buffer": "lng-tanker",
+			"byteLength": 384936,
+			"byteOffset": 0,
+			"target": 34963
+		},
+		"bufferView_355": {
+			"buffer": "lng-tanker",
+			"byteLength": 6158944,
+			"byteOffset": 384936,
+			"target": 34962
+		}
+	},
+	"buffers": {
+		"lng-tanker": {
+			"byteLength": 6543880,
+			"path": "efdf4a4b",
+			"type": "arraybuffer"
+		}
+	},
+	"images": {
+		"RENA_tex_jpg-image": {
+			"path": ""
+		},
+		"file1-image": {
+			"path": "/Archive_Database/July2015/Navy"
+		}
+	},
+	"materials": {
+		"LNG_Color-fx": {
+			"instanceTechnique": {
+				"technique": "technique0",
+				"values": {
+					"ambient": [
+						0,
+						0,
+						0,
+						1
+					],
+					"emission": [
+						0,
+						0,
+						0,
+						1
+					]
+				}
+			},
+			"name": "LNG_Color"
+		},
+		"RENA-fx": {
+			"instanceTechnique": {
+				"technique": "technique1",
+				"values": {
+					"ambient": [
+						0.421057,
+						0.421057,
+						0.421057,
+						1
+					],
+					"emission": [
+						0,
+						0,
+						0,
+						1
+					],
+					"shininess": 2,
+					"specular": [
+						0,
+						0,
+						0,
+						1
+					]
+				}
+			},
+			"name": "RENA"
+		}
+	},
+	"meshes": {
+		"Anchor-lib": {
+			"name": "AnchorMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_133",
+						"POSITION": "accessor_131",
+						"TEXCOORD_0": "accessor_135"
+					},
+					"indices": "accessor_129",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Foremast1-lib": {
+			"name": "Foremast1Mesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_215",
+						"POSITION": "accessor_213",
+						"TEXCOORD_0": "accessor_217"
+					},
+					"indices": "accessor_211",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"LNG_Carrier_Hull-lib": {
+			"name": "LNG_Carrier_HullMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_25",
+						"POSITION": "accessor_23",
+						"TEXCOORD_0": "accessor_27"
+					},
+					"indices": "accessor_21",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"LNG_Tanks-lib": {
+			"name": "LNG_TanksMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_188",
+						"POSITION": "accessor_186",
+						"TEXCOORD_0": "accessor_190"
+					},
+					"indices": "accessor_184",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Pipes-lib": {
+			"name": "PipesMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_52",
+						"POSITION": "accessor_50",
+						"TEXCOORD_0": "accessor_54"
+					},
+					"indices": "accessor_48",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Rail_Stands-lib": {
+			"name": "Rail_StandsMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_106",
+						"POSITION": "accessor_104",
+						"TEXCOORD_0": "accessor_108"
+					},
+					"indices": "accessor_102",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Rails-lib": {
+			"name": "RailsMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_79",
+						"POSITION": "accessor_77",
+						"TEXCOORD_0": "accessor_81"
+					},
+					"indices": "accessor_75",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Rear_Tower-lib": {
+			"name": "Rear_TowerMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_323",
+						"POSITION": "accessor_321",
+						"TEXCOORD_0": "accessor_325"
+					},
+					"indices": "accessor_319",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Smokestack-lib": {
+			"name": "SmokestackMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_296",
+						"POSITION": "accessor_294",
+						"TEXCOORD_0": "accessor_298"
+					},
+					"indices": "accessor_292",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Stairs-lib": {
+			"name": "StairsMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_160",
+						"POSITION": "accessor_158",
+						"TEXCOORD_0": "accessor_162"
+					},
+					"indices": "accessor_156",
+					"material": "RENA-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Superstructure-lib": {
+			"name": "SuperstructureMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_269",
+						"POSITION": "accessor_267",
+						"TEXCOORD_0": "accessor_271"
+					},
+					"indices": "accessor_265",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Winch_Front4-lib": {
+			"name": "Winch_Front4Mesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_242",
+						"POSITION": "accessor_240",
+						"TEXCOORD_0": "accessor_244"
+					},
+					"indices": "accessor_238",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		},
+		"Windows-lib": {
+			"name": "WindowsMesh",
+			"primitives": [
+				{
+					"attributes": {
+						"NORMAL": "accessor_350",
+						"POSITION": "accessor_348",
+						"TEXCOORD_0": "accessor_352"
+					},
+					"indices": "accessor_346",
+					"material": "LNG_Color-fx",
+					"primitive": 4
+				}
+			]
+		}
+	},
+	"nodes": {
+		"Anchor": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Anchor-lib"
+			],
+			"name": "Anchor"
+		},
+		"Bollocks": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"name": "Bollocks"
+		},
+		"Foremast1": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Foremast1-lib"
+			],
+			"name": "Foremast1"
+		},
+		"LNG_Carrier_Hull": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"LNG_Carrier_Hull-lib"
+			],
+			"name": "LNG_Carrier_Hull"
+		},
+		"LNG_Tanks": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"LNG_Tanks-lib"
+			],
+			"name": "LNG_Tanks"
+		},
+		"Pipes": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Pipes-lib"
+			],
+			"name": "Pipes"
+		},
+		"Rail_Stands": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Rail_Stands-lib"
+			],
+			"name": "Rail_Stands"
+		},
+		"Rails": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Rails-lib"
+			],
+			"name": "Rails"
+		},
+		"Rear_Tower": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Rear_Tower-lib"
+			],
+			"name": "Rear_Tower"
+		},
+		"Smokestack": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Smokestack-lib"
+			],
+			"name": "Smokestack"
+		},
+		"Stairs": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Stairs-lib"
+			],
+			"name": "Stairs"
+		},
+		"Superstructure": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Superstructure-lib"
+			],
+			"name": "Superstructure"
+		},
+		"Winch_Front4": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Winch_Front4-lib"
+			],
+			"name": "Winch_Front4"
+		},
+		"Windows": {
+			"children": [],
+			"matrix": [
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				0.01,
+				0,
+				0,
+				0,
+				0,
+				1
+			],
+			"meshes": [
+				"Windows-lib"
+			],
+			"name": "Windows"
+		}
+	},
+	"programs": {
+		"program_0": {
+			"attributes": [
+				"a_normal",
+				"a_position"
+			],
+			"fragmentShader": "lng-tanker0FS",
+			"vertexShader": "lng-tanker0VS"
+		},
+		"program_1": {
+			"attributes": [
+				"a_normal",
+				"a_position"
+			],
+			"fragmentShader": "lng-tanker1FS",
+			"vertexShader": "lng-tanker1VS"
+		}
+	},
+	"scene": "defaultScene",
+	"scenes": {
+		"defaultScene": {
+			"nodes": [
+				"LNG_Carrier_Hull",
+				"Pipes",
+				"Rails",
+				"Rail_Stands",
+				"Anchor",
+				"Stairs",
+				"Bollocks",
+				"LNG_Tanks",
+				"Foremast1",
+				"Winch_Front4",
+				"Superstructure",
+				"Smokestack",
+				"Rear_Tower",
+				"Windows"
+			]
+		}
+	},
+	"shaders": {
+		"lng-tanker0FS": {
+			"path": "lng-tanker0FS.glsl",
+			"type": 35632
+		},
+		"lng-tanker0VS": {
+			"path": "lng-tanker0VS.glsl",
+			"type": 35633
+		},
+		"lng-tanker1FS": {
+			"path": "lng-tanker1FS.glsl",
+			"type": 35632
+		},
+		"lng-tanker1VS": {
+			"path": "lng-tanker1VS.glsl",
+			"type": 35633
+		}
+	},
+	"skins": {},
+	"techniques": {
+		"technique0": {
+			"parameters": {
+				"ambient": {
+					"type": 35666
+				},
+				"emission": {
+					"type": 35666
+				},
+				"modelViewMatrix": {
+					"semantic": "MODELVIEW",
+					"type": 35676
+				},
+				"normal": {
+					"semantic": "NORMAL",
+					"type": 35665
+				},
+				"normalMatrix": {
+					"semantic": "MODELVIEWINVERSETRANSPOSE",
+					"type": 35675
+				},
+				"position": {
+					"semantic": "POSITION",
+					"type": 35665
+				},
+				"projectionMatrix": {
+					"semantic": "PROJECTION",
+					"type": 35676
+				}
+			},
+			"pass": "defaultPass",
+			"passes": {
+				"defaultPass": {
+					"details": {
+						"commonProfile": {
+							"extras": {
+								"doubleSided": false
+							},
+							"lightingModel": "Lambert",
+							"parameters": [
+								"ambient",
+								"emission",
+								"modelViewMatrix",
+								"normalMatrix",
+								"projectionMatrix"
+							]
+						},
+						"type": "COLLADA-1.4.1/commonProfile"
+					},
+					"instanceProgram": {
+						"attributes": {
+							"a_normal": "normal",
+							"a_position": "position"
+						},
+						"program": "program_0",
+						"uniforms": {
+							"u_ambient": "ambient",
+							"u_emission": "emission",
+							"u_modelViewMatrix": "modelViewMatrix",
+							"u_normalMatrix": "normalMatrix",
+							"u_projectionMatrix": "projectionMatrix"
+						}
+					},
+					"states": {
+						"blendEnable": 0,
+						"cullFaceEnable": 1,
+						"depthMask": 1,
+						"depthTestEnable": 1
+					}
+				}
+			}
+		},
+		"technique1": {
+			"parameters": {
+				"ambient": {
+					"type": 35666
+				},
+				"emission": {
+					"type": 35666
+				},
+				"modelViewMatrix": {
+					"semantic": "MODELVIEW",
+					"type": 35676
+				},
+				"normal": {
+					"semantic": "NORMAL",
+					"type": 35665
+				},
+				"normalMatrix": {
+					"semantic": "MODELVIEWINVERSETRANSPOSE",
+					"type": 35675
+				},
+				"position": {
+					"semantic": "POSITION",
+					"type": 35665
+				},
+				"projectionMatrix": {
+					"semantic": "PROJECTION",
+					"type": 35676
+				},
+				"shininess": {
+					"type": 5126
+				},
+				"specular": {
+					"type": 35666
+				}
+			},
+			"pass": "defaultPass",
+			"passes": {
+				"defaultPass": {
+					"details": {
+						"commonProfile": {
+							"extras": {
+								"doubleSided": false
+							},
+							"lightingModel": "Phong",
+							"parameters": [
+								"ambient",
+								"emission",
+								"modelViewMatrix",
+								"normalMatrix",
+								"projectionMatrix",
+								"shininess",
+								"specular"
+							]
+						},
+						"type": "COLLADA-1.4.1/commonProfile"
+					},
+					"instanceProgram": {
+						"attributes": {
+							"a_normal": "normal",
+							"a_position": "position"
+						},
+						"program": "program_1",
+						"uniforms": {
+							"u_ambient": "ambient",
+							"u_emission": "emission",
+							"u_modelViewMatrix": "modelViewMatrix",
+							"u_normalMatrix": "normalMatrix",
+							"u_projectionMatrix": "projectionMatrix",
+							"u_shininess": "shininess",
+							"u_specular": "specular"
+						}
+					},
+					"states": {
+						"blendEnable": 0,
+						"cullFaceEnable": 1,
+						"depthMask": 1,
+						"depthTestEnable": 1
+					}
+				}
+			}
+		}
+	}
+}
