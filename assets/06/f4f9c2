@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.6750922142527997,
-		"s1": 0.46568743931129575,
-		"s2": 0.14215276157483459,
-		"c": 1002617
+		"s0": 0.7783896480686963,
+		"s1": 0.18596333335153759,
+		"s2": 0.9032814893871546,
+		"c": 491674
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -54,7 +54,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Wed Nov 18 2015 07:45:33 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Fri Nov 20 2015 11:12:00 GMT-0500 (Eastern Standard Time)",
 		"_length": 0.23,
 		"accuracy": 24,
 		"activeState": "targeting",
@@ -271,8 +271,8 @@
 			-0.01746985875070095,
 			1.000847578048706,
 			0,
-			-0.09672527015209198,
-			1.2322324514389038,
+			4.331390857696533,
+			-2.4935526847839355,
 			0.01774579845368862,
 			1
 		],
@@ -395,16 +395,22 @@
 			"body": "var origin = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"50CalPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy, this.random() / this.accuracy - 1 / this.accuracy];\n    if (!this.userControlled())\n    {\n        shake = MATH.scaleVec3(shake, 1.5);\n    }\n\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n\n    if (hit && hit.node)\n    {\n        // if (Engine.ancestors(hit.node.id).indexOf(this.targetID) != -1)\n        {\n\n            if (hit.node.hit)\n                hit.node.hit([hit.point, 5]);\n\n        }\n        if (!this.userControlled())\n        {\n            // this.stopBurst();\n\n            //    this.activateState(\"targeting\");\n        }\n    }\n\n    this.collectXAPIData(hit);\n    this.Ammo -= 2;\n    console.log(this.Ammo);\n    if (this.Ammo <= 0)\n    {\n        this.startReloading();\n    }",
 			"parameters": []
 		},
-		"collectXAPIData": {
-			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.userControlled())\n    {\n        //2 - Info from bullets - still inside the if sender and user control\n        if (!this.started)\n        {\n            // console.log(\"Starting Burst\");\n            this.startT = this.Scene.time;\n            this.hits = [];\n            this.started = true;\n            this.roundsFired = 0;\n            this.numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        this.roundsFired++;\n        // console.error(hit);\n        if (hit && hit.node && hit.node.DisplayName /*we have hit something significant*/ )\n        {\n            // console.error('We have hit', hit);\n            this.numHits++;\n            var newObj = true;\n            for (var i in this.hits)\n            {\n                if (this.hits[i] === hit.node.DisplayName)\n                    newObj = false;\n            }\n            if (newObj)\n                this.hits.push(hit.node.DisplayName); //or hit.node, or hit.node.DisplayName\n        }\n        // console.error(this.hits);\n        // console.log(this.roundsFired, this.numHits);\n    }",
-			"parameters": [
-				"hit"
-			]
-		},
 		"xAPISend": {
 			"body": "// console.log(\"Ending burst and sending xapi statement\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        this.started = false;\n        var dur = this.Scene.time - this.startT;\n\n        //3 - build objects for statement\n        var result = {\n            score:\n            {\n                max: this.roundsFired, // || 140,\n                raw: this.numHits, // || 45,\n                min: 0,\n                scaled: this.numHits / this.roundsFired, // || 0.321 //remove or 0.321 when in place\n            },\n            success: (this.hits.length > 0),\n            duration: \"PT\" + Math.floor(dur * 1000) / 1000 + \"S\", //a real end - start number of the burst\n            response: \"scaled is the hit/fired ratio\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit\": this.hits.toString() || \"broadside of barn\", //hit.node.DisplayName/hit.node.id\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled\": \"\" + (this.isUserControlled || true),\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/shipStatus\": this.Scene.children_by_name[\"DDG51\"].engine || \"status error\",\n        };\n        // console.error(result);\n        var burstObject = {\n            id: sender.baseURL + \"objects/\" + (encodeURI(\"burst\" + (this.burstCount || 0))),\n            definition:\n            {\n                name:\n                {\n                    \"en-US\": encodeURI(\"burst\" + (this.burstCount || 0)),\n                },\n                type: sender.baseURL + \"activity/types/50CalBurst\",\n            },\n        };\n\n        //4 - Send it - inside if(ended),  inside if(sender)\n        sender.xAPISend(\"fired\", burstObject, \"Small Craft Action Team\", result, conExt);\n    } //if(sender)",
 			"parameters": [
 				"hits"
+			]
+		},
+		"collectXAPIData": {
+			"body": "//1 - Burst Statement\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender && this.userControlled())\n    {\n        //2 - Info from bullets - still inside the if sender and user control\n        if (!this.started)\n        {\n            // console.log(\"Starting Burst\");\n            this.startT = this.Scene.time;\n            this.hits = [];\n            this.started = true;\n            this.roundsFired = 0;\n            this.numHits = 0;\n            this.burstCount++; //make this a property\n        }\n        this.roundsFired++;\n        // console.error(hit);\n        if (hit && hit.node /*we have hit something significant*/ )\n        {\n           this.verifyHit(hit.node.DisplayName);\n        }\n        // console.error(this.hits);\n        // console.log(this.roundsFired, this.numHits);\n    }",
+			"parameters": [
+				"hit"
+			]
+		},
+		"verifyHit": {
+			"body": "console.log(\"verifyHit method\");\n\n    // console.error('We have hit', hit);\n    if (name != \"Ocean-Collision\" && name != \"Terrain\")\n    {\n        this.numHits++;\n        var newObj = true;\n        for (var i in this.hits)\n        {\n            if (this.hits[i] === name)\n                newObj = false;\n        }\n        if (newObj)\n            this.hits.push(name); //or hit.node, or hit.node.DisplayName\n    }",
+			"parameters": [
+				"name"
 			]
 		}
 	},
@@ -625,8 +631,8 @@
 							0.8161420226097107,
 							0.03166591376066208,
 							0,
-							-0.5305518507957458,
-							1.8360782861709595,
+							3.8975636959075928,
+							-1.8897062540054321,
 							0.8012259006500244,
 							0.9999998807907104
 						]

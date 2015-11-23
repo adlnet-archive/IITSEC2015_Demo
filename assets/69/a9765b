@@ -22,7 +22,7 @@
 			-0.1445750892162323,
 			0.00038580354885198176
 		],
-		"DisplayName": "FAC_MASTER2",
+		"DisplayName": "Fishies",
 		"EditorData": {
 			"_controllingCamera": {
 				"displayname": "Controlling Camera",
@@ -119,7 +119,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Thu Nov 19 2015 10:55:26 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Fri Nov 20 2015 13:49:20 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
 		"_length": 22,
 		"activeState": "active",
@@ -155,7 +155,7 @@
 		},
 		"aiTargetID": "asset-vwf-Nc8f85604",
 		"bullets_50_cal": 987,
-		"controllingCamera": "sphere2-vwf-N4e81436",
+		"controllingCamera": "SandboxCamera-vwf-N93228a70",
 		"counter": 14602,
 		"currentState": {
 			"name": "idle",
@@ -305,7 +305,7 @@
 		"fuel": 100,
 		"fuelConsumptionRate": 0.01,
 		"health": 100,
-		"height": 3,
+		"height": 1.2,
 		"hostile": true,
 		"hullStrength": 100,
 		"isSlave": false,
@@ -388,7 +388,7 @@
 				]
 			}
 		},
-		"owner": "ADLteam",
+		"owner": "Andy",
 		"physicsAPI": {},
 		"radarTracked": true,
 		"rangeToTarget": 1000,
@@ -506,21 +506,21 @@
 		},
 		"tickCount": 0,
 		"transform": [
-			-0.9963967204093933,
-			-0.003610003972426057,
-			0.03449152410030365,
+			-0.999360203742981,
+			0.0006475538248196244,
+			0.03575974702835083,
 			0,
-			0.003450007876381278,
-			-0.9959835410118103,
-			-0.0045793671160936356,
+			-0.00008924291614675894,
+			-0.9958787560462952,
+			0.015539859421551228,
 			0,
-			0.03450755402445793,
-			-0.004461716860532761,
-			0.9963927268981934,
+			0.035658203065395355,
+			0.015542315319180489,
+			0.9962409138679504,
 			0,
-			1370.75,
-			900.25,
-			20.5,
+			1.25,
+			-31,
+			0,
 			1
 		],
 		"type": "Primitive",
@@ -529,29 +529,29 @@
 		"warningsReceived": 0,
 		"width": 7,
 		"worldPosition": [
-			1370.75,
-			900.25,
-			20.5
+			1.25,
+			-31,
+			0
 		],
 		"worldTransform": [
-			-0.9963967204093933,
-			-0.003610003972426057,
-			0.03449152410030365,
+			-0.999360203742981,
+			0.0006475538248196244,
+			0.03575974702835083,
 			0,
-			0.003450007876381278,
-			-0.9959835410118103,
-			-0.0045793671160936356,
+			-0.00008924291614675894,
+			-0.9958787560462952,
+			0.015539859421551228,
 			0,
-			0.03450755402445793,
-			-0.004461716860532761,
-			0.9963927268981934,
+			0.035658203065395355,
+			0.015542315319180489,
+			0.9962409138679504,
 			0,
-			1370.75,
-			900.25,
-			20.5,
+			1.25,
+			-31,
+			0,
 			1
 		],
-		"sourceAssetId": "5624e95d"
+		"hsegs": 3
 	},
 	"methods": {
 		"FACMovementDirection": {
@@ -674,10 +674,6 @@
 			"body": "var thisCam = this.controllingCamera;\n\n    return this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
 		},
-		"launchMissile": {
-			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        // var postion = sender.baseURL + \"position/\";\n        // var result = {\n        //     extensions:\n        //     {\n        //         position:\n        //         {\n        //             pos\n        //         },\n        //     }\n        // };\n        sender.xAPISend(\"fired\", \"FACMissile\", \"FastAttackCraft\", null);    //result);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
-			"parameters": []
-		},
 		"moving_awayTransition": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"moving_awayTransition\");\n                                this.moving_awayUpdate(this.currentState);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -690,10 +686,6 @@
 		},
 		"notifyPeers": {
 			"body": "var my_position = this.transformAPI.getPosition();\n    this.tickCount++;\n    if (this.tickCount == 4 || this.tickCount == 8)\n    {\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward], 50);\n    }\n\n    if (this.tickCount > 10)\n    {\n        var leader_projection = this.transformAPI.localToGlobal(-150, 0, 0);\n\n        this.broadcast(\"facLeaderInput\", [leader_projection], 500);\n        this.tickCount = 0;\n    }",
-			"parameters": []
-		},
-		"out_of_gasTransition": {
-			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    }",
 			"parameters": []
 		},
 		"out_of_gasUpdate": {
@@ -791,12 +783,8 @@
 			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            this.rockets = this.rockets - 1;\n            if(this.rockets <= 0)\n            {\n                this.aiActiveState = \"flee\";\n            }\n            else if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
 			"parameters": []
 		},
-		"warn": {
-			"body": "this.aiActiveState = \"flee\";\n    this.hostile = false;\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISender('warned', this.DisplayName, \"Fishing Boat\");\n    }",
-			"parameters": []
-		},
 		"hit": {
-			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n       \n    }",
+			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
 			"parameters": [
 				"args"
 			]
@@ -805,13 +793,25 @@
 			"body": "console.log(\"defeatedTransition\");\n    this.currentState = this.states[\"defeated\"];",
 			"parameters": []
 		},
+		"out_of_gasTransition": {
+			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    // var sender = this.Scene.children_by_name.xAPISender;\n    // if (sender)\n    // {\n    //     sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    // }",
+			"parameters": []
+		},
+		"launchMissile": {
+			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,            \n        };\n        sender.xAPISend(\"fired\", 'FAC Missile', 'Fast Attack Craft', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"parameters": []
+		},
+		"warn": {
+			"body": "this.aiActiveState = \"flee\";\n    this.hostile = false;\n    \n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISender('warned', this.DisplayName, 'Fishing Boat');\n    }",
+			"parameters": []
+		},
 		"destroyFAC": {
-			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName, \"FishingBoat\", null);\n    }",
+			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    vwf.createChild(this.id, GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"Fishing Boat\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName + this.id, \"Fishing Boat\", null);\n    }",
 			"parameters": []
 		}
 	},
 	"children": {
-		"N8c4837dd": {
+		"Ne03bbd75": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -914,26 +914,26 @@
 				"visible": false,
 				"width": 1.36,
 				"worldTransform": [
-					-0.20632730424404144,
-					0.016534389927983284,
-					0.9752744436264038,
+					-0.20584654808044434,
+					0.0369679257273674,
+					0.9749932885169983,
 					0,
-					-0.005231860559433699,
-					0.9958243370056152,
-					-0.01803525537252426,
+					-0.001722646877169609,
+					0.9952691793441772,
+					-0.03814456984400749,
 					0,
-					-0.9754011034965515,
-					-0.008846184238791466,
-					-0.20620471239089966,
+					-0.9785770773887634,
+					-0.009524424560368061,
+					-0.20480763912200928,
 					0,
-					1369.805419921875,
-					900.2396850585938,
-					22.02907943725586,
+					0.3041268289089203,
+					-30.97603988647461,
+					1.5301203727722168,
 					1
 				]
 			}
 		},
-		"N83e3ec00": {
+		"Na3f6ebd3": {
 			"extends": "box2.vwf",
 			"source": "vwf/model/threejs/box.js",
 			"type": "subDriver/threejs",
@@ -1026,7 +1026,7 @@
 				"width": 2.18
 			}
 		},
-		"N8cf5a8e2": {
+		"N33c55d87": {
 			"extends": "http://vwf.example.com/node3.vwf",
 			"sequence": 0,
 			"random": {
@@ -1066,26 +1066,26 @@
 					}
 				},
 				"worldTransform": [
-					-0.9963967204093933,
-					-0.003610003972426057,
-					0.03449152410030365,
+					-0.999360203742981,
+					0.0006475538248196244,
+					0.03575974702835083,
 					0,
-					0.003450007876381278,
-					-0.9959835410118103,
-					-0.0045793671160936356,
+					-0.00008924291614675894,
+					-0.9958787560462952,
+					0.015539859421551228,
 					0,
-					0.03450854867696762,
-					-0.004461713135242462,
-					0.9963926672935486,
+					0.03565920144319534,
+					0.015542314387857914,
+					0.9962408542633057,
 					0,
-					1367.7349853515625,
-					900.2424926757812,
-					19.85618019104004,
+					-1.7748242616653442,
+					-31.009714126586914,
+					-0.6399014592170715,
 					1
 				]
 			}
 		},
-		"N8d83b3ad": {
+		"N2840e53b": {
 			"extends": "asset.vwf",
 			"source": "/sas/assets/8ff78404",
 			"type": "subDriver/threejs/asset/vnd.gltf+json",
@@ -1161,24 +1161,24 @@
 				},
 				"DisplayName": "Fishing Boat",
 				"___assetServerOriginalID": "N8d83b3ad",
-				"___sourceAssetTimestamp": "Wed Nov 18 2015 16:19:30 GMT-0500 (Eastern Standard Time)",
-				"owner": "ADLteam",
+				"___sourceAssetTimestamp": "Fri Nov 20 2015 13:53:45 GMT-0500 (Eastern Standard Time)",
+				"owner": "Andy",
 				"transform": [
-					0.007703371811658144,
-					1.3908082246780396,
-					-0.01814034767448902,
+					0.001739470288157463,
+					1.3901842832565308,
+					-0.04601668193936348,
 					0,
-					-1.3838258981704712,
-					0.009273692965507507,
-					0.12139619886875153,
+					-1.3795617818832397,
+					0.005823114421218634,
+					0.12288980185985565,
 					0,
-					0.12235673516988754,
-					0.017553819343447685,
-					1.3951290845870972,
+					0.1235075369477272,
+					0.04609097167849541,
+					1.3943449258804321,
 					0,
-					-0.7036518454551697,
-					0.11879934370517731,
-					0.0532807782292366,
+					-0.2649044394493103,
+					0.20530147850513458,
+					0.2777685523033142,
 					1
 				]
 			}
