@@ -63,7 +63,7 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Fri Nov 20 2015 16:13:46 GMT-0500 (EST)",
+		"___sourceAssetTimestamp": "Sun Nov 22 2015 21:07:03 GMT-0500 (Eastern Standard Time)",
 		"_length": 2.98,
 		"controllingCamera": "SandboxCamera-vwf-N79164421",
 		"counter": 2063.24999999994,
@@ -188,9 +188,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			1.0085744857788086,
-			0.7039268016815186,
-			0.009999999776482582,
+			0,
+			0.5,
+			5,
 			1
 		],
 		"type": "Primitive",
@@ -198,9 +198,9 @@
 		"weaponsTarget": "ocean-ocean-vwf-N4bab7165",
 		"width": 8.49,
 		"worldPosition": [
-			1.0085744857788086,
-			0.7039268016815186,
-			0.009999999776482582
+			0,
+			0.5,
+			5
 		],
 		"maxHeight": 500,
 		"minHeight": 25,
@@ -217,9 +217,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			1.0085744857788086,
-			0.7039268016815186,
-			0.009999999776482582,
+			0,
+			0.5,
+			5,
 			1
 		],
 		"userControlCounter": 0,
@@ -336,10 +336,6 @@
 			"body": "var dist = Infinity;\n    var hostile = null;\n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node.hostile && node.state !== \"defeated\")\n        {\n            var pos = this.transformAPI.getWorldPosition();\n            var hostilePos = node.transformAPI.getWorldPosition();\n            if (Vec3.distance(pos, hostilePos) < dist)\n            {\n                dist = Vec3.distance(pos, hostilePos);\n                hostile = node.id;\n            }\n        }\n    }\n    return hostile;",
 			"parameters": []
 		},
-		"userControlled": {
-			"body": "var thisCam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n\n    return this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
-			"parameters": []
-		},
 		"hit": {
 			"body": "this.children_by_name.art.materialDef.layers[0].src = \"/sas/assets/d2f274ee\";\n    this.children_by_name.smoke.visible = true;\n    this.isHit = true;\n    this.___physics_constant_force[2] = 0;\n    this.___physics_damping = .1;\n    this.activateState(\"hit\");",
 			"parameters": []
@@ -370,6 +366,10 @@
 		},
 		"launchMissile": {
 			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = _DataManager.getCleanNodePrototype(this.missileDef);\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    if (this.weaponsTarget)\n    {\n        def.properties.target_data = {\n            id: this.weaponsTarget\n        };\n    }\n\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'Seahawk Missile', 'Seahawk Pilot', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    console.log(def.properties.target_data);\n    vwf.createChild(vwf.application(), GUID(), def, null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"parameters": []
+		},
+		"userControlled": {
+			"body": "var thisCam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n\n    return this.keysDown.length === 0 &&  this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
 			"parameters": []
 		}
 	},
@@ -489,9 +489,9 @@
 					0.9285185933113098,
 					-0.10019166022539139,
 					0,
-					0.24883313477039337,
-					-1.9975851774215698,
-					-0.9654121398925781,
+					-0.7597413659095764,
+					-2.201512098312378,
+					4.024588108062744,
 					1
 				]
 			}
@@ -710,9 +710,9 @@
 					0.9300360083580017,
 					-0.08099353313446045,
 					0,
-					3.1359236240386963,
-					-0.8902361392974854,
-					-0.9150159955024719,
+					2.1273491382598877,
+					-1.094162940979004,
+					4.074984073638916,
 					1
 				]
 			}
@@ -921,9 +921,9 @@
 							-0.08479224890470505,
 							0.9961658120155334,
 							0,
-							2.546719551086426,
-							-2.3708155155181885,
-							-0.003162582404911518,
+							1.5381450653076172,
+							-2.574742555618286,
+							4.986837387084961,
 							1
 						]
 					},
