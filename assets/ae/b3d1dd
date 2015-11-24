@@ -86,20 +86,20 @@
 			0,
 			1,
 			0,
-			4.955603042294465,
-			-31.19302535547874,
-			0.331575164794927,
+			59.06479422499286,
+			51.91400060813628,
+			0.5593252944946201,
 			1
 		],
 		"type": "ParticleSystem",
 		"visible": true,
 		"startSize": 0.45,
-		"___sourceAssetTimestamp": "Tue Oct 13 2015 17:34:13 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 13:07:59 GMT-0500 (Eastern Standard Time)",
 		"deathCount": 0
 	},
 	"methods": {
 		"tick": {
-			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (!this.Scene.findNodeByID(this.targetEntity))\n    {\n        if (this.deathCount > 45)\n        {\n            vwf.deleteNode(this.id);\n        }\n        this.deathCount++;\n        return;\n    }\n    var pos = this.Scene.findNodeByID(this.targetEntity).transformAPI.getWorldPosition();\n    this.emitterPosition = this.transformAPI.globalToLocal(pos);\n    findviewnode(this.id).children[0].children[0].frustumCulled = false",
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (!this.Scene.findNodeByID(this.targetEntity))\n    {\n        if (this.deathCount > 45)\n        {\n            this.delete();\n        }\n        this.deathCount++;\n        return;\n    }\n    var pos = this.Scene.findNodeByID(this.targetEntity).transformAPI.getWorldPosition();\n    this.emitterPosition = this.transformAPI.globalToLocal(pos);\n    findviewnode(this.id).children[0].children[0].frustumCulled = false",
 			"parameters": []
 		}
 	}

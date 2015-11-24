@@ -61,7 +61,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Mon Nov 09 2015 12:03:49 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 12:52:20 GMT-0500 (Eastern Standard Time)",
 		"_length": 1.78,
 		"accuracy": 8,
 		"activeState": "targeting",
@@ -299,9 +299,9 @@
 			-0.017452405765652657,
 			0.9998477101325989,
 			0,
-			-1.2148535251617432,
-			-0.24912568926811218,
-			0.03119475580751896,
+			-4.095678329467773,
+			-1.5728996992111206,
+			0.009999999776482582,
 			1
 		],
 		"type": "Primitive",
@@ -326,10 +326,6 @@
 			"body": "if (this.Ammo > 0 )\n    {\n       \n\n        if (this.firecounter < 0)\n        {\n            this.firecounter = 30;\n            this.Ammo -= 1;\n            this.fire();\n           \n            return;\n        }\n\n        if (this.Ammo == 0)\n        {\n            this.activeState = \"reloading\";\n            this.firecounter = 170;\n            this.playSound(this.reloadSound, false, 10);\n        }\n    }\n    this.firecounter--;",
 			"parameters": []
 		},
-		"ready": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       this.Scene.unbind(\"pointerMove\", this._pv);\n                    this.Scene.unbind(\"pointerDown\", this._pd);\n                    this.Scene.unbind(\"pointerUp\", this._pu);\n                    this.Scene.unbind(\"pointerWheel\", this._pw);\n\n                    this.Scene.unbind(\"keyDown\", this._kd);\n                    this.Scene.unbind(\"keyUp\", this._ku);\n                    var self = this;\n                    this._pv = function(e, d)\n                    {\n                        self._pointerMove(e, d);\n                    }\n                    this._pd = function(e, d)\n                    {\n                        self._pointerDown(e, d);\n                    }\n                    this._pu = function(e, d)\n                    {\n                        self._pointerUp(e, d);\n                    }\n                    this._kd = function(e, d)\n                    {\n                        self._keyDown(e, d);\n                    }\n                    this._ku = function(e, d)\n                    {\n                        self._keyUp(e, d);\n                    }\n                    this._pw = function(e, d)\n                    {\n                        self._pointerWheel(e, d);\n                    }\n                    this.Scene.bind(\"pointerMove\", this._pv);\n                    this.Scene.bind(\"pointerDown\", this._pd);\n                    this.Scene.bind(\"pointerUp\", this._pu);\n                    this.Scene.bind(\"pointerWheel\", this._pw);\n                    this.Scene.bind(\"keyDown\", this._kd);\n                    this.Scene.bind(\"keyUp\", this._ku);                       \n\n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
 		"reloading": {
 			"body": "if (this.activeState == 'reloading')\n    {\n        this.firecounter--;\n        if (this.firecounter == 0)\n        {\n            this.Ammo = 30;\n            if(!this.userControlled())\n                this.activeState = 'firing';\n        }\n\n    }",
 			"parameters": []
@@ -337,13 +333,6 @@
 		"targeting": {
 			"body": "var near = Infinity;\n    var target = null;\n    var thispos = this.transformAPI.getPosition();\n   \n    for (var i = 0; i < this.Scene.children.length; i++)\n    {\n        var child = this.Scene.children[i];\n        if (child.id == this.id) continue;\n        if (child.parent.id == this.id) continue;\n        if (!child.transformAPI) continue;\n\n        var childpos = child.transformAPI.getPosition();\n        var dist = MATH.distanceVec3(thispos, childpos);\n        if (dist > 75 && dist < near && child.hostile && child.activeState !== 'defeated')\n        {\n            near = dist;\n            target = child;\n        }\n    }\n    if (target && near < (this.maxRange || 15000))\n    {\n        this.targetID = target.id;\n        this.activateState(\"tracking\");\n    }",
 			"parameters": []
-		},
-		"explode": {
-			"body": "var def = this.explosionDef;\n    if (def.internal_val)\n        def = def.internal_val;\n    def = JSON.parse(JSON.stringify(def));\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = dist / 10;\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null);",
-			"parameters": [
-				"pos",
-				"dist"
-			]
 		},
 		"toggleControl": {
 			"body": "if (disable) this.isUserControlled = false;\n    else this.isUserControlled = !this.isUserControlled;\n\n    var button = this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].children_by_name[\"Button1\"];\n    button.text = this.isUserControlled ? \"Enable AI\" : \"Take Control\";",
@@ -413,6 +402,17 @@
 		"fire": {
 			"body": "var origin = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.getWorldPosition();\n    var dir = this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].transformAPI.localToGlobalRotation([0, 0, 1]);\n    var shake = [(this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy, (this.random() - .5) / this.accuracy];\n    dir = Vec3.normalize(Vec3.add(shake, dir, []), []);\n    var hit = this.Scene.traceAPI.rayCast(origin, dir,\n    {\n        ignore: [findviewnode(this.id)]\n    });\n    this.audioAPI.playSound(this.fireSound, false, 700.0);\n    var dist = this.fuse + ((this.random() - .5) / this.accuracy);\n    if (hit && hit.distance < dist)\n    {\n        dist = hit.distance;\n    }\n\n    console.log(hit || \"miss\");\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var boom, objHit;\n        if (hit)\n        {\n            boom = true;\n            objHit = hit.node.DisplayName;\n        }\n        else\n        {\n            boom = false;\n            objHit = \"miss\";\n        }\n        var result = {\n            success: boom,\n            response: \"success = hit - t, or miss - f\"\n        };\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n            \"https://sandbox.adlnet.gov/context/extensions/position/\": origin || \"this is where the position goes\",\n            \"https://sandbox.adlnet.gov/context/extensions/target/\": this.targetID || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/objectHit/\": objHit,\n            \"https://sandbox.adlnet.gov/context/extensions/userControlled/\": this.isUserControlled,\n            \"https://sandbox.adlnet.gov/context/extensions/shipstatus/\": this.Scene.children_by_name['DDG51'].engine || 'status error',\n            \"https://sandbox.adlnet.gov/context/extensions/maxRounds/\": this.Ammo || 'one of these',\n            \"https://sandbox.adlnet.gov/context/extensions/roundNum/\": this.Ammo || 'will be right',\n        };\n        sender.xAPISend('fired', 'shell', this.DisplayName || \"TAO 5 Inch Gun\", result, conExt, null);\n    }\n\n    var point = Vec3.add(origin, Vec3.scale(dir, dist, []), []);\n    this.explode(point, dist);\n    this.children_by_name[\"5InPivot\"].children_by_name[\"Barrel\"].children_by_name[\"Explosion\"].explode();\n\n    var shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].transformAPI.move(shake);\n    shake = [this.random() / 1 - .5, this.random() / 1 - .5, this.random() / 1 - .5]\n    this.children_by_name[\"5InPivot\"].transformAPI.move(shake);",
 			"parameters": []
+		},
+		"ready": {
+			"body": "this.Scene.unbind(\"pointerMove\", this._pv,this);\n    this.Scene.unbind(\"pointerDown\", this._pd,this);\n    this.Scene.unbind(\"pointerUp\", this._pu,this);\n    this.Scene.unbind(\"pointerWheel\", this._pw,this);\n\n    this.Scene.unbind(\"keyDown\", this._kd,this);\n    this.Scene.unbind(\"keyUp\", this._ku,this);\n    var self = this;\n    this._pv = function(e, d)\n    {\n        self._pointerMove(e, d);\n    }\n    this._pd = function(e, d)\n    {\n        self._pointerDown(e, d);\n    }\n    this._pu = function(e, d)\n    {\n        self._pointerUp(e, d);\n    }\n    this._kd = function(e, d)\n    {\n        self._keyDown(e, d);\n    }\n    this._ku = function(e, d)\n    {\n        self._keyUp(e, d);\n    }\n    this._pw = function(e, d)\n    {\n        self._pointerWheel(e, d);\n    }\n    this.Scene.bind(\"pointerMove\", this._pv,this);\n    this.Scene.bind(\"pointerDown\", this._pd,this);\n    this.Scene.bind(\"pointerUp\", this._pu,this);\n    this.Scene.bind(\"pointerWheel\", this._pw,this);\n    this.Scene.bind(\"keyDown\", this._kd,this);\n    this.Scene.bind(\"keyUp\", this._ku,this);",
+			"parameters": []
+		},
+		"explode": {
+			"body": "var def = this.explosionDef;\n    if (def.internal_val)\n        def = def.internal_val;\n    def = JSON.parse(JSON.stringify(def));\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = dist / 10;\n    // console.profile(\"launch\");\n    this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null);",
+			"parameters": [
+				"pos",
+				"dist"
+			]
 		}
 	},
 	"children": {

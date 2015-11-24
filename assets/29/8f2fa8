@@ -9,7 +9,7 @@
 	},
 	"properties": {
 		"DisplayName": "IntroScreen",
-		"___sourceAssetTimestamp": "Fri Nov 20 2015 09:20:52 GMT-0500 (EST)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 14:36:01 GMT-0500 (Eastern Standard Time)",
 		"background_color": [
 			1,
 			0,
@@ -76,9 +76,9 @@
 			0,
 			1,
 			0,
-			0,
-			0,
-			0,
+			0.8091459707851641,
+			-1.6794095913323064,
+			0.01774579882621774,
 			1
 		],
 		"visible": true,
@@ -98,6 +98,10 @@
 		},
 		"startSimulation": {
 			"body": "var choice = this.children_by_name.ChoicePanel.children_by_name.YourChoice.text;\n    var camID = this.cameraChoiceIDs[choice];\n    if (camID && vwf.client() == vwf.moniker())\n    {\n        _dView.setCamera(camID);\n    }\n\n    if (choice === \"Instructor\")\n    {\n        var toggler = this.getCameraToggler();\n        if (toggler) toggler.bindToggle();\n    }\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (!this.simulationStarted && sender)\n    {\n        this.simulationStarted = true;\n        sender.xAPISend(\"started\", null, \"Start Screen\", null);\n    }\n\n    if (sender)\n    {\n        sender.xAPISend(\"selected\", choice, choice, null);\n    }",
+			"parameters": []
+		},
+		"ready": {
+			"body": "Engine.startCoSimulating(this.id);",
 			"parameters": []
 		}
 	},

@@ -54,7 +54,7 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Mon Nov 23 2015 12:25:45 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 13:28:28 GMT-0500 (Eastern Standard Time)",
 		"_length": 0.23,
 		"accuracy": 24,
 		"activeState": "targeting",
@@ -271,8 +271,8 @@
 			0.012877748347818851,
 			1.000847578048706,
 			0,
-			-0.6584042906761169,
-			-0.08281058073043823,
+			-0.5656980872154236,
+			-2.994643449783325,
 			0.01774579845368862,
 			1
 		],
@@ -325,10 +325,6 @@
 		},
 		"firing": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       return (this.keysDown.indexOf(' ') !== -1)                         \n\n\n\n\n\n\n\n",
-			"parameters": []
-		},
-		"ready": {
-			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       this.Scene.unbind(\"pointerMove\", this._pv);\n                  this.Scene.unbind(\"pointerDown\", this._pd);\n                  this.Scene.unbind(\"pointerUp\", this._pu);\n                  \n                  this.Scene.unbind(\"keyDown\", this._kd);\n                  this.Scene.unbind(\"keyUp\", this._ku);\n                  var self = this;\n                  this._pv = function(e, d)\n                  {\n                      self._pointerMove(e, d);\n                  }\n                  this._pd = function(e, d)\n                  {\n                      self._pointerDown(e, d);\n                  }\n                  this._pu = function(e, d)\n                  {\n                      self._pointerUp(e, d);\n                  }\n                  this._kd = function(e, d)\n                  {\n                      self._keyDown(e, d);\n                  }\n                  this._ku = function(e, d)\n                  {\n                      self._keyUp(e, d);\n                  }\n                  this.Scene.bind(\"pointerMove\", this._pv);\n                  this.Scene.bind(\"pointerDown\", this._pd);\n                  this.Scene.bind(\"pointerUp\", this._pu);\n                  this.Scene.bind(\"keyDown\", this._kd);\n                  this.Scene.bind(\"keyUp\", this._ku);                         \n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
 		"returnFromShakeOffsets": {
@@ -412,6 +408,10 @@
 			"parameters": [
 				"e"
 			]
+		},
+		"ready": {
+			"body": "this.Scene.unbind(\"pointerMove\", this._pv,this);\n    this.Scene.unbind(\"pointerDown\", this._pd,this);\n    this.Scene.unbind(\"pointerUp\", this._pu,this);\n\n    this.Scene.unbind(\"keyDown\", this._kd,this);\n    this.Scene.unbind(\"keyUp\", this._ku,this);\n    var self = this;\n    this._pv = function(e, d)\n    {\n        self._pointerMove(e, d);\n    }\n    this._pd = function(e, d)\n    {\n        self._pointerDown(e, d);\n    }\n    this._pu = function(e, d)\n    {\n        self._pointerUp(e, d);\n    }\n    this._kd = function(e, d)\n    {\n        self._keyDown(e, d);\n    }\n    this._ku = function(e, d)\n    {\n        self._keyUp(e, d);\n    }\n    this.Scene.bind(\"pointerMove\", this._pv,this);\n    this.Scene.bind(\"pointerDown\", this._pd,this);\n    this.Scene.bind(\"pointerUp\", this._pu,this);\n    this.Scene.bind(\"keyDown\", this._kd,this);\n    this.Scene.bind(\"keyUp\", this._ku,this);",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -631,8 +631,8 @@
 							-0.9879780411720276,
 							0.03166591376066208,
 							0,
-							-0.7466552257537842,
-							-0.8210837244987488,
+							-0.6539490818977356,
+							-3.7329161167144775,
 							0.8012259006500244,
 							0.9999998807907104
 						]
@@ -875,6 +875,108 @@
 								"visible": false,
 								"visibleToAncestor": true,
 								"width": 294
+							}
+						},
+						"N97599420": {
+							"extends": "sphere2.vwf",
+							"source": "vwf/model/threejs/sphere.js",
+							"type": "subDriver/threejs",
+							"sequence": 0,
+							"random": {
+								"s0": 0.149597299983725,
+								"s1": 0.00260460376739502,
+								"s2": 0.888775671832263,
+								"c": 1
+							},
+							"properties": {
+								"DisplayName": "sphere1",
+								"___physics_activation_state": 1,
+								"___physics_deactivation_time": 0,
+								"___physics_velocity_angular": [
+									0,
+									0,
+									0
+								],
+								"___physics_velocity_linear": [
+									0,
+									0,
+									0
+								],
+								"materialDef": {
+									"shininess": 15,
+									"alpha": 1,
+									"ambient": {
+										"r": 1,
+										"g": 1,
+										"b": 1
+									},
+									"color": {
+										"r": 1,
+										"g": 1,
+										"b": 1,
+										"a": 1
+									},
+									"emit": {
+										"r": 0,
+										"g": 0,
+										"b": 0
+									},
+									"reflect": 0.8,
+									"shadeless": false,
+									"shadow": true,
+									"specularColor": {
+										"r": 0.5773502691896258,
+										"g": 0.5773502691896258,
+										"b": 0.5773502691896258
+									},
+									"specularLevel": 1,
+									"layers": [
+										{
+											"alpha": 1,
+											"blendMode": 0,
+											"mapInput": 0,
+											"mapTo": 1,
+											"offsetx": 0,
+											"offsety": 0,
+											"rot": 0,
+											"scalex": 1,
+											"scaley": 1,
+											"src": "checker.jpg"
+										}
+									],
+									"type": "phong",
+									"side": 0,
+									"blendMode": 1,
+									"fog": true,
+									"shading": true,
+									"metal": false,
+									"wireframe": false,
+									"depthtest": true,
+									"depthwrite": true,
+									"vertexColors": false
+								},
+								"owner": "ADLteam",
+								"transform": [
+									-0.994077742099762,
+									-0.13903911411762238,
+									0.02221762016415596,
+									0,
+									0.1397085040807724,
+									-0.993708610534668,
+									0.032260961830616,
+									0,
+									0.01750476285815239,
+									0.03499886393547058,
+									1.0022363662719727,
+									0,
+									0,
+									0,
+									0,
+									1
+								],
+								"type": "Primitive",
+								"visible": false,
+								"___assetServerOriginalID": "N97599420"
 							}
 						}
 					}

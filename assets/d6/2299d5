@@ -47,7 +47,7 @@
 			0
 		],
 		"___physics_mass": 100,
-		"___sourceAssetTimestamp": "Mon Oct 26 2015 09:19:17 GMT-0400 (Eastern Daylight Time)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 13:06:30 GMT-0500 (Eastern Standard Time)",
 		"counter": 0,
 		"explosionDef": {
 			"continues": "/sas/assets/d3402bc3",
@@ -132,9 +132,9 @@
 			-0.9797827005386353,
 			-0.06082130968570709,
 			0,
-			-17.14467430114746,
-			35.96413040161133,
-			0.009999999776482582,
+			35.93351745605469,
+			38.74874496459961,
+			0.5593252778053284,
 			1
 		],
 		"type": "Primitive",
@@ -151,27 +151,27 @@
 			-0.9797827005386353,
 			-0.06082130968570709,
 			0,
-			-17.14467430114746,
-			35.96413040161133,
-			0.009999999776482582,
+			35.93351745605469,
+			38.74874496459961,
+			0.5593252778053284,
 			1
 		]
 	},
 	"methods": {
-		"tick": {
-			"body": "\n         if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 2)\n    {\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 200, this.random() * 200, this.random() * 1));\n    }\n    if (this.counter < 30)\n    {\n        var force = this.transformAPI.localToGlobal(0, 0, -30 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 10, this.random() * 10, this.random() * 1));\n    }\n    if (this.counter > 10 && this.counter < 270)\n    {\n        \n        var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var center = this.transformAPI.getPosition();\n        var hit = this.Scene.traceAPI.rayCast(center, offset,\n        {\n            ignore: [findviewnode(this.id)]\n        });\n        if (hit && hit.distance < 2)\n        {\n            this.explode();\n            console.log(hit);\n            vwf.deleteNode(this.id);\n            return;\n        }\n    }\n    if (this.counter > 60)\n        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 270)\n        vwf.deleteNode(this.id);         \n",
-			"parameters": []
-		},
-		"explode": {
-			"body": "var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    var now = performance.now();\n    // console.profile(\"launch\");\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n    {\n        vwf.callMethod(childID, 'explode');\n    });\n\n    //Should this be here or collision method?? the collision method has obstacle\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"hit\", (this.parent.DisplayName + this.DisplayName), \"FastAttackCraft\", null);\n    }",
-			"parameters": []
-		},
 		"collision": {
 			"body": "// The body has collided with another body. The ID of the node is param 1, collision data in param 2\n    if (this.counter > 10 && this.counter < 270)\n    {\n        this.explode();\n        console.log(hit);\n\n    //Is this being called - or just the explode method? this method has obstacle\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"hit\", obstacle, this.parent.DisplayName, null);\n    }\n\n    vwf.deleteNode(this.id);\n    return;\n    }",
 			"parameters": [
 				"obstacle",
 				"data"
 			]
+		},
+		"explode": {
+			"body": "var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    var now = performance.now();\n    // console.profile(\"launch\");\n    this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null, function(childID)\n    {\n        Engine.emit.callMethod(childID, 'explode');\n    });\n\n    //Should this be here or collision method?? the collision method has obstacle\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"hit\", (this.parent.DisplayName + this.DisplayName), \"FastAttackCraft\", null);\n    }",
+			"parameters": []
+		},
+		"tick": {
+			"body": "if (!this.fired)\n        return;\n    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    if (this.counter < 2)\n    {\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 200, this.random() * 200, this.random() * 1));\n    }\n    if (this.counter < 30)\n    {\n        var force = this.transformAPI.localToGlobal(0, 0, -30 * this.physicsAPI.getMass());\n        this.physicsAPI.addForceAtCenter(force);\n        this.children_by_name.ParticleSystem1.visible = true;\n        this.physicsAPI.addTorque(this.transformAPI.localToGlobal(this.random() * 10, this.random() * 10, this.random() * 1));\n    }\n    if (this.counter > 10 && this.counter < 270)\n    {\n\n        var offset = this.transformAPI.localToGlobalRotation(0, 0, 1);\n        var center = this.transformAPI.getPosition();\n        var hit = this.Scene.traceAPI.rayCast(center, offset,\n        {\n            ignore: [findviewnode(this.id)]\n        });\n        if (hit && hit.distance < 2)\n        {\n            this.explode();\n            console.log(hit);\n            this.delete();\n            return;\n        }\n    }\n    if (this.counter > 60)\n        this.children_by_name.ParticleSystem1.visible = false;\n    this.counter++;\n\n    if (this.counter > 270)\n        this.delete();",
+			"parameters": []
 		}
 	},
 	"events": {

@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.3407250146847218,
-		"s1": 0.04213666822761297,
-		"s2": 0.7380663794465363,
-		"c": 741540
+		"s0": 0.04213666822761297,
+		"s1": 0.7380663794465363,
+		"s2": 0.72916279011406,
+		"c": 712673
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -63,7 +63,7 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Mon Nov 23 2015 10:39:43 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 13:03:38 GMT-0500 (Eastern Standard Time)",
 		"_length": 2.98,
 		"controllingCamera": "SandboxCamera-vwf-N79164421",
 		"counter": 2063.24999999994,
@@ -188,9 +188,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			-21.00625228881836,
-			38.050498962402344,
-			0.27407172322273254,
+			0.4483131170272827,
+			-3.2666702270507812,
+			2.7397842407226562,
 			1
 		],
 		"type": "Primitive",
@@ -198,9 +198,9 @@
 		"weaponsTarget": "ocean-ocean-vwf-N4bab7165",
 		"width": 8.49,
 		"worldPosition": [
-			-21.00625228881836,
-			38.050498962402344,
-			0.27407172322273254
+			0.4483131170272827,
+			-3.2666702270507812,
+			2.7397842407226562
 		],
 		"maxHeight": 500,
 		"minHeight": 25,
@@ -217,9 +217,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			-21.00625228881836,
-			38.050498962402344,
-			0.27407172322273254,
+			0.4483131170272827,
+			-3.2666702270507812,
+			2.7397842407226562,
 			1
 		],
 		"userControlCounter": 0,
@@ -259,10 +259,6 @@
 			"parameters": [
 				"char"
 			]
-		},
-		"ready": {
-			"body": "this.Scene.unbind(\"keyDown\",this.__kd);\n            this.Scene.unbind(\"keyUp\",this.__ku);\n            \n            var self = this;\n            this.__ku = function(e,d)\n            {\n                self._ku(e,d);\n            }\n            \n            this.__kd = function(e,d)\n            {\n                self._kd(e,d);\n            }\n            \n            this.Scene.bind(\"keyDown\",this.__kd);\n            this.Scene.bind(\"keyUp\",this.__ku);",
-			"parameters": []
 		},
 		"_ku": {
 			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 200;\n    if (this.keysDown.indexOf(e.key.key) != -1)\n    {\n        this.keysDown.splice(this.keysDown.indexOf(e.key.key), 1);\n    }\n\n    if (e.key.key == 'space')\n    {\n        this.launchMissile();\n    }",
@@ -364,12 +360,16 @@
 			"body": "this.fireCounter = 600;",
 			"parameters": []
 		},
-		"userControlled": {
-			"body": "var thisCam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n\n    return this.keysDown.length === 0 &&  this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
+		"ready": {
+			"body": "this.Scene.unbind(\"keyDown\", this.__kd,this);\n    this.Scene.unbind(\"keyUp\", this.__ku,this);\n\n    var self = this;\n    this.__ku = function(e, d)\n    {\n        self._ku(e, d);\n    }\n\n    this.__kd = function(e, d)\n    {\n        self._kd(e, d);\n    }\n\n    this.Scene.bind(\"keyDown\", this.__kd,this);\n    this.Scene.bind(\"keyUp\", this.__ku,this);",
 			"parameters": []
 		},
 		"launchMissile": {
-			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = _DataManager.getCleanNodePrototype(this.missileDef);\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    if (this.weaponsTarget)\n    {\n        def.properties.target_data = {\n            id: this.weaponsTarget\n        };\n    }\n\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.properties.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'Seahawk Missile', 'Seahawk Pilot', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    console.log(def.properties.target_data);\n    vwf.createChild(vwf.application(), GUID(), def, null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = _DataManager.getCleanNodePrototype(this.missileDef);\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    if (this.weaponsTarget)\n    {\n        def.properties.target_data = {\n            id: this.weaponsTarget\n        };\n    }\n\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.properties.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'Seahawk Missile', 'Seahawk Pilot', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    console.log(def.properties.target_data);\n    this.Scene.createChild( GUID(), def, null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        this.Scene.createChild( GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"parameters": []
+		},
+		"userControlled": {
+			"body": "var thisCam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n\n    return this.keysDown.length !== 0 || ( this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0);",
 			"parameters": []
 		}
 	},
@@ -489,9 +489,9 @@
 					0.9285185933113098,
 					-0.10019166022539139,
 					0,
-					-21.765993118286133,
-					35.3489875793457,
-					-0.70134037733078,
+					-0.3114282488822937,
+					-5.96818208694458,
+					1.7643721103668213,
 					1
 				]
 			}
@@ -710,9 +710,9 @@
 					0.9300360083580017,
 					-0.08099353313446045,
 					0,
-					-18.878902435302734,
-					36.456336975097656,
-					-0.6509442925453186,
+					2.57566237449646,
+					-4.860833168029785,
+					1.8147681951522827,
 					1
 				]
 			}
@@ -921,15 +921,15 @@
 							-0.08479224890470505,
 							0.9961658120155334,
 							0,
-							-19.468107223510742,
-							34.97575759887695,
-							0.2609091103076935,
+							1.9864583015441895,
+							-6.3414130210876465,
+							2.726621627807617,
 							1
 						]
 					},
 					"methods": {
 						"ready": {
-							"body": "//This function was created for you by the system. \n    //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n\n    this.Scene.unbind('pointerMove', this._mouseMoved);\n    this.Scene.unbind('pointerDown', this._mouseDown);\n    this.Scene.unbind('pointerUp', this._mouseup);\n    var self = this;\n    this._mouseMoved = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (self.pointerState == 'down')\n        {\n            console.log(eventData);\n            self.parent.parent.userControlCounter = 200;\n            var relX = self.lastPos[0] - eventData.position[0];\n            var relY = self.lastPos[1] - eventData.position[1];\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n            console.log(relX, relY);\n\n            self.transformAPI.rotate(relY * 100, 0, 0, self.transformAPI.COORDINATES.LOCAL);\n            self.transformAPI.rotate(0, 0, relX * 100, self.transformAPI.COORDINATES.GLOBAL);\n\n        }\n    }\n    this._mouseDown = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (eventData.button == 'left')\n        {\n            self.pointerState = \"down\";\n            console.log('pointer is down');\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n        }\n    }\n    this._mouseup = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        self.pointerState = \"none\";\n    }\n\n    this.Scene.bind('pointerMove', this._mouseMoved);\n    this.Scene.bind('pointerDown', this._mouseDown);\n    this.Scene.bind('pointerUp', this._mouseup);",
+							"body": "//This function was created for you by the system. \n    //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n\n    this.Scene.unbind('pointerMove', this._mouseMoved,this);\n    this.Scene.unbind('pointerDown', this._mouseDown,this);\n    this.Scene.unbind('pointerUp', this._mouseup,this);\n    var self = this;\n    this._mouseMoved = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (self.pointerState == 'down')\n        {\n            console.log(eventData);\n            self.parent.parent.userControlCounter = 200;\n            var relX = self.lastPos[0] - eventData.position[0];\n            var relY = self.lastPos[1] - eventData.position[1];\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n            console.log(relX, relY);\n\n            self.transformAPI.rotate(relY * 100, 0, 0, self.transformAPI.COORDINATES.LOCAL);\n            self.transformAPI.rotate(0, 0, relX * 100, self.transformAPI.COORDINATES.GLOBAL);\n\n        }\n    }\n    this._mouseDown = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (eventData.button == 'left')\n        {\n            self.pointerState = \"down\";\n            console.log('pointer is down');\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n        }\n    }\n    this._mouseup = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        self.pointerState = \"none\";\n    }\n\n    this.Scene.bind('pointerMove', this._mouseMoved,this);\n    this.Scene.bind('pointerDown', this._mouseDown,this);\n    this.Scene.bind('pointerUp', this._mouseup,this);",
 							"parameters": []
 						}
 					},
