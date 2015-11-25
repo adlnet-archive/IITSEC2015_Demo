@@ -119,7 +119,7 @@
 			-0.000487978426872444
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Mon Nov 23 2015 10:47:44 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 11:29:29 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -519,9 +519,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-75,
-			-8.25,
-			0.25,
+			0.575311541557312,
+			-3.120084285736084,
+			0.07221463322639465,
 			1
 		],
 		"type": "Primitive",
@@ -530,9 +530,9 @@
 		"warningsReceived": 0,
 		"width": 2.5,
 		"worldPosition": [
-			-75,
-			-8.25,
-			0.25
+			0.575311541557312,
+			-3.120084285736084,
+			0.07221463322639465
 		],
 		"worldTransform": [
 			-0.6870899796485901,
@@ -547,9 +547,9 @@
 			0.02181629091501236,
 			0.9963927268981934,
 			0,
-			-75,
-			-8.25,
-			0.25,
+			0.575311541557312,
+			-3.120084285736084,
+			0.07221463322639465,
 			1
 		]
 	},
@@ -718,13 +718,6 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"playWarning\");\n                                this.audioAPI.playSound(\"\", false, 100);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
-		"randomIntFromInterval": {
-			"body": "return Math.floor(Math.random()*(max-min+1)+min);",
-			"parameters": [
-				"min",
-				"max"
-			]
-		},
 		"ready": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                 // The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n                                this.Scene.unbind(\"keyDown\",this._kd);\n                                this.Scene.unbind(\"keyUp\",this._ku);\n                                var self = this;\n                                this._kd = function(e,d){self._keyDown(e,d)};\n                                this._ku = function(e,d){self._keyUp(e,d)};\n                                this.Scene.bind(\"keyDown\",this._kd);\n                                this.Scene.bind(\"keyUp\",this._ku);                                                     \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -797,13 +790,20 @@
 			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    // var sender = this.Scene.children_by_name.xAPISender;\n    // if (sender)\n    // {\n    //     sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    // }",
 			"parameters": []
 		},
-		"isUserControlled": {
-			"body": "var thisCam = this.controllingCamera;\n\n    return this._keysDown.length === 0 && this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
-			"parameters": []
-		},
 		"launchMissile": {
 			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.properties.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'FAC Missile', 'Fast Attack Craft', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
 			"parameters": []
+		},
+		"isUserControlled": {
+			"body": "var thisCam = this.controllingCamera;\n\n    return this._keysDown.length !== 0 || (this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0);",
+			"parameters": []
+		},
+		"randomIntFromInterval": {
+			"body": "return Math.floor(this.random() * (max - min + 1) + min);",
+			"parameters": [
+				"min",
+				"max"
+			]
 		}
 	},
 	"children": {
@@ -902,9 +902,9 @@
 					1
 				],
 				"worldPosition": [
-					-75.35710144042969,
-					-8.621715545654297,
-					-0.23095059394836426
+					0.21821361780166626,
+					-3.4917993545532227,
+					-0.4087359607219696
 				]
 			},
 			"methods": {
@@ -1031,9 +1031,9 @@
 					-0.7100855708122253,
 					-0.20620471239089966,
 					0,
-					-75.64643096923828,
-					-8.93889045715332,
-					1.7790799140930176,
+					-0.07111899554729462,
+					-3.8089747428894043,
+					1.6012945175170898,
 					1
 				]
 			}
@@ -1183,9 +1183,9 @@
 					0.021817011758685112,
 					0.9963926672935486,
 					0,
-					-77.08159637451172,
-					-10.431203842163086,
-					-0.39381998777389526,
+					-1.5062878131866455,
+					-5.301288604736328,
+					-0.5716053247451782,
 					1
 				]
 			}
