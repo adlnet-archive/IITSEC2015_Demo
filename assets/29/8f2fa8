@@ -9,7 +9,7 @@
 	},
 	"properties": {
 		"DisplayName": "IntroScreen",
-		"___sourceAssetTimestamp": "Tue Nov 24 2015 14:36:01 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Wed Nov 25 2015 10:08:35 GMT-0500 (Eastern Standard Time)",
 		"background_color": [
 			1,
 			0,
@@ -76,9 +76,9 @@
 			0,
 			1,
 			0,
-			0.8091459707851641,
-			-1.6794095913323064,
-			0.01774579882621774,
+			1.98847802003898,
+			-0.31907305296544,
+			0.023936576843262003,
 			1
 		],
 		"visible": true,
@@ -101,7 +101,7 @@
 			"parameters": []
 		},
 		"ready": {
-			"body": "Engine.startCoSimulating(this.id);",
+			"body": "window.setTimeout(function(){\n    Engine.startCoSimulating(this.id);\n    }.bind(this),20);",
 			"parameters": []
 		}
 	},

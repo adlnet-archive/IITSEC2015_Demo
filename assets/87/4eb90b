@@ -13,14 +13,14 @@
 		"___physics_activation_state": 4,
 		"___physics_deactivation_time": 0,
 		"___physics_velocity_linear": [
-			0.0000014165404991217656,
-			-0.00012891086225863546,
-			-0.0032490950543433428
+			9.999999974752427e-7,
+			-0.0001289999927394092,
+			-0.0032500000670552254
 		],
 		"___physics_velocity_angular": [
-			0.008379931561648846,
-			-0.002338845981284976,
-			0.000013828842384100426
+			0.00837900023907423,
+			-0.002339000115171075,
+			0.000012999999853491317
 		],
 		"DisplayName": "DDG51",
 		"EditorData": {
@@ -78,16 +78,16 @@
 			}
 		},
 		"___physics_angular_velocity": [
-			0.0067684168103513,
-			0.00232219359937594,
-			0.00000300311251272397
+			0.006768,
+			0.002322,
+			0.000003
 		],
 		"___physics_damping": 0.4,
 		"___physics_enabled": true,
 		"___physics_linear_velocity": [
-			-5.51645837632456e-10,
-			2.28675722473472e-8,
-			-0.00000146451189718221
+			-0.000001,
+			0,
+			-0.000002
 		],
 		"___physics_mass": 80051.2,
 		"_length": 135,
@@ -179,27 +179,27 @@
 			0,
 			0,
 			0,
-			0.9988478422164917,
-			-0.01743495464324951,
+			0.9988470077514648,
+			-0.017434999346733093,
 			0,
 			0,
-			0.01743495464324951,
-			0.9988478422164917,
+			0.017433999106287956,
+			0.9988470077514648,
 			0,
-			-68.1631088256836,
-			66.80252838134766,
-			1.1078424453735352,
+			-26.512184143066406,
+			-55.71824264526367,
+			0.44147801399230957,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 20,
-		"___sourceAssetTimestamp": "Wed Nov 18 2015 11:58:33 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Sat Nov 28 2015 20:48:14 GMT-0500 (Eastern Standard Time)",
 		"damageTexture": "/sas/assets/dde67e10",
 		"worldPosition": [
-			-68.1631088256836,
-			66.80252838134766,
-			1.1078424453735352
+			-26.512184143066406,
+			-55.71824264526367,
+			0.44147801399230957
 		]
 	},
 	"methods": {
@@ -223,16 +223,20 @@
 			"body": "var torque = [0, 0, 0];\n    var force = [0, 0, 0];\n    if (this.rudder == 'hardLeft')\n    {\n        torque[2] = .0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'hardRight')\n    {\n        torque[2] = -.0001 * this.physicsAPI.getMass();\n    }\n    if (this.rudder == 'center')\n    {\n\n    }\n    if (this.engine == \"aheadFull\")\n    {\n        force[0] = 25 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"aheadHalf\")\n    {\n        force[0] = 12 * this.physicsAPI.getMass();\n    }\n    if (this.engine == \"idle\")\n    {\n\n    }\n    if (this.engine == 'backFull')\n    {\n        force[0] = -12 * this.physicsAPI.getMass();\n    }\n    torque[2] *= force[0];\n    force = this.transformAPI.localToGlobalRotation(force);\n    this.physicsAPI.addForceAtCenter(force);\n    this.physicsAPI.addTorque(torque);",
 			"parameters": []
 		},
-		"tick": {
-			"body": "this.audioAPI.playSound(\"/sas/assets/c46fb970\", true, 200, false);\n    this.audioAPI.playSound(\"/sas/assets/50af929c\", true, 200, false);\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n\n    }",
-			"parameters": []
-		},
 		"hit": {
 			"body": "if (force > 5) //cannot be hurt by 50 cal\n    {\n\n        this.children_by_name.Barry1.materialDef.layers[0].src = this.damageTexture;\n        this.broadcast(\"shiphit\",[],0);\n        var sender = this.Scene.children_by_name.xAPISender;\n        if (sender)\n        {\n            sender.xAPISend(\"is-damaged\", this.DisplayName, \"TacticalActionOfficer\", null);\n        }\n    }",
 			"parameters": [
 				"pos",
 				"force"
 			]
+		},
+		"ready": {
+			"body": "",
+			"parameters": []
+		},
+		"tick": {
+			"body": "var sound = Engine.callMethod(Engine.application(), 'getSound', [this.id, \"/sas/assets/c46fb970\"]);\n    if (!sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/c46fb970\", true, 200, false);\n        this.audioAPI.playSound(\"/sas/assets/50af929c\", true, 200, false);\n    }\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n\n    }",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -331,9 +335,9 @@
 				],
 				"type": "3DR Object",
 				"worldPosition": [
-					-68.1631088256836,
-					66.80252838134766,
-					1.1078424453735352
+					-26.512184143066406,
+					-55.71824264526367,
+					0.44147801399230957
 				]
 			},
 			"methods": {
@@ -362,21 +366,21 @@
 						"___assetServerOriginalID": "Necdbc16e",
 						"owner": "ADLteam",
 						"transform": [
-							-0.009000000543892384,
-							6.431299503367738e-12,
-							-5.626657993695883e-13,
+							-0.009000999853014946,
 							0,
-							-6.455866657234521e-12,
-							-0.008965750224888325,
-							0.0007844014908187091,
+							-9.999999974752427e-7,
+							0,
+							-9.999999974752427e-7,
+							-0.008965999819338322,
+							0.000783999974373728,
 							0,
 							0,
-							0.0007844014908187091,
-							0.008965750224888325,
+							0.000783999974373728,
+							0.008964999578893185,
 							0,
-							0.2488119751214981,
-							-0.05801611766219139,
-							0.1564117968082428,
+							0.2488110065460205,
+							-0.058017000555992126,
+							0.15641100704669952,
 							1
 						],
 						"far": 10000
@@ -388,9 +392,9 @@
 					"type": "link_existing/threejs",
 					"sequence": 0,
 					"random": {
-						"s0": 0.7373845279216766,
-						"s1": 0.892781610134989,
-						"s2": 0.06203169864602387,
+						"s0": 0.737384,
+						"s1": 0.892781,
+						"s2": 0.062031,
 						"c": 1
 					},
 					"properties": {
@@ -409,17 +413,17 @@
 						"type": "3DR Object",
 						"DisplayName": "Arleigh_Burke_Railings",
 						"transform": [
-							0.009999999776482582,
+							0.009998999536037445,
 							0,
 							0,
 							0,
 							0,
-							0.009999999776482582,
+							0.009998999536037445,
 							0,
 							0,
 							0,
 							0,
-							0.009999999776482582,
+							0.009998999536037445,
 							0,
 							0,
 							0,
@@ -462,7 +466,7 @@
 							"metal": false,
 							"reflect": 0,
 							"shading": true,
-							"shininess": 0.0004022,
+							"shininess": 0.000402,
 							"side": 0,
 							"specularColor": {
 								"b": 0,
