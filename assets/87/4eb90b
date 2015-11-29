@@ -13,14 +13,14 @@
 		"___physics_activation_state": 4,
 		"___physics_deactivation_time": 0,
 		"___physics_velocity_linear": [
-			9.999999974752427e-7,
+			0,
 			-0.0001289999927394092,
-			-0.0032500000670552254
+			-0.0032510000746697187
 		],
 		"___physics_velocity_angular": [
 			0.00837900023907423,
-			-0.002339000115171075,
-			0.000012999999853491317
+			-0.0023399998899549246,
+			0.000012000000424450263
 		],
 		"DisplayName": "DDG51",
 		"EditorData": {
@@ -94,7 +94,7 @@
 		"activeState": "navigating",
 		"counter": 14602,
 		"ditorData": "",
-		"engine": "aheadFull",
+		"engine": "idle",
 		"height": 10,
 		"materialDef": {
 			"alpha": 1,
@@ -183,23 +183,23 @@
 			-0.017434999346733093,
 			0,
 			0,
-			0.017433999106287956,
+			0.01743300072848797,
 			0.9988470077514648,
 			0,
-			-26.512184143066406,
-			-55.71824264526367,
-			0.44147801399230957,
+			-1.6696070432662964,
+			-12.283143043518066,
+			0.0177449993789196,
 			1
 		],
 		"type": "Primitive",
 		"visible": false,
 		"width": 20,
-		"___sourceAssetTimestamp": "Sat Nov 28 2015 20:48:14 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Sun Nov 29 2015 11:22:16 GMT-0500 (Eastern Standard Time)",
 		"damageTexture": "/sas/assets/dde67e10",
 		"worldPosition": [
-			-26.512184143066406,
-			-55.71824264526367,
-			0.44147801399230957
+			-1.6696070432662964,
+			-12.283143043518066,
+			0.0177449993789196
 		]
 	},
 	"methods": {
@@ -235,7 +235,7 @@
 			"parameters": []
 		},
 		"tick": {
-			"body": "var sound = Engine.callMethod(Engine.application(), 'getSound', [this.id, \"/sas/assets/c46fb970\"]);\n    if (!sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/c46fb970\", true, 200, false);\n        this.audioAPI.playSound(\"/sas/assets/50af929c\", true, 200, false);\n    }\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n\n    }",
+			"body": "var sound = Engine.callMethod(Engine.application(), 'getSound', [this.id, \"/sas/assets/c46fb970\"]);\n    if (!sound || !sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/c46fb970\", true, 200, false);\n        this.audioAPI.playSound(\"/sas/assets/50af929c\", true, 200, false);\n    }\n    var state = this.states[this.activeState];\n    if (state)\n    {\n\n        if (state.movement)\n            this.movement();\n        if (state.buoyancy)\n            this.buoyancy();\n        if (state.updateFunc && this[state.updateFunc])\n            this[state.updateFunc]()\n\n    }",
 			"parameters": []
 		}
 	},
@@ -335,9 +335,9 @@
 				],
 				"type": "3DR Object",
 				"worldPosition": [
-					-26.512184143066406,
-					-55.71824264526367,
-					0.44147801399230957
+					-1.6696070432662964,
+					-12.283143043518066,
+					0.0177449993789196
 				]
 			},
 			"methods": {
@@ -372,14 +372,14 @@
 							0,
 							-9.999999974752427e-7,
 							-0.008965999819338322,
-							0.000783999974373728,
+							0.0007830000249668956,
 							0,
 							0,
-							0.000783999974373728,
-							0.008964999578893185,
+							0.0007830000249668956,
+							0.008964000269770622,
 							0,
 							0.2488110065460205,
-							-0.058017000555992126,
+							-0.058017998933792114,
 							0.15641100704669952,
 							1
 						],
@@ -413,17 +413,17 @@
 						"type": "3DR Object",
 						"DisplayName": "Arleigh_Burke_Railings",
 						"transform": [
-							0.009998999536037445,
+							0.009998000226914883,
 							0,
 							0,
 							0,
 							0,
-							0.009998999536037445,
+							0.009998000226914883,
 							0,
 							0,
 							0,
 							0,
-							0.009998999536037445,
+							0.009998000226914883,
 							0,
 							0,
 							0,
