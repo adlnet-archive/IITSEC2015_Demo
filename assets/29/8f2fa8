@@ -2,14 +2,14 @@
 	"extends": "http://vwf.example.com/panel.vwf",
 	"sequence": 0,
 	"random": {
-		"s0": 0.64075077068992,
-		"s1": 0.777328419033438,
-		"s2": 0.234217520570382,
+		"s0": 0.64075,
+		"s1": 0.777328,
+		"s2": 0.234217,
 		"c": 1
 	},
 	"properties": {
 		"DisplayName": "IntroScreen",
-		"___sourceAssetTimestamp": "Wed Nov 25 2015 10:08:35 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 30 2015 00:05:51 GMT-0500 (Eastern Standard Time)",
 		"background_color": [
 			1,
 			0,
@@ -76,9 +76,9 @@
 			0,
 			1,
 			0,
-			1.98847802003898,
-			-0.31907305296544,
-			0.023936576843262003,
+			2.00903,
+			-1.041642,
+			0.017745,
 			1
 		],
 		"visible": true,
@@ -86,10 +86,6 @@
 		"width": 100
 	},
 	"methods": {
-		"getCameraToggler": {
-			"body": "var children = this.Scene.children;\n\n    for (var i = 0; i < children.length; i++)\n    {\n        var child = children[i];\n        if (child && child.isCameraToggler === true) return child;\n    }\n\n    return null;",
-			"parameters": []
-		},
 		"selectRole": {
 			"body": "this.children_by_name.ChoicePanel.children_by_name.YourChoice.text = role;\n    this.children_by_name.InstructionPAnel.visible = true;\n    this.children_by_name.InstructionPAnel.children_by_name.Instructions.text = this.instructions[role];\n    if (this.controls[role])\n    {\n        this.children_by_name.InstructionPAnel.children_by_name.Controls.visible = true;\n        this.children_by_name.InstructionPAnel.children_by_name.Controls.src = this.controls[role];\n    }\n    else\n    {\n        this.children_by_name.InstructionPAnel.children_by_name.Controls.visible = false;\n    }",
 			"parameters": [
@@ -103,6 +99,10 @@
 		"ready": {
 			"body": "window.setTimeout(function(){\n    Engine.startCoSimulating(this.id);\n    }.bind(this),20);",
 			"parameters": []
+		},
+		"getCameraToggler": {
+			"body": "var children = this.parent.children;\n\n    for (var i = 0; i < children.length; i++)\n    {\n        var child = children[i];\n        if (child && child.isCameraToggler === true) return child;\n    }\n\n    return null;",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -110,18 +110,18 @@
 			"extends": "http://vwf.example.com/panel.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.477086802246049,
-				"s1": 0.662482763640583,
-				"s2": 0.229522233363241,
+				"s0": 0.477086,
+				"s1": 0.662482,
+				"s2": 0.229522,
 				"c": 1
 			},
 			"properties": {
 				"DisplayName": "InstructionPAnel",
 				"___assetServerOriginalID": "Nb57658e8",
 				"background_color": [
-					0.0196078431372549,
-					0.0196078431372549,
-					0.0196078431372549
+					0.019607,
+					0.019607,
+					0.019607
 				],
 				"background_visible": true,
 				"border_color": [
@@ -171,9 +171,9 @@
 					"extends": "http://vwf.example.com/label.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.729979472933337,
-						"s1": 0.21683713211678,
-						"s2": 0.581641138298437,
+						"s0": 0.729979,
+						"s1": 0.216837,
+						"s2": 0.581641,
 						"c": 1
 					},
 					"properties": {
@@ -211,8 +211,8 @@
 							0,
 							1,
 							0,
-							10.1748809814453,
-							1.72544646263123,
+							10.17488,
+							1.725446,
 							0,
 							1
 						],
@@ -224,9 +224,9 @@
 					"extends": "http://vwf.example.com/image.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.11204170063138,
-						"s1": 0.625456349691376,
-						"s2": 0.0114210785832256,
+						"s0": 0.112041,
+						"s1": 0.625456,
+						"s2": 0.011421,
 						"c": 1
 					},
 					"properties": {
@@ -268,9 +268,9 @@
 					"extends": "http://vwf.example.com/label.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.729979472933337,
-						"s1": 0.21683713211678,
-						"s2": 0.581641138298437,
+						"s0": 0.729979,
+						"s1": 0.216837,
+						"s2": 0.581641,
 						"c": 1
 					},
 					"properties": {
@@ -306,8 +306,8 @@
 							0,
 							1,
 							0,
-							10.0150003433228,
-							13.5819997787476,
+							10.015,
+							13.581999,
 							1,
 							1
 						],
@@ -321,18 +321,18 @@
 			"extends": "http://vwf.example.com/panel.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.819274035980925,
-				"s1": 0.975229885429144,
-				"s2": 0.784824640722945,
+				"s0": 0.819274,
+				"s1": 0.975229,
+				"s2": 0.784824,
 				"c": 1
 			},
 			"properties": {
 				"DisplayName": "ChoicePanel",
 				"___assetServerOriginalID": "N87a5a3d8",
 				"background_color": [
-					0.0196078431372549,
-					0.0196078431372549,
-					0.0196078431372549
+					0.019607,
+					0.019607,
+					0.019607
 				],
 				"background_visible": true,
 				"border_color": [
@@ -381,9 +381,9 @@
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
+						"s0": 0.838904,
+						"s1": 0.520298,
+						"s2": 0.905892,
 						"c": 1
 					},
 					"properties": {
@@ -434,9 +434,9 @@
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
+						"s0": 0.838904,
+						"s1": 0.520298,
+						"s2": 0.905892,
 						"c": 1
 					},
 					"properties": {
@@ -487,9 +487,9 @@
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.221668544923887,
-						"s1": 0.182144248858094,
-						"s2": 0.424506951356307,
+						"s0": 0.221668,
+						"s1": 0.182144,
+						"s2": 0.424506,
 						"c": 1
 					},
 					"properties": {
@@ -520,8 +520,8 @@
 							0,
 							1,
 							0,
-							16.3120002746582,
-							57.1759986877441,
+							16.312,
+							57.175998,
 							1,
 							1
 						],
@@ -542,9 +542,9 @@
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
+						"s0": 0.838904,
+						"s1": 0.520298,
+						"s2": 0.905892,
 						"c": 1
 					},
 					"properties": {
@@ -596,9 +596,9 @@
 					"extends": "http://vwf.example.com/label.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.729979472933337,
-						"s1": 0.21683713211678,
-						"s2": 0.581641138298437,
+						"s0": 0.729979,
+						"s1": 0.216837,
+						"s2": 0.581641,
 						"c": 1
 					},
 					"properties": {
@@ -634,7 +634,7 @@
 							0,
 							1,
 							0,
-							-0.189999997615814,
+							-0.19,
 							15,
 							0,
 							1
@@ -647,9 +647,9 @@
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
+						"s0": 0.838904,
+						"s1": 0.520298,
+						"s2": 0.905892,
 						"c": 1
 					},
 					"properties": {
@@ -700,9 +700,9 @@
 					"extends": "http://vwf.example.com/label.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.729979472933337,
-						"s1": 0.21683713211678,
-						"s2": 0.581641138298437,
+						"s0": 0.729979,
+						"s1": 0.216837,
+						"s2": 0.581641,
 						"c": 1
 					},
 					"properties": {
@@ -737,7 +737,7 @@
 							0,
 							1,
 							0,
-							-0.189999997615814,
+							-0.19,
 							5,
 							0,
 							1
@@ -750,9 +750,9 @@
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
+						"s0": 0.838904,
+						"s1": 0.520298,
+						"s2": 0.905892,
 						"c": 1
 					},
 					"properties": {
@@ -803,9 +803,9 @@
 					"extends": "http://vwf.example.com/button.vwf",
 					"sequence": 0,
 					"random": {
-						"s0": 0.838904722128063,
-						"s1": 0.520298416726291,
-						"s2": 0.90589270205237,
+						"s0": 0.838904,
+						"s1": 0.520298,
+						"s2": 0.905892,
 						"c": 1
 					},
 					"properties": {
@@ -859,9 +859,9 @@
 			"extends": "http://vwf.example.com/image.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.880096745910123,
-				"s1": 0.55490582739003,
-				"s2": 0.18280574935488403,
+				"s0": 0.880096,
+				"s1": 0.554905,
+				"s2": 0.182805,
 				"c": 1
 			},
 			"properties": {
@@ -898,9 +898,9 @@
 			"extends": "http://vwf.example.com/label.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.07276622718200088,
-				"s1": 0.8093430860899389,
-				"s2": 0.6135764389764518,
+				"s0": 0.072766,
+				"s1": 0.809343,
+				"s2": 0.613576,
 				"c": 1
 			},
 			"properties": {
@@ -933,7 +933,7 @@
 				"font_color": [
 					0,
 					0,
-					0.34509803921568627
+					0.345098
 				],
 				"font_size": 19,
 				"style": {
@@ -946,9 +946,9 @@
 			"extends": "http://vwf.example.com/label.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.36539049027487636,
-				"s1": 0.8817124550696462,
-				"s2": 0.25483252736739814,
+				"s0": 0.36539,
+				"s1": 0.881712,
+				"s2": 0.254832,
 				"c": 1
 			},
 			"properties": {
@@ -981,7 +981,7 @@
 				"font_color": [
 					0,
 					0,
-					0.34509803921568627
+					0.345098
 				],
 				"font_size": 33,
 				"style": {
