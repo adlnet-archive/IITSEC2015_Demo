@@ -2,10 +2,10 @@
 	"extends": "sandboxGroup.vwf",
 	"sequence": 0,
 	"random": {
-		"s0": 0.463987119728699,
-		"s1": 0.0462946102488786,
-		"s2": 0.294398021884263,
-		"c": 1248939
+		"s0": 0.9921782847959548,
+		"s1": 0.05235524685122073,
+		"s2": 0.6458961459575221,
+		"c": 707694
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -23,7 +23,7 @@
 		"DisplayName": "Explosion",
 		"explodeSound": "/sas/assets/3c6b353e",
 		"explodeSound2": "/sas/assets/d714ebe1",
-		"fuse": 10000000,
+		"fuse": 4,
 		"open": true,
 		"owner": "ADLteam",
 		"transform": [
@@ -39,9 +39,9 @@
 			0,
 			1,
 			0,
-			13.850886344909668,
-			-17.383155822753906,
-			0.2784443795681,
+			0.25627198815345764,
+			-1.2223190069198608,
+			0.0177449993789196,
 			1
 		],
 		"type": "Group",
@@ -55,15 +55,15 @@
 				"type": "slider"
 			}
 		},
-		"___sourceAssetTimestamp": "Mon Nov 09 2015 11:48:19 GMT-0500 (Eastern Standard Time)"
+		"___sourceAssetTimestamp": "Mon Nov 30 2015 22:06:26 GMT-0500 (Eastern Standard Time)"
 	},
 	"methods": {
-		"tick": {
-			"body": "    // The tick function is called 20 times every second.\n    // Write code here to animate over time\n   this.fuse--; if(Math.floor(this.fuse) == 0)\n        this.explode();\n    if(Math.floor(this.fuse) == -130)\n      vwf.deleteNode(this.id);    ",
+		"explode": {
+			"body": "this.broadcast('hit', [null, 50], 15);\n    this.children_by_name.ParticleSystem1.explode();\n    this.children_by_name.ParticleSystem2.explode();\n    if (this.random() > .5)\n        this.audioAPI.playSound(this.explodeSound, false, 1200);\n    else\n        this.audioAPI.playSound(this.explodeSound2, false, 1200);",
 			"parameters": []
 		},
-		"explode": {
-			"body": "this.broadcast('hit', [null, 50], 5);\n    this.children_by_name.ParticleSystem1.explode();\n    this.children_by_name.ParticleSystem2.explode();\n    if (this.random() > .5)\n        this.audioAPI.playSound(this.explodeSound, false, 1200);\n    else\n        this.audioAPI.playSound(this.explodeSound2, false, 1200);",
+		"tick": {
+			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n    this.fuse--;\n    if (Math.floor(this.fuse) == 0)\n        this.explode();\n    if (Math.floor(this.fuse) == -130)\n        this.delete();",
 			"parameters": []
 		}
 	},
@@ -72,9 +72,9 @@
 			"extends": "SandboxParticleSystem.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.981667949585244,
-				"s1": 0.595058325445279,
-				"s2": 0.676680717850104,
+				"s0": 0.981667,
+				"s1": 0.595058,
+				"s2": 0.67668,
 				"c": 1
 			},
 			"properties": {
@@ -120,7 +120,7 @@
 				"renderDepth": 0,
 				"solver": "Euler",
 				"startColor": [
-					0.980392156862745,
+					0.980392,
 					0.6,
 					0.6,
 					1
@@ -165,9 +165,9 @@
 			"extends": "SandboxParticleSystem.vwf",
 			"sequence": 0,
 			"random": {
-				"s0": 0.981667949585244,
-				"s1": 0.595058325445279,
-				"s2": 0.676680717850104,
+				"s0": 0.981667,
+				"s1": 0.595058,
+				"s2": 0.67668,
 				"c": 1
 			},
 			"properties": {
@@ -212,9 +212,9 @@
 				"particleCount": 100,
 				"solver": "Euler",
 				"startColor": [
-					0.56078431372549,
-					0.443137254901961,
-					0.427450980392157,
+					0.560784,
+					0.443137,
+					0.42745,
 					1
 				],
 				"textureTiles": 4,

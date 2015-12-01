@@ -11,16 +11,16 @@
 	},
 	"properties": {
 		"___physics_activation_state": 1,
-		"___physics_deactivation_time": 0.05000000074505806,
+		"___physics_deactivation_time": 0.05,
 		"___physics_velocity_linear": [
-			0.00044100001105107367,
-			-0.006850000005215406,
-			0.1253349930047989
+			0.000441,
+			-0.006851,
+			0.125334
 		],
 		"___physics_velocity_angular": [
-			-0.04453999921679497,
-			0.08765800297260284,
-			-0.0004820000031031668
+			-0.04454,
+			0.087658,
+			-0.000483
 		],
 		"DisplayName": "SeaHawk",
 		"EditorData": {
@@ -63,7 +63,7 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Sat Nov 28 2015 20:51:47 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 30 2015 22:35:53 GMT-0500 (Eastern Standard Time)",
 		"_length": 2.98,
 		"controllingCamera": "SandboxCamera-vwf-N79164421",
 		"counter": 2063.249999,
@@ -178,19 +178,19 @@
 		"transform": [
 			0.9297040104866028,
 			0.3569340109825134,
-			0.016227999702095985,
+			0.01622599922120571,
 			0,
 			-0.3579559922218323,
-			0.9326459765434265,
+			0.9326450228691101,
 			-0.006246999837458134,
 			0,
 			-0.01745299994945526,
 			-0.0000019999999949504854,
-			0.9998469948768616,
+			0.9998459815979004,
 			0,
-			31.03916358947754,
-			17.906417846679688,
-			0.44147801399230957,
+			0.6933979988098145,
+			-0.22784699499607086,
+			0.0177449993789196,
 			1
 		],
 		"type": "Primitive",
@@ -198,28 +198,28 @@
 		"weaponsTarget": "ocean-ocean-vwf-N4bab7165",
 		"width": 8.49,
 		"worldPosition": [
-			31.03916358947754,
-			17.906417846679688,
-			0.44147801399230957
+			0.6933979988098145,
+			-0.22784699499607086,
+			0.0177449993789196
 		],
 		"maxHeight": 500,
 		"minHeight": 25,
 		"worldTransform": [
 			0.9297040104866028,
 			0.3569340109825134,
-			0.016227999702095985,
+			0.01622599922120571,
 			0,
 			-0.3579559922218323,
-			0.9326459765434265,
+			0.9326450228691101,
 			-0.006246999837458134,
 			0,
 			-0.01745299994945526,
 			-0.0000019999999949504854,
-			0.9998469948768616,
+			0.9998459815979004,
 			0,
-			31.03916358947754,
-			17.906417846679688,
-			0.44147801399230957,
+			0.6933979988098145,
+			-0.22784699499607086,
+			0.0177449993789196,
 			1
 		],
 		"userControlCounter": 0,
@@ -266,10 +266,6 @@
 				"e",
 				"d"
 			]
-		},
-		"doUserTargeting": {
-			"body": "/********************************************\n     * Update weapons target\n     *******************************************/\n\n    var worldToCamera = new THREE.Matrix4().fromArray(this.children_by_name.art.children_by_name.UH60Pilot.worldTransform);\n    worldToCamera.getInverse(worldToCamera);\n    var target = {\n        range: 4,\n        id: ''\n    };\n\n    // get location of all scene children in view space\n    for (i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node === this) continue;\n\n        var targetCoord = new THREE.Vector4().fromArray(node.transformAPI.getWorldPosition().concat([1]));\n        targetCoord.applyMatrix4(worldToCamera);\n\n        // calculate distance to center iff target is in front of the camera\n        if (targetCoord.y > 0)\n        {\n            var range = Math.sqrt(targetCoord.x * targetCoord.x + targetCoord.z * targetCoord.z);\n            if (range < target.range)\n            {\n                target.id = node.id;\n                target.range = range;\n            }\n        }\n    }\n\n    this.weaponsTarget = target.id;\n\n    if (this.weaponsTarget)\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [1, 0, 0];\n    else\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [0.5, 0.5, 0.5];",
-			"parameters": []
 		},
 		"_kd": {
 			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 200;\n   \n    if (this.keysDown.indexOf(e.key.key) == -1)\n    {\n        this.keysDown.push(e.key.key);\n    }",
@@ -371,6 +367,10 @@
 		"tick": {
 			"body": "// The tick function is called 20 times every second.\n    // Write code here to animate over time\n\n    var sound = Engine.callMethod(Engine.application(), 'getSound', [this.id, \"/sas/assets/dc81768a\"]);\n      if (!sound || !sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/dc81768a\", true, 300, false);\n    }\n\n    this.userControlCounter--;\n    this.doHover();\n    if (this.userControlled())\n    {\n        this.doUserInput();\n        this.doUserTargeting();\n    }\n    else\n    {\n        this.doAIBehaviors();\n    }\n\n    this.doFlightModel();",
 			"parameters": []
+		},
+		"doUserTargeting": {
+			"body": "/********************************************\n     * Update weapons target\n     *******************************************/\n\n    var worldToCamera = new THREE.Matrix4().fromArray(this.children_by_name.art.children_by_name.UH60Pilot.worldTransform);\n    worldToCamera.getInverse(worldToCamera);\n    var target = {\n        range: 16,\n        id: ''\n    };\n\n    // get location of all scene children in view space\n    for (i = 0; i < this.Scene.children.length; i++)\n    {\n        var node = this.Scene.children[i];\n        if (node === this) continue;\n\n        var targetCoord = new THREE.Vector4().fromArray(node.transformAPI.getWorldPosition().concat([1]));\n        targetCoord.applyMatrix4(worldToCamera);\n\n        // calculate distance to center iff target is in front of the camera\n        if (targetCoord.y > 0)\n        {\n            var range = Math.sqrt(targetCoord.x * targetCoord.x + targetCoord.z * targetCoord.z);\n            if (range < target.range)\n            {\n                target.id = node.id;\n                target.range = range;\n            }\n        }\n    }\n\n    this.weaponsTarget = target.id;\n\n    if (this.weaponsTarget)\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [1, 0, 0];\n    else\n        this.children_by_name.art.children_by_name.UH60Pilot.children_by_name.reticle1.border_color = [0.5, 0.5, 0.5];",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -462,16 +462,16 @@
 					0,
 					0,
 					0,
-					-0.09398700296878815,
+					-0.09398800134658813,
 					-0.9955739974975586,
 					0,
 					0,
-					0.9955729842185974,
-					-0.09398700296878815,
+					0.9955719709396362,
+					-0.09398800134658813,
 					0,
-					-1.7000010013580322,
-					-2.2460010051727295,
-					-0.9620000123977661,
+					-1.7000019550323486,
+					-2.246001958847046,
+					-0.9620010256767273,
 					1
 				],
 				"type": "Primitive",
@@ -479,19 +479,19 @@
 				"worldTransform": [
 					0.9297040104866028,
 					0.3569340109825134,
-					0.016227999702095985,
+					0.01622599922120571,
 					0,
-					0.05101896449923515,
-					-0.08765460550785065,
-					-0.9948345422744751,
+					0.051019322127103806,
+					-0.0876554474234581,
+					-0.9948335289955139,
 					0,
-					-0.3547309637069702,
-					0.9285173416137695,
-					-0.10019196569919586,
+					-0.3547305762767792,
+					0.9285154342651367,
+					-0.10019285976886749,
 					0,
-					30.2794246673584,
-					15.204907417297363,
-					-0.5339316725730896,
+					-0.06634097546339035,
+					-2.929356098175049,
+					-0.9576613306999207,
 					1
 				]
 			}
@@ -683,16 +683,16 @@
 					0,
 					0,
 					0,
-					-0.07477600127458572,
-					-0.9972010254859924,
+					-0.07477699965238571,
+					-0.9972019791603088,
 					0,
 					0,
 					0.9972000122070312,
-					-0.07477600127458572,
+					-0.07477699965238571,
 					0,
-					1.4049999713897705,
+					1.404999017715454,
 					-2.246999979019165,
-					-0.9620000123977661,
+					-0.9620010256767273,
 					1
 				],
 				"type": "Primitive",
@@ -700,19 +700,19 @@
 				"worldTransform": [
 					0.9297040104866028,
 					0.3569340109825134,
-					0.016227999702095985,
+					0.01622599922120571,
 					0,
-					0.04417066648602486,
-					-0.06973753869533539,
-					-0.9965813159942627,
+					0.044171042740345,
+					-0.06973840296268463,
+					-0.9965812563896179,
 					0,
-					-0.3556486666202545,
-					0.9300347566604614,
-					-0.08099406957626343,
+					-0.35564863681793213,
+					0.930033802986145,
+					-0.08099499344825745,
 					0,
-					33.1665153503418,
-					16.312255859375,
-					-0.4835374653339386,
+					2.8207480907440186,
+					-1.8220064640045166,
+					-0.9072733521461487,
 					1
 				]
 			}
@@ -813,7 +813,7 @@
 					0,
 					1,
 					0,
-					-0.08900000154972076,
+					-0.08900099992752075,
 					-1.7405459880828857,
 					-1.4672549962997437,
 					1
@@ -891,45 +891,45 @@
 						"owner": "Rob",
 						"pointerState": "none",
 						"transform": [
-							-0.9976320266723633,
+							-0.9976329803466797,
 							-0.06877899914979935,
 							-0.000838999985717237,
 							0,
 							0.0685570016503334,
 							-0.9932839870452881,
-							-0.09321200102567673,
+							-0.09321299940347672,
 							0,
-							0.005576999858021736,
+							0.005576000083237886,
 							-0.09304899722337723,
-							0.9956449866294861,
+							0.9956439733505249,
 							0,
 							0.42399901151657104,
-							-1.6844550371170044,
-							1.4272539615631104,
+							-1.6844559907913208,
+							1.427253007888794,
 							1
 						],
 						"worldTransform": [
-							-0.9028679728507996,
-							-0.4202352464199066,
-							-0.016598781570792198,
+							-0.9028688669204712,
+							-0.4202355444431305,
+							-0.016596799716353416,
 							0,
-							0.42091649770736694,
-							-0.9019117951393127,
-							-0.08588015288114548,
+							0.42091652750968933,
+							-0.9019108414649963,
+							-0.08588118851184845,
 							0,
-							0.021115412935614586,
-							-0.08479314297437668,
-							0.9961644411087036,
+							0.021114502102136612,
+							-0.08479341119527817,
+							0.9961623549461365,
 							0,
-							32.57731246948242,
-							14.831677436828613,
-							0.42831549048423767,
+							2.2315449714660645,
+							-3.3025858402252197,
+							0.004580809269100428,
 							1
 						]
 					},
 					"methods": {
 						"ready": {
-							"body": "//This function was created for you by the system. \n    //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n\n    this.Scene.unbind('pointerMove', this._mouseMoved,this);\n    this.Scene.unbind('pointerDown', this._mouseDown,this);\n    this.Scene.unbind('pointerUp', this._mouseup,this);\n    var self = this;\n    this._mouseMoved = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (self.pointerState == 'down')\n        {\n            console.log(eventData);\n            self.parent.parent.userControlCounter = 200;\n            var relX = self.lastPos[0] - eventData.position[0];\n            var relY = self.lastPos[1] - eventData.position[1];\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n            console.log(relX, relY);\n\n            self.transformAPI.rotate(relY * 100, 0, 0, self.transformAPI.COORDINATES.LOCAL);\n            self.transformAPI.rotate(0, 0, relX * 100, self.transformAPI.COORDINATES.GLOBAL);\n\n        }\n    }\n    this._mouseDown = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (eventData.button == 'left')\n        {\n            self.pointerState = \"down\";\n            console.log('pointer is down');\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n        }\n    }\n    this._mouseup = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        self.pointerState = \"none\";\n    }\n\n    this.Scene.bind('pointerMove', this._mouseMoved,this);\n    this.Scene.bind('pointerDown', this._mouseDown,this);\n    this.Scene.bind('pointerUp', this._mouseup,this);",
+							"body": "//This function was created for you by the system. \n    //The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n\n    this.Scene.unbind('pointerMove', this._mouseMoved, this);\n    this.Scene.unbind('pointerDown', this._mouseDown, this);\n    this.Scene.unbind('pointerUp', this._mouseup, this);\n    var self = this;\n    this._mouseMoved = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (self.pointerState == 'down')\n        {\n            console.log(eventData);\n            self.parent.parent.userControlCounter = 800;\n            var relX = self.lastPos[0] - eventData.position[0];\n            var relY = self.lastPos[1] - eventData.position[1];\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n            console.log(relX, relY);\n\n            self.transformAPI.rotate(relY * 100, 0, 0, self.transformAPI.COORDINATES.LOCAL);\n            self.transformAPI.rotate(0, 0, relX * 100, self.transformAPI.COORDINATES.GLOBAL);\n\n        }\n    }\n    this._mouseDown = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        if (eventData.button == 'left')\n        {\n            self.pointerState = \"down\";\n            console.log('pointer is down');\n            self.lastPos = [eventData.position[0], eventData.position[1]];\n        }\n    }\n    this._mouseup = function(eventData)\n    {\n        if (!self.Scene.clientAPI.getCameraForClient(vwf.client()) || self.Scene.clientAPI.getCameraForClient(vwf.client()).DisplayName != self.DisplayName) return;\n        self.pointerState = \"none\";\n    }\n\n    this.Scene.bind('pointerMove', this._mouseMoved, this);\n    this.Scene.bind('pointerDown', this._mouseDown, this);\n    this.Scene.bind('pointerUp', this._mouseup, this);",
 							"parameters": []
 						}
 					},
@@ -1049,7 +1049,7 @@
 						}
 					}
 				},
-				"Nf03e7073": {
+				"Nf1b3e5c7": {
 					"extends": "asset.vwf",
 					"source": "Mrotor",
 					"type": "link_existing/threejs",
@@ -1074,7 +1074,7 @@
 							0
 						],
 						"DisplayName": "Mrotor",
-						"___assetServerOriginalID": "Nf03e7073",
+						"___assetServerOriginalID": "Nf1b3e5c7",
 						"materialDef": {
 							"alpha": 1,
 							"ambient": {
@@ -1126,23 +1126,23 @@
 						},
 						"transform": [
 							0.009196000173687935,
-							0.003926999866962433,
+							0.003926000092178583,
 							0,
 							0,
-							-0.00392800010740757,
+							-0.00392899988219142,
 							0.009196000173687935,
 							0,
 							0,
 							0,
 							0,
-							0.009998999536037445,
+							0.009998000226914883,
 							0,
 							0.004877000115811825,
 							0.08373100310564041,
-							2.0202789306640625,
+							2.0202770233154297,
 							1
 						],
-						"type": "3DR Object"
+						"type": "behavior"
 					},
 					"children": {
 						"Nf1b3e5c7": {
@@ -1159,8 +1159,7 @@
 								"DisplayName": "rotator1",
 								"Local": true,
 								"___assetServerOriginalID": "Nf1b3e5c7",
-								"owner": "ADLteam",
-								"type": "behavior"
+								"owner": "ADLteam"
 							}
 						}
 					}
@@ -1230,17 +1229,17 @@
 							"wireframe": false
 						},
 						"transform": [
-							0.009998999536037445,
+							0.009998000226914883,
 							0,
 							0,
 							0,
 							0,
-							0.009998999536037445,
+							0.009998000226914883,
 							0,
 							0,
 							0,
 							0,
-							0.009998999536037445,
+							0.009998000226914883,
 							0,
 							0,
 							0,

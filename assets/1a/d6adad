@@ -13,14 +13,14 @@
 		"___physics_activation_state": 4,
 		"___physics_deactivation_time": 0,
 		"___physics_velocity_linear": [
-			-0.019123,
-			0.104488,
-			-0.003257
+			-0.019122999161481857,
+			0.10448800027370453,
+			-0.0032569998875260353
 		],
 		"___physics_velocity_angular": [
-			0.02765,
-			-0.144576,
-			0.000384
+			0.027650000527501106,
+			-0.14457599818706512,
+			0.00038400001358240843
 		],
 		"DisplayName": "FAC_MASTER2",
 		"EditorData": {
@@ -119,7 +119,7 @@
 			-0.000488
 		],
 		"___physics_mass": 8051.2,
-		"___sourceAssetTimestamp": "Sun Nov 29 2015 11:12:24 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 30 2015 22:07:23 GMT-0500 (Eastern Standard Time)",
 		"_keysDown": [],
 		"_length": 7,
 		"activeState": "active",
@@ -304,7 +304,7 @@
 		"facPeerMovementCandidate": null,
 		"fuel": 100,
 		"fuelConsumptionRate": 0.01,
-		"health": 100,
+		"health": 49,
 		"height": 1.2,
 		"hostile": true,
 		"hullStrength": 100,
@@ -507,21 +507,21 @@
 		},
 		"tickCount": 0,
 		"transform": [
-			-0.6870899796485901,
-			-0.7216169834136963,
-			0.03449000045657158,
+			0.5157290101051331,
+			0.8531960248947144,
+			0.010425000451505184,
 			0,
-			0.7212030291557312,
-			-0.6869199872016907,
-			-0.004579999949783087,
+			-0.8438199758529663,
+			0.5116170048713684,
+			-0.12742899358272552,
 			0,
-			0.027101000770926476,
-			0.02181600034236908,
-			0.996392011642456,
+			-0.11450699716806412,
+			0.05714400112628937,
+			0.9877340197563171,
 			0,
-			1.215378999710083,
-			-1.0828319787979126,
-			0.0177449993789196,
+			18.25,
+			-1.25,
+			0,
 			1
 		],
 		"type": "Primitive",
@@ -530,26 +530,26 @@
 		"warningsReceived": 0,
 		"width": 2.5,
 		"worldPosition": [
-			1.215378999710083,
-			-1.0828319787979126,
-			0.0177449993789196
+			18.25,
+			-1.25,
+			0
 		],
 		"worldTransform": [
-			-0.6870899796485901,
-			-0.7216169834136963,
-			0.03449000045657158,
+			0.5157290101051331,
+			0.8531960248947144,
+			0.010425000451505184,
 			0,
-			0.7212030291557312,
-			-0.6869199872016907,
-			-0.004579999949783087,
+			-0.8438199758529663,
+			0.5116170048713684,
+			-0.12742899358272552,
 			0,
-			0.027101000770926476,
-			0.02181600034236908,
-			0.996392011642456,
+			-0.11450699716806412,
+			0.05714400112628937,
+			0.9877340197563171,
 			0,
-			1.215378999710083,
-			-1.0828319787979126,
-			0.0177449993789196,
+			18.25,
+			-1.25,
+			0,
 			1
 		]
 	},
@@ -557,6 +557,13 @@
 		"FACMovementDirection": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                // set equal to \"\" after adding calculations:\n                                var movement = \"closing\";\n                                // Perform calculations to determine approaching or moving away states:\n                                //     movement = \"closing\" if distance to target is getting smaller\n                                //     movement = \"none\" if distance to target hasn't changed\n                                //     movement = \"increasing\" if distance to target is getting larger\n                                switch (movement)\n                                {\n                                    case \"closing\":\n                                        this.currentState = this.states[\"approaching\"];\n                                        return \"approaching\";\n                                    case \"none\":\n                                        this.currentState = this.states[\"idle\"];\n                                        return \"idle\";\n                                    case \"increasing\":\n                                        this.currentState = this.states[\"moving_away\"];\n                                        return \"moving_away\";\n                                }    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
+		},
+		"_keyDown": {
+			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (this.currentState === null)\n    {\n        console.log(\"Set initial state\");\n        this.currentState = this.states[\"approaching\"];\n    }\n    if (this._keysDown.indexOf(e.key.char) == -1)\n    {\n        this._keysDown.push(e.key.char);\n    }",
+			"parameters": [
+				"e",
+				"d"
+			]
 		},
 		"_keyUp": {
 			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (this._keysDown.indexOf(e.key.char) !== -1)\n    {\n        this._keysDown.splice(this._keysDown.indexOf(e.key.char), 1);\n    }\n    if (e.key.char == \" \")\n    {\n        if (this.rockets > 0)\n        {\n            this.activateState(\"fire_rocket\");\n            console.log(\"rockets: \" + this.rockets);\n\n            console.log(\"Broadcasting leader fire...\");\n            // this.broadcast(\"facLeaderFire\", [], 500);\n        }\n    }",
@@ -573,6 +580,14 @@
 		},
 		"aiDefeated": {
 			"body": "console.log(\"aiDefeated\");",
+			"parameters": []
+		},
+		"aiFire": {
+			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            this.rockets = this.rockets - 1;\n            if(this.rockets <= 0)\n            {\n                this.aiActiveState = \"flee\";\n            }\n            else if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
+			"parameters": []
+		},
+		"aiFlee": {
+			"body": "var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n\n        if (targetPos[1] < 10)\n            this.doTurn('right')\n        else if (targetPos[1] > -10)\n            this.doTurn('left');\n\n        this.doMoveForward();\n\n    }",
 			"parameters": []
 		},
 		"aiMoveAway": {
@@ -605,6 +620,24 @@
 		},
 		"consumeFuel": {
 			"body": "if (this.fuel <= 0.0)\n    {\n        this.currentState = this.states[\"out_of_gas\"];\n    }\n    else\n    {\n        this.fuel = this.fuel - this.fuelConsumptionRate;\n        //console.log(\"fuel: \" + this.fuel);\n    }",
+			"parameters": []
+		},
+		"createExplosion": {
+			"body": "var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = 1;\n    this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null);",
+			"parameters": []
+		},
+		"defeatedTransition": {
+			"body": "console.log(\"defeatedTransition\");\n    this.currentState = this.states[\"defeated\"];",
+			"parameters": []
+		},
+		"defeatedUpdate": {
+			"body": "console.log(\"defeatedUpdate\");\n    this.currentState = this.states[\"defeated\"];\n    this.audioAPI.stopSound(\"/sas/assets/c253157d\", true, 200);",
+			"parameters": [
+				"statename"
+			]
+		},
+		"destroyFAC": {
+			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    this.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName + this.id, \"FastAttackCraft\", null);\n    }",
 			"parameters": []
 		},
 		"doAIBehaviors": {
@@ -649,6 +682,12 @@
 				"statename"
 			]
 		},
+		"hit": {
+			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n    if (this.activeState == \"defeated\") return;\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        \n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
+			"parameters": [
+				"args"
+			]
+		},
 		"idleTransition": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"idleTransition\");\n                                this.currentState = this.states[\"idle\"];   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
@@ -658,6 +697,18 @@
 			"parameters": [
 				"statename"
 			]
+		},
+		"isUserControlled": {
+			"body": "var thisCam = this.controllingCamera;\n\n    return this._keysDown.length !== 0 ||( this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0);",
+			"parameters": []
+		},
+		"launchMissile": {
+			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.properties.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'FAC Missile', 'Fast Attack Craft', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"parameters": []
+		},
+		"moveToAvoidPeer": {
+			"body": "var peer_info = this.facPeerMovementCandidate;\n    if (!peer_info) return false;\n\n    if (peer_info[1] == this.id) return;\n\n    var safe_distance = peer_info[3] || 50;\n    var mass = this.physicsAPI.getMass();\n\n    // Get peer world position\n    var peer_pos = peer_info[0];\n\n    // Get my world position\n    var my_pos = this.transformAPI.getWorldPosition();\n\n    // Get the distance between me and the leader\n    var distance = MATH.distanceVec3(peer_pos, my_pos);\n    //console.log(\"facFollowBehavior: distance: \" + distance);\n\n    if (distance < safe_distance)\n    {\n        //console.log(\"Move to Avoid Peer (\" + this.id + \")\");\n        var direction = MATH.subVec3(my_pos, peer_pos);\n        //console.log(\"diff: \" + direction);\n\n        direction[2] = 0;\n\n        var norm_direction = MATH.toUnitVec3(direction);\n\n        norm_direction = this.transformAPI.globalToLocalRotation(norm_direction);\n\n        var x = norm_direction[0];\n        var y = norm_direction[1];\n\n        //console.log(\"x: \" + x);\n        //console.log(\"y: \" + y);\n\n        var peer_heading = this.transformAPI.globalToLocalRotation(peer_info[2]);\n\n        //console.log(peer_heading);\n\n        // if the peer is headed right at me, then I should turn right\n        //      if (peer_heading[0] > 0 && Math.abs(peer_heading[1]) < .25)\n        //        {\n        //console.log(\"peer heading at me, turn right!\");\n        //          this.doTurn('right');\n        //    }\n        //  else\n        {\n            if (y >= 0)\n            {\n                if (x > 0) // 1st quadrant\n                {\n                    this.doTurn('right');\n                }\n                else // 2nd quadrant\n                {\n\n                    //this.doTurn('left');\n                }\n            }\n            else\n            {\n                if (x > 0) // 4th quardrant\n                {\n                    this.doTurn('left');\n                }\n                else // 3rd quadrant\n                {\n\n                    //this.doTurn('right');\n                }\n            }\n        }\n    }\n    else\n    {\n        this.facPeerMovementCandidate = null;\n    }\n\n    this.doMoveForward();\n\n    return true;",
+			"parameters": []
 		},
 		"moving_awayTransition": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"moving_awayTransition\");\n                                this.moving_awayUpdate(this.currentState);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
@@ -671,6 +722,10 @@
 		},
 		"notifyPeers": {
 			"body": "var my_position = this.transformAPI.getPosition();\n    this.tickCount++;\n    if (this.tickCount == 4 || this.tickCount == 8)\n    {\n        var local_forward = this.transformAPI.localToGlobalRotation(-1, 0, 0);\n\n        this.broadcast(\"facPeerInput\", [my_position, this.id, local_forward], 50);\n    }\n\n    if (this.tickCount > 10)\n    {\n        var leader_projection = this.transformAPI.localToGlobal(-150, 0, 0);\n\n        this.broadcast(\"facLeaderInput\", [leader_projection], 500);\n        this.tickCount = 0;\n    }",
+			"parameters": []
+		},
+		"out_of_gasTransition": {
+			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    // var sender = this.Scene.children_by_name.xAPISender;\n    // if (sender)\n    // {\n    //     sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    // }",
 			"parameters": []
 		},
 		"out_of_gasUpdate": {
@@ -691,12 +746,24 @@
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"playBulletWhizzingBy\");\n                                this.audioAPI.playSound(\"\", false, 100);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
+		"playExplosion": {
+			"body": "console.log(\"playExplosion\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/8d358349\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/d714ebe1\", false, 100);\n    // #3:\n    this.audioAPI.playSound(\"/sas/assets/3c6b353e\", false, 1000);",
+			"parameters": []
+		},
 		"playHelicopter": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               //console.log(\"playHelicopter\");\n                                // #1:\n                                //this.audioAPI.playSound(\"/sas/assets/af90534a\", false, 100);\n                                //#2:\n                                this.audioAPI.playSound(\"/sas/assets/dc81768a\", false, 100);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 			"parameters": []
 		},
+		"playMissileLaunch": {
+			"body": "console.log(\"playMissileLaunch\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/744acf2e\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/4334801b\", false, 100);\n    // #3:\n    //this.audioAPI.playSound(\"/sas/assets/10b027bd\", false, 100);\n    // #4:\n    //this.audioAPI.playSound(\"/sas/assets/94d508e3\", false, 100);\n    // #5:\n    this.audioAPI.playSound(\"/sas/assets/263beb86\", false, 400);",
+			"parameters": []
+		},
 		"playMotorIdle": {
 			"body": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                               console.log(\"playMotorIdle\");\n                                this.audioAPI.playSound(\"\", false, 100);   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"parameters": []
+		},
+		"playMotorRunning": {
+			"body": "//console.log(\"playMotorRunning\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/2cb9fef9\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/994ee0c8\", false, 100);\n    // #3:\n    var sound = vwf.callMethod(this.id, \"getSound\", [this.id, \"/sas/assets/c253157d\"]);\n\n     if (sound == null || !sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/c253157d\", true, 200, false);\n    }",
 			"parameters": []
 		},
 		"playMotorSputtering": {
@@ -714,99 +781,185 @@
 				"max"
 			]
 		},
-		"verifyCamera": {
-			"body": "if(!this.controllingCamera)\n        return true;\n    var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.controllingCamera) return false;\n    return true;",
-			"parameters": []
-		},
-		"moveToAvoidPeer": {
-			"body": "var peer_info = this.facPeerMovementCandidate;\n    if (!peer_info) return false;\n\n    if (peer_info[1] == this.id) return;\n\n    var safe_distance = peer_info[3] || 50;\n    var mass = this.physicsAPI.getMass();\n\n    // Get peer world position\n    var peer_pos = peer_info[0];\n\n    // Get my world position\n    var my_pos = this.transformAPI.getWorldPosition();\n\n    // Get the distance between me and the leader\n    var distance = MATH.distanceVec3(peer_pos, my_pos);\n    //console.log(\"facFollowBehavior: distance: \" + distance);\n\n    if (distance < safe_distance)\n    {\n        //console.log(\"Move to Avoid Peer (\" + this.id + \")\");\n        var direction = MATH.subVec3(my_pos, peer_pos);\n        //console.log(\"diff: \" + direction);\n\n        direction[2] = 0;\n\n        var norm_direction = MATH.toUnitVec3(direction);\n\n        norm_direction = this.transformAPI.globalToLocalRotation(norm_direction);\n\n        var x = norm_direction[0];\n        var y = norm_direction[1];\n\n        //console.log(\"x: \" + x);\n        //console.log(\"y: \" + y);\n\n        var peer_heading = this.transformAPI.globalToLocalRotation(peer_info[2]);\n\n        //console.log(peer_heading);\n\n        // if the peer is headed right at me, then I should turn right\n        //      if (peer_heading[0] > 0 && Math.abs(peer_heading[1]) < .25)\n        //        {\n        //console.log(\"peer heading at me, turn right!\");\n        //          this.doTurn('right');\n        //    }\n        //  else\n        {\n            if (y >= 0)\n            {\n                if (x > 0) // 1st quadrant\n                {\n                    this.doTurn('right');\n                }\n                else // 2nd quadrant\n                {\n\n                    //this.doTurn('left');\n                }\n            }\n            else\n            {\n                if (x > 0) // 4th quardrant\n                {\n                    this.doTurn('left');\n                }\n                else // 3rd quadrant\n                {\n\n                    //this.doTurn('right');\n                }\n            }\n        }\n    }\n    else\n    {\n        this.facPeerMovementCandidate = null;\n    }\n\n    this.doMoveForward();\n\n    return true;",
-			"parameters": []
-		},
-		"playMissileLaunch": {
-			"body": "console.log(\"playMissileLaunch\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/744acf2e\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/4334801b\", false, 100);\n    // #3:\n    //this.audioAPI.playSound(\"/sas/assets/10b027bd\", false, 100);\n    // #4:\n    //this.audioAPI.playSound(\"/sas/assets/94d508e3\", false, 100);\n    // #5:\n    this.audioAPI.playSound(\"/sas/assets/263beb86\", false, 400);",
-			"parameters": []
-		},
-		"playExplosion": {
-			"body": "console.log(\"playExplosion\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/8d358349\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/d714ebe1\", false, 100);\n    // #3:\n    this.audioAPI.playSound(\"/sas/assets/3c6b353e\", false, 1000);",
-			"parameters": []
-		},
-		"defeatedUpdate": {
-			"body": "console.log(\"defeatedUpdate\");\n    this.currentState = this.states[\"defeated\"];\n    this.audioAPI.stopSound(\"/sas/assets/c253157d\", true, 200);",
-			"parameters": [
-				"statename"
-			]
-		},
-		"aiAttack": {
-			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > attackRange)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
-			"parameters": []
-		},
-		"aiCirclecc": {
-			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] < 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circle\";\n\n        if (this.random() > .99575)\n            this.aiActiveState = \"fire\";\n\n    }",
-			"parameters": []
-		},
-		"aiCircle": {
-			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] > 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circlecc\";\n\n        if (this.random() > .99575)\n            this.aiActiveState = \"fire\";\n    }",
-			"parameters": []
-		},
-		"aiFlee": {
-			"body": "var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n\n        if (targetPos[1] < 10)\n            this.doTurn('right')\n        else if (targetPos[1] > -10)\n            this.doTurn('left');\n\n        this.doMoveForward();\n\n    }",
-			"parameters": []
-		},
-		"aiFire": {
-			"body": "var attachRange = 100;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n\n        if (targetPos[1] > 0)\n            this.doTurn('right')\n        else\n            this.doTurn('left');\n\n        if (Math.abs(targetPos[1]) < .2)\n        {\n            console.log(\"FIRE!\");\n            this.launchMissile();\n            this.playMissileLaunch();\n            this.rockets = this.rockets - 1;\n            if(this.rockets <= 0)\n            {\n                this.aiActiveState = \"flee\";\n            }\n            else if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n\n        this.doMoveForward();\n\n    }",
-			"parameters": []
-		},
-		"hit": {
-			"body": "this.audioAPI.playSound(\"/sas/assets/bc13daa3\", false, 200, true);\n    if (this.currentState.name == \"defeated\") return;\n\n    var pos = args[0];\n    var force = args[1];\n    if (typeof force == 'number')\n    {\n        this.health -= force;\n\n    }\n    else\n    {\n        this.health -= 101;\n    }\n    if (this.health < 0)\n    {\n        this.hostile = false;\n        this.createExplosion();\n        this.destroyFAC();\n    }",
-			"parameters": [
-				"args"
-			]
-		},
-		"defeatedTransition": {
-			"body": "console.log(\"defeatedTransition\");\n    this.currentState = this.states[\"defeated\"];",
-			"parameters": []
-		},
-		"out_of_gasTransition": {
-			"body": "console.log(\"out_of_gasTransition\");\n    //this.currentState = this.states[\"out_of_gas\"];\n    this.out_of_gasUpdate(this.currentState);\n\n    // var sender = this.Scene.children_by_name.xAPISender;\n    // if (sender)\n    // {\n    //     sender.xAPISend(\"ran-out-of-gas\", this.DisplayName, \"FastAttackCraft\", null);\n    // }",
-			"parameters": []
-		},
 		"ready": {
 			"body": "// The scene is now completely loaded. This will fire on each client when the client joins, so it`s not a great place to create objects\n    this.Scene.unbind(\"keyDown\", this._kd, this);\n    this.Scene.unbind(\"keyUp\", this._ku, this);\n    var self = this;\n    this._kd = function(e, d)\n    {\n        self._keyDown(e, d)\n    };\n    this._ku = function(e, d)\n    {\n        self._keyUp(e, d)\n    };\n    this.Scene.bind(\"keyDown\", this._kd,this);\n    this.Scene.bind(\"keyUp\", this._ku,this);",
-			"parameters": []
-		},
-		"isUserControlled": {
-			"body": "var thisCam = this.controllingCamera;\n\n    return this._keysDown.length !== 0 ||( this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0);",
-			"parameters": []
-		},
-		"_keyDown": {
-			"body": "if (!this.verifyCamera()) return;\n    this.userControlCounter = 100;\n    if (this.currentState === null)\n    {\n        console.log(\"Set initial state\");\n        this.currentState = this.states[\"approaching\"];\n    }\n    if (this._keysDown.indexOf(e.key.char) == -1)\n    {\n        this._keysDown.push(e.key.char);\n    }",
-			"parameters": [
-				"e",
-				"d"
-			]
-		},
-		"launchMissile": {
-			"body": "var def = this.missileDef;\n    var pos = this.children_by_name.MissileLauncher.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.properties.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'FAC Missile', 'Fast Attack Craft', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
-			"parameters": []
-		},
-		"destroyFAC": {
-			"body": "var def = this.destroyedFACDef;\n    var val1 = this.randomIntFromInterval(1, 360);\n    var val2 = this.randomIntFromInterval(1, 90);\n    var val3 = this.randomIntFromInterval(1, 360);\n    console.log(\"FAC blown up\");\n    this.currentState = this.states[\"defeated\"];\n    this.activeState = \"defeated\";\n    this.aiActiveState = \"defeated\";\n    this.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null);\n    if (this.isSlave)\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(val1, val2, val3);\n    else\n        this.children_by_name[\"3D_model\"].transformAPI.setRotation(180, 45, 90);\n    this.children_by_name.WaterBlocker.visible = false;\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        sender.xAPISend(\"is-defeated\", this.DisplayName + this.id, \"FastAttackCraft\", null);\n    }",
-			"parameters": []
-		},
-		"createExplosion": {
-			"body": "var def = this.explosionDef;\n    var pos = this.transformAPI.getWorldPosition();\n    def.properties.transform[12] = pos[0];\n    def.properties.transform[13] = pos[1];\n    def.properties.transform[14] = pos[2];\n    def.properties.fuse = 1;\n    this.Scene.createChild(GUID(), _DataManager.getCleanNodePrototype(def), null);",
-			"parameters": []
-		},
-		"playMotorRunning": {
-			"body": "//console.log(\"playMotorRunning\");\n    // #1:\n    //this.audioAPI.playSound(\"/sas/assets/2cb9fef9\", false, 100);\n    // #2:\n    //this.audioAPI.playSound(\"/sas/assets/994ee0c8\", false, 100);\n    // #3:\n    var sound = vwf.callMethod(this.id, \"getSound\", [this.id, \"/sas/assets/c253157d\"]);\n\n     if (sound == null || !sound.isPlaying())\n    {\n        this.audioAPI.playSound(\"/sas/assets/c253157d\", true, 200, false);\n    }",
 			"parameters": []
 		},
 		"tick": {
 			"body": "console.log(this.facPeerMovementCandidate);\n    this.userControlCounter--;\n    this.doBuoyancy();\n    this.notifyPeers();\n    if (!Engine.isSimulating(this.controllingCamera) && this.Scene.findNodeByID(this.controllingCamera))\n    {\n        debugger;\n        Engine.requestControl(this.controllingCamera);\n    }\n    if (this.facPeerMovementCandidate && !this.isUserControlled())\n    {\n        this.moveToAvoidPeer();\n\n        return;\n\n    }\n    this.facPeerMovementCandidate = null;\n\n    if (this.isUserControlled())\n    {\n        this.isSlave = false;\n        this.doUserInput();\n    }\n    else\n    {\n        this.isSlave = true;\n        this.doAIBehaviors();\n    }",
 			"parameters": []
+		},
+		"verifyCamera": {
+			"body": "if(!this.controllingCamera)\n        return true;\n    var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n\n    if (!cam || cam.id != this.controllingCamera) return false;\n    return true;",
+			"parameters": []
+		},
+		"aiAttack": {
+			"body": "var attackRange = 200;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        targetPos[0] += Math.sin(this.time) * 70;\n        targetPos[1] += Math.cos(this.time) * 70;\n        if (MATH.lengthVec3(targetPos) > attackRange)\n        {\n            if (targetPos[1] > 10)\n                this.doTurn('right')\n            else if (targetPos[1] < -10)\n                this.doTurn('left');\n        }\n        else\n        {\n            if (this.random() < .5)\n                this.aiActiveState = \"circle\";\n            else\n                this.aiActiveState = \"circlecc\";\n        }\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n    }",
+			"parameters": []
+		},
+		"aiCircle": {
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] > 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circlecc\";\n\n        if (this.random() > .9965)\n            this.aiActiveState = \"fire\";\n    }",
+			"parameters": []
+		},
+		"aiCirclecc": {
+			"body": "var attackRange = 300;\n    var target = this.Scene.findNodeByID(this.aiTargetID);\n    var targetPos;\n    if (target)\n    {\n        targetPos = target.transformAPI.getWorldPosition();\n        targetPos = this.transformAPI.globalToLocal(targetPos);\n        if (MATH.lengthVec3(targetPos) < attackRange)\n        {\n            if (targetPos[0] < 0)\n                this.doTurn('right')\n            else\n                this.doTurn('left');\n        }\n        else\n        {\n            this.aiActiveState = 'attack';\n        }\n\n        if (MATH.lengthVec3(targetPos) < 150)\n        {\n            this.aiActiveState = \"moveAway\";\n        }\n\n        if (MATH.lengthVec3(targetPos) > 10)\n        {\n            this.doMoveForward();\n        }\n        if (this.random() > .995)\n            this.aiActiveState = \"circle\";\n\n        if (this.random() > .9965)\n            this.aiActiveState = \"fire\";\n\n    }",
+			"parameters": []
 		}
 	},
 	"children": {
+		"N83e3ec00": {
+			"extends": "box2.vwf",
+			"source": "vwf/model/threejs/box.js",
+			"type": "subDriver/threejs",
+			"sequence": 0,
+			"random": {
+				"s0": 0.198099,
+				"s1": 0.027581,
+				"s2": 0.352169,
+				"c": 1
+			},
+			"properties": {
+				"___physics_activation_state": 1,
+				"___physics_deactivation_time": 0,
+				"___physics_velocity_linear": [
+					0,
+					0,
+					0
+				],
+				"___physics_velocity_angular": [
+					0,
+					0,
+					0
+				],
+				"DisplayName": "WaterBlocker",
+				"___assetServerOriginalID": "N83e3ec00",
+				"_length": 3.45,
+				"castShadows": false,
+				"height": 0.18,
+				"materialDef": {
+					"alpha": 0,
+					"ambient": {
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"blendMode": 1,
+					"color": {
+						"a": 0,
+						"b": 1,
+						"g": 1,
+						"r": 1
+					},
+					"depthtest": true,
+					"depthwrite": true,
+					"emit": {
+						"b": 0,
+						"g": 0,
+						"r": 0
+					},
+					"fog": true,
+					"layers": [],
+					"metal": false,
+					"reflect": 0.8,
+					"shadeless": false,
+					"shading": true,
+					"shadow": true,
+					"shininess": 15,
+					"side": 0,
+					"specularColor": {
+						"b": 0.57735,
+						"g": 0.57735,
+						"r": 0.57735
+					},
+					"specularLevel": 1,
+					"type": "phong",
+					"vertexColors": false,
+					"wireframe": false
+				},
+				"owner": "ADLteam",
+				"renderDepth": 11,
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					1,
+					0,
+					-0.25,
+					1
+				],
+				"type": "Primitive",
+				"visible": true,
+				"width": 2.18
+			}
+		},
+		"N8cf5a8e2": {
+			"extends": "http://vwf.example.com/node3.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.022454,
+				"s1": 0.002702,
+				"s2": 0.55584,
+				"c": 1
+			},
+			"properties": {
+				"DisplayName": "enginePos",
+				"___assetServerOriginalID": "N8cf5a8e2",
+				"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
+				"owner": "ADLteam",
+				"transform": [
+					1,
+					0,
+					0,
+					0,
+					0,
+					1,
+					0,
+					0,
+					-9.999999974752427e-7,
+					0,
+					1,
+					0,
+					3,
+					0,
+					-0.75,
+					1
+				],
+				"transformAPI": {
+					"COORDINATES": {
+						"GLOBAL": "global",
+						"LOCAL": "local",
+						"PARENT": "parent"
+					}
+				},
+				"worldTransform": [
+					0.5157290101051331,
+					0.8531960248947144,
+					0.010425000451505184,
+					0,
+					-0.8438199758529663,
+					0.5116170048713684,
+					-0.12742899358272552,
+					0,
+					-0.1145075112581253,
+					0.05714314803481102,
+					0.9877340197563171,
+					0,
+					19.883068084716797,
+					1.2667300701141357,
+					-0.7095255255699158,
+					1
+				]
+			}
+		},
 		"Ned0c4c0a": {
 			"extends": "asset.vwf",
 			"source": "/sas/assets/a31ba113",
@@ -902,9 +1055,9 @@
 					1
 				],
 				"worldPosition": [
-					0.858283519744873,
-					-1.4545484781265259,
-					-0.4632059931755066
+					18.56511878967285,
+					-0.8519740104675293,
+					-0.4886545240879059
 				]
 			},
 			"methods": {
@@ -1019,174 +1172,21 @@
 				"visible": false,
 				"width": 1.36,
 				"worldTransform": [
-					-0.1547544300556183,
-					-0.13746348023414612,
-					0.9752731919288635,
+					0.031383585184812546,
+					0.24956785142421722,
+					0.9637622833251953,
 					0,
-					-0.7223201394081116,
-					0.6855251789093018,
-					-0.018037671223282814,
+					0.8467210531234741,
+					-0.5119308233261108,
+					0.1049523800611496,
 					0,
-					-0.6687764525413513,
-					-0.7100861668586731,
-					-0.2062070369720459,
+					0.5226836204528809,
+					0.817678689956665,
+					-0.22827370464801788,
 					0,
-					0.5689405202865601,
-					-1.7717249393463135,
-					1.5468220710754395,
-					1
-				]
-			}
-		},
-		"N83e3ec00": {
-			"extends": "box2.vwf",
-			"source": "vwf/model/threejs/box.js",
-			"type": "subDriver/threejs",
-			"sequence": 0,
-			"random": {
-				"s0": 0.198099,
-				"s1": 0.027581,
-				"s2": 0.352169,
-				"c": 1
-			},
-			"properties": {
-				"___physics_activation_state": 1,
-				"___physics_deactivation_time": 0,
-				"___physics_velocity_linear": [
-					0,
-					0,
-					0
-				],
-				"___physics_velocity_angular": [
-					0,
-					0,
-					0
-				],
-				"DisplayName": "WaterBlocker",
-				"___assetServerOriginalID": "N83e3ec00",
-				"_length": 3.45,
-				"castShadows": false,
-				"height": 0.18,
-				"materialDef": {
-					"alpha": 0,
-					"ambient": {
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"blendMode": 1,
-					"color": {
-						"a": 0,
-						"b": 1,
-						"g": 1,
-						"r": 1
-					},
-					"depthtest": true,
-					"depthwrite": true,
-					"emit": {
-						"b": 0,
-						"g": 0,
-						"r": 0
-					},
-					"fog": true,
-					"layers": [],
-					"metal": false,
-					"reflect": 0.8,
-					"shadeless": false,
-					"shading": true,
-					"shadow": true,
-					"shininess": 15,
-					"side": 0,
-					"specularColor": {
-						"b": 0.57735,
-						"g": 0.57735,
-						"r": 0.57735
-					},
-					"specularLevel": 1,
-					"type": "phong",
-					"vertexColors": false,
-					"wireframe": false
-				},
-				"owner": "ADLteam",
-				"renderDepth": 11,
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					1,
-					0,
-					-0.25,
-					1
-				],
-				"type": "Primitive",
-				"width": 2.18,
-				"visible": true
-			}
-		},
-		"N8cf5a8e2": {
-			"extends": "http://vwf.example.com/node3.vwf",
-			"sequence": 0,
-			"random": {
-				"s0": 0.022454,
-				"s1": 0.002702,
-				"s2": 0.55584,
-				"c": 1
-			},
-			"properties": {
-				"DisplayName": "enginePos",
-				"___assetServerOriginalID": "N8cf5a8e2",
-				"glyphURL": "../vwf/view/editorview/images/icons/sphere.png",
-				"owner": "ADLteam",
-				"transform": [
-					1,
-					0,
-					0,
-					0,
-					0,
-					1,
-					0,
-					0,
-					-9.999999974752427e-7,
-					0,
-					1,
-					0,
-					3,
-					0,
-					-0.75,
-					1
-				],
-				"transformAPI": {
-					"COORDINATES": {
-						"GLOBAL": "global",
-						"LOCAL": "local",
-						"PARENT": "parent"
-					}
-				},
-				"worldTransform": [
-					-0.6870899796485901,
-					-0.7216169834136963,
-					0.03449000045657158,
-					0,
-					0.7212030291557312,
-					-0.6869199872016907,
-					-0.004579999949783087,
-					0,
-					0.027101688086986542,
-					0.021816721186041832,
-					0.9963919520378113,
-					0,
-					-0.8662167191505432,
-					-3.264045000076294,
-					-0.6260790228843689,
+					18.593969345092773,
+					-0.31108802556991577,
+					1.4920251369476318,
 					1
 				]
 			}

@@ -4,10 +4,10 @@
 	"type": "subDriver/threejs",
 	"sequence": 0,
 	"random": {
-		"s0": 0.9041244068648666,
-		"s1": 0.26753772771917284,
-		"s2": 0.8329820621293038,
-		"c": 1175602
+		"s0": 0.12654120847582817,
+		"s1": 0.07814551773481071,
+		"s2": 0.8298087907023728,
+		"c": 632263
 	},
 	"properties": {
 		"___physics_activation_state": 1,
@@ -61,9 +61,9 @@
 			}
 		},
 		"EditorDate": "",
-		"___sourceAssetTimestamp": "Tue Nov 24 2015 12:52:20 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Mon Nov 30 2015 21:45:24 GMT-0500 (Eastern Standard Time)",
 		"_length": 1.78,
-		"accuracy": 8,
+		"accuracy": 400,
 		"activeState": "targeting",
 		"controllingCamera": "SandboxCamera-vwf-N37c91fa8",
 		"explosionDef": {
@@ -96,22 +96,22 @@
 		"isUserControlled": false,
 		"keysDown": [],
 		"lastTargetPos": null,
-		"lastx": 0.0126315789473684,
-		"lasty": 0.486051905717151,
+		"lastx": 0.012631,
+		"lasty": 0.486051,
 		"manualFiring": false,
 		"materialDef": {
 			"alpha": 1,
 			"ambient": {
-				"b": 0.493506493506494,
-				"g": 0.493506493506494,
-				"r": 0.493506493506494
+				"b": 0.493506,
+				"g": 0.493506,
+				"r": 0.493506
 			},
 			"blendMode": 1,
 			"color": {
 				"a": 1,
-				"b": 0.493506493506494,
-				"g": 0.493506493506494,
-				"r": 0.493506493506494
+				"b": 0.493506,
+				"g": 0.493506,
+				"r": 0.493506
 			},
 			"depthtest": true,
 			"depthwrite": true,
@@ -130,9 +130,9 @@
 			"shininess": 15,
 			"side": 0,
 			"specularColor": {
-				"b": 0.577350269189626,
-				"g": 0.577350269189626,
-				"r": 0.577350269189626
+				"b": 0.57735,
+				"g": 0.57735,
+				"r": 0.57735
 			},
 			"specularLevel": 1,
 			"type": "phong",
@@ -247,9 +247,9 @@
 					"shadow": true,
 					"shininess": 15,
 					"specularColor": {
-						"b": 0.577350269189626,
-						"g": 0.577350269189626,
-						"r": 0.577350269189626
+						"b": 0.57735,
+						"g": 0.57735,
+						"r": 0.57735
 					},
 					"specularLevel": 1
 				},
@@ -278,9 +278,9 @@
 			},
 			"random": {
 				"c": 1,
-				"s0": 0.206418882822618,
-				"s1": 0.937666497891769,
-				"s2": 0.393718022387475
+				"s0": 0.206418,
+				"s1": 0.937666,
+				"s2": 0.393718
 			},
 			"sequence": 0,
 			"source": "vwf/model/threejs/sphere.js",
@@ -292,16 +292,16 @@
 			0,
 			0,
 			0,
-			0.9998477101325989,
-			0.017452405765652657,
+			0.999846994876862,
+			0.0174519997090101,
 			0,
 			0,
-			-0.017452405765652657,
-			0.9998477101325989,
+			-0.0174529999494553,
+			0.999846994876862,
 			0,
-			-4.095678329467773,
-			-1.5728996992111206,
-			0.009999999776482582,
+			12.030421257019,
+			29.0171298980713,
+			3.229572057724,
 			1
 		],
 		"type": "Primitive",
@@ -339,10 +339,6 @@
 			"parameters": [
 				"disable"
 			]
-		},
-		"tracking": {
-			"body": "this.firecounter--;\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target || target.activeState == 'defeated')\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n\n    var thispos = this.transformAPI.getPosition();\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    if (dist < .075)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    vec = MATH.subVec3(thispos, MATH.addVec3(targetpos, MATH.scaleVec3(targetSpeed, (dist / 10) + 1)));\n    this.fuse = MATH.lengthVec3(vec);\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * .7);\n\n    var upvec = this.children_by_name[\"5InPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .01)\n    {\n        this.children_by_name[\"5InPivot\"].transformAPI.rotateY(Math.min(-0.2, -dot));\n    }\n    if (dot < -.01)\n    {\n        this.children_by_name[\"5InPivot\"].transformAPI.rotateY(Math.max(0.2, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02 && this.firecounter < 1)\n    {\n        this.activateState(\"firing\");\n    }\n    this.lastTargetPos = targetpos;",
-			"parameters": []
 		},
 		"verifyCamera": {
 			"body": "var cam = this.Scene.clientAPI.getCameraForClient(vwf.client());\n    var thisCam = this.children_by_name[\"5InPivot\"].children_by_name[\"5 inch camera\"].id;\n    if (!cam || cam.id != thisCam) return false;\n    return true;",
@@ -413,6 +409,10 @@
 				"pos",
 				"dist"
 			]
+		},
+		"tracking": {
+			"body": "this.firecounter--;\n    if (!this.targetID)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    var target = this.Scene.findNodeByID(this.targetID);\n    if (!target || target.activeState == 'defeated')\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n\n    var thispos = this.transformAPI.getPosition();\n    var targetpos = target.transformAPI.getWorldPosition();\n\n    if (this.parent.transformAPI)\n    {\n        targetpos = this.parent.transformAPI.globalToLocal(targetpos);\n    }\n    if (!this.lastTargetPos)\n        this.lastTargetPos = targetpos;\n\n    var targetSpeed = MATH.subVec3(targetpos, this.lastTargetPos);\n    // targetSpeed = MATH.scaleVec3(targetSpeed, 20); //now in m/s\n\n    var vec = MATH.subVec3(thispos, targetpos);\n    var dist = MATH.lengthVec3(vec);\n    if (dist < .075)\n    {\n        this.activateState(\"targeting\");\n        return;\n    }\n    vec = MATH.subVec3(thispos, MATH.addVec3(targetpos, MATH.scaleVec3(targetSpeed, (dist / 10) + 1)));\n    this.fuse = MATH.lengthVec3(vec);\n    vec = MATH.toUnitVec3(vec);\n    var targetangle = Math.atan2(vec[0], vec[1]);\n    var thisvec = this.transformAPI.localToGlobalRotation(1, 0, vec[2]);\n    thisvec = MATH.toUnitVec3(thisvec);\n    if (this.parent.transformAPI)\n    {\n        thisvec = this.parent.transformAPI.globalToLocalRotation(thisvec);\n    }\n    var thisangle = Math.atan2(thisvec[0], thisvec[1]);\n    var angle = targetangle - thisangle;\n\n    if (angle < -Math.PI)\n        angle *= -1;\n    else if (angle > Math.PI)\n    {\n        angle *= -1;\n    }\n    angle *= 10;\n    if (angle > 1) angle = 1;\n    if (angle < -1) angle = -1;\n    this.transformAPI.rotateZ(-angle * 1.7);\n\n    var upvec = this.children_by_name[\"5InPivot\"].transformAPI.localToGlobalRotation(1, 0, 0);\n\n    if (this.parent.transformAPI)\n    {\n        upvec = this.parent.transformAPI.globalToLocalRotation(upvec);\n    }\n\n    var targetvec = MATH.subVec3(thispos, targetpos);\n    targetvec = MATH.toUnitVec3(targetvec);\n\n    var dot = MATH.dotVec3(upvec, targetvec)\n    if (dot > .01)\n    {\n        this.children_by_name[\"5InPivot\"].transformAPI.rotateY(Math.min(-0.5, -dot));\n    }\n    if (dot < -.01)\n    {\n        this.children_by_name[\"5InPivot\"].transformAPI.rotateY(Math.max(0.5, -dot));\n    }\n\n    if (Math.abs(angle) < .06 && Math.abs(dot) < .02 && this.firecounter < 1)\n    {\n        this.activateState(\"firing\");\n    }\n    this.lastTargetPos = targetpos;",
+			"parameters": []
 		}
 	},
 	"children": {
@@ -422,9 +422,9 @@
 			"type": "subDriver/threejs",
 			"sequence": 0,
 			"random": {
-				"s0": 0.570447616046295,
-				"s1": 0.810183898778632,
-				"s2": 0.997119625797495,
+				"s0": 0.570447,
+				"s1": 0.810183,
+				"s2": 0.997119,
 				"c": 1
 			},
 			"properties": {
@@ -447,16 +447,16 @@
 				"materialDef": {
 					"alpha": 1,
 					"ambient": {
-						"b": 0.493506493506494,
-						"g": 0.493506493506494,
-						"r": 0.493506493506494
+						"b": 0.493506,
+						"g": 0.493506,
+						"r": 0.493506
 					},
 					"blendMode": 1,
 					"color": {
 						"a": 1,
-						"b": 0.493506493506494,
-						"g": 0.493506493506494,
-						"r": 0.493506493506494
+						"b": 0.493506,
+						"g": 0.493506,
+						"r": 0.493506
 					},
 					"depthtest": true,
 					"depthwrite": true,
@@ -475,9 +475,9 @@
 					"shininess": 15,
 					"side": 0,
 					"specularColor": {
-						"b": 0.577350269189626,
-						"g": 0.577350269189626,
-						"r": 0.577350269189626
+						"b": 0.57735,
+						"g": 0.57735,
+						"r": 0.57735
 					},
 					"specularLevel": 1,
 					"type": "phong",
@@ -486,21 +486,21 @@
 				},
 				"owner": "Anonymous_srrHyERdWKafkXchAAAA",
 				"transform": [
-					0.02205572836101055,
+					0.022055000066757202,
 					0,
-					0.9997562170028687,
+					0.9997559785842896,
 					0,
 					0,
 					1,
 					0,
 					0,
-					-0.9997562170028687,
+					-0.9997569918632507,
 					0,
-					0.02205572836101055,
+					0.022055000066757202,
 					0,
-					0.0000013468421684592613,
-					-1.5892135252215667e-7,
-					0.7499991655349731,
+					9.999999974752427e-7,
+					-9.999999974752427e-7,
+					0.7499989867210388,
 					1
 				],
 				"type": "Primitive",
@@ -514,9 +514,9 @@
 					"type": "subDriver/threejs",
 					"sequence": 0,
 					"random": {
-						"s0": 0.809604124864563,
-						"s1": 0.25392062519677,
-						"s2": 0.65455412468873,
+						"s0": 0.809604,
+						"s1": 0.253919,
+						"s2": 0.654554,
 						"c": 1
 					},
 					"properties": {
@@ -539,16 +539,16 @@
 						"materialDef": {
 							"alpha": 1,
 							"ambient": {
-								"b": 0.493506493506494,
-								"g": 0.493506493506494,
-								"r": 0.493506493506494
+								"b": 0.493506,
+								"g": 0.493506,
+								"r": 0.493506
 							},
 							"blendMode": 1,
 							"color": {
 								"a": 1,
-								"b": 0.493506493506494,
-								"g": 0.493506493506494,
-								"r": 0.493506493506494
+								"b": 0.493506,
+								"g": 0.493506,
+								"r": 0.493506
 							},
 							"depthtest": true,
 							"depthwrite": true,
@@ -567,9 +567,9 @@
 							"shininess": 15,
 							"side": 0,
 							"specularColor": {
-								"b": 0.577350269189626,
-								"g": 0.577350269189626,
-								"r": 0.577350269189626
+								"b": 0.57735,
+								"g": 0.57735,
+								"r": 0.57735
 							},
 							"specularLevel": 1,
 							"type": "phong",
@@ -604,9 +604,9 @@
 							"extends": "sandboxGroup.vwf",
 							"sequence": 0,
 							"random": {
-								"s0": 0.463987119728699,
-								"s1": 0.0462946102488786,
-								"s2": 0.294398021884263,
+								"s0": 0.463987,
+								"s1": 0.046294,
+								"s2": 0.294398,
 								"c": 1248939
 							},
 							"properties": {
@@ -630,21 +630,21 @@
 								"open": true,
 								"owner": "ADLteam",
 								"transform": [
-									0.010000278241932392,
-									0.8183329105377197,
-									-0.5729156136512756,
+									0.009999999776482582,
+									0.8183320164680481,
+									-0.5729159712791443,
 									0,
-									-0.01428187545388937,
-									0.5730028748512268,
-									0.8182082772254944,
+									-0.014282000251114368,
+									0.5730019807815552,
+									0.8182079792022705,
 									0,
-									0.9998477101325989,
+									0.9998469948768616,
 									0,
-									0.017452405765652657,
+									0.017451999709010124,
 									0,
-									1.2342493534088135,
-									-0.018995855003595352,
-									4.849478721618652,
+									1.2342489957809448,
+									-0.018996000289916992,
+									4.849477767944336,
 									1
 								],
 								"type": "Group"
@@ -664,9 +664,9 @@
 									"extends": "SandboxParticleSystem.vwf",
 									"sequence": 0,
 									"random": {
-										"s0": 0.981667949585244,
-										"s1": 0.595058325445279,
-										"s2": 0.676680717850104,
+										"s0": 0.981667,
+										"s1": 0.595058,
+										"s2": 0.67668,
 										"c": 1
 									},
 									"properties": {
@@ -713,9 +713,9 @@
 										"renderDepth": 0,
 										"solver": "Euler",
 										"startColor": [
-											0.63921568627451,
-											0.63921568627451,
-											0.63921568627451,
+											0.639215,
+											0.639215,
+											0.639215,
 											0.08
 										],
 										"startSize": 0.76,
@@ -744,9 +744,9 @@
 							"type": "subDriver/threejs/asset/vnd.gltf+json",
 							"sequence": 0,
 							"random": {
-								"s0": 0.448671482270584,
-								"s1": 0.332659306703135,
-								"s2": 0.490023307036608,
+								"s0": 0.448671,
+								"s1": 0.332659,
+								"s2": 0.490023,
 								"c": 1
 							},
 							"properties": {
@@ -816,17 +816,17 @@
 								"___assetServerOriginalID": "N151b9a87",
 								"owner": "ADLteam",
 								"transform": [
-									0.017400048673152924,
+									0.017400000244379044,
 									0,
-									-0.9968481659889221,
-									0,
-									0,
-									0.996999979019165,
+									-0.996849000453949,
 									0,
 									0,
-									0.9968481659889221,
+									0.9969990253448486,
 									0,
-									0.017400048673152924,
+									0,
+									0.9968479871749878,
+									0,
+									0.017400000244379044,
 									0,
 									1,
 									0,
@@ -843,9 +843,9 @@
 					"type": "subDriver/threejs",
 					"sequence": 0,
 					"random": {
-						"s0": 0.881991325877607,
-						"s1": 0.977037542732432,
-						"s2": 0.315142978914082,
+						"s0": 0.881991,
+						"s1": 0.977037,
+						"s2": 0.315142,
 						"c": 1
 					},
 					"properties": {
@@ -855,21 +855,21 @@
 						"fovGoal": 60,
 						"owner": "Anonymous_srrHyERdWKafkXchAAAA",
 						"transform": [
-							2.2182256317884247e-16,
-							0.9990000128746033,
-							-1.0749018342082195e-9,
-							0,
-							-3.583007224250423e-10,
-							1.074901945230522e-9,
-							0.9990000128746033,
 							0,
 							0.9990000128746033,
-							-1.1091128158942124e-16,
-							3.5830077793619353e-10,
+							-9.999999974752427e-7,
 							0,
-							2.0000009536743164,
-							-0.000001527716904092813,
-							-0.0000014700135579914786,
+							-9.999999974752427e-7,
+							0,
+							0.9990000128746033,
+							0,
+							0.9990000128746033,
+							-9.999999974752427e-7,
+							0,
+							0,
+							2,
+							-0.0000019999999949504854,
+							-0.0000019999999949504854,
 							1
 						],
 						"far": 10000
@@ -891,9 +891,9 @@
 							"extends": "http://vwf.example.com/label.vwf",
 							"sequence": 0,
 							"random": {
-								"s0": 0.143934219842777,
-								"s1": 0.316251687472686,
-								"s2": 0.606364157516509,
+								"s0": 0.143934,
+								"s1": 0.316251,
+								"s2": 0.606364,
 								"c": 1
 							},
 							"properties": {
@@ -926,7 +926,7 @@
 									1,
 									0,
 									70,
-									4.52254915237427,
+									4.522549,
 									0,
 									1
 								],
@@ -944,9 +944,9 @@
 			"type": "subDriver/threejs/asset/vnd.gltf+json",
 			"sequence": 0,
 			"random": {
-				"s0": 0.861636834219098,
-				"s1": 0.335862152278423,
-				"s2": 0.76301988447085,
+				"s0": 0.861636,
+				"s1": 0.335862,
+				"s2": 0.763019,
 				"c": 1
 			},
 			"properties": {
