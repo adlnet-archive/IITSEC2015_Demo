@@ -63,7 +63,7 @@
 			0,
 			0
 		],
-		"___sourceAssetTimestamp": "Mon Nov 23 2015 10:39:43 GMT-0500 (Eastern Standard Time)",
+		"___sourceAssetTimestamp": "Tue Nov 24 2015 10:55:56 GMT-0500 (Eastern Standard Time)",
 		"_length": 2.98,
 		"controllingCamera": "SandboxCamera-vwf-N79164421",
 		"counter": 2063.24999999994,
@@ -188,9 +188,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			-21.00625228881836,
-			38.050498962402344,
-			0.27407172322273254,
+			-2,
+			4.75,
+			3,
 			1
 		],
 		"type": "Primitive",
@@ -198,9 +198,9 @@
 		"weaponsTarget": "ocean-ocean-vwf-N4bab7165",
 		"width": 8.49,
 		"worldPosition": [
-			-21.00625228881836,
-			38.050498962402344,
-			0.27407172322273254
+			-2,
+			4.75,
+			3
 		],
 		"maxHeight": 500,
 		"minHeight": 25,
@@ -217,9 +217,9 @@
 			-0.0000016084766230051173,
 			0.9998477101325989,
 			0,
-			-21.00625228881836,
-			38.050498962402344,
-			0.27407172322273254,
+			-2,
+			4.75,
+			3,
 			1
 		],
 		"userControlCounter": 0,
@@ -364,12 +364,12 @@
 			"body": "this.fireCounter = 600;",
 			"parameters": []
 		},
-		"userControlled": {
-			"body": "var thisCam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n\n    return this.keysDown.length === 0 &&  this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0;",
-			"parameters": []
-		},
 		"launchMissile": {
 			"body": "if (this.Missiles === 0) return;\n    this.Missiles--;\n    var def = _DataManager.getCleanNodePrototype(this.missileDef);\n\n    if (this.random() > .5)\n        var pos = this.children_by_name.Launcher1.worldTransform.slice();\n    else\n        pos = this.children_by_name.Launcher2.worldTransform.slice();\n\n    pos[14] += 0;\n    def.properties.transform = pos;\n    // def.properties.___physics_velocity_linear = this.physicsAPI.getLinearVelocity();\n    def.properties.fired = true;\n    if (this.weaponsTarget)\n    {\n        def.properties.target_data = {\n            id: this.weaponsTarget\n        };\n    }\n\n    var now = performance.now();\n    // console.profile(\"launch\");\n\n    var sender = this.Scene.children_by_name.xAPISender;\n    if (sender)\n    {\n        var missId = ADL.ruuid();\n        def.properties.stmtId = missId; //make sure to include this once added to fac and seahawk\n        var conExt = {\n            \"https://sandbox.adlnet.gov/context/extensions/target\": this.weaponsTarget || \"no target\",\n            \"https://sandbox.adlnet.gov/context/extensions/missileId\": (def.continues + def.stmtId) || \"Missile#2\",\n            \"https://sandbox.adlnet.gov/context/extensions/firePosition\": this.transformAPI.getWorldPosition() || \"this is where the missile began\",\n            \"https://sandbox.adlnet.gov/context/extensions/scene/time/\": Math.floor(this.Scene.time * 1000) / 1000,\n        };\n        sender.xAPISend(\"fired\", 'Seahawk Missile', 'Seahawk Pilot', null, conExt, missId);\n    }\n\n    var smokeDef = this.smokeDef;\n    console.log(def.properties.target_data);\n    vwf.createChild(vwf.application(), GUID(), def, null, function(id)\n    {\n        smokeDef.properties.targetEntity = id;\n        vwf.createChild(vwf.application(), GUID(), _DataManager.getCleanNodePrototype(smokeDef), null, function()\n        {\n            console.log(performance.now() - now);\n        });\n    });",
+			"parameters": []
+		},
+		"userControlled": {
+			"body": "var thisCam = this.children_by_name.art.children_by_name.UH60Pilot.id;\n\n    return this.keysDown.length !== 0 ||( this.userControlCounter > 0 && this.Scene.clientAPI.getClientForCamera(thisCam).length > 0);",
 			"parameters": []
 		}
 	},
@@ -489,9 +489,9 @@
 					0.9285185933113098,
 					-0.10019166022539139,
 					0,
-					-21.765993118286133,
-					35.3489875793457,
-					-0.70134037733078,
+					-2.7597413063049316,
+					2.048487901687622,
+					2.024587869644165,
 					1
 				]
 			}
@@ -710,9 +710,9 @@
 					0.9300360083580017,
 					-0.08099353313446045,
 					0,
-					-18.878902435302734,
-					36.456336975097656,
-					-0.6509442925453186,
+					0.12734924256801605,
+					3.155837059020996,
+					2.074984073638916,
 					1
 				]
 			}
@@ -921,9 +921,9 @@
 							-0.08479224890470505,
 							0.9961658120155334,
 							0,
-							-19.468107223510742,
-							34.97575759887695,
-							0.2609091103076935,
+							-0.46185484528541565,
+							1.675257682800293,
+							2.986837387084961,
 							1
 						]
 					},
