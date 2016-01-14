@@ -1,6 +1,6 @@
 {
 	"extends": "asset.vwf",
-	"source": "http://54.175.234.78:3030/assets/25f0ce05",
+	"source": "/sas/assets/25f0ce05",
 	"type": "subDriver/threejs/asset/vnd.gltf+json",
 	"sequence": 0,
 	"random": {
@@ -56,7 +56,7 @@
 					"offsetx": 0,
 					"offsety": 0,
 					"alpha": 1,
-					"src": "http://54.175.234.78:3030/assets/bc96930e.JPG",
+					"src": "/sas/assets/bc96930e.JPG",
 					"mapInput": 0
 				}
 			],
