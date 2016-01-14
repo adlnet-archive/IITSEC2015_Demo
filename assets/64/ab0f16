@@ -1,0 +1,120 @@
+{
+	"extends": "asset.vwf",
+	"source": "/sas/assets/0f4d7e2a",
+	"type": "subDriver/threejs/asset/vnd.collada+xml",
+	"sequence": 0,
+	"random": {
+		"s0": 0.46425750805065036,
+		"s1": 0.19218487502075732,
+		"s2": 0.7347619154024869,
+		"c": 1
+	},
+	"properties": {
+		"___physics_activation_state": 1,
+		"___physics_deactivation_time": 0,
+		"___physics_velocity_linear": [
+			0,
+			0,
+			0
+		],
+		"___physics_velocity_angular": [
+			0,
+			0,
+			0
+		],
+		"materialDef": {
+			"alpha": 1,
+			"ambient": {
+				"b": 0.190235407049464,
+				"g": 0.871125222367305,
+				"r": 0.902597402597403
+			},
+			"blendMode": 1,
+			"color": {
+				"a": 1,
+				"b": 0.190235407049464,
+				"g": 0.871125222367305,
+				"r": 0.902597402597403
+			},
+			"depthtest": true,
+			"depthwrite": true,
+			"emit": {
+				"b": 0,
+				"g": 0,
+				"r": 0
+			},
+			"fog": true,
+			"layers": [
+				{
+					"alpha": 1,
+					"blendMode": 0,
+					"mapInput": 0,
+					"mapTo": 4,
+					"offsetx": 0,
+					"offsety": 0,
+					"scalex": 1,
+					"scaley": 1,
+					"src": "/sas/assets/f7444df4"
+				}
+			],
+			"metal": false,
+			"reflect": 0.8,
+			"shadeless": false,
+			"shading": true,
+			"shadow": true,
+			"shininess": 15,
+			"side": 2,
+			"specularColor": {
+				"b": 0.57,
+				"g": 0.57,
+				"r": 0.57
+			},
+			"specularLevel": 1,
+			"type": "phong",
+			"vertexColors": false,
+			"wireframe": false
+		},
+		"owner": "ADLteam",
+		"transform": [
+			0.9980000257492065,
+			0,
+			0,
+			0,
+			0,
+			-3.579419538546347e-10,
+			0.9980000257492065,
+			0,
+			0,
+			-0.9990000128746033,
+			-3.5830061140273983e-10,
+			0,
+			0,
+			0,
+			0.75,
+			1
+		],
+		"___sourceAssetTimestamp": "Tue Jan 12 2016 10:37:29 GMT-0500 (EST)",
+		"sourceAssetId": "ef3a7b78"
+	},
+	"children": {
+		"N5592c028": {
+			"extends": "rotator.vwf",
+			"sequence": 0,
+			"random": {
+				"s0": 0.9038271282333881,
+				"s1": 0.429564923979342,
+				"s2": 0.5442415282595903,
+				"c": 1
+			},
+			"properties": {
+				"owner": "ADLteam",
+				"type": "behavior",
+				"DisplayName": "rotator1",
+				"Axis": "Y",
+				"Local": true,
+				"Amount": 14,
+				"___assetServerOriginalID": "N5592c028"
+			}
+		}
+	}
+}
